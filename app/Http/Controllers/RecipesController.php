@@ -26,6 +26,7 @@ class RecipesController extends Controller
     public function create()
     {
         //
+        return view('recipes.create');
     }
 
     /**
@@ -37,6 +38,10 @@ class RecipesController extends Controller
     public function store(Request $request)
     {
         //
+
+        echo "<pre>";
+        print_r($request);
+        echo "</pre>";
     }
 
     /**

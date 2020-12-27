@@ -9,41 +9,30 @@
     <meta name="description" content="Frest admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Frest admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Recipes</title>
-    <link rel="apple-touch-icon" href="app-assets/images/ico/apple-icon-120.png">
-    <!--<link rel="shortcut icon" type="image/x-icon" href="app-assets/images/ico/favicon.ico">-->
-    <link rel="shortcut icon" type="image/x-icon" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_180x180.png?v=1595428268">
-    <link rel="apple-touch-icon" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_180x180.png?v=1595428268"/>
-    <link rel="apple-touch-icon" sizes="57x57" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_57x57.png?v=1595428268"/>
-    <link rel="apple-touch-icon" sizes="60x60" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_60x60.png?v=1595428268"/>
-    <link rel="apple-touch-icon" sizes="72x72" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_72x72.png?v=1595428268"/>
-    <link rel="apple-touch-icon" sizes="76x76" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_76x76.png?v=1595428268"/>
-    <link rel="apple-touch-icon" sizes="114x114" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_114x114.png?v=1595428268"/>
-    <link rel="apple-touch-icon" sizes="180x180" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_180x180.png?v=1595428268"/>
-    <link rel="apple-touch-icon" sizes="228x228" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_228x228.png?v=1595428268"/>
+    <title>Innri - Add New Recipe</title>
+    <link rel="apple-touch-icon" href="../app-assets/images/ico/apple-icon-120.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/vendors.min.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/tables/datatable/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/vendors.min.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap-extended.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/colors.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/components.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/themes/dark-layout.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/themes/semi-dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css/colors.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css/components.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css/themes/dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css/themes/semi-dark-layout.css">
     <!-- END: Theme CSS-->
 
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/pages/page-users.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css/core/menu/menu-types/vertical-menu.css">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
     <!-- END: Custom CSS-->
 
 </head>
@@ -100,7 +89,7 @@
                             <li class="scrollable-container media-list"><a class="d-flex justify-content-between" href="javascript:void(0)">
                                     <div class="media d-flex align-items-center">
                                         <div class="media-left pr-0">
-                                            <div class="avatar mr-1 m-0"><img src="app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="39" width="39"></div>
+                                            <div class="avatar mr-1 m-0"><img src="../app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="39" width="39"></div>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">Congratulate Socrates Itumay</span> for work anniversaries</h6><small class="notification-text">Mar 15 12:32pm</small>
@@ -110,7 +99,7 @@
                                 <div class="d-flex justify-content-between read-notification cursor-pointer">
                                     <div class="media d-flex align-items-center">
                                         <div class="media-left pr-0">
-                                            <div class="avatar mr-1 m-0"><img src="app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
+                                            <div class="avatar mr-1 m-0"><img src="../app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">New Message</span> received</h6><small class="notification-text">You have 18 unread messages</small>
@@ -119,7 +108,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between cursor-pointer">
                                     <div class="media d-flex align-items-center py-0">
-                                        <div class="media-left pr-0"><img class="mr-1" src="app-assets/images/icon/sketch-mac-icon.png" alt="avatar" height="39" width="39"></div>
+                                        <div class="media-left pr-0"><img class="mr-1" src="../app-assets/images/icon/sketch-mac-icon.png" alt="avatar" height="39" width="39"></div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">Updates Available</span></h6><small class="notification-text">Sketch 50.2 is currently newly added</small>
                                         </div>
@@ -173,7 +162,7 @@
                                 <div class="d-flex justify-content-between read-notification cursor-pointer">
                                     <div class="media d-flex align-items-center">
                                         <div class="media-left pr-0">
-                                            <div class="avatar mr-1 m-0"><img src="app-assets/images/portrait/small/avatar-s-4.jpg" alt="avatar" height="39" width="39"></div>
+                                            <div class="avatar mr-1 m-0"><img src="../app-assets/images/portrait/small/avatar-s-4.jpg" alt="avatar" height="39" width="39"></div>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">New file</span> has been uploaded</h6><small class="notification-text">4 hrs ago</small>
@@ -195,7 +184,7 @@
                                 <div class="d-flex justify-content-between cursor-pointer">
                                     <div class="media d-flex align-items-center border-0">
                                         <div class="media-left pr-0">
-                                            <div class="avatar mr-1 m-0"><img src="app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
+                                            <div class="avatar mr-1 m-0"><img src="../app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">New customer</span> comment recieved</h6><small class="notification-text">2 days ago</small>
@@ -235,8 +224,8 @@
 <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
-            <li class="nav-item mr-auto"><a class="navbar-brand" href="{{ route('home') }}">
-                    <div class="brand-logo" style="width: 100%; max-width: 211px;"><!--<img class="logo" src="app-assets/images/logo/logo.png" />--><img class="logo" src="../app-assets/images/logo/fisherman-2.png" style="width: 100%; max-width: 211px; height: 47px; max-height: 47px;" /></div>
+            <li class="nav-item mr-auto"><a class="navbar-brand" href="home.html">
+                    <div class="brand-logo" style="width: 100%; max-width: 211px;"><!--<img class="logo" src="../app-assets/images/logo/logo.png" />--><img class="logo" src="../app-assets/images/logo/fisherman-2.png" style="width: 100%; max-width: 211px; height: 47px; max-height: 47px;" /></div>
                     <!--<h2 class="brand-text mb-0">Frest</h2>-->
                 </a></li>
             <!--<li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="bx bx-x d-block d-xl-none font-medium-4 primary"></i><i class="toggle-icon bx bx-disc font-medium-4 d-none d-xl-block primary" data-ticon="bx-disc"></i></a></li>-->
@@ -305,106 +294,173 @@
     <div class="content-overlay"></div>
     <div class="content-wrapper">
         <div class="content-header row">
-        </div>
-        <div class="content-body">
-            <!-- users list start -->
-            <section class="users-list-wrapper">
-                <div class="users-list-filter px-1">
-                    <div class="row  rounded py-2 mb-2">
-                        <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center" onclick="window.location.href='{{ route('recipes.create') }}'">
-                            <button type="reset" class="btn btn-primary btn-block glow users-list-clear mb-0">Add New Recipe</button>
+            <div class="content-header-left col-12 mb-2 mt-1">
+                <div class="row breadcrumbs-top">
+                    <div class="col-12">
+                        <h5 class="content-header-title float-left pr-1 mb-0">New Recipe</h5>
+                        <div class="breadcrumb-wrapper col-12">
+                            <ol class="breadcrumb p-0 mb-0">
+                                <li class="breadcrumb-item"><a href="index.html"><i class="bx bx-home-alt"></i></a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('recipes.index') }}">Recipes</a>
+                                </li>
+                                <li class="breadcrumb-item active"><a href="#">New Recipe</a>
+                                </li>
+                            </ol>
                         </div>
                     </div>
-
                 </div>
-                <div class="users-list-table">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body">
-                                <!-- datatable start -->
-                                <div class="table-responsive">
-                                    <table id="users-list-datatable" class="table">
-                                        <thead>
-                                        <tr>
-                                            <!--<th>id</th>-->
-                                            <th style="text-align: left; padding-left: 1rem;">Recipe</th>
-                                            <!--<th>JOb Title</th>
-                                            <th>Department</th>
-                                            <th>Direct Phone</th>
-                                            <th>GSM</th>
-                                            <th>E-Mail</th>-->
-                                            <th style="text-align: left; padding-left: 1rem;">edit</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <!--<td>300</td>-->
-                                            <td style="padding: 0.5rem 1.15rem">Smoked Trout 300g (10.5oz) bite</td>
-                                            <!--<td>Marketing</td>
-                                            <td>Suðureyri</td>
-                                            <td>661 9900</td>
-                                            <td>661 9900</td>
-                                            <td>elias@fisherman.is</td>-->
-                                            <td style="padding: 0.5rem 1.15rem"><a href="#"><i class="bx bx-edit-alt"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <!--<td>300</td>-->
-                                            <td style="padding: 0.5rem 1.15rem">Smoked salmon "húskarlabiti" 200g (7 oz)</td>
-                                            <!--<td>Sales</td>
-                                            <td>Grandatröó</td>
-                                            <td>661 9900</td>
-                                            <td>661 9900</td>
-                                            <td>elias@fisherman.is</td>-->
-                                            <td style="padding: 0.5rem 1.15rem"><a href="#"><i class="bx bx-edit-alt"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <!--<td>300</td>-->
-                                            <td style="padding: 0.5rem 1.15rem">Smoked salmon 150g (5,3oz) slices</td>
-                                            <!--<td>Development</td>
-                                            <td>Grandatröó</td>
-                                            <td>661 9900</td>
-                                            <td>661 9900</td>
-                                            <td>elias@fisherman.is</td>-->
-                                            <td style="padding: 0.5rem 1.15rem"><a href="#"><i class="bx bx-edit-alt"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <!--<td>300</td>-->
-                                            <td style="padding: 0.5rem 1.15rem">Rope Hung Smoked Salmon 300g (10,5oz) slices</td>
-                                            <!--<td>Sales</td>
-                                            <td>Fiskislóð</td>
-                                            <td>661 9900</td>
-                                            <td>661 9900</td>
-                                            <td>elias@fisherman.is</td>-->
-                                            <td style="padding: 0.5rem 1.15rem"><a href="#"><i class="bx bx-edit-alt"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <!--<td>300</td>-->
-                                            <td style="padding: 0.5rem 1.15rem">Cured Salmon "Gravlax " 300g (10,5 oz) slices</td>
-                                            <!--<td>Design</td>
-                                            <td>624 Sales</td>
-                                            <td>661 9900</td>
-                                            <td>661 9900</td>
-                                            <td>elias@fisherman.is</td>-->
-                                            <td style="padding: 0.5rem 1.15rem"><a href="#"><i class="bx bx-edit-alt"></i></a></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+            </div>
+        </div>
+        <div class="content-body">
+            <form class="form-horizontal" novalidate method="post" action="{{ route('recipes.store') }}">
+            @csrf
+            <!-- // Basic multiple Column Form section start -->
+                <section id="multiple-column-form">
+                    <div class="row match-height">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Recipe General Information</h4>
                                 </div>
-                                <!-- datatable ends -->
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Recipe Title</label>
+                                                    <div class="controls">
+                                                        <input type="text" name="name" class="form-control" data-validation-required-message="Recipe title is required" placeholder="Recipe Title">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Cooking Time</label>
+                                                    <div class="controls">
+                                                        <input type="text" name="cooking_time" class="form-control" data-validation-required-message="Cooking time required" placeholder="Cooking Time">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Preparation Time</label>
+                                                    <div class="controls">
+                                                        <input type="text" name="preparation_time" class="form-control" data-validation-required-message="Preparaion time is required" placeholder="Preparation Time">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-            <!-- users list ends -->
+                </section>
+                <!-- // Basic multiple Column Form section end -->
+                <section id="form-repeater-wrapper">
+                    <!-- form default repeater -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">
+                                        Ingredients
+                                    </h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body repeater-default">
+                                        <div data-repeater-list="group-a">
+                                            <div data-repeater-item>
+                                                <div class="row justify-content-between">
+                                                    <div class="col-md-2 col-sm-12 form-group" style="width: 50% !important; max-width: 600px;">
+                                                        <label for="text">Name </label>
+                                                        <input type="text" class="form-control" id="ingredient" name="ingredient" placeholder="Enter Item Title" style="width: 400px;">
+                                                    </div>
+                                                    <div class="col-md-2 col-sm-12 form-group"  style="width: 20% !important; max-width: 125px;">
+                                                        <label for="quanity">Quantity</label>
+                                                        <input type="text" class="form-control" id="quantity" name="quantity" placeholder="Enter Quantity" style="width: 125px;">
+                                                    </div>
+                                                    <div class="col-md-2 col-sm-12 form-group"  style="width: 30% !important; max-width: 100px;">
+                                                        <label for="unit">Unit</label>
+                                                        <select name="unit" id="unit" class="form-control">
+                                                            <option value="KG">KG</option>
+                                                            <option value="Liter">Liter</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
+                                                        <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
+                                                            Delete
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col p-0">
+                                                <button class="btn btn-primary" data-repeater-create type="button"><i class="bx bx-plus"></i>
+                                                    Add
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/ form default repeater -->
+                </section>
+                <section id="form-repeater-wrapper">
+                    <!-- form default repeater -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">
+                                        Steps
+                                    </h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body repeater-default">
+                                        <div data-repeater-list="group-b">
+                                            <div data-repeater-item>
+                                                <div class="row justify-content-between">
+                                                    <div class="col-md-2 col-sm-12 form-group" style="width: 800px; max-width: 80%;">
+                                                        <label for="text">Step </label>
+                                                        <input type="text" class="form-control" id="step" name="step" placeholder="Enter Step Detail" style="width: 800px; max-width: 100%;">
+                                                    </div>
+                                                    <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
+                                                        <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
+                                                            Delete
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col p-0">
+                                                <button class="btn btn-primary" data-repeater-create type="button"><i class="bx bx-plus"></i>
+                                                    Add
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/ form default repeater -->
+                </section>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
     </div>
 </div>
 <!-- END: Content-->
 
-<!-- demo chat-->
 <?php
-/*<div class="widget-chat-demo">
+/*<!-- demo chat-->
+<div class="widget-chat-demo">
     <!-- widget chat demo footer button start -->
     <button class="btn btn-primary chat-demo-button glow px-1"><i class="livicon-evo" data-options="name: comments.svg; style: lines; size: 24px; strokeColor: #fff; autoPlay: true; repeat: loop;"></i></button>
     <!-- widget chat demo footer button ends -->
@@ -415,7 +471,7 @@
                 <div class="media m-75">
                     <a href="JavaScript:void(0);">
                         <div class="avatar mr-75">
-                            <img src="app-assets/images/portrait/small/avatar-s-2.jpg" alt="avtar images" width="32" height="32">
+                            <img src="../app-assets/images/portrait/small/avatar-s-2.jpg" alt="avtar images" width="32" height="32">
                             <span class="avatar-status-online"></span>
                         </div>
                     </a>
@@ -466,14 +522,13 @@
     </div>
     <!-- widget chat demo ends -->
 
-</div>*/
-?>
+</div>*/ ?>
 <div class="sidenav-overlay"></div>
 <div class="drag-target"></div>
 
 <!-- BEGIN: Footer-->
 <footer class="footer footer-static footer-light">
-    <p class="clearfix mb-0"><span class="float-left d-inline-block">2020 &copy; FISHERMAN</span><!--<span class="float-right d-sm-inline-block d-none">Crafted with<i class="bx bxs-heart pink mx-50 font-small-3"></i>by<a class="text-uppercase" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent</a></span>
+    <p class="clearfix mb-0"><span class="float-left d-inline-block">2021 &copy; FISHERMAN</span><!--<span class="float-right d-sm-inline-block d-none">Crafted with<i class="bx bxs-heart pink mx-50 font-small-3"></i>by<a class="text-uppercase" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent</a></span>
         <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>-->
     </p>
 </footer>
@@ -481,27 +536,28 @@
 
 
 <!-- BEGIN: Vendor JS-->
-<script src="app-assets/vendors/js/vendors.min.js"></script>
-<script src="app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
-<script src="app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
-<script src="app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
+<script src="../app-assets/vendors/js/vendors.min.js"></script>
+<script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
+<script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
+<script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
-<script src="app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
-<script src="app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
-<script src="app-assets/js/scripts/configs/vertical-menu-light.js"></script>
-<script src="app-assets/js/core/app-menu.js"></script>
-<script src="app-assets/js/core/app.js"></script>
-<script src="app-assets/js/scripts/components.js"></script>
-<script src="app-assets/js/scripts/footer.js"></script>
+<script src="../app-assets/js/scripts/configs/vertical-menu-light.js"></script>
+<script src="../app-assets/js/core/app-menu.js"></script>
+<script src="../app-assets/js/core/app.js"></script>
+<script src="../app-assets/js/scripts/components.js"></script>
+<script src="../app-assets/js/scripts/footer.js"></script>
 <!-- END: Theme JS-->
+<!-- BEGIN: Page Vendor JS-->
+<script src="../app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
+<script src="../app-assets/js/scripts/forms/form-repeater.js"></script>
+<!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Page JS-->
-<script src="app-assets/js/scripts/pages/page-users.js"></script>
 <!-- END: Page JS-->
 
 </body>
