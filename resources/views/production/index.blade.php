@@ -210,9 +210,14 @@
                             <?php /*<div class="user-nav d-sm-flex d-none"><span class="user-name"> {{ Auth::user()->name }}</span><span class="user-status text-muted">Available</span></div><span><img class="round" src="app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"></span>*/?>
                             <div class="user-nav d-sm-flex d-none"><span class="user-name"> {{ Auth::user()->name }}</span><span class="user-status text-muted">Available</span></div><span><img class="round" src="app-assets/images/portrait/small/group 238_2x.jpg" alt="avatar" height="40" width="40"></span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right pb-0"><a class="dropdown-item" href="page-user-profile.html"><i class="bx bx-user mr-50"></i> Edit Profile</a><a class="dropdown-item" href="app-email.html"><i class="bx bx-envelope mr-50"></i> My Inbox</a><a class="dropdown-item" href="app-todo.html"><i class="bx bx-check-square mr-50"></i> Task</a><a class="dropdown-item" href="app-chat.html"><i class="bx bx-message mr-50"></i> Chats</a>
+                        <div class="dropdown-menu dropdown-menu-right pb-0">
+                            <a class="dropdown-item" href="{{ route('change-password') }}"><i class="bx bx-user mr-50"></i> Change Password</a>
+                            <?php /*<a class="dropdown-item" href="app-email.html"><i class="bx bx-envelope mr-50"></i> My Inbox</a>
+                            <a class="dropdown-item" href="app-todo.html"><i class="bx bx-check-square mr-50"></i> Task</a>
+                            <a class="dropdown-item" href="app-chat.html"><i class="bx bx-message mr-50"></i> Chats</a>*/?>
                             <div class="dropdown-divider mb-0"></div><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><i class="bx bx-power-off mr-50"></i> Logout</a>
+                                                     document.getElementById('logout-form').submit();">
+                                <i class="bx bx-power-off mr-50"></i> Logout</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
@@ -367,35 +372,35 @@
                                         <thead>
                                             <tr>
                                                 <!--<th>id</th>-->
-                                                <th>Recipe</th>
-                                                <th>Product nr.</th>
-                                                <th>LOT nr.</th>
-                                                <th>Product Name</th>
-                                                <th>Instructions<br>M: Make<br>F: Freeze<br>P: Pack<br>S: Send</th>
-                                                <th>Products Available/Arriving.<br>(How much Fish in freezer-cooler or arriving today?)</th>
-                                                <th>Packing<br>Package size</th>
-                                                <th>Production<br>Total kg/packages<br>Pcs - boxes</th>
-                                                <th>Delivery / Storage Where<br>FÍ: Freezer Íslandssaga<br>Flytjandi: Sent today w/Flytjandi<br>K: Our cooler<br>F: Our Freezer<br>FBox: Blue boxes in our freezer</th>
-                                                <th>Delivery / Storage<br>Quantity</th>
-                                                <th>Pallet #</th>
-                                                <th>Options</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Recipe</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Product nr.</th>
+                                                <th style="text-align: left; padding-left: 1rem;">LOT nr.</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Product Name</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Instructions<br>M: Make<br>F: Freeze<br>P: Pack<br>S: Send</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Products Available/Arriving.<br>(How much Fish in freezer-cooler or arriving today?)</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Packing<br>Package size</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Production<br>Total kg/packages<br>Pcs - boxes</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Delivery / Storage Where<br>FÍ: Freezer Íslandssaga<br>Flytjandi: Sent today w/Flytjandi<br>K: Our cooler<br>F: Our Freezer<br>FBox: Blue boxes in our freezer</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Delivery / Storage<br>Quantity</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Pallet #</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Options</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         @foreach ($productions as $production)
                                             <tr>
-                                                <td>Rope Hung Smoked Salmon</td>
-                                                <td>{{ $production->product_number }}</td>
-                                                <td>{{ $production->lot_number }}</td>
-                                                <td>{{ $production->product_name }}</td>
-                                                <td>{{ $production->instructions }}</td>
-                                                <td>{{ $production->products_available_arriving }}</td>
-                                                <td>{{ $production->packing_package_size }}</td>
-                                                <td>{{ $production->production_total }}</td>
-                                                <td>{{ $production->delivery_storage }}</td>
-                                                <td>{{ $production->delivery_storage_quantity }}</td>
-                                                <td>{{ $production->pallet_number }}</td>
-                                                <td>
+                                                <td style="padding: 0.5rem 1.15rem">Rope Hung Smoked Salmon</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $production->product_number }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $production->lot_number }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $production->product_name }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $production->instructions }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $production->products_available_arriving }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $production->packing_package_size }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $production->production_total }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $production->delivery_storage }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $production->delivery_storage_quantity }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $production->pallet_number }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">
                                                     <form id="form-del" action="{{ route('production.destroy',$production->id) }}" method="POST">
                                                         <a href="{{ route('production.edit', $production->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp;
                                                         @csrf
@@ -494,7 +499,8 @@
 <!-- END: Content-->
 
 <!-- demo chat-->
-<div class="widget-chat-demo">
+<?php
+/*<div class="widget-chat-demo">
     <!-- widget chat demo footer button start -->
     <button class="btn btn-primary chat-demo-button glow px-1"><i class="livicon-evo" data-options="name: comments.svg; style: lines; size: 24px; strokeColor: #fff; autoPlay: true; repeat: loop;"></i></button>
     <!-- widget chat demo footer button ends -->
@@ -556,14 +562,15 @@
     </div>
     <!-- widget chat demo ends -->
 
-</div>
+</div>*/
+?>
 <div class="sidenav-overlay"></div>
 <div class="drag-target"></div>
 
 <!-- BEGIN: Footer-->
 <footer class="footer footer-static footer-light">
-    <p class="clearfix mb-0"><span class="float-left d-inline-block">2020 &copy; PIXINVENT</span><span class="float-right d-sm-inline-block d-none">Crafted with<i class="bx bxs-heart pink mx-50 font-small-3"></i>by<a class="text-uppercase" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent</a></span>
-        <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>
+    <p class="clearfix mb-0"><span class="float-left d-inline-block">2021 &copy; FISHERMAN</span><!--<span class="float-right d-sm-inline-block d-none">Crafted with<i class="bx bxs-heart pink mx-50 font-small-3"></i>by<a class="text-uppercase" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent</a></span>
+        <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>-->
     </p>
 </footer>
 <!-- END: Footer-->

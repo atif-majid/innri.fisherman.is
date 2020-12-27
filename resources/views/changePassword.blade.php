@@ -9,9 +9,9 @@
     <meta name="description" content="Frest admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Frest admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Recipes</title>
-    <link rel="apple-touch-icon" href="app-assets/images/ico/apple-icon-120.png">
-    <!--<link rel="shortcut icon" type="image/x-icon" href="app-assets/images/ico/favicon.ico">-->
+    <title>Home - Change Password</title>
+    <link rel="apple-touch-icon" href="../app-assets/images/ico/apple-icon-120.png">
+    <!--<link rel="shortcut icon" type="image/x-icon" href="../app-assets/images/ico/favicon.ico">-->
     <link rel="shortcut icon" type="image/x-icon" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_180x180.png?v=1595428268">
     <link rel="apple-touch-icon" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_180x180.png?v=1595428268"/>
     <link rel="apple-touch-icon" sizes="57x57" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_57x57.png?v=1595428268"/>
@@ -24,26 +24,25 @@
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/vendors.min.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/tables/datatable/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/vendors.min.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap-extended.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/colors.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/components.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/themes/dark-layout.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/themes/semi-dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css/colors.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css/components.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css/themes/dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css/themes/semi-dark-layout.css">
     <!-- END: Theme CSS-->
 
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/pages/page-users.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css/plugins/forms/validation/form-validation.css">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
     <!-- END: Custom CSS-->
 
 </head>
@@ -100,7 +99,7 @@
                             <li class="scrollable-container media-list"><a class="d-flex justify-content-between" href="javascript:void(0)">
                                     <div class="media d-flex align-items-center">
                                         <div class="media-left pr-0">
-                                            <div class="avatar mr-1 m-0"><img src="app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="39" width="39"></div>
+                                            <div class="avatar mr-1 m-0"><img src="../app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="39" width="39"></div>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">Congratulate Socrates Itumay</span> for work anniversaries</h6><small class="notification-text">Mar 15 12:32pm</small>
@@ -110,7 +109,7 @@
                                 <div class="d-flex justify-content-between read-notification cursor-pointer">
                                     <div class="media d-flex align-items-center">
                                         <div class="media-left pr-0">
-                                            <div class="avatar mr-1 m-0"><img src="app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
+                                            <div class="avatar mr-1 m-0"><img src="../app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">New Message</span> received</h6><small class="notification-text">You have 18 unread messages</small>
@@ -119,7 +118,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between cursor-pointer">
                                     <div class="media d-flex align-items-center py-0">
-                                        <div class="media-left pr-0"><img class="mr-1" src="app-assets/images/icon/sketch-mac-icon.png" alt="avatar" height="39" width="39"></div>
+                                        <div class="media-left pr-0"><img class="mr-1" src="../app-assets/images/icon/sketch-mac-icon.png" alt="avatar" height="39" width="39"></div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">Updates Available</span></h6><small class="notification-text">Sketch 50.2 is currently newly added</small>
                                         </div>
@@ -173,7 +172,7 @@
                                 <div class="d-flex justify-content-between read-notification cursor-pointer">
                                     <div class="media d-flex align-items-center">
                                         <div class="media-left pr-0">
-                                            <div class="avatar mr-1 m-0"><img src="app-assets/images/portrait/small/avatar-s-4.jpg" alt="avatar" height="39" width="39"></div>
+                                            <div class="avatar mr-1 m-0"><img src="../app-assets/images/portrait/small/avatar-s-4.jpg" alt="avatar" height="39" width="39"></div>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">New file</span> has been uploaded</h6><small class="notification-text">4 hrs ago</small>
@@ -195,7 +194,7 @@
                                 <div class="d-flex justify-content-between cursor-pointer">
                                     <div class="media d-flex align-items-center border-0">
                                         <div class="media-left pr-0">
-                                            <div class="avatar mr-1 m-0"><img src="app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
+                                            <div class="avatar mr-1 m-0"><img src="../app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">New customer</span> comment recieved</h6><small class="notification-text">2 days ago</small>
@@ -247,7 +246,7 @@
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
             <li class="nav-item"><a href="#"><span class="menu-title">Production System</span></a>
                 <ul class="menu-content">
-                    <li class="active"><a href="{{ route('recipes.index') }}"><!--<i class="menu-livicon" data-icon="envelope-pull"></i>--><span class="menu-title" data-i18n="Email">Recipes</span></a>
+                    <li><a href="{{ route('recipes.index') }}"><!--<i class="menu-livicon" data-icon="envelope-pull"></i>--><span class="menu-title" data-i18n="Email">Recipes</span></a>
                     </li>
                     <li><a href="{{ route('production.index') }}"><!--<i class="menu-livicon" data-icon="check-alt"></i>--><span class="menu-title" data-i18n="Todo">Today's Production</span></a>
                     </li>
@@ -289,7 +288,7 @@
             </li>
             <li class="nav-item"><a href="#"><span class="menu-title">Employees</span></a>
                 <ul class="menu-content">
-                    <li><a href="{{ route('employees.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Empoloyee Directory</span></a>
+                    <li class="active"><a href="{{ route('employees.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Empoloyee Directory</span></a>
                     </li>
                     <li><a href="#"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Job Description</span></a>
                     </li>
@@ -305,98 +304,60 @@
     <div class="content-overlay"></div>
     <div class="content-wrapper">
         <div class="content-header row">
-        </div>
-        <div class="content-body">
-            <!-- users list start -->
-            <section class="users-list-wrapper">
-                <div class="users-list-filter px-1">
-                    <div class="row  rounded py-2 mb-2">
-                        <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center" onclick="window.location.href='new-recipe.html'">
-                            <button type="reset" class="btn btn-primary btn-block glow users-list-clear mb-0">Add New Recipe</button>
+            <div class="content-header-left col-12 mb-2 mt-1">
+                <div class="row breadcrumbs-top">
+                    <div class="col-12">
+                        <h5 class="content-header-title float-left pr-1 mb-0">Change Password</h5>
+                        <div class="breadcrumb-wrapper col-12">
+                            <ol class="breadcrumb p-0 mb-0">
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bx bx-home-alt"></i></a>
+                                </li>
+                                <li class="breadcrumb-item active">Change Password
+                                </li>
+                            </ol>
                         </div>
                     </div>
-
                 </div>
-                <div class="users-list-table">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body">
-                                <!-- datatable start -->
-                                <div class="table-responsive">
-                                    <table id="users-list-datatable" class="table">
-                                        <thead>
-                                        <tr>
-                                            <!--<th>id</th>-->
-                                            <th style="text-align: left; padding-left: 1rem;">Recipe</th>
-                                            <!--<th>JOb Title</th>
-                                            <th>Department</th>
-                                            <th>Direct Phone</th>
-                                            <th>GSM</th>
-                                            <th>E-Mail</th>-->
-                                            <th style="text-align: left; padding-left: 1rem;">edit</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <!--<td>300</td>-->
-                                            <td style="padding: 0.5rem 1.15rem">Smoked Trout 300g (10.5oz) bite</td>
-                                            <!--<td>Marketing</td>
-                                            <td>Suðureyri</td>
-                                            <td>661 9900</td>
-                                            <td>661 9900</td>
-                                            <td>elias@fisherman.is</td>-->
-                                            <td style="padding: 0.5rem 1.15rem"><a href="#"><i class="bx bx-edit-alt"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <!--<td>300</td>-->
-                                            <td style="padding: 0.5rem 1.15rem">Smoked salmon "húskarlabiti" 200g (7 oz)</td>
-                                            <!--<td>Sales</td>
-                                            <td>Grandatröó</td>
-                                            <td>661 9900</td>
-                                            <td>661 9900</td>
-                                            <td>elias@fisherman.is</td>-->
-                                            <td style="padding: 0.5rem 1.15rem"><a href="#"><i class="bx bx-edit-alt"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <!--<td>300</td>-->
-                                            <td style="padding: 0.5rem 1.15rem">Smoked salmon 150g (5,3oz) slices</td>
-                                            <!--<td>Development</td>
-                                            <td>Grandatröó</td>
-                                            <td>661 9900</td>
-                                            <td>661 9900</td>
-                                            <td>elias@fisherman.is</td>-->
-                                            <td style="padding: 0.5rem 1.15rem"><a href="#"><i class="bx bx-edit-alt"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <!--<td>300</td>-->
-                                            <td style="padding: 0.5rem 1.15rem">Rope Hung Smoked Salmon 300g (10,5oz) slices</td>
-                                            <!--<td>Sales</td>
-                                            <td>Fiskislóð</td>
-                                            <td>661 9900</td>
-                                            <td>661 9900</td>
-                                            <td>elias@fisherman.is</td>-->
-                                            <td style="padding: 0.5rem 1.15rem"><a href="#"><i class="bx bx-edit-alt"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <!--<td>300</td>-->
-                                            <td style="padding: 0.5rem 1.15rem">Cured Salmon "Gravlax " 300g (10,5 oz) slices</td>
-                                            <!--<td>Design</td>
-                                            <td>624 Sales</td>
-                                            <td>661 9900</td>
-                                            <td>661 9900</td>
-                                            <td>elias@fisherman.is</td>-->
-                                            <td style="padding: 0.5rem 1.15rem"><a href="#"><i class="bx bx-edit-alt"></i></a></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+            </div>
+        </div>
+        <div class="content-body">
+            <!-- Input Validation start -->
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger mb-2">{{ $error }}</div>
+                @endforeach
+            @endif
+            <section class="input-validation">
+                <div class="row" style="width: 40%;">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Change Password</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <form class="mb-2" action="{{ route('change.password') }}" method="post">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label class="text-bold-600" for="exampleInputPassword1">Current Password</label>
+                                            <input type="password" class="form-control" id="password" name="current_password" autocomplete="current-password"></div>
+                                        <div class="form-group">
+                                            <label class="text-bold-600" for="exampleInputPassword1">New Password</label>
+                                            <input type="password" class="form-control" id="new_password" name="new_password" placeholder="Enter a new password"></div>
+                                        <div class="form-group mb-2">
+                                            <label class="text-bold-600" for="exampleInputPassword2">Confirm New
+                                                Password</label>
+                                            <input type="password" class="form-control" id="new_confirm_password" name="confirm_new_password" placeholder="Confirm your new password"></div>
+                                        <button type="submit" class="btn btn-primary glow position-relative w-100">Reset my
+                                            password<i id="icon-arrow" class="bx bx-right-arrow-alt"></i></button>
+                                    </form>
                                 </div>
-                                <!-- datatable ends -->
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- users list ends -->
+            <!-- Input Validation end -->
         </div>
     </div>
 </div>
@@ -415,7 +376,7 @@
                 <div class="media m-75">
                     <a href="JavaScript:void(0);">
                         <div class="avatar mr-75">
-                            <img src="app-assets/images/portrait/small/avatar-s-2.jpg" alt="avtar images" width="32" height="32">
+                            <img src="../app-assets/images/portrait/small/avatar-s-2.jpg" alt="avtar images" width="32" height="32">
                             <span class="avatar-status-online"></span>
                         </div>
                     </a>
@@ -473,35 +434,34 @@
 
 <!-- BEGIN: Footer-->
 <footer class="footer footer-static footer-light">
-    <p class="clearfix mb-0"><span class="float-left d-inline-block">2020 &copy; FISHERMAN</span><!--<span class="float-right d-sm-inline-block d-none">Crafted with<i class="bx bxs-heart pink mx-50 font-small-3"></i>by<a class="text-uppercase" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent</a></span>
-        <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>-->
+    <p class="clearfix mb-0"><span class="float-left d-inline-block">2021 &copy; FISHERMAN</span><span class="float-right d-sm-inline-block d-none">Crafted with<i class="bx bxs-heart pink mx-50 font-small-3"></i>by<a class="text-uppercase" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent</a></span>
+        <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>
     </p>
 </footer>
 <!-- END: Footer-->
 
 
 <!-- BEGIN: Vendor JS-->
-<script src="app-assets/vendors/js/vendors.min.js"></script>
-<script src="app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
-<script src="app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
-<script src="app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
+<script src="../app-assets/vendors/js/vendors.min.js"></script>
+<script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
+<script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
+<script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
-<script src="app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
-<script src="app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>
+<script src="../app-assets/vendors/js/forms/validation/jqBootstrapValidation.js"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
-<script src="app-assets/js/scripts/configs/vertical-menu-light.js"></script>
-<script src="app-assets/js/core/app-menu.js"></script>
-<script src="app-assets/js/core/app.js"></script>
-<script src="app-assets/js/scripts/components.js"></script>
-<script src="app-assets/js/scripts/footer.js"></script>
+<script src="../app-assets/js/scripts/configs/vertical-menu-light.js"></script>
+<script src="../app-assets/js/core/app-menu.js"></script>
+<script src="../app-assets/js/core/app.js"></script>
+<script src="../app-assets/js/scripts/components.js"></script>
+<script src="../app-assets/js/scripts/footer.js"></script>
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
-<script src="app-assets/js/scripts/pages/page-users.js"></script>
+<script src="../app-assets/js/scripts/forms/validation/form-validation.js"></script>
 <!-- END: Page JS-->
 
 </body>

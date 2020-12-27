@@ -210,9 +210,14 @@
                             <?php /*<div class="user-nav d-sm-flex d-none"><span class="user-name"> {{ Auth::user()->name }}</span><span class="user-status text-muted">Available</span></div><span><img class="round" src="app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"></span>*/?>
                             <div class="user-nav d-sm-flex d-none"><span class="user-name"> {{ Auth::user()->name }}</span><span class="user-status text-muted">Available</span></div><span><img class="round" src="app-assets/images/portrait/small/group 238_2x.jpg" alt="avatar" height="40" width="40"></span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right pb-0"><a class="dropdown-item" href="page-user-profile.html"><i class="bx bx-user mr-50"></i> Edit Profile</a><a class="dropdown-item" href="app-email.html"><i class="bx bx-envelope mr-50"></i> My Inbox</a><a class="dropdown-item" href="app-todo.html"><i class="bx bx-check-square mr-50"></i> Task</a><a class="dropdown-item" href="app-chat.html"><i class="bx bx-message mr-50"></i> Chats</a>
+                        <div class="dropdown-menu dropdown-menu-right pb-0">
+                            <a class="dropdown-item" href="{{ route('change-password') }}"><i class="bx bx-user mr-50"></i> Change Password</a>
+                            <?php /*<a class="dropdown-item" href="app-email.html"><i class="bx bx-envelope mr-50"></i> My Inbox</a>
+                            <a class="dropdown-item" href="app-todo.html"><i class="bx bx-check-square mr-50"></i> Task</a>
+                            <a class="dropdown-item" href="app-chat.html"><i class="bx bx-message mr-50"></i> Chats</a>*/?>
                             <div class="dropdown-divider mb-0"></div><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><i class="bx bx-power-off mr-50"></i> Logout</a>
+                                                     document.getElementById('logout-form').submit();">
+                                <i class="bx bx-power-off mr-50"></i> Logout</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
@@ -367,25 +372,25 @@
                                         <thead>
                                             <tr>
                                                 <!--<th>id</th>-->
-                                                <th>Employee Name</th>
-                                                <th>JOb Title</th>
-                                                <th>Department</th>
-                                                <th>Direct Phone</th>
-                                                <th>Mobile phone</th>
-                                                <th>EMail address</th>
-                                                <th>edit</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Employee Name</th>
+                                                <th style="text-align: left; padding-left: 1rem;">JOb Title</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Department</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Direct Phone</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Mobile phone</th>
+                                                <th style="text-align: left; padding-left: 1rem;">EMail address</th>
+                                                <th style="text-align: left; padding-left: 1rem;">edit</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($employees as $employee)
                                                 <tr>
-                                                    <td>{{ $employee->name }}</td>
-                                                    <td>{{ $employee->designation }}</td>
-                                                    <td>{{ $employee->department }}</td>
-                                                    <td>{{ $employee->direct_phone }}</td>
-                                                    <td>{{ $employee->gsm }}</td>
-                                                    <td>{{ $employee->email }}</td>
-                                                    <td>
+                                                    <td style="padding: 0.5rem 1.15rem">{{ $employee->name }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem">{{ $employee->designation }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem">{{ $employee->department }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem">{{ $employee->direct_phone }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem">{{ $employee->gsm }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem">{{ $employee->email }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem">
                                                         <form id="form-del" action="{{ route('employees.destroy',$employee->id) }}" method="POST">
                                                             <a href="{{ route('employees.edit', $employee->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp;
                                                             @csrf
@@ -464,7 +469,8 @@
 <!-- END: Content-->
 
 <!-- demo chat-->
-<div class="widget-chat-demo">
+<?php
+/*<div class="widget-chat-demo">
     <!-- widget chat demo footer button start -->
     <button class="btn btn-primary chat-demo-button glow px-1"><i class="livicon-evo" data-options="name: comments.svg; style: lines; size: 24px; strokeColor: #fff; autoPlay: true; repeat: loop;"></i></button>
     <!-- widget chat demo footer button ends -->
@@ -526,14 +532,15 @@
     </div>
     <!-- widget chat demo ends -->
 
-</div>
+</div>*/
+?>
 <div class="sidenav-overlay"></div>
 <div class="drag-target"></div>
 
 <!-- BEGIN: Footer-->
 <footer class="footer footer-static footer-light">
-    <p class="clearfix mb-0"><span class="float-left d-inline-block">2020 &copy; PIXINVENT</span><span class="float-right d-sm-inline-block d-none">Crafted with<i class="bx bxs-heart pink mx-50 font-small-3"></i>by<a class="text-uppercase" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent</a></span>
-        <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>
+    <p class="clearfix mb-0"><span class="float-left d-inline-block">2021 &copy; FISHERMAN</span><!--<span class="float-right d-sm-inline-block d-none">Crafted with<i class="bx bxs-heart pink mx-50 font-small-3"></i>by<a class="text-uppercase" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent</a></span>
+        <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>-->
     </p>
 </footer>
 <!-- END: Footer-->
