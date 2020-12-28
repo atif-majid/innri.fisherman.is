@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Recipes extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+    protected $fillable = [
+        'title',
+        'preparation_time',
+        'cooking_time'
+    ];
 }

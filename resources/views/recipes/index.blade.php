@@ -317,6 +317,11 @@
                     </div>
 
                 </div>
+                @if ($message = Session::get('success'))
+                    <div class="alert alert-info mb-2">
+                        {{ $message }}
+                    </div>
+                @endif
                 <div class="users-list-table">
                     <div class="card">
                         <div class="card-content">
@@ -325,19 +330,37 @@
                                 <div class="table-responsive">
                                     <table id="users-list-datatable" class="table">
                                         <thead>
-                                        <tr>
-                                            <!--<th>id</th>-->
-                                            <th style="text-align: left; padding-left: 1rem;">Recipe</th>
-                                            <!--<th>JOb Title</th>
-                                            <th>Department</th>
-                                            <th>Direct Phone</th>
-                                            <th>GSM</th>
-                                            <th>E-Mail</th>-->
-                                            <th style="text-align: left; padding-left: 1rem;">edit</th>
-                                        </tr>
+                                            <tr>
+                                                <!--<th>id</th>-->
+                                                <th style="text-align: left; padding-left: 1rem;">Recipe</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Preparation Time</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Cooking Time</th>
+                                                <!--<th>Direct Phone</th>
+                                                <th>GSM</th>
+                                                <th>E-Mail</th>-->
+                                                <th style="text-align: left; padding-left: 1rem;">Options</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
+                                        @foreach ($recipes as $recipe)
+                                            <tr>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $recipe->title }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $recipe->preparation_time }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $recipe->cooking_time }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">
+                                                    <form id="form-del" action="{{ route('recipes.destroy',$recipe->id) }}" method="POST">
+                                                        <!--<a href="{{ route('recipes.edit', $recipe->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp;-->
+                                                        <a href="#"><i class="bx bx-edit-alt"></i></a>&nbsp
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a href="{{ route('recipes.destroy', $recipe->id) }}" onclick="event.preventDefault();
+                                                     if(confirm('Are you sure to delete?')){document.getElementById('form-del').submit();}"><i class="bx bxs-trash-alt"></i></a>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        <?php
+                                        /*<tr>
                                             <!--<td>300</td>-->
                                             <td style="padding: 0.5rem 1.15rem">Smoked Trout 300g (10.5oz) bite</td>
                                             <!--<td>Marketing</td>
@@ -386,7 +409,8 @@
                                             <td>661 9900</td>
                                             <td>elias@fisherman.is</td>-->
                                             <td style="padding: 0.5rem 1.15rem"><a href="#"><i class="bx bx-edit-alt"></i></a></td>
-                                        </tr>
+                                        </tr>*/
+                                        ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -473,7 +497,7 @@
 
 <!-- BEGIN: Footer-->
 <footer class="footer footer-static footer-light">
-    <p class="clearfix mb-0"><span class="float-left d-inline-block">2020 &copy; FISHERMAN</span><!--<span class="float-right d-sm-inline-block d-none">Crafted with<i class="bx bxs-heart pink mx-50 font-small-3"></i>by<a class="text-uppercase" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent</a></span>
+    <p class="clearfix mb-0"><span class="float-left d-inline-block">2021 &copy; FISHERMAN</span><!--<span class="float-right d-sm-inline-block d-none">Crafted with<i class="bx bxs-heart pink mx-50 font-small-3"></i>by<a class="text-uppercase" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent</a></span>
         <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>-->
     </p>
 </footer>

@@ -313,6 +313,11 @@
             </div>
         </div>
         <div class="content-body">
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger mb-2">{{ $error }}</div>
+                @endforeach
+            @endif
             <form class="form-horizontal" novalidate method="post" action="{{ route('recipes.store') }}">
             @csrf
             <!-- // Basic multiple Column Form section start -->
@@ -330,7 +335,7 @@
                                                 <div class="form-group">
                                                     <label>Recipe Title</label>
                                                     <div class="controls">
-                                                        <input type="text" name="name" class="form-control" data-validation-required-message="Recipe title is required" placeholder="Recipe Title">
+                                                        <input type="text" name="title" class="form-control" data-validation-required-message="Recipe title is required" placeholder="Recipe Title">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -426,7 +431,7 @@
                                                 <div class="row justify-content-between">
                                                     <div class="col-md-2 col-sm-12 form-group" style="width: 800px; max-width: 80%;">
                                                         <label for="text">Step </label>
-                                                        <input type="text" class="form-control" id="step" name="step" placeholder="Enter Step Detail" style="width: 800px; max-width: 100%;">
+                                                        <textarea class="form-control" id="step" name="step" placeholder="Enter Step Detail" style="width: 800px; max-width: 100%;"></textarea>
                                                     </div>
                                                     <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
                                                         <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>

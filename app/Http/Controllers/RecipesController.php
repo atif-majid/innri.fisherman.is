@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Recipes;
+use App\Models\Ingredients;
+use App\Models\Steps;
 use Illuminate\Http\Request;
 
 class RecipesController extends Controller
@@ -15,7 +17,11 @@ class RecipesController extends Controller
     public function index()
     {
         //
-        return view('recipes.index');
+        //return view('recipes.index');
+        $recipes = Recipes::all();
+
+        return view('recipes.index',compact('recipes'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -38,10 +44,43 @@ class RecipesController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'title' => 'required',
+            'preparation_time' => 'required',
+            'cooking_time' => 'required'
+        ]);
+        $arrRecipe = array(
+            'title'=>$request->title,
+            'preparation_time'=>$request->preparation_time,
+            'cooking_time'=>$request->cooking_time
+            );
 
-        echo "<pre>";
-        print_r($request);
-        echo "</pre>";
+        $recipe = Recipes::create($arrRecipe);
+        $nRecipeID = $recipe->id;
+
+        $arrIngredients = $_POST['group-a'];
+        foreach ($arrIngredients as $thisIngredient)
+        {
+            $arrInsert = array(
+                'name'=>$thisIngredient['ingredient'],
+                'amount'=>$thisIngredient['quantity'],
+                'unit'=>$thisIngredient['unit'],
+                'recipe_id'=>$nRecipeID
+            );
+            Ingredients::create($arrInsert);
+        }
+
+        $arrSteps = $_POST['group-b'];
+        foreach ($arrSteps as $thisStep)
+        {
+            $arrInsert = array(
+                'details'=>$thisStep['step'],
+                'recipe_id'=>$nRecipeID
+            );
+            Steps::create($arrInsert);
+        }
+        return redirect()->route('recipes.index')
+            ->with('success','Recipe added successfully.');
     }
 
     /**
@@ -84,8 +123,14 @@ class RecipesController extends Controller
      * @param  \App\Models\Recipes  $recipes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Recipes $recipes)
+    public function destroy(Recipes $recipe)
     {
         //
+        $nRecipeID = $recipe->id;
+        Ingredients::where('recipe_id',$nRecipeID)->delete();
+        Steps::where('recipe_id',$nRecipeID)->delete();
+        $recipe->delete();
+        return redirect()->route('recipes.index')
+            ->with('success','Recipe deleted successfully.');
     }
 }
