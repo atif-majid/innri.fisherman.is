@@ -338,20 +338,27 @@
                                                         <input type="text" name="title" class="form-control" data-validation-required-message="Recipe title is required" placeholder="Recipe Title">
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                @php
+                                                /*<div class="form-group">
                                                     <label>Cooking Time</label>
                                                     <div class="controls">
                                                         <input type="text" name="cooking_time" class="form-control" data-validation-required-message="Cooking time required" placeholder="Cooking Time">
                                                     </div>
                                                 </div>
+                                                */
+                                                @endphp
                                             </div>
                                             <div class="col-md-6">
+                                                @php
+                                                /*
                                                 <div class="form-group">
                                                     <label>Preparation Time</label>
                                                     <div class="controls">
                                                         <input type="text" name="preparation_time" class="form-control" data-validation-required-message="Preparaion time is required" placeholder="Preparation Time">
                                                     </div>
                                                 </div>
+                                                */
+                                                @endphp
                                             </div>
                                         </div>
                                     </div>
@@ -376,25 +383,28 @@
                                         <div data-repeater-list="group-a">
                                             <div data-repeater-item>
                                                 <div class="row justify-content-between">
-                                                    <div class="col-md-2 col-sm-12 form-group" style="width: 50% !important; max-width: 600px;">
-                                                        <label for="text">Name </label>
-                                                        <input type="text" class="form-control" id="ingredient" name="ingredient" placeholder="Enter Item Title" style="width: 400px;">
-                                                    </div>
-                                                    <div class="col-md-2 col-sm-12 form-group"  style="width: 20% !important; max-width: 125px;">
-                                                        <label for="quanity">Quantity</label>
-                                                        <input type="text" class="form-control" id="quantity" name="quantity" placeholder="Enter Quantity" style="width: 125px;">
-                                                    </div>
-                                                    <div class="col-md-2 col-sm-12 form-group"  style="width: 30% !important; max-width: 100px;">
-                                                        <label for="unit">Unit</label>
-                                                        <select name="unit" id="unit" class="form-control">
-                                                            <option value="KG">KG</option>
-                                                            <option value="Liter">Liter</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
-                                                        <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
-                                                            Delete
-                                                        </button>
+                                                    <div class="input-group">
+                                                        <div class="col-md-2 col-sm-12 form-group" style="max-width: 600px;">
+                                                            <label for="text">Name </label>
+                                                            <input type="text" class="form-control" id="ingredient" name="ingredient" placeholder="Enter Item Title" style="width: 360px;">
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px;">
+                                                            <label for="quanity">Quantity</label>
+                                                            <input type="text" class="form-control" id="quantity" name="quantity" placeholder="Enter Quantity" style="width: 125px;">
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px; margin-left: 30px; margin-right: 30px;">
+                                                            <label for="unit">Unit</label>
+                                                            <select name="unit" id="unit" class="form-control" style="width: 125px;">
+                                                                <option value="" selected></option>
+                                                                <option value="KG">KG</option>
+                                                                <option value="Liter">Liter</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
+                                                            <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
+                                                                Delete
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <hr>
@@ -431,7 +441,7 @@
                                                 <div class="row justify-content-between">
                                                     <div class="col-md-2 col-sm-12 form-group" style="width: 800px; max-width: 80%;">
                                                         <label for="text">Step </label>
-                                                        <textarea class="form-control" id="step" name="step" placeholder="Enter Step Detail" style="width: 800px; max-width: 100%;"></textarea>
+                                                        <textarea class="form-control" id="step" name="step" placeholder="Enter Step Detail" rows="4" style="width: 800px; max-width: 100%;"></textarea>
                                                     </div>
                                                     <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
                                                         <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>

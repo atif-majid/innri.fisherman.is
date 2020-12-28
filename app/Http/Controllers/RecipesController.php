@@ -44,10 +44,13 @@ class RecipesController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate([
+        /*$request->validate([
             'title' => 'required',
             'preparation_time' => 'required',
             'cooking_time' => 'required'
+        ]);*/
+        $request->validate([
+            'title' => 'required'
         ]);
         $arrRecipe = array(
             'title'=>$request->title,

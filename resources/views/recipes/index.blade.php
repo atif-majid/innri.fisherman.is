@@ -332,21 +332,23 @@
                                         <thead>
                                             <tr>
                                                 <!--<th>id</th>-->
-                                                <th style="text-align: left; padding-left: 1rem;">Recipe</th>
-                                                <th style="text-align: left; padding-left: 1rem;">Preparation Time</th>
+                                                <th style="text-align: left; padding-left: 1rem; width: 85%">Recipe</th>
+                                                <!--<th style="text-align: left; padding-left: 1rem;">Preparation Time</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Cooking Time</th>
-                                                <!--<th>Direct Phone</th>
+                                                <th>Direct Phone</th>
                                                 <th>GSM</th>
                                                 <th>E-Mail</th>-->
-                                                <th style="text-align: left; padding-left: 1rem;">Options</th>
+                                                <th style="text-align: left; padding-left: 1rem; width: 15%">Options</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         @foreach ($recipes as $recipe)
                                             <tr>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $recipe->title }}</td>
-                                                <td style="padding: 0.5rem 1.15rem">{{ $recipe->preparation_time }}</td>
-                                                <td style="padding: 0.5rem 1.15rem">{{ $recipe->cooking_time }}</td>
+                                                @php
+                                                /*<td style="padding: 0.5rem 1.15rem">{{ $recipe->preparation_time }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $recipe->cooking_time }}</td>*/
+                                                @endphp
                                                 <td style="padding: 0.5rem 1.15rem">
                                                     <form id="form-del" action="{{ route('recipes.destroy',$recipe->id) }}" method="POST">
                                                         <!--<a href="{{ route('recipes.edit', $recipe->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp;-->

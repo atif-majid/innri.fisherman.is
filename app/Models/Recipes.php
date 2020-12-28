@@ -9,9 +9,12 @@ class Recipes extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable = [
+    /*protected $fillable = [
         'title',
         'preparation_time',
         'cooking_time'
+    ];*/
+    protected $fillable = [
+        'title'
     ];
 }
