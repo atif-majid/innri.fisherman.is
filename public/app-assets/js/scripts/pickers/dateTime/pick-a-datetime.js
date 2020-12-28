@@ -18,7 +18,8 @@
 
   // Format Date Picker
   $('.format-picker').pickadate({
-      format: 'mmmm, d, yyyy'
+      //format: 'mmmm, d, yyyy'
+      format: 'yyyy-mm-dd'
   });
 
   // Date limits
@@ -80,7 +81,7 @@
   // * Pick a Time Picker *//
   // ************************//
   // Basic time
-  $('.pickatime').pickatime();
+  /*$('.pickatime').pickatime();
 
   // Format options
   $('.pickatime-format').pickatime({
@@ -125,7 +126,7 @@
       // Disable Using Integers
           3, 5, 7, 13, 17, 21
 
-      /* Using Array */
+      // Using Array
           // [0,30],
           // [2,0],
           // [8,30],
@@ -137,13 +138,14 @@
   $('.pickatime-close-action').pickatime({
       closeOnSelect: false,
       closeOnClear: false
-  });
+  });*/
 
   // ************************//
   // * Date Range Picker *//
   // ************************//
 
   // Basic Date Range Picker
+    /*
   $('.daterange').daterangepicker();
 
   // Date & Time
@@ -292,6 +294,6 @@
 
   // show picker on load
   picker.data('daterangepicker').show();
-
+*/
 
 })(window, document, jQuery);

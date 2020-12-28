@@ -389,14 +389,14 @@
                                         <tbody>
                                         @foreach ($productions as $production)
                                             <tr>
-                                                <td style="padding: 0.5rem 1.15rem">Rope Hung Smoked Salmon</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $production->title }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->product_number }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->lot_number }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->product_name }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->instructions }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->products_available_arriving }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->packing_package_size }}</td>
-                                                <td style="padding: 0.5rem 1.15rem">{{ $production->production_total }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $production->production_total }}&nbsp;{{ $production->production_unit }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->delivery_storage }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->delivery_storage_quantity }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->pallet_number }}</td>

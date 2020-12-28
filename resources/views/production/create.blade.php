@@ -25,6 +25,7 @@
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/pickers/pickadate/pickadate.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -345,13 +346,26 @@
                                                 <div class="form-group">
                                                     <label>Recipe</label>
                                                     <fieldset class="form-group">
-                                                        <select class="form-control" id="recipe" name="recipe">
-                                                            <option value="">Select an Option</option>
+                                                        <select class="form-control" id="recipe_id" name="recipe_id">
+                                                            <option value="" selected></option>
+                                                            @foreach ($recipes as $recipe)
+                                                                <option value="{{ $recipe->id }}">{{$recipe->title}}</option>
+                                                            @endforeach
+                                                            <!--<option value="">Select an Option</option>
                                                             <option value="F">Cured Salmon "Gravlax "</option>
                                                             <option value="M">Rope Hung Smoked Salmon</option>
                                                             <option value="P">Smoked Salmon</option>
-                                                            <option value="S">Smoked salmon "húskarlabiti"</option>
+                                                            <option value="S">Smoked salmon "húskarlabiti"</option>-->
                                                         </select>
+                                                    </fieldset>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Production Date</label>
+                                                    <fieldset class="position-relative has-icon-left">
+                                                        <input type="text" class="form-control format-picker" placeholder="Select Date" id="production_date" name="production_date" value="@php echo date("Y-m-d");@endphp">
+                                                        <div class="form-control-position">
+                                                            <i class='bx bx-calendar'></i>
+                                                        </div>
                                                     </fieldset>
                                                 </div>
                                                 <div class="form-group">
@@ -384,14 +398,14 @@
                                                         </select>
                                                     </fieldset>
                                                 </div>
+                                            </div>
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Products Available/Arriving. (How much Fish in freezer-cooler or arriving today?)</label>
                                                     <div class="controls">
                                                         <input type="text" name="products_available_arriving" class="form-control" data-validation-required-message="Availability is required" placeholder="Products available">
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Packing (Package size)</label>
                                                     <div class="controls">
@@ -400,9 +414,22 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Production (Total kg/packages)</label>
-                                                    <div class="controls">
-                                                        <input type="text" name="production_total" class="form-control" data-validation-required-message="Production quantity is required" placeholder="Production quantity">
+                                                    <div class="input-group">
+                                                        <input type="text" aria-label="Production" class="form-control" placeholder="Total Production" id="production_total" name="production_total" style="max-width: 50% !important; box-sizing: border-box;">
+                                                        <!--<input type="text" aria-label="Last name" class="form-control" placeholder="Last Name">-->
+                                                        <fieldset style="padding-left: 30px;">
+                                                            <select class="form-control" id="production_unit" name="production_unit" style="min-width: 100% !important; box-sizing: border-box;">
+                                                                <option value=""></option>
+                                                                <option value="Kg">Kg</option>
+                                                                <option value="Packages">Packages</option>
+                                                            </select>
+                                                        </fieldset>
                                                     </div>
+                                                    <?php
+                                                    /*<div class="controls">
+                                                        <input type="text" name="production_total" class="form-control" data-validation-required-message="Production quantity is required" placeholder="Production quantity">
+                                                    </div>*/
+                                                    ?>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Delivery / Storage</label>
@@ -429,6 +456,21 @@
                                                         <input type="text" name="pallet_number" class="form-control" data-validation-required-message="Pallet # is required" placeholder="Pallet #">
                                                     </div>
                                                 </div>
+                                                <?php
+                                                /*<div class="form-group">
+                                                    <label>Total Production</label>
+                                                    <div class="input-group">
+                                                        <input type="text" aria-label="Production" class="form-control" placeholder="Total Production" id="production_total" name="production_total" style="max-width: 50% !important; box-sizing: border-box;">
+                                                        <!--<input type="text" aria-label="Last name" class="form-control" placeholder="Last Name">-->
+                                                        <fieldset class="form-group">
+                                                            <select class="form-control" id="production_unit" name="production_unit" style="min-width: 100% !important; box-sizing: border-box;">
+                                                                <option value=""></option>
+                                                                <option value="Kg">Kg</option>
+                                                                <option value="Packages">Packages</option>
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>*/?>
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -532,6 +574,10 @@
 
 <!-- BEGIN: Page Vendor JS-->
 <script src="../app-assets/vendors/js/forms/validation/jqBootstrapValidation.js"></script>
+<script src="../app-assets/vendors/js/pickers/pickadate/picker.js"></script>
+<script src="../app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
+
+
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
@@ -545,6 +591,7 @@
 <!-- BEGIN: Page JS-->
 <script src="../app-assets/js/scripts/forms/validation/form-validation.js"></script>
 <!-- END: Page JS-->
+<script src="../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js"></script>
 
 </body>
 <!-- END: Body-->

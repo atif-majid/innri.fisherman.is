@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Production;
+use App\Models\Recipes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductionController extends Controller
 {
@@ -15,7 +17,11 @@ class ProductionController extends Controller
     public function index()
     {
         //
-        $productions = Production::paginate(10);
+        //$productions = Production::leftJoin('production', 'recipe_id', '=')->paginate(10);
+        $productions = DB::table('production')
+            ->leftJoin('recipes', 'recipe_id', '=', 'recipes.id')
+            ->select('production.*','recipes.title')
+            ->get();
 
         return view('production.index',compact('productions'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
@@ -29,7 +35,8 @@ class ProductionController extends Controller
     public function create()
     {
         //
-        return view('production.create');
+        $recipes = Recipes::all();
+        return view('production.create',compact('recipes'));
     }
 
     /**
@@ -51,7 +58,10 @@ class ProductionController extends Controller
             'production_total' => 'required',
             'delivery_storage' => 'required',
             'delivery_storage_quantity' => 'required',
-            'pallet_number' => 'required'
+            'pallet_number' => 'required',
+            'recipe_id' => 'required',
+            'production_date' => 'required',
+            'production_unit' => 'required'
         ]);
 
         Production::create($request->all());
@@ -81,7 +91,8 @@ class ProductionController extends Controller
     public function edit(Production $production)
     {
         //
-        return view('production.edit', compact('production'));
+        $recipes = Recipes::all();
+        return view('production.edit', compact('production', 'recipes'));
     }
 
     /**
@@ -105,7 +116,10 @@ class ProductionController extends Controller
             'production_total' => 'required',
             'delivery_storage' => 'required',
             'delivery_storage_quantity' => 'required',
-            'pallet_number' => 'required'
+            'pallet_number' => 'required',
+            'recipe_id' => 'required',
+            'production_date' => 'required',
+            'production_unit' => 'required'
         ]);
 
         $production->update($request->all());

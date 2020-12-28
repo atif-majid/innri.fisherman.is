@@ -20,6 +20,10 @@ class Production extends Model
         'production_total',
         'delivery_storage',
         'delivery_storage_quantity',
-        'pallet_number'
+        'pallet_number',
+        'recipe_id',
+        'production_date',
+        'production_unit'
     ];
+
 }
