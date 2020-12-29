@@ -371,7 +371,7 @@
                                     <table id="users-list-datatable" class="table">
                                         <thead>
                                             <tr>
-                                                <!--<th>id</th>-->
+                                                <th>id</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Recipe</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Product nr.</th>
                                                 <th style="text-align: left; padding-left: 1rem;">LOT nr.</th>
@@ -389,6 +389,7 @@
                                         <tbody>
                                         @foreach ($productions as $production)
                                             <tr>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $production->id }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->title }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->product_number }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->lot_number }}</td>
@@ -597,7 +598,7 @@
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
-<script src="app-assets/js/scripts/pages/page-users.js"></script>
+<script src="app-assets/js/scripts/pages/page-production.js?time=<?php echo time();?>"></script>
 <!-- END: Page JS-->
 
 </body>
