@@ -278,7 +278,7 @@
             </li>
             <li class="nav-item"><a href="#"><span class="menu-title">Employees</span></a>
                 <ul class="menu-content">
-                    <li><a href="{{ route('employees.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Empoloyee Directory</span></a>
+                    <li><a href="{{ route('employees.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Employee Directory</span></a>
                     </li>
                     <li><a href="#"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Job Description</span></a>
                     </li>
