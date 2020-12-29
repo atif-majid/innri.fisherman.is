@@ -11,16 +11,7 @@
     <meta name="author" content="PIXINVENT">
     <title>Employees</title>
     <link rel="apple-touch-icon" href="app-assets/images/ico/apple-icon-120.png">
-    <!--<link rel="shortcut icon" type="image/x-icon" href="app-assets/images/ico/favicon.ico">-->
-    <link rel="shortcut icon" type="image/x-icon" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_180x180.png?v=1595428268">
-    <link rel="apple-touch-icon" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_180x180.png?v=1595428268"/>
-    <link rel="apple-touch-icon" sizes="57x57" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_57x57.png?v=1595428268"/>
-    <link rel="apple-touch-icon" sizes="60x60" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_60x60.png?v=1595428268"/>
-    <link rel="apple-touch-icon" sizes="72x72" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_72x72.png?v=1595428268"/>
-    <link rel="apple-touch-icon" sizes="76x76" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_76x76.png?v=1595428268"/>
-    <link rel="apple-touch-icon" sizes="114x114" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_114x114.png?v=1595428268"/>
-    <link rel="apple-touch-icon" sizes="180x180" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_180x180.png?v=1595428268"/>
-    <link rel="apple-touch-icon" sizes="228x228" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_228x228.png?v=1595428268"/>
+    <link rel="shortcut icon" type="image/x-icon" href="app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
@@ -317,37 +308,52 @@
                     </div>
 
                 </div>
-                <!--<div class="users-list-filter px-1">
-                    <form>
+                <div class="users-list-filter px-1">
+                    <form onsubmit="return false;">
                         <div class="row border rounded py-2 mb-2">
                             <div class="col-12 col-sm-6 col-lg-3">
-                                <label for="users-list-verified">Verified</label>
+                                <label for="users-list-role">Name</label>
+                                <fieldset class="form-group">
+                                    <input type="text" class="form-control" id="users-list-role">
+                                </fieldset>
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <label for="users-list-verified">Department</label>
                                 <fieldset class="form-group">
                                     <select class="form-control" id="users-list-verified">
                                         <option value="">Any</option>
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">No</option>
+                                        <option value="Distribution">Distribution</option>
+                                        <option value="Production Suðureyri">Production Suðureyri</option>
+                                        <option value="Production Hafnarfjörður">Production Hafnarfjörður</option>
+                                        <option value="Service center">Service center</option>
+                                        <option value="Service center - Suðureyri">Service center - Suðureyri</option>
+                                        <option value="Suðureyri- vinnsla">Suðureyri- vinnsla</option>
+                                        <option value="Travel service">Travel service</option>
                                     </select>
                                 </fieldset>
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3">
-                                <label for="users-list-role">Role</label>
-                                <fieldset class="form-group">
-                                    <select class="form-control" id="users-list-role">
-                                        <option value="">Any</option>
-                                        <option value="User">User</option>
-                                        <option value="Staff">Staff</option>
-                                    </select>
-                                </fieldset>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <label for="users-list-status">Status</label>
+                                <label for="users-list-status">Job Title</label>
                                 <fieldset class="form-group">
                                     <select class="form-control" id="users-list-status">
                                         <option value="">Any</option>
-                                        <option value="Active">Active</option>
-                                        <option value="Close">Close</option>
-                                        <option value="Banned">Banned</option>
+                                        <option value="Bookkeeper">Bookkeeper</option>
+                                        <option value="CEO">CEO</option>
+                                        <option value="Customer service">Customer service</option>
+                                        <option value="Distribution manager">Distribution manager</option>
+                                        <option value="Driver">Driver</option>
+                                        <option value="Factory cleaning">Factory cleaning</option>
+                                        <option value="Factory worker">Factory worker</option>
+                                        <option value="Hotel caretaker">Hotel caretaker</option>
+                                        <option value="Maintenance manager">Maintenance manager</option>
+                                        <option value="Office manager">Office manager</option>
+                                        <option value="Production manager">Production manager</option>
+                                        <option value="Project manager">Project manager</option>
+                                        <option value="Purchasing & Quality manager">Purchasing & Quality manager</option>
+                                        <option value="Sales manager">Sales manager</option>
+                                        <option value="Store manager & Staff food chef">Store manager & Staff food chef</option>
+                                        <option value="Truck driver">Truck driver</option>
+
                                     </select>
                                 </fieldset>
                             </div>
@@ -356,7 +362,7 @@
                             </div>
                         </div>
                     </form>
-                </div>-->
+                </div>
                 @if ($message = Session::get('success'))
                     <div class="alert alert-info mb-2">
                         {{ $message }}
@@ -371,7 +377,7 @@
                                     <table id="users-list-datatable" class="table">
                                         <thead>
                                             <tr>
-                                                <!--<th>id</th>-->
+                                                <th>id</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Employee Name</th>
                                                 <th style="text-align: left; padding-left: 1rem;">JOb Title</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Department</th>
@@ -384,6 +390,7 @@
                                         <tbody>
                                             @foreach ($employees as $employee)
                                                 <tr>
+                                                    <td>{{ $employee->id }}</td>
                                                     <td style="padding: 0.5rem 1.15rem">{{ $employee->name }}</td>
                                                     <td style="padding: 0.5rem 1.15rem">{{ $employee->designation }}</td>
                                                     <td style="padding: 0.5rem 1.15rem">{{ $employee->department }}</td>
@@ -396,63 +403,11 @@
                                                             @csrf
                                                             @method('DELETE')
                                                             <a href="{{ route('employees.destroy', $employee->id) }}" onclick="event.preventDefault();
-                                                     if(confirm('Are you sure to delete?')){document.getElementById('form-del').submit();}"><i class="bx bxs-trash-alt"></i></a>
+                                                         if(confirm('Are you sure to delete?')){document.getElementById('form-del').submit();}"><i class="bx bxs-trash-alt"></i></a>
                                                         </form>
                                                     </td>
                                                 </tr>
                                             @endforeach
-                                            <?php
-                                            /*<tr>
-                                                <!--<td>300</td>-->
-                                                <td>Petra D. Karvel</td>
-                                                <td>Marketing</td>
-                                                <td>Suðureyri</td>
-                                                <td>661 9900</td>
-                                                <td>661 9900</td>
-                                                <td>elias@fisherman.is</td>
-                                                <!--<td><a href="html/ltr/vertical-menu-template/page-users-edit.html"><i class="bx bx-edit-alt"></i></a></td>-->
-                                            </tr>
-                                            <tr>
-                                                <!--<td>300</td>-->
-                                                <td>Pálmi þór Gunnarsson</td>
-                                                <td>Sales</td>
-                                                <td>Grandatröó</td>
-                                                <td>661 9900</td>
-                                                <td>661 9900</td>
-                                                <td>elias@fisherman.is</td>
-                                                <!--<td><a href="html/ltr/vertical-menu-template/page-users-edit.html"><i class="bx bx-edit-alt"></i></a></td>-->
-                                            </tr>
-                                            <tr>
-                                                <!--<td>300</td>-->
-                                                <td>Jón Jónsson</td>
-                                                <td>Development</td>
-                                                <td>Grandatröó</td>
-                                                <td>661 9900</td>
-                                                <td>661 9900</td>
-                                                <td>elias@fisherman.is</td>
-                                                <!--<td><a href="html/ltr/vertical-menu-template/page-users-edit.html"><i class="bx bx-edit-alt"></i></a></td>-->
-                                            </tr>
-                                            <tr>
-                                                <!--<td>300</td>-->
-                                                <td>Jón Jónsson</td>
-                                                <td>Sales</td>
-                                                <td>Fiskislóð</td>
-                                                <td>661 9900</td>
-                                                <td>661 9900</td>
-                                                <td>elias@fisherman.is</td>
-                                                <!--<td><a href="html/ltr/vertical-menu-template/page-users-edit.html"><i class="bx bx-edit-alt"></i></a></td>-->
-                                            </tr>
-                                            <tr>
-                                                <!--<td>300</td>-->
-                                                <td>Jón Jónsson</td>
-                                                <td>Design</td>
-                                                <td>624 Sales</td>
-                                                <td>661 9900</td>
-                                                <td>661 9900</td>
-                                                <td>elias@fisherman.is</td>
-                                                <!--<td><a href="html/ltr/vertical-menu-template/page-users-edit.html"><i class="bx bx-edit-alt"></i></a></td>-->
-                                            </tr>*/
-                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -467,10 +422,10 @@
     </div>
 </div>
 <!-- END: Content-->
-
+@php
+/*
 <!-- demo chat-->
-<?php
-/*<div class="widget-chat-demo">
+<div class="widget-chat-demo">
     <!-- widget chat demo footer button start -->
     <button class="btn btn-primary chat-demo-button glow px-1"><i class="livicon-evo" data-options="name: comments.svg; style: lines; size: 24px; strokeColor: #fff; autoPlay: true; repeat: loop;"></i></button>
     <!-- widget chat demo footer button ends -->
@@ -532,8 +487,9 @@
     </div>
     <!-- widget chat demo ends -->
 
-</div>*/
-?>
+</div>
+*/
+@endphp
 <div class="sidenav-overlay"></div>
 <div class="drag-target"></div>
 
@@ -567,15 +523,9 @@
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
-<script src="app-assets/js/scripts/pages/page-users.js"></script>
+<script src="app-assets/js/scripts/pages/page-users.js?time=<?php echo time();?>"></script>
 <!-- END: Page JS-->
-<script>
-    $(document).ready(function() {
-        $(".table-sortable").dataTable({
-            bPaginate: false,
-        });
-    });
-</script>
+
 </body>
 <!-- END: Body-->
 

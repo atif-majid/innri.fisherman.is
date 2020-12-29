@@ -15,11 +15,16 @@ $(document).ready(function () {
     // datatable initialization
     if ($("#users-list-datatable").length > 0) {
         usersTable = $("#users-list-datatable").DataTable({
+            "pageLength": 100,
             responsive: true,
             'columnDefs': [
                 {
                     "orderable": false,
                     "targets": [7]
+                },
+                {
+                    "targets": [ 0 ],
+                    "visible": false
                 }]
         });
     };
