@@ -2682,7 +2682,8 @@ _:-ms-lang(x),
 
 .pagination .page-item.active .page-link, .pagination .page-item.active .page-link:hover {
   border-radius: 0.267rem;
-  background-color: #5A8DEE !important;
+  /*background-color: #5A8DEE !important;*/
+    background-color: #525253 !important;
   color: #FFFFFF;
 }
 
@@ -2898,6 +2899,7 @@ _:-ms-lang(x),
 /*  Boxicons Default Set Font-size */
 .bx {
   font-size: 1.2rem;
+    color: #404040;
 }
 
 /* drag n drop - bullets none on drag - as default */

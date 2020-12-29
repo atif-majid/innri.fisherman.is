@@ -5,7 +5,7 @@
 - Responsive Layout CSS
 - Sidebar
 - Footer CSS
-- Main Menu 
+- Main Menu
 - Content Helpers
 -   Display
 -   Borders
@@ -540,11 +540,14 @@ body.footer-hidden footer {
 }
 
 .main-menu.menu-light .navigation > li ul .active {
-  background: rgba(90, 141, 238, 0.15);
+  /*background: rgba(90, 141, 238, 0.15);*/
+    background: rgb(210, 210, 212);
 }
 
 .main-menu.menu-light .navigation > li ul .active > a {
-  color: #5A8DEE;
+  /*color: #5A8DEE;*/
+    color: #404040;
+    fill: #404040;
 }
 
 .main-menu.menu-light .navigation > li > ul > li:first-child > a {

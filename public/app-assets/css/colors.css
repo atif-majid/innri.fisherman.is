@@ -1672,27 +1672,35 @@ input:focus ~ .bg-primary {
 /* Basic buttons */
 /* ------------- */
 .btn-primary {
-  border-color: #2c6de9 !important;
-  background-color: #5A8DEE !important;
+  /*border-color: #2c6de9 !important;
+  background-color: #5A8DEE !important;*/
+    border-color: #D2D2D4 !important;
+    background-color: #525253 !important;
   color: #fff;
 }
 
 .btn-primary:hover, .btn-primary.hover {
-  background-color: #719df0 !important;
+  /*background-color: #719df0 !important;*/
+    background-color: #525253 !important;
   color: #fff;
 }
 
 .btn-primary:hover.glow, .btn-primary.hover.glow {
-  box-shadow: 0 4px 12px 0 rgba(90, 141, 238, 0.6) !important;
+  /*box-shadow: 0 4px 12px 0 rgba(90, 141, 238, 0.6) !important;*/
+    box-shadow: 0 4px 12px 0 rgba(82, 82, 83, 0.6) !important;
 }
 
 .btn-primary:focus, .btn-primary:active, .btn-primary.active {
-  background-color: #437dec !important;
+  /*background-color: #437dec !important;*/
+    background-color: #525253 !important;
   color: #fff !important;
 }
 
 .btn-primary.glow {
-  box-shadow: 0 2px 4px 0 rgba(90, 141, 238, 0.5) !important;
+  /*box-shadow: 0 2px 4px 0 rgba(90, 141, 238, 0.5) !important;
+
+   */
+    box-shadow: 0 2px 4px 0 rgba(210, 210, 212, 0.5) !important;
 }
 
 .btn-primary:disabled, .btn-primary.disabled {
@@ -1705,7 +1713,8 @@ input:focus ~ .bg-primary {
 }
 
 .btn-light-primary:hover, .btn-light-primary.hover {
-  background-color: #719df0 !important;
+  /*background-color: #719df0 !important;*/
+    background-color: #525253 !important;
   color: #fff !important;
 }
 
@@ -1722,7 +1731,8 @@ input:focus ~ .bg-primary {
 }
 
 .btn-outline-primary:hover, .btn-outline-primary.hover {
-  background-color: #719df0 !important;
+  /*background-color: #719df0 !important;*/
+    background-color: #525253 !important;
   color: #fff !important;
 }
 

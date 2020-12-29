@@ -2222,8 +2222,10 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #FFFFFF;
-  background-color: #5A8DEE;
-  border-color: #5A8DEE;
+  /*background-color: #5A8DEE;
+  border-color: #5A8DEE;*/
+    background-color: #525253;
+    border-color: #525253;
 }
 
 .btn-primary:hover {
@@ -4537,7 +4539,10 @@ input[type="button"].btn-block {
 }
 
 .breadcrumb-item.active {
-  color: #5A8DEE;
+  /*color: #5A8DEE;*/
+    color: black;
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 .pagination {
