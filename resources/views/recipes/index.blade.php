@@ -331,28 +331,20 @@
                                     <table id="users-list-datatable" class="table">
                                         <thead>
                                             <tr>
-                                                <!--<th>id</th>-->
+                                                <th>id</th>
                                                 <th style="text-align: left; padding-left: 1rem; width: 85%">Recipe</th>
-                                                <!--<th style="text-align: left; padding-left: 1rem;">Preparation Time</th>
-                                                <th style="text-align: left; padding-left: 1rem;">Cooking Time</th>
-                                                <th>Direct Phone</th>
-                                                <th>GSM</th>
-                                                <th>E-Mail</th>-->
                                                 <th style="text-align: left; padding-left: 1rem; width: 15%">Options</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         @foreach ($recipes as $recipe)
                                             <tr>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $recipe->id }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $recipe->title }}</td>
-                                                @php
-                                                /*<td style="padding: 0.5rem 1.15rem">{{ $recipe->preparation_time }}</td>
-                                                <td style="padding: 0.5rem 1.15rem">{{ $recipe->cooking_time }}</td>*/
-                                                @endphp
                                                 <td style="padding: 0.5rem 1.15rem">
                                                     <form id="form-del" action="{{ route('recipes.destroy',$recipe->id) }}" method="POST">
                                                         <!--<a href="{{ route('recipes.edit', $recipe->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp;-->
-                                                        <a href="#"><i class="bx bx-edit-alt"></i></a>&nbsp
+                                                        <a href="{{ route('recipes.edit', $recipe->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp
                                                         @csrf
                                                         @method('DELETE')
                                                         <a href="{{ route('recipes.destroy', $recipe->id) }}" onclick="event.preventDefault();
@@ -527,7 +519,7 @@
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
-<script src="app-assets/js/scripts/pages/page-users.js"></script>
+<script src="app-assets/js/scripts/pages/page-recipes.js?time=<?php echo time();?>"></script>
 <!-- END: Page JS-->
 
 </body>
