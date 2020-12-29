@@ -58,11 +58,14 @@ class RecipesController extends Controller
                 'Ingredients.*.unit.required' => 'Ingredient unit is required',
                 'Steps.*.step.required' => 'Step details are required'
             ]);
-        $arrRecipe = array(
+        /*$arrRecipe = array(
             'title'=>$request->title,
             'preparation_time'=>$request->preparation_time,
             'cooking_time'=>$request->cooking_time
-            );
+            );*/
+        $arrRecipe = array(
+            'title'=>$request->title
+        );
 
         $recipe = Recipes::create($arrRecipe);
         $nRecipeID = $recipe->id;
@@ -106,12 +109,16 @@ class RecipesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Recipes  $recipes
+     * @param  \App\Models\Recipes  $recipe
      * @return \Illuminate\Http\Response
      */
-    public function edit(Recipes $recipes)
+    public function edit(Recipes $recipe)
     {
         //
+        $nRecipeID = $recipe->id;
+        $Ingredients = Ingredients::where('recipe_id', $nRecipeID)->get();
+        $Steps = Steps::where('recipe_id', $nRecipeID)->get();
+        return view('recipes.edit', compact('recipe', 'Ingredients', 'Steps'));
     }
 
     /**
@@ -124,6 +131,67 @@ class RecipesController extends Controller
     public function update(Request $request, Recipes $recipes)
     {
         //
+        $request->validate([
+            'title' => 'required',
+            'Ingredients.*.ingredient' => 'required',
+            'Ingredients.*.quantity' => 'required',
+            'Ingredients.*.unit' => 'required',
+            'Steps.*.step' => 'required'
+        ],
+            [
+                'title.required' => 'Recipe title is required',
+                'Ingredients.*.ingredient.required' => 'Ingredient name is required',
+                'Ingredients.*.quantity.required' => 'Ingredient quantity is required',
+                'Ingredients.*.unit.required' => 'Ingredient unit is required',
+                'Steps.*.step.required' => 'Step details are required'
+            ]);
+        $arrRecipe = array(
+            'title'=>$request->title
+        );
+        $nRecipeId = $request->nRecipeId;
+
+        Recipes::find($nRecipeId)->update($arrRecipe);
+        $arrIngredients = $_POST['Ingredients'];
+        foreach ($arrIngredients as $thisIngredient)
+        {
+
+            $arrUpdateIngredient = array(
+                'name'=>$thisIngredient['ingredient'],
+                'amount'=>$thisIngredient['quantity'],
+                'unit'=>$thisIngredient['unit'],
+                'recipe_id'=>$nRecipeId
+            );
+            if(isset($thisIngredient['ingredientid']) && $thisIngredient['ingredientid']>0)
+            {
+                $nIngredientID = $thisIngredient['ingredientid'];
+                Ingredients::find($nIngredientID)->update($arrUpdateIngredient);
+            }
+            else{
+                Ingredients::create($arrUpdateIngredient);
+            }
+
+        }
+
+        $arrSteps = $_POST['Steps'];
+        foreach ($arrSteps as $thisStep)
+        {
+            $arrUpdateStep = array(
+                'details'=>$thisStep['step'],
+                'recipe_id'=>$nRecipeId
+            );
+            if(isset($thisStep['stepid']) && $thisStep['stepid']>0)
+            {
+                $nStepID = $thisStep['stepid'];
+                Steps::find($nStepID)->update($arrUpdateStep);
+            }
+            else{
+                Steps::create($arrUpdateStep);
+            }
+        }
+
+
+        return redirect()->route('recipes.index')
+            ->with('success','Recipe updated successfully.');
     }
 
     /**

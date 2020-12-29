@@ -9,30 +9,30 @@
     <meta name="description" content="Frest admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Frest admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Innri - Add New Recipe</title>
-    <link rel="apple-touch-icon" href="../app-assets/images/ico/apple-icon-120.png">
-    <link rel="shortcut icon" type="image/x-icon" href="../app-assets/images/ico/favicon.ico">
+    <title>Recipe - Edit</title>
+    <link rel="apple-touch-icon" href="../../app-assets/images/ico/apple-icon-120.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/vendors.min.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/bootstrap-extended.css">
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/colors.css">
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/components.css">
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/themes/dark-layout.css">
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/themes/semi-dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/colors.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/components.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/themes/dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/themes/semi-dark-layout.css">
     <!-- END: Theme CSS-->
 
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/core/menu/menu-types/vertical-menu.css">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/style.css">
     <!-- END: Custom CSS-->
 
 </head>
@@ -89,7 +89,7 @@
                             <li class="scrollable-container media-list"><a class="d-flex justify-content-between" href="javascript:void(0)">
                                     <div class="media d-flex align-items-center">
                                         <div class="media-left pr-0">
-                                            <div class="avatar mr-1 m-0"><img src="../app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="39" width="39"></div>
+                                            <div class="avatar mr-1 m-0"><img src="../../app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="39" width="39"></div>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">Congratulate Socrates Itumay</span> for work anniversaries</h6><small class="notification-text">Mar 15 12:32pm</small>
@@ -99,7 +99,7 @@
                                 <div class="d-flex justify-content-between read-notification cursor-pointer">
                                     <div class="media d-flex align-items-center">
                                         <div class="media-left pr-0">
-                                            <div class="avatar mr-1 m-0"><img src="../app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
+                                            <div class="avatar mr-1 m-0"><img src="../../app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">New Message</span> received</h6><small class="notification-text">You have 18 unread messages</small>
@@ -108,7 +108,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between cursor-pointer">
                                     <div class="media d-flex align-items-center py-0">
-                                        <div class="media-left pr-0"><img class="mr-1" src="../app-assets/images/icon/sketch-mac-icon.png" alt="avatar" height="39" width="39"></div>
+                                        <div class="media-left pr-0"><img class="mr-1" src="../../app-assets/images/icon/sketch-mac-icon.png" alt="avatar" height="39" width="39"></div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">Updates Available</span></h6><small class="notification-text">Sketch 50.2 is currently newly added</small>
                                         </div>
@@ -162,7 +162,7 @@
                                 <div class="d-flex justify-content-between read-notification cursor-pointer">
                                     <div class="media d-flex align-items-center">
                                         <div class="media-left pr-0">
-                                            <div class="avatar mr-1 m-0"><img src="../app-assets/images/portrait/small/avatar-s-4.jpg" alt="avatar" height="39" width="39"></div>
+                                            <div class="avatar mr-1 m-0"><img src="../../app-assets/images/portrait/small/avatar-s-4.jpg" alt="avatar" height="39" width="39"></div>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">New file</span> has been uploaded</h6><small class="notification-text">4 hrs ago</small>
@@ -184,7 +184,7 @@
                                 <div class="d-flex justify-content-between cursor-pointer">
                                     <div class="media d-flex align-items-center border-0">
                                         <div class="media-left pr-0">
-                                            <div class="avatar mr-1 m-0"><img src="../app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
+                                            <div class="avatar mr-1 m-0"><img src="../../app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">New customer</span> comment recieved</h6><small class="notification-text">2 days ago</small>
@@ -225,7 +225,7 @@
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto"><a class="navbar-brand" href="home.html">
-                    <div class="brand-logo" style="width: 100%; max-width: 211px;"><!--<img class="logo" src="../app-assets/images/logo/logo.png" />--><img class="logo" src="../app-assets/images/logo/fisherman-2.png" style="width: 100%; max-width: 211px; height: 47px; max-height: 47px;" /></div>
+                    <div class="brand-logo" style="width: 100%; max-width: 211px;"><!--<img class="logo" src="../../app-assets/images/logo/logo.png" />--><img class="logo" src="../../app-assets/images/logo/fisherman-2.png" style="width: 100%; max-width: 211px; height: 47px; max-height: 47px;" /></div>
                     <!--<h2 class="brand-text mb-0">Frest</h2>-->
                 </a></li>
             <!--<li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="bx bx-x d-block d-xl-none font-medium-4 primary"></i><i class="toggle-icon bx bx-disc font-medium-4 d-none d-xl-block primary" data-ticon="bx-disc"></i></a></li>-->
@@ -297,14 +297,14 @@
             <div class="content-header-left col-12 mb-2 mt-1">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h5 class="content-header-title float-left pr-1 mb-0">New Recipe</h5>
+                        <h5 class="content-header-title float-left pr-1 mb-0">Update Recipe</h5>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb p-0 mb-0">
                                 <li class="breadcrumb-item"><a href="index.html"><i class="bx bx-home-alt"></i></a>
                                 </li>
                                 <li class="breadcrumb-item"><a href="{{ route('recipes.index') }}">Recipes</a>
                                 </li>
-                                <li class="breadcrumb-item active"><a href="#">New Recipe</a>
+                                <li class="breadcrumb-item active"><a href="#">Update Recipe</a>
                                 </li>
                             </ol>
                         </div>
@@ -318,8 +318,9 @@
                     <div class="alert alert-danger mb-2">{{ $error }}</div>
                 @endforeach
             @endif
-            <form class="form-horizontal" novalidate method="post" action="{{ route('recipes.store') }}">
+            <form class="form-horizontal" novalidate method="post" action="{{ route('recipes.update', $recipe->id) }}">
             @csrf
+            @method('PUT')
             <!-- // Basic multiple Column Form section start -->
                 <section id="multiple-column-form">
                     <div class="row match-height">
@@ -335,7 +336,10 @@
                                                 <div class="form-group">
                                                     <label>Recipe Title</label>
                                                     <div class="controls">
-                                                        <input type="text" name="title" value="{{ old('title') }}" class="form-control" data-validation-required-message="Recipe title is required" placeholder="Recipe Title">
+                                                        <input type="text" name="title" value="@if (old('title')) {{ old('title') }} @else {{ $recipe->title }} @endif" class="form-control" data-validation-required-message="Recipe title is required" placeholder="Recipe Title">
+                                                        <input type="hidden" name="nRecipeId" id="nRecipeId" value="@if (old('nRecipeId')) {{ old('nRecipeId') }} @else {{ $recipe->id }} @endif">
+                                                        <input type="hidden" id="deletedingredients" name="deletedingredients" value="@if (old('deletedsteps')) {{ old('deletedsteps') }} @endif">
+                                                        <input type="hidden" id="deletedsteps" name="deletedsteps" value="@if (old('deletedsteps')) {{ old('deletedsteps') }} @endif">
                                                     </div>
                                                 </div>
                                                 @php
@@ -379,7 +383,7 @@
                                     </h4>
                                 </div>
                                 <div class="card-content">
-                                    <div class="card-body repeater-default">
+                                    <div class="card-body repeater-default ingredient">
                                         <div data-repeater-list="Ingredients">
                                             @if (old('Ingredients'))
                                                 @for( $i =0; $i < count(old('Ingredients')); $i++)
@@ -389,6 +393,9 @@
                                                                 <div class="col-md-2 col-sm-12 form-group" style="max-width: 600px;">
                                                                     <label for="text">Name </label>
                                                                     <input type="text" class="form-control" id="ingredient" name="ingredient" placeholder="Enter Item Title" style="width: 360px;" value="{{ old('Ingredients')[$i]['ingredient'] }}">
+                                                                    @if(old('Ingredients')[$i]['ingredientid']>0)
+                                                                        <input type="hidden" id="ingredientid" name="ingredientid" value="{{ old('Ingredients')[$i]['ingredientid'] }}">
+                                                                    @endif
                                                                 </div>
                                                                 <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px;">
                                                                     <label for="quanity">Quantity</label>
@@ -399,12 +406,51 @@
                                                                     <select name="unit" id="unit" class="form-control" style="width: 125px;">
                                                                         <option value="" selected></option>
                                                                         <option value="grams" @if(old('Ingredients')[$i]['unit'] == 'grams') ? selected : null @endif>grams</option>
-                                                                        <option value="KG" @if(old('Ingredients')[$i]['unit'] == 'KG') ? selected : null @endif>Kg</option>
+                                                                        <option value="KG" @if(old('Ingredients')[$i]['unit'] == 'Kg') ? selected : null @endif>KG</option>
                                                                         <option value="Liter" @if(old('Ingredients')[$i]['unit'] == 'Liter') ? selected : null @endif>Liter</option>
                                                                     </select>
                                                                 </div>
                                                                 <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
-                                                                    <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
+                                                                    @if(old('Ingredients')[$i]['ingredientid']>0)
+                                                                        <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button" onclick="deleteingredients({{ old('Ingredients')[$i]['ingredientid'] }})"> <i class="bx bx-x"></i>
+                                                                            Delete
+                                                                        </button>
+                                                                    @else
+                                                                        <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
+                                                                            Delete
+                                                                        </button>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                    </div>
+                                                @endfor
+                                            @elseif ($Ingredients)
+                                                @foreach($Ingredients as $thisIngredient)
+                                                    <div data-repeater-item>
+                                                        <div class="row justify-content-between">
+                                                            <div class="input-group">
+                                                                <div class="col-md-2 col-sm-12 form-group" style="max-width: 600px;">
+                                                                    <label for="text">Name </label>
+                                                                    <input type="text" class="form-control" id="ingredient" name="ingredient" placeholder="Enter Item Title" style="width: 360px;" value="{{ $thisIngredient->name }}">
+                                                                    <input type="hidden" id="ingredientid" name="ingredientid" value="{{ $thisIngredient->id }}">
+                                                                </div>
+                                                                <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px;">
+                                                                    <label for="quanity">Quantity</label>
+                                                                    <input type="text" class="form-control" id="quantity" name="quantity" placeholder="Enter Quantity" style="width: 125px;" value="{{ $thisIngredient->amount }}">
+                                                                </div>
+                                                                <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px; margin-left: 30px; margin-right: 30px;">
+                                                                    <label for="unit">Unit</label>
+                                                                    <select name="unit" id="unit" class="form-control" style="width: 125px;">
+                                                                        <option value="" selected></option>
+                                                                        <option value="grams" @if($thisIngredient->unit == 'grams') ? selected : null @endif>grams</option>
+                                                                        <option value="KG" @if($thisIngredient->unit == 'KG') ? selected : null @endif>Kg</option>
+                                                                        <option value="Liter" @if($thisIngredient->unit == 'Liter') ? selected : null @endif>Liter</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
+                                                                    <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button" onclick="deleteingredients({{ $thisIngredient->id }})"> <i class="bx bx-x"></i>
                                                                         Delete
                                                                     </button>
                                                                 </div>
@@ -412,7 +458,7 @@
                                                         </div>
                                                         <hr>
                                                     </div>
-                                                @endfor
+                                                @endforeach
                                             @else
                                                 <div data-repeater-item>
                                                     <div class="row justify-content-between">
@@ -429,8 +475,7 @@
                                                                 <label for="unit">Unit</label>
                                                                 <select name="unit" id="unit" class="form-control" style="width: 125px;">
                                                                     <option value="" selected></option>
-                                                                    <option value="grams">grams</option>
-                                                                    <option value="KG">Kg</option>
+                                                                    <option value="KG">KG</option>
                                                                     <option value="Liter">Liter</option>
                                                                 </select>
                                                             </div>
@@ -479,16 +524,44 @@
                                                             <div class="col-md-2 col-sm-12 form-group" style="width: 800px; max-width: 80%;">
                                                                 <label for="text">Step </label>
                                                                 <textarea class="form-control" id="step" name="step" placeholder="Enter Step Detail" rows="4" style="width: 800px; max-width: 100%;">{{ old('Steps')[$i]['step'] }}</textarea>
+                                                                @if(old('Steps')[$i]['stepid']>0)
+                                                                    <input type="hidden" id="stepid" name="stepid" value="{{ old('Steps')[$i]['stepid'] }}">
+                                                                @endif
                                                             </div>
                                                             <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
-                                                                <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
+                                                                @if(old('Steps')[$i]['stepid']>0)
+                                                                    <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button" onclick="deletesteps({{ old('Steps')[$i]['stepid'] }})"> <i class="bx bx-x"></i>
+                                                                        Delete
+                                                                    </button>
+                                                                @else
+                                                                    <button class="btn btn-danger text-nowrap px-1 steps" data-repeater-delete type="button"> <i class="bx bx-x"></i>
+                                                                        Delete
+                                                                    </button>
+                                                                @endif
+
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                    </div>
+                                                @endfor
+                                            @elseif($Steps)
+                                                @foreach($Steps as $thisStep)
+                                                    <div data-repeater-item>
+                                                        <div class="row justify-content-between">
+                                                            <div class="col-md-2 col-sm-12 form-group" style="width: 800px; max-width: 80%;">
+                                                                <label for="text">Step </label>
+                                                                <textarea class="form-control" id="step" name="step" placeholder="Enter Step Detail" rows="4" style="width: 800px; max-width: 100%;">{{ $thisStep->details }}</textarea>
+                                                                <input type="hidden" id="stepid" name="stepid" value="{{ $thisStep->id }}">
+                                                            </div>
+                                                            <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
+                                                                <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button" onclick="deletesteps({{ $thisStep->id }})"> <i class="bx bx-x"></i>
                                                                     Delete
                                                                 </button>
                                                             </div>
                                                         </div>
                                                         <hr>
                                                     </div>
-                                                @endfor
+                                                @endforeach
                                             @else
                                                 <div data-repeater-item>
                                                     <div class="row justify-content-between">
@@ -540,7 +613,7 @@
                 <div class="media m-75">
                     <a href="JavaScript:void(0);">
                         <div class="avatar mr-75">
-                            <img src="../app-assets/images/portrait/small/avatar-s-2.jpg" alt="avtar images" width="32" height="32">
+                            <img src="../../app-assets/images/portrait/small/avatar-s-2.jpg" alt="avtar images" width="32" height="32">
                             <span class="avatar-status-online"></span>
                         </div>
                     </a>
@@ -605,29 +678,57 @@
 
 
 <!-- BEGIN: Vendor JS-->
-<script src="../app-assets/vendors/js/vendors.min.js"></script>
-<script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
-<script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
-<script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
+<script src="../../app-assets/vendors/js/vendors.min.js"></script>
+<script src="../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
+<script src="../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
+<script src="../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
-<script src="../app-assets/js/scripts/configs/vertical-menu-light.js"></script>
-<script src="../app-assets/js/core/app-menu.js"></script>
-<script src="../app-assets/js/core/app.js"></script>
-<script src="../app-assets/js/scripts/components.js"></script>
-<script src="../app-assets/js/scripts/footer.js"></script>
+<script src="../../app-assets/js/scripts/configs/vertical-menu-light.js"></script>
+<script src="../../app-assets/js/core/app-menu.js"></script>
+<script src="../../app-assets/js/core/app.js"></script>
+<script src="../../app-assets/js/scripts/components.js"></script>
+<script src="../../app-assets/js/scripts/footer.js"></script>
 <!-- END: Theme JS-->
 <!-- BEGIN: Page Vendor JS-->
-<script src="../app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
-<script src="../app-assets/js/scripts/forms/form-repeater.js"></script>
+<script src="../../app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
+<script src="../../app-assets/js/scripts/forms/form-repeater.js?time=<?php echo time();?>"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Page JS-->
 <!-- END: Page JS-->
+<script>
+    function deleteingredients(nIDIngredient)
+    {
+        if($('#deletedingredients').val()=="")
+        {
+            $('#deletedingredients').val(nIDIngredient);
+        }
+        else
+        {
+            var currDelIngredients = $('#deletedingredients').val() + "," + nIDIngredient;
+            $('#deletedingredients').val(currDelIngredients);
+        }
+    }
+
+    function deletesteps(nIDStep)
+    {
+        if($('#deletedsteps').val()=="")
+        {
+            $('#deletedsteps').val(nIDStep);
+        }
+        else
+        {
+            var currDelSteps = $('#deletedsteps').val() + "," + nIDStep;
+            $('#deletedsteps').val(currDelSteps);
+        }
+    }
+
+</script>
 
 </body>
 <!-- END: Body-->
