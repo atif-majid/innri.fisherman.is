@@ -44,14 +44,20 @@ class RecipesController extends Controller
     public function store(Request $request)
     {
         //
-        /*$request->validate([
-            'title' => 'required',
-            'preparation_time' => 'required',
-            'cooking_time' => 'required'
-        ]);*/
         $request->validate([
-            'title' => 'required'
-        ]);
+                'title' => 'required',
+                'Ingredients.*.ingredient' => 'required',
+                'Ingredients.*.quantity' => 'required',
+                'Ingredients.*.unit' => 'required',
+                'Steps.*.step' => 'required'
+            ],
+            [
+                'title.required' => 'Recipe title is required',
+                'Ingredients.*.ingredient.required' => 'Ingredient name is required',
+                'Ingredients.*.quantity.required' => 'Ingredient quantity is required',
+                'Ingredients.*.unit.required' => 'Ingredient unit is required',
+                'Steps.*.step.required' => 'Step details are required'
+            ]);
         $arrRecipe = array(
             'title'=>$request->title,
             'preparation_time'=>$request->preparation_time,
@@ -61,7 +67,7 @@ class RecipesController extends Controller
         $recipe = Recipes::create($arrRecipe);
         $nRecipeID = $recipe->id;
 
-        $arrIngredients = $_POST['group-a'];
+        $arrIngredients = $_POST['Ingredients'];
         foreach ($arrIngredients as $thisIngredient)
         {
             $arrInsert = array(
@@ -73,7 +79,7 @@ class RecipesController extends Controller
             Ingredients::create($arrInsert);
         }
 
-        $arrSteps = $_POST['group-b'];
+        $arrSteps = $_POST['Steps'];
         foreach ($arrSteps as $thisStep)
         {
             $arrInsert = array(
@@ -135,5 +141,16 @@ class RecipesController extends Controller
         $recipe->delete();
         return redirect()->route('recipes.index')
             ->with('success','Recipe deleted successfully.');
+    }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'Recipe title is required',
+            'Ingredients.*.ingredient.required' => 'Ingredient name is required',
+            'Ingredients.*.quantity.required' => 'Ingredient quantity is required',
+            'Ingredients.*.unit.required' => 'Ingredient unit is required',
+            'Steps.*.step.required' => 'Step details are required'
+        ];
     }
 }

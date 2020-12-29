@@ -335,7 +335,7 @@
                                                 <div class="form-group">
                                                     <label>Recipe Title</label>
                                                     <div class="controls">
-                                                        <input type="text" name="title" class="form-control" data-validation-required-message="Recipe title is required" placeholder="Recipe Title">
+                                                        <input type="text" name="title" value="{{ old('title') }}" class="form-control" data-validation-required-message="Recipe title is required" placeholder="Recipe Title">
                                                     </div>
                                                 </div>
                                                 @php
@@ -380,35 +380,68 @@
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body repeater-default">
-                                        <div data-repeater-list="group-a">
-                                            <div data-repeater-item>
-                                                <div class="row justify-content-between">
-                                                    <div class="input-group">
-                                                        <div class="col-md-2 col-sm-12 form-group" style="max-width: 600px;">
-                                                            <label for="text">Name </label>
-                                                            <input type="text" class="form-control" id="ingredient" name="ingredient" placeholder="Enter Item Title" style="width: 360px;">
+                                        <div data-repeater-list="Ingredients">
+                                            @if (old('Ingredients'))
+                                                @for( $i =0; $i < count(old('Ingredients')); $i++)
+                                                    <div data-repeater-item>
+                                                        <div class="row justify-content-between">
+                                                            <div class="input-group">
+                                                                <div class="col-md-2 col-sm-12 form-group" style="max-width: 600px;">
+                                                                    <label for="text">Name </label>
+                                                                    <input type="text" class="form-control" id="ingredient" name="ingredient" placeholder="Enter Item Title" style="width: 360px;" value="{{ old('Ingredients')[$i]['ingredient'] }}">
+                                                                </div>
+                                                                <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px;">
+                                                                    <label for="quanity">Quantity</label>
+                                                                    <input type="text" class="form-control" id="quantity" name="quantity" placeholder="Enter Quantity" style="width: 125px;" value="{{ old('Ingredients')[$i]['quantity'] }}">
+                                                                </div>
+                                                                <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px; margin-left: 30px; margin-right: 30px;">
+                                                                    <label for="unit">Unit</label>
+                                                                    <select name="unit" id="unit" class="form-control" style="width: 125px;">
+                                                                        <option value="" selected></option>
+                                                                        <option value="KG" @if(old('Ingredients')[$i]['unit'] == 'KG') ? selected : null @endif>KG</option>
+                                                                        <option value="Liter" @if(old('Ingredients')[$i]['unit'] == 'Liter') ? selected : null @endif>Liter</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
+                                                                    <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
+                                                                        Delete
+                                                                    </button>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px;">
-                                                            <label for="quanity">Quantity</label>
-                                                            <input type="text" class="form-control" id="quantity" name="quantity" placeholder="Enter Quantity" style="width: 125px;">
-                                                        </div>
-                                                        <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px; margin-left: 30px; margin-right: 30px;">
-                                                            <label for="unit">Unit</label>
-                                                            <select name="unit" id="unit" class="form-control" style="width: 125px;">
-                                                                <option value="" selected></option>
-                                                                <option value="KG">KG</option>
-                                                                <option value="Liter">Liter</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
-                                                            <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
-                                                                Delete
-                                                            </button>
+                                                        <hr>
+                                                    </div>
+                                                @endfor
+                                            @else
+                                                <div data-repeater-item>
+                                                    <div class="row justify-content-between">
+                                                        <div class="input-group">
+                                                            <div class="col-md-2 col-sm-12 form-group" style="max-width: 600px;">
+                                                                <label for="text">Name </label>
+                                                                <input type="text" class="form-control" id="ingredient" name="ingredient" placeholder="Enter Item Title" style="width: 360px;">
+                                                            </div>
+                                                            <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px;">
+                                                                <label for="quanity">Quantity</label>
+                                                                <input type="text" class="form-control" id="quantity" name="quantity" placeholder="Enter Quantity" style="width: 125px;">
+                                                            </div>
+                                                            <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px; margin-left: 30px; margin-right: 30px;">
+                                                                <label for="unit">Unit</label>
+                                                                <select name="unit" id="unit" class="form-control" style="width: 125px;">
+                                                                    <option value="" selected></option>
+                                                                    <option value="KG">KG</option>
+                                                                    <option value="Liter">Liter</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
+                                                                <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
+                                                                    Delete
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                    <hr>
                                                 </div>
-                                                <hr>
-                                            </div>
+                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <div class="col p-0">
@@ -436,21 +469,40 @@
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body repeater-default">
-                                        <div data-repeater-list="group-b">
-                                            <div data-repeater-item>
-                                                <div class="row justify-content-between">
-                                                    <div class="col-md-2 col-sm-12 form-group" style="width: 800px; max-width: 80%;">
-                                                        <label for="text">Step </label>
-                                                        <textarea class="form-control" id="step" name="step" placeholder="Enter Step Detail" rows="4" style="width: 800px; max-width: 100%;"></textarea>
+                                        <div data-repeater-list="Steps">
+                                            @if (old('Steps'))
+                                                @for( $i =0; $i < count(old('Steps')); $i++)
+                                                    <div data-repeater-item>
+                                                        <div class="row justify-content-between">
+                                                            <div class="col-md-2 col-sm-12 form-group" style="width: 800px; max-width: 80%;">
+                                                                <label for="text">Step </label>
+                                                                <textarea class="form-control" id="step" name="step" placeholder="Enter Step Detail" rows="4" style="width: 800px; max-width: 100%;">{{ old('Steps')[$i]['step'] }}</textarea>
+                                                            </div>
+                                                            <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
+                                                                <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
+                                                                    Delete
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <hr>
                                                     </div>
-                                                    <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
-                                                        <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
-                                                            Delete
-                                                        </button>
+                                                @endfor
+                                            @else
+                                                <div data-repeater-item>
+                                                    <div class="row justify-content-between">
+                                                        <div class="col-md-2 col-sm-12 form-group" style="width: 800px; max-width: 80%;">
+                                                            <label for="text">Step </label>
+                                                            <textarea class="form-control" id="step" name="step" placeholder="Enter Step Detail" rows="4" style="width: 800px; max-width: 100%;"></textarea>
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
+                                                            <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
+                                                                Delete
+                                                            </button>
+                                                        </div>
                                                     </div>
+                                                    <hr>
                                                 </div>
-                                                <hr>
-                                            </div>
+                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <div class="col p-0">
