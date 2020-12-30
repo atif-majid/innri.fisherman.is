@@ -531,19 +531,19 @@
                     <div class="col-xl-4 col-md-6 col-12 dashboard-greetings">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="greeting-text">Congratulations John!</h3>
-                                <p class="mb-0">Best seller of the month</p>
+                                <h3 class="greeting-text">Welcome to Fisherman!</h3>
+                                <p class="mb-0">Home of sustainable gourmet seafood and local experience</p>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-end">
                                         <div class="dashboard-content-left">
-                                            <h1 class="text-primary font-large-2 text-bold-500">$89k</h1>
-                                            <p>You have done 57.6% more sales today.</p>
-                                            <button type="button" class="btn btn-primary glow">View Sales</button>
+                                            <!--<h1 class="text-primary font-large-2 text-bold-500" style="color: #525253 !important;">Seafood Trail</h1>
+                                            <p>Home of sustainable gourmet seafood and local experience.</p>
+                                            <button type="button" class="btn btn-primary glow">Seafood Trail</button>-->
                                         </div>
                                         <div class="dashboard-content-right">
-                                            <img src="app-assets/images/icon/cup.png" height="220" width="220" class="img-fluid" alt="Dashboard Ecommerce" />
+                                            <img src="app-assets/images/sailor.jpg" height="220" width="220" style="height: 200px !important; width: 400px !important;" class="img-fluid" alt="Dashboard Ecommerce" />
                                         </div>
                                     </div>
                                 </div>
@@ -559,12 +559,13 @@
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <div id="multi-radial-chart"></div>
+                                    <img src="app-assets/images/visit1.jpg" height="220" width="220" style="height: 238px !important; width: 371px !important;" class="img-fluid" alt="Dashboard Ecommerce" />
+                                    <!--<div id="multi-radial-chart"></div>
                                     <ul class="list-inline d-flex justify-content-around mb-0">
                                         <li> <span class="bullet bullet-xs bullet-primary mr-50"></span>Target</li>
                                         <li> <span class="bullet bullet-xs bullet-danger mr-50"></span>Mart</li>
                                         <li> <span class="bullet bullet-xs bullet-warning mr-50"></span>Ebay</li>
-                                    </ul>
+                                    </ul>-->
                                 </div>
                             </div>
                         </div>

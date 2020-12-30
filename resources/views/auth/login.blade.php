@@ -28,10 +28,10 @@
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap-extended.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/colors.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/components.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap.css?time=<?php echo time();?>">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap-extended.css?time=<?php echo time();?>">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/colors.css?time=<?php echo time();?>">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/components.css?time=@php echo time();@endphp">
     <link rel="stylesheet" type="text/css" href="app-assets/css/themes/dark-layout.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/themes/semi-dark-layout.css">
     <!-- END: Theme CSS-->
@@ -48,21 +48,21 @@
         @media (min-width: 768px) {
             .col-xl-8 {
                 flex: 0 0 66.66667%;
-                max-width: 60.66667%;
+                max-width: 58.66667%;
             }
         }
 
         @media (min-width: 992px) {
             .col-xl-8 {
                 flex: 0 0 66.66667%;
-                max-width: 40.66667%;
+                max-width: 37.66667%;
             }
         }
 
         @media (min-width: 1200px) {
             .col-xl-8 {
                 flex: 0 0 66.66667%;
-                max-width: 35.66667%;
+                max-width: 30.66667%;
             }
         }
     </style>
@@ -88,11 +88,13 @@
                             <!-- left section-login -->
                             <div class="col-12 px-0">
                                 <div class="card disable-rounded-right mb-0 p-2 h-100 d-flex justify-content-center">
-                                    <div class="card-header pb-1">
+                                    @php
+                                    /*<div class="card-header pb-1">
                                         <div class="card-title">
                                             <h4 class="text-center mb-2">Welcome Back</h4>
                                         </div>
-                                    </div>
+                                    </div>*/
+                                    @endphp
                                     <div class="card-content">
                                         <div class="card-body">
                                             <div class="d-flex flex-md-row flex-column justify-content-around">
@@ -102,11 +104,14 @@
                                                 <a href="#" class="btn btn-social btn-block mt-0 btn-facebook font-small-3">
                                                     <i class="bx bxl-facebook-square font-medium-3"></i><span class="pl-50 d-block text-center">Facebook</span></a>-->
                                             </div>
-                                            <div class="divider">
+                                            <br /><br />
+                                            @php
+                                            /*<div class="divider">
                                                 <div class="divider-text text-uppercase text-muted"><small>Login here</small>
                                                 </div>
-                                            </div>
-                                            <form method="POST" action="{{ route('login') }}">
+                                            </div>*/
+                                            @endphp
+                                            <form method="POST" action="{{ route('login') }}" style="width:90% !important; margin: auto;">
                                             @csrf
                                                 <div class="form-group mb-50">
                                                     <label class="text-bold-600" for="exampleInputEmail1">Email address</label>
@@ -118,7 +123,7 @@
                                                         </div>
                                                     @enderror
                                                     </div>
-                                                <div class="form-group">
+                                                <div class="form-group" style="margin-top: 20px;">
                                                     <label class="text-bold-600" for="exampleInputPassword1">Password</label>
                                                     <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Password" name="password">
                                                     @error('password')
@@ -136,11 +141,11 @@
                                                                 in</small></label>
                                                         </div>
                                                     </div>
-                                                    <div class="text-right">@php /*<a href="auth-forgot-password.html" class="card-link"><small>Forgot Password?</small></a>*/ @endphp</div>
+                                                    <div class="text-right"><a href="#" class="card-link" style="color: #475F7B !important;"><small>Forgot Password?</small></a></div>
                                                 </div>
                                                 <button type="submit" class="btn btn-primary glow w-100 position-relative">Login@php /*<i id="icon-arrow" class="bx bx-right-arrow-alt"></i>*/@endphp</button>
                                             </form>
-                                            <hr>
+                                            @php /*<hr>*/ @endphp
                                             <!--<div class="text-center"><small class="mr-25">Don't have an account?</small><a href="auth-register.html"><small>Sign up</small></a></div>-->
                                         </div>
                                     </div>
