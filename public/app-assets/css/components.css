@@ -190,8 +190,10 @@ html body p {
 }
 
 html body.bg-full-screen-image {
-  background: url(../../app-assets/images/pages/auth-bg.jpg) no-repeat center center;
+  /*background: url(../../app-assets/images/pages/auth-bg.jpg) no-repeat center center;*/
+    background: url(../../app-assets/images/pages/Banner_Fisherman_1800x1000_1600x.jpg) no-repeat center center;
   background-size: cover;
+
 }
 
 html body.blank-page .content {

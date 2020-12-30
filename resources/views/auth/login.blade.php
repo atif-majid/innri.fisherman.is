@@ -44,6 +44,28 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <!-- END: Custom CSS-->
+    <style>
+        @media (min-width: 768px) {
+            .col-xl-8 {
+                flex: 0 0 66.66667%;
+                max-width: 60.66667%;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .col-xl-8 {
+                flex: 0 0 66.66667%;
+                max-width: 40.66667%;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .col-xl-8 {
+                flex: 0 0 66.66667%;
+                max-width: 35.66667%;
+            }
+        }
+    </style>
 
 </head>
 <!-- END: Head-->
@@ -64,7 +86,7 @@
                     <div class="card bg-authentication mb-0">
                         <div class="row m-0">
                             <!-- left section-login -->
-                            <div class="col-md-6 col-12 px-0">
+                            <div class="col-12 px-0">
                                 <div class="card disable-rounded-right mb-0 p-2 h-100 d-flex justify-content-center">
                                     <div class="card-header pb-1">
                                         <div class="card-title">
@@ -114,9 +136,9 @@
                                                                 in</small></label>
                                                         </div>
                                                     </div>
-                                                    <div class="text-right"><a href="auth-forgot-password.html" class="card-link"><small>Forgot Password?</small></a></div>
+                                                    <div class="text-right">@php /*<a href="auth-forgot-password.html" class="card-link"><small>Forgot Password?</small></a>*/ @endphp</div>
                                                 </div>
-                                                <button type="submit" class="btn btn-primary glow w-100 position-relative">Login<i id="icon-arrow" class="bx bx-right-arrow-alt"></i></button>
+                                                <button type="submit" class="btn btn-primary glow w-100 position-relative">Login@php /*<i id="icon-arrow" class="bx bx-right-arrow-alt"></i>*/@endphp</button>
                                             </form>
                                             <hr>
                                             <!--<div class="text-center"><small class="mr-25">Don't have an account?</small><a href="auth-register.html"><small>Sign up</small></a></div>-->
@@ -125,11 +147,13 @@
                                 </div>
                             </div>
                             <!-- right section image -->
-                            <div class="col-md-6 d-md-block d-none text-center align-self-center p-3">
+                            @php
+                            /*<div class="col-md-6 d-md-block d-none text-center align-self-center p-3">
                                 <div class="card-content">
                                     <img class="img-fluid" src="app-assets/images/pages/login.png" alt="branding logo">
                                 </div>
-                            </div>
+                            </div>*/
+                            @endphp
                         </div>
                     </div>
                 </div>
