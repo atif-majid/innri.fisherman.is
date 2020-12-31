@@ -25,6 +25,7 @@
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/pickers/pickadate/pickadate.css">
     <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/tables/datatable/datatables.min.css">
     <!-- END: Vendor CSS-->
 
@@ -317,38 +318,28 @@
                     </div>
 
                 </div>
-                <!--<div class="users-list-filter px-1">
-                    <form>
+                <div class="users-list-filter px-1">
+                    <form onsubmit="return false">
                         <div class="row border rounded py-2 mb-2">
                             <div class="col-12 col-sm-6 col-lg-3">
-                                <label for="users-list-verified">Verified</label>
-                                <fieldset class="form-group">
-                                    <select class="form-control" id="users-list-verified">
-                                        <option value="">Any</option>
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">No</option>
-                                    </select>
+                                <label for="users-list-verified">Date</label>
+                                <fieldset class="form-group position-relative has-icon-left" >
+                                    <input type="text" class="form-control format-picker" id="users-list-verified">
+                                    <div class="form-control-position">
+                                        <i class='bx bx-calendar'></i>
+                                    </div>
                                 </fieldset>
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3">
-                                <label for="users-list-role">Role</label>
+                                <label for="users-list-role">Recipe</label>
                                 <fieldset class="form-group">
-                                    <select class="form-control" id="users-list-role">
-                                        <option value="">Any</option>
-                                        <option value="User">User</option>
-                                        <option value="Staff">Staff</option>
-                                    </select>
+                                    <input  type="text" class="form-control" id="users-list-role">
                                 </fieldset>
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3">
-                                <label for="users-list-status">Status</label>
+                                <label for="users-list-status">Lot nr.</label>
                                 <fieldset class="form-group">
-                                    <select class="form-control" id="users-list-status">
-                                        <option value="">Any</option>
-                                        <option value="Active">Active</option>
-                                        <option value="Close">Close</option>
-                                        <option value="Banned">Banned</option>
-                                    </select>
+                                    <input type="text" class="form-control" id="users-list-status">
                                 </fieldset>
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center">
@@ -356,7 +347,7 @@
                             </div>
                         </div>
                     </form>
-                </div>-->
+                </div>
                 @if ($message = Session::get('success'))
                     <div class="alert alert-info mb-2">
                         {{ $message }}
@@ -372,24 +363,69 @@
                                         <thead>
                                             <tr>
                                                 <th>id</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Date</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Recipe</th>
-                                                <th style="text-align: left; padding-left: 1rem;">Product nr.</th>
-                                                <th style="text-align: left; padding-left: 1rem;">LOT nr.</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Product NR.</th>
+                                                <th style="text-align: left; padding-left: 1rem;">LOT NR.</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Product Name</th>
-                                                <th style="text-align: left; padding-left: 1rem;">Instructions<br>M: Make<br>F: Freeze<br>P: Pack<br>S: Send</th>
-                                                <th style="text-align: left; padding-left: 1rem;">Products Available/Arriving.<br>(How much Fish in freezer-cooler or arriving today?)</th>
+                                                <th style="text-align: left; padding-left: 1rem;" data-toggle="tooltip" data-placement="top" data-html="true" data-original-title="M: Make<br>F: Freeze<br>P: Pack<br>S: Send">Instructions</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Raw materials</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Packing<br>Package size</th>
-                                                <th style="text-align: left; padding-left: 1rem;">Production<br>Total kg/packages<br>Pcs - boxes</th>
-                                                <th style="text-align: left; padding-left: 1rem;">Delivery / Storage Where<br>FÍ: Freezer Íslandssaga<br>Flytjandi: Sent today w/Flytjandi<br>K: Our cooler<br>F: Our Freezer<br>FBox: Blue boxes in our freezer</th>
+                                                <th style="text-align: left; padding-left: 1rem;" data-toggle="tooltip" data-placement="top" data-html="true" data-original-title="kg/packages<br>Pcs - boxes">Production<br>Total</th>
+                                                <th style="text-align: left; padding-left: 1rem;" data-toggle="tooltip" data-placement="top" data-html="true" data-original-title="Shipped to day with Flytjandi<br>Íslandssaga freezer<br>Suðureyri freezer<br>Suðureyri cooler">SHIPMENT / STORAGE OPTIONS</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Delivery / Storage<br>Quantity</th>
-                                                <th style="text-align: left; padding-left: 1rem;">Pallet #</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Pallet NR.</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Options</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         @foreach ($productions as $production)
+                                            @php
+                                                $strDisp = <<<EOT
+<div class="col-12">
+<table class="table table-borderless" colspan="12">
+<tbody>
+<tr>
+<td>Production Date:</td>
+<td class="users-view-latest-activity">$production->production_date</td>
+<td>Product Name:</td>
+<td>$production->product_name</td>
+<td>Production Total:</td>
+<td>$production->production_total $production->production_unit</td>
+</tr>
+<tr>
+<td>Recipe:</td>
+<td>$production->title</td>
+<td>Instructions:</td>
+<td>$production->instructions</td>
+<td>SHIPMENT / STORAGE OPTIONS:</td>
+<td>$production->delivery_storage</td>
+</tr>
+<tr>
+<td>Product NR.:</td>
+<td>$production->product_number</td>
+<td>Raw materials:</td>
+<td>$production->products_available_arriving</td>
+<td>Delivery / Storage Quantity:</td>
+<td>$production->delivery_storage_quantity</td>
+</tr>
+<tr>
+<td>LOT NR.</td>
+<td>$production->lot_number</td>
+<td>Packing (Package size):</td>
+<td>$production->packing_package_size</td>
+<td>Pallet NR.:</td>
+<td>$production->pallet_number</td>
+</tr>
+</tbody>
+</table>
+</div>
+EOT;
+
+                                            @endphp
                                             <tr>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->id }}</td>
+                                                <td style="padding: 0.5rem 1.15rem; white-space: nowrap;">{{ $production->production_date }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->title }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->product_number }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->lot_number }}</td>
@@ -403,6 +439,10 @@
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->pallet_number }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">
                                                     <form id="form-del" action="{{ route('production.destroy',$production->id) }}" method="POST">
+                                                        <a href="#" class="invoice-action-view mr-1">
+                                                            <i class="bx bx-show-alt"></i>
+                                                            <div class="divData" style="display: none; visibility: hidden;">@php echo $strDisp;@endphp</div>
+                                                        </a>
                                                         <a href="{{ route('production.edit', $production->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp;
                                                         @csrf
                                                         @method('DELETE')
@@ -582,6 +622,8 @@
 <script src="app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
 <script src="app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
 <script src="app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
+<script src="../app-assets/vendors/js/pickers/pickadate/picker.js"></script>
+<script src="../app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
@@ -599,7 +641,10 @@
 
 <!-- BEGIN: Page JS-->
 <script src="app-assets/js/scripts/pages/page-production.js?time=<?php echo time();?>"></script>
+<script src="../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js"></script>
+
 <!-- END: Page JS-->
+
 
 </body>
 <!-- END: Body-->
