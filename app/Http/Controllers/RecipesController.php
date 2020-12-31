@@ -150,6 +150,12 @@ class RecipesController extends Controller
         );
         $nRecipeId = $request->nRecipeId;
 
+        $deletedingredients = $_POST['deletedingredients'];
+        $deletedsteps = $_POST['deletedsteps'];
+
+        $arrUpdatedIngredients = array();
+        $arrUpdatedSteps = array();
+
         Recipes::find($nRecipeId)->update($arrRecipe);
         $arrIngredients = $_POST['Ingredients'];
         foreach ($arrIngredients as $thisIngredient)
@@ -165,6 +171,7 @@ class RecipesController extends Controller
             {
                 $nIngredientID = $thisIngredient['ingredientid'];
                 Ingredients::find($nIngredientID)->update($arrUpdateIngredient);
+                $arrUpdatedIngredients[] = $nIngredientID;
             }
             else{
                 Ingredients::create($arrUpdateIngredient);
@@ -183,9 +190,34 @@ class RecipesController extends Controller
             {
                 $nStepID = $thisStep['stepid'];
                 Steps::find($nStepID)->update($arrUpdateStep);
+                $arrUpdatedSteps[] = $nStepID;
             }
             else{
                 Steps::create($arrUpdateStep);
+            }
+        }
+        if(trim($deletedingredients)!="")
+        {
+            $arrDeletedIngredients = explode(",", $deletedingredients);
+            for($i=0; $i<count($arrDeletedIngredients); $i++)
+            {
+                $nDelThisIngredient = $arrDeletedIngredients[$i];
+                if(!in_array($nDelThisIngredient, $arrUpdatedIngredients))
+                {
+                    Ingredients::find($nDelThisIngredient)->delete();
+                }
+            }
+        }
+        if(trim($deletedsteps)!="")
+        {
+            $arrDeletedSteps = explode(",", $deletedsteps);
+            for($i=0; $i<count($arrDeletedSteps); $i++)
+            {
+                $nDelThisStep = $arrDeletedSteps[$i];
+                if(!in_array($nDelThisStep, $arrUpdatedSteps))
+                {
+                    Steps::where('id',$nDelThisStep)->delete();
+                }
             }
         }
 

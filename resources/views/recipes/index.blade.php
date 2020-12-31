@@ -317,6 +317,36 @@
                     </div>
 
                 </div>
+                <div class="users-list-filter px-1">
+                    <form onsubmit="return false">
+                        <div class="row border rounded py-2 mb-2">
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <label for="users-list-role">Recipe</label>
+                                <fieldset class="form-group">
+                                    <input  type="text" class="form-control" id="users-list-role">
+                                </fieldset>
+                            </div>
+                            <!--<div class="col-12 col-sm-6 col-lg-3">
+                                <label for="users-list-verified">Date</label>
+                                <fieldset class="form-group position-relative has-icon-left" >
+                                    <input type="text" class="form-control format-picker" id="users-list-verified">
+                                    <div class="form-control-position">
+                                        <i class='bx bx-calendar'></i>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <label for="users-list-status">Lot nr.</label>
+                                <fieldset class="form-group">
+                                    <input type="text" class="form-control" id="users-list-status">
+                                </fieldset>
+                            </div>-->
+                            <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center">
+                                <button type="reset" class="btn btn-primary btn-block glow users-list-clear mb-0">Clear</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 @if ($message = Session::get('success'))
                     <div class="alert alert-info mb-2">
                         {{ $message }}

@@ -406,8 +406,12 @@
                                                                     <select name="unit" id="unit" class="form-control" style="width: 125px;">
                                                                         <option value="" selected></option>
                                                                         <option value="grams" @if(old('Ingredients')[$i]['unit'] == 'grams') ? selected : null @endif>grams</option>
-                                                                        <option value="KG" @if(old('Ingredients')[$i]['unit'] == 'Kg') ? selected : null @endif>KG</option>
-                                                                        <option value="Liter" @if(old('Ingredients')[$i]['unit'] == 'Liter') ? selected : null @endif>Liter</option>
+                                                                        <option value="kg" @if(old('Ingredients')[$i]['unit'] == 'kg') ? selected : null @endif>kg</option>
+                                                                        <option value="">------------</option>
+                                                                        <option value="liter" @if(old('Ingredients')[$i]['unit'] == 'liter') ? selected : null @endif>liter</option>
+                                                                        <option value="deciliter" @if(old('Ingredients')[$i]['unit'] == 'deciliter') ? selected : null @endif>deciliter</option>
+                                                                        <option value="centiliter" @if(old('Ingredients')[$i]['unit'] == 'centiliter') ? selected : null @endif>centiliter</option>
+                                                                        <option value="milliliter" @if(old('Ingredients')[$i]['unit'] == 'milliliter') ? selected : null @endif>milliliter</option>
                                                                     </select>
                                                                 </div>
                                                                 <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
@@ -445,8 +449,12 @@
                                                                     <select name="unit" id="unit" class="form-control" style="width: 125px;">
                                                                         <option value="" selected></option>
                                                                         <option value="grams" @if($thisIngredient->unit == 'grams') ? selected : null @endif>grams</option>
-                                                                        <option value="KG" @if($thisIngredient->unit == 'KG') ? selected : null @endif>Kg</option>
-                                                                        <option value="Liter" @if($thisIngredient->unit == 'Liter') ? selected : null @endif>Liter</option>
+                                                                        <option value="kg" @if($thisIngredient->unit == 'kg') ? selected : null @endif>kg</option>
+                                                                        <option value="">------------</option>
+                                                                        <option value="liter" @if($thisIngredient->unit == 'liter') ? selected : null @endif>liter</option>
+                                                                        <option value="deciliter" @if($thisIngredient->unit == 'deciliter') ? selected : null @endif>deciliter</option>
+                                                                        <option value="centiliter" @if($thisIngredient->unit == 'centiliter') ? selected : null @endif>centiliter</option>
+                                                                        <option value="milliliter" @if($thisIngredient->unit == 'milliliter') ? selected : null @endif>milliliter</option>
                                                                     </select>
                                                                 </div>
                                                                 <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
@@ -475,8 +483,13 @@
                                                                 <label for="unit">Unit</label>
                                                                 <select name="unit" id="unit" class="form-control" style="width: 125px;">
                                                                     <option value="" selected></option>
-                                                                    <option value="KG">KG</option>
-                                                                    <option value="Liter">Liter</option>
+                                                                    <option value="grams">grams</option>
+                                                                    <option value="kg">kg</option>
+                                                                    <option value="">------------</option>
+                                                                    <option value="liter">liter</option>
+                                                                    <option value="deciliter">deciliter</option>
+                                                                    <option value="centiliter">centiliter</option>
+                                                                    <option value="milliliter">milliliter</option>
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
@@ -492,7 +505,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col p-0">
-                                                <button class="btn btn-primary" data-repeater-create type="button"><i class="bx bx-plus"></i>
+                                                <button class="btn btn-primary" data-repeater-create type="button"><i class="bx bx-plus" style="color: #FFFFFF;"></i>
                                                     Add
                                                 </button>
                                             </div>
@@ -581,7 +594,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col p-0">
-                                                <button class="btn btn-primary" data-repeater-create type="button"><i class="bx bx-plus"></i>
+                                                <button class="btn btn-primary" data-repeater-create type="button"><i class="bx bx-plus" style="color: #FFFFFF;"></i>
                                                     Add
                                                 </button>
                                             </div>
@@ -708,8 +721,7 @@
         {
             $('#deletedingredients').val(nIDIngredient);
         }
-        else
-        {
+        else {
             var currDelIngredients = $('#deletedingredients').val() + "," + nIDIngredient;
             $('#deletedingredients').val(currDelIngredients);
         }
