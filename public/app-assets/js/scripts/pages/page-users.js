@@ -27,6 +27,22 @@ $(document).ready(function () {
                     "visible": false
                 }]
         });
+        $('#users-list-datatable tbody').on('click', '.invoice-action-view', function () {
+            var tr = $(this).closest('tr');
+            var row = usersTable.row(tr);
+
+            if (row.child.isShown()) {
+                // This row is already open - close it
+                row.child.hide();
+                //tr.removeClass('shown');
+            } else {
+                // Open this row
+                //alert(row.find('.divData').html());
+                var PrintData = $(this).closest('tr').find('.divData').html();
+                row.child(PrintData).show();
+                //tr.addClass('shown');
+            }
+        });
     };
     // on click selected users data from table(page named page-users-list)
     // to store into local storage to get rendered on second page named page-users-view
@@ -60,17 +76,23 @@ $(document).ready(function () {
     }
     // page users list verified filter
     $("#users-list-verified").on("change", function () {
+        $("#users-list-role").val('');
+        $("#users-list-status").val('');
         var usersVerifiedSelect = $("#users-list-verified").val();
         usersTable.search(usersVerifiedSelect).draw();
     });
     // page users list role filter
     $("#users-list-role").on("change", function () {
+        $("#users-list-verified").val('');
+        $("#users-list-status").val('');
         var usersRoleSelect = $("#users-list-role").val();
         // console.log(usersRoleSelect);
         usersTable.search(usersRoleSelect).draw();
     });
     // page users list status filter
     $("#users-list-status").on("change", function () {
+        $("#users-list-role").val('');
+        $("#users-list-verified").val('');
         var usersStatusSelect = $("#users-list-status").val();
         // console.log(usersStatusSelect);
         usersTable.search(usersStatusSelect).draw();
