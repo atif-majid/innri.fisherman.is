@@ -428,7 +428,7 @@ EOT;
                                                     <td style="white-space: nowrap;padding: 0.5rem 1.15rem;">
                                                         <div class="divData" style="display: none; visibility: hidden;">@php echo $strDisp;@endphp</div>
                                                         <form id="form-del" action="{{ route('employees.destroy',$employee->id) }}" method="POST">
-                                                            <a href="#" class="invoice-action-view mr-1" onclick="return false;">
+                                                            <a href="#" class="invoice-action-view" onclick="return false;">
                                                                 <i class="bx bx-show-alt"></i>
                                                             </a>
                                                             <a href="{{ route('employees.edit', $employee->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp;
