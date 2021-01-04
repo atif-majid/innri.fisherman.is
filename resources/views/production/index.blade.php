@@ -382,7 +382,7 @@
                                         @foreach ($productions as $production)
                                             @php
                                                 $strDisp = <<<EOT
-<div class="col-12">
+<div class="border-secondary col-12 border">
 <table class="table table-borderless" colspan="12">
 <tbody>
 <tr>
@@ -437,9 +437,9 @@ EOT;
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->delivery_storage }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->delivery_storage_quantity }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->pallet_number }}</td>
-                                                <td style="padding: 0.5rem 1.15rem">
+                                                <td style="padding: 0.5rem 1.15rem; white-space: nowrap;">
                                                     <form id="form-del" action="{{ route('production.destroy',$production->id) }}" method="POST">
-                                                        <a href="#" class="invoice-action-view mr-1">
+                                                        <a href="#" class="invoice-action-view" onclick="return false">
                                                             <i class="bx bx-show-alt"></i>
                                                             <div class="divData" style="display: none; visibility: hidden;">@php echo $strDisp;@endphp</div>
                                                         </a>
