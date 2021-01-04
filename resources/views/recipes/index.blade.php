@@ -368,12 +368,44 @@
                                         </thead>
                                         <tbody>
                                         @foreach ($recipes as $recipe)
+                                            @php
+                                                /*$strDisp = <<<EOT
+<div class="border-secondary col-12 border">
+<table class="table table-borderless" colspan="12">
+<tbody>
+<tr>
+<td>Name:</td>
+<td class="users-view-latest-activity" colspan="5">$recipe->title</td>
+<td>Department:</td>
+<td>&nbsp;</td>
+<td>Mobile Phone:</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Job Title:</td>
+<td>&nbsp;</td>
+<td>Direct Phone:</td>
+<td>&nbsp;</td>
+<td>Email Address:</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+EOT;*/
+
+
+                                            @endphp
                                             <tr>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $recipe->id }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $recipe->title }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">
+                                                    <div class="divData" style="display: none; visibility: hidden;">{{ $recipe->id }}</div>
                                                     <form id="form-del" action="{{ route('recipes.destroy',$recipe->id) }}" method="POST">
                                                         <!--<a href="{{ route('recipes.edit', $recipe->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp;-->
+                                                            <a href="{{ route('recipes.show', $recipe->id) }}" class="invoice-action-view">
+                                                                <i class="bx bx-show-alt"></i>
+                                                            </a>
                                                         <a href="{{ route('recipes.edit', $recipe->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp
                                                         @csrf
                                                         @method('DELETE')

@@ -9,10 +9,6 @@ use Illuminate\Http\Request;
 
 class RecipesController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -105,9 +101,13 @@ class RecipesController extends Controller
      * @param  \App\Models\Recipes  $recipes
      * @return \Illuminate\Http\Response
      */
-    public function show(Recipes $recipes)
+    public function show(Recipes $recipe)
     {
         //
+        $nRecipeID = $recipe->id;
+        $Ingredients = Ingredients::where('recipe_id', $nRecipeID)->get();
+        $Steps = Steps::where('recipe_id', $nRecipeID)->get();
+        return view('recipes.show', compact('recipe', 'Ingredients', 'Steps'));
     }
 
     /**
@@ -256,5 +256,10 @@ class RecipesController extends Controller
             'Ingredients.*.unit.required' => 'Ingredient unit is required',
             'Steps.*.step.required' => 'Step details are required'
         ];
+    }
+
+    public function getdetails(Recipes $recipe)
+    {
+        echo $recipe->id;
     }
 }

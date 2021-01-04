@@ -27,6 +27,30 @@ $(document).ready(function () {
                     "visible": false
                 }]
         });
+        $('#users-list-datatable tbody').on('click', '.invoice-action-view', function (event) {
+            event.preventDefault();
+            var thisURL = this.href;
+            var tr = $(this).closest('tr');
+            var row = usersTable.row(tr);
+
+            if (row.child.isShown()) {
+                // This row is already open - close it
+                row.child.hide();
+                //tr.removeClass('shown');
+            } else {
+                // Open this row
+                //alert(row.find('.divData').html());
+                var strLoading = '<div class="badge badge-pill badge-glow badge-secondary mr-1 mb-1">Loading</div>';
+                row.child(strLoading).show();
+                var PrintData = $(this).closest('tr').find('.divData').html();
+                $.get( thisURL, function( data ) {
+                    //$( ".result" ).html( data );
+                    row.child(data).show();
+                });
+
+                //tr.addClass('shown');
+            }
+        });
     };
     // on click selected users data from table(page named page-users-list)
     // to store into local storage to get rendered on second page named page-users-view
