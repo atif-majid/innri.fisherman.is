@@ -9,40 +9,32 @@
     <meta name="description" content="Frest admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Frest admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Home - Change Password</title>
-    <link rel="apple-touch-icon" href="../app-assets/images/ico/apple-icon-120.png">
-    <!--<link rel="shortcut icon" type="image/x-icon" href="../app-assets/images/ico/favicon.ico">-->
-    <link rel="shortcut icon" type="image/x-icon" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_180x180.png?v=1595428268">
-    <link rel="apple-touch-icon" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_180x180.png?v=1595428268"/>
-    <link rel="apple-touch-icon" sizes="57x57" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_57x57.png?v=1595428268"/>
-    <link rel="apple-touch-icon" sizes="60x60" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_60x60.png?v=1595428268"/>
-    <link rel="apple-touch-icon" sizes="72x72" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_72x72.png?v=1595428268"/>
-    <link rel="apple-touch-icon" sizes="76x76" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_76x76.png?v=1595428268"/>
-    <link rel="apple-touch-icon" sizes="114x114" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_114x114.png?v=1595428268"/>
-    <link rel="apple-touch-icon" sizes="180x180" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_180x180.png?v=1595428268"/>
-    <link rel="apple-touch-icon" sizes="228x228" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_228x228.png?v=1595428268"/>
+    <title>Improvements</title>
+    <link rel="apple-touch-icon" href="app-assets/images/ico/apple-icon-120.png">
+    <link rel="shortcut icon" type="image/x-icon" href="app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/tables/datatable/datatables.min.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/bootstrap.css?time=<?php echo time();?>">
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/bootstrap-extended.css?time=<?php echo time();?>">
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/colors.css?time=<?php echo time();?>">
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/components.css?time=<?php echo time();?>">
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/themes/dark-layout.css">
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/themes/semi-dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap.css?time<?php echo time();?>">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap-extended.css?time=<?php echo time();?>">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/colors.css?time=<?php echo time();?>">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/components.css?time=<?php echo time();?>">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/themes/dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/themes/semi-dark-layout.css">
     <!-- END: Theme CSS-->
 
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/core/menu/menu-types/vertical-menu.css">
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/plugins/forms/validation/form-validation.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/pages/page-users.css">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <!-- END: Custom CSS-->
 
 </head>
@@ -99,7 +91,7 @@
                             <li class="scrollable-container media-list"><a class="d-flex justify-content-between" href="javascript:void(0)">
                                     <div class="media d-flex align-items-center">
                                         <div class="media-left pr-0">
-                                            <div class="avatar mr-1 m-0"><img src="../app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="39" width="39"></div>
+                                            <div class="avatar mr-1 m-0"><img src="app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="39" width="39"></div>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">Congratulate Socrates Itumay</span> for work anniversaries</h6><small class="notification-text">Mar 15 12:32pm</small>
@@ -109,7 +101,7 @@
                                 <div class="d-flex justify-content-between read-notification cursor-pointer">
                                     <div class="media d-flex align-items-center">
                                         <div class="media-left pr-0">
-                                            <div class="avatar mr-1 m-0"><img src="../app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
+                                            <div class="avatar mr-1 m-0"><img src="app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">New Message</span> received</h6><small class="notification-text">You have 18 unread messages</small>
@@ -118,7 +110,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between cursor-pointer">
                                     <div class="media d-flex align-items-center py-0">
-                                        <div class="media-left pr-0"><img class="mr-1" src="../app-assets/images/icon/sketch-mac-icon.png" alt="avatar" height="39" width="39"></div>
+                                        <div class="media-left pr-0"><img class="mr-1" src="app-assets/images/icon/sketch-mac-icon.png" alt="avatar" height="39" width="39"></div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">Updates Available</span></h6><small class="notification-text">Sketch 50.2 is currently newly added</small>
                                         </div>
@@ -172,7 +164,7 @@
                                 <div class="d-flex justify-content-between read-notification cursor-pointer">
                                     <div class="media d-flex align-items-center">
                                         <div class="media-left pr-0">
-                                            <div class="avatar mr-1 m-0"><img src="../app-assets/images/portrait/small/avatar-s-4.jpg" alt="avatar" height="39" width="39"></div>
+                                            <div class="avatar mr-1 m-0"><img src="app-assets/images/portrait/small/avatar-s-4.jpg" alt="avatar" height="39" width="39"></div>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">New file</span> has been uploaded</h6><small class="notification-text">4 hrs ago</small>
@@ -194,7 +186,7 @@
                                 <div class="d-flex justify-content-between cursor-pointer">
                                     <div class="media d-flex align-items-center border-0">
                                         <div class="media-left pr-0">
-                                            <div class="avatar mr-1 m-0"><img src="../app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
+                                            <div class="avatar mr-1 m-0"><img src="app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">New customer</span> comment recieved</h6><small class="notification-text">2 days ago</small>
@@ -235,7 +227,7 @@
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto"><a class="navbar-brand" href="{{ route('home') }}">
-                    <div class="brand-logo" style="width: 100%; max-width: 211px;"><!--<img class="logo" src="app-assets/images/logo/logo.png" />--><img class="logo" src="../app-assets/images/logo/fisherman-2.png" style="width: 100%; max-width: 211px; height: 47px; max-height: 47px;" /></div>
+                    <div class="brand-logo" style="width: 100%; max-width: 211px;"><!--<img class="logo" src="app-assets/images/logo/logo.png" />--><img class="logo" src="app-assets/images/logo/fisherman-2.png" style="width: 100%; max-width: 211px; height: 47px; max-height: 47px;" /></div>
                     <!--<h2 class="brand-text mb-0">Frest</h2>-->
                 </a></li>
             <!--<li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="bx bx-x d-block d-xl-none font-medium-4 primary"></i><i class="toggle-icon bx bx-disc font-medium-4 d-none d-xl-block primary" data-ticon="bx-disc"></i></a></li>-->
@@ -262,7 +254,7 @@
                     </li>
                     <li><a href="#"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Typography">Templates</span></a>
                     </li>
-                    <li><a href="{{ route('improvements.index') }}"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Text Utilities">Improvements</span></a>
+                    <li class="active"><a href="{{ route('improvements.index') }}"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Text Utilities">Improvements</span></a>
                     </li>
                     <li><a href="#"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Syntax Highlighter">Maintenance Plan</span></a>
                     </li>
@@ -288,7 +280,7 @@
             </li>
             <li class="nav-item"><a href="#"><span class="menu-title">Employees</span></a>
                 <ul class="menu-content">
-                    <li class="active"><a href="{{ route('employees.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Employee Directory</span></a>
+                    <li><a href="{{ route('employees.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Employee Directory</span></a>
                     </li>
                     <li><a href="#"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Job Description</span></a>
                     </li>
@@ -304,164 +296,240 @@
     <div class="content-overlay"></div>
     <div class="content-wrapper">
         <div class="content-header row">
-            <div class="content-header-left col-12 mb-2 mt-1">
-                <div class="row breadcrumbs-top">
-                    <div class="col-12">
-                        <h5 class="content-header-title float-left pr-1 mb-0">Change Password</h5>
-                        <div class="breadcrumb-wrapper col-12">
-                            <ol class="breadcrumb p-0 mb-0">
-                                <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bx bx-home-alt"></i></a>
-                                </li>
-                                <li class="breadcrumb-item active">Change Password
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="content-body">
-            <!-- Input Validation start -->
-            @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    <div class="alert alert-danger mb-2">{{ $error }}</div>
-                @endforeach
-            @endif
-            <section class="input-validation">
-                <div class="row" style="width: 40%;">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Change Password</h4>
+            <!-- users list start -->
+            <section class="users-list-wrapper">
+                <div class="users-list-filter px-1">
+                    <div class="row  rounded py-2 mb-2">
+                        <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center" onclick="window.location.href='{{ route('improvements.create') }}'">
+                            <button type="reset" class="btn btn-primary btn-block glow users-list-clear mb-0">Add New Improvement</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="users-list-filter px-1">
+                    <form onsubmit="return false;">
+                        <div class="row border rounded py-2 mb-2">
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <label for="users-list-role">Who Notified</label>
+                                <fieldset class="form-group">
+                                    <input type="text" class="form-control" id="users-list-role">
+                                </fieldset>
                             </div>
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <form class="mb-2" action="{{ route('change.password') }}" method="post">
-                                        @csrf
-                                        <div class="form-group">
-                                            <label class="text-bold-600" for="exampleInputPassword1">Current Password</label>
-                                            <input type="password" class="form-control" id="password" name="current_password" autocomplete="current-password"></div>
-                                        <div class="form-group">
-                                            <label class="text-bold-600" for="exampleInputPassword1">New Password</label>
-                                            <input type="password" class="form-control" id="new_password" name="new_password" placeholder="Enter a new password"></div>
-                                        <div class="form-group mb-2">
-                                            <label class="text-bold-600" for="exampleInputPassword2">Confirm New
-                                                Password</label>
-                                            <input type="password" class="form-control" id="new_confirm_password" name="confirm_new_password" placeholder="Confirm your new password"></div>
-                                        <button type="submit" class="btn btn-primary glow position-relative w-100">Reset my
-                                            password<i id="icon-arrow" class="bx bx-right-arrow-alt"></i></button>
-                                    </form>
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <label for="users-list-role">Lot Nr.</label>
+                                <fieldset class="form-group">
+                                    <input type="text" class="form-control" id="users-list-role">
+                                </fieldset>
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <label for="users-list-role">Product</label>
+                                <fieldset class="form-group">
+                                    <input type="text" class="form-control" id="users-list-role">
+                                </fieldset>
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <label for="users-list-verified">Production Site</label>
+                                <fieldset class="form-group">
+                                    <select class="form-control" id="users-list-verified">
+                                        <option value="">Any</option>
+                                        <option value="Suðureyri">Suðureyri</option>
+                                        <option value="Hafnarfirði">Hafnarfirði</option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <label for="users-list-status">Supplier</label>
+                                <fieldset class="form-group">
+                                    <select class="form-control" id="users-list-status">
+                                        <option value="">Any</option>
+                                        <option value="Íslandssaga">Íslandssaga</option>
+                                        <option value="Nýfiskur">Nýfiskur</option>
+                                        <option value="Skinney Þorlákshöfn">Skinney Þorlákshöfn</option>
+                                        <option value="Tungusilungur">Tungusilungur</option>
+                                        <option value="Hábrún">Hábrún</option>
+                                        <option value="Kambur Hafnarfirði">Kambur Hafnarfirði</option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center">
+                                <button type="reset" class="btn btn-primary btn-block glow users-list-clear mb-0">Clear</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                @if ($message = Session::get('success'))
+                    <div class="alert alert-info mb-2">
+                        {{ $message }}
+                    </div>
+                @endif
+                <div class="users-list-table">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <!-- datatable start -->
+                                    <div class="table-responsive">
+                                        <table id="users-list-datatable" class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Time reported</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Who notified ?</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Where bought ?</th>
+                                                <th style="text-align: left; padding-left: 1rem;">When bought ?</th>
+                                                <th style="text-align: left; padding-left: 1rem;">LOT number</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Product</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Responsible</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Production site</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Supplier</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Options</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach ($Improvements as $Improvement)
+
+                                                <tr>
+                                                    <td>{{ $Improvement->id }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem">{{ $Improvement->complain_creation_date }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem">{{ $Improvement->complainer }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem">{{ $Improvement->selling_location }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem">{{ $Improvement->purchase_date }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem">{{ $Improvement->lot_nr }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem">{{ $Improvement->product }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem">{{ $Improvement->name }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem">{{ $Improvement->production_location }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem">{{ $Improvement->supplier }}</td>
+                                                    <td style="white-space: nowrap;padding: 0.5rem 1.15rem;">
+                                                        <form id="form-del" action="{{ route('employees.destroy',$Improvement->id) }}" method="POST">
+                                                            <a href="{{ route('improvements.show', $Improvement->id) }}" class="invoice-action-view" onclick="return false;">
+                                                                <i class="bx bx-show-alt"></i>
+                                                            </a>
+                                                            <a href="#"><i class="bx bx-edit-alt"></i></a>&nbsp;
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <a href="#" onclick="event.preventDefault();
+                                                             if(confirm('Are you sure to delete?')){document.getElementById('form-del').submit();}"><i class="bx bxs-trash-alt"></i></a>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
+                                <!-- datatable ends -->
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- Input Validation end -->
+            <!-- users list ends -->
         </div>
     </div>
 </div>
 <!-- END: Content-->
-
-<!-- demo chat-->
-<?php
-/*<div class="widget-chat-demo">
-    <!-- widget chat demo footer button start -->
-    <button class="btn btn-primary chat-demo-button glow px-1"><i class="livicon-evo" data-options="name: comments.svg; style: lines; size: 24px; strokeColor: #fff; autoPlay: true; repeat: loop;"></i></button>
-    <!-- widget chat demo footer button ends -->
-    <!-- widget chat demo start -->
-    <div class="widget-chat widget-chat-demo d-none">
-        <div class="card mb-0">
-            <div class="card-header border-bottom p-0">
-                <div class="media m-75">
-                    <a href="JavaScript:void(0);">
-                        <div class="avatar mr-75">
-                            <img src="../app-assets/images/portrait/small/avatar-s-2.jpg" alt="avtar images" width="32" height="32">
-                            <span class="avatar-status-online"></span>
-                        </div>
-                    </a>
-                    <div class="media-body">
-                        <h6 class="media-heading mb-0 pt-25"><a href="javaScript:void(0);">Kiara Cruiser</a></h6>
-                        <span class="text-muted font-small-3">Active</span>
-                    </div>
-                    <i class="bx bx-x widget-chat-close float-right my-auto cursor-pointer"></i>
-                </div>
-            </div>
-            <div class="card-body widget-chat-container widget-chat-demo-scroll">
-                <div class="chat-content">
-                    <div class="badge badge-pill badge-light-secondary my-1">today</div>
-                    <div class="chat">
-                        <div class="chat-body">
-                            <div class="chat-message">
-                                <p>How can we help? 😄</p>
-                                <span class="chat-time">7:45 AM</span>
+@php
+    /*
+    <!-- demo chat-->
+    <div class="widget-chat-demo">
+        <!-- widget chat demo footer button start -->
+        <button class="btn btn-primary chat-demo-button glow px-1"><i class="livicon-evo" data-options="name: comments.svg; style: lines; size: 24px; strokeColor: #fff; autoPlay: true; repeat: loop;"></i></button>
+        <!-- widget chat demo footer button ends -->
+        <!-- widget chat demo start -->
+        <div class="widget-chat widget-chat-demo d-none">
+            <div class="card mb-0">
+                <div class="card-header border-bottom p-0">
+                    <div class="media m-75">
+                        <a href="JavaScript:void(0);">
+                            <div class="avatar mr-75">
+                                <img src="app-assets/images/portrait/small/avatar-s-2.jpg" alt="avtar images" width="32" height="32">
+                                <span class="avatar-status-online"></span>
                             </div>
+                        </a>
+                        <div class="media-body">
+                            <h6 class="media-heading mb-0 pt-25"><a href="javaScript:void(0);">Kiara Cruiser</a></h6>
+                            <span class="text-muted font-small-3">Active</span>
                         </div>
-                    </div>
-                    <div class="chat chat-left">
-                        <div class="chat-body">
-                            <div class="chat-message">
-                                <p>Hey John, I am looking for the best admin template.</p>
-                                <p>Could you please help me to find it out? 🤔</p>
-                                <span class="chat-time">7:50 AM</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="chat">
-                        <div class="chat-body">
-                            <div class="chat-message">
-                                <p>Stack admin is the responsive bootstrap 4 admin template.</p>
-                                <span class="chat-time">8:01 AM</span>
-                            </div>
-                        </div>
+                        <i class="bx bx-x widget-chat-close float-right my-auto cursor-pointer"></i>
                     </div>
                 </div>
-            </div>
-            <div class="card-footer border-top p-1">
-                <form class="d-flex" onsubmit="widgetChatMessageDemo();" action="javascript:void(0);">
-                    <input type="text" class="form-control chat-message-demo mr-75" placeholder="Type here...">
-                    <button type="submit" class="btn btn-primary glow px-1"><i class="bx bx-paper-plane"></i></button>
-                </form>
+                <div class="card-body widget-chat-container widget-chat-demo-scroll">
+                    <div class="chat-content">
+                        <div class="badge badge-pill badge-light-secondary my-1">today</div>
+                        <div class="chat">
+                            <div class="chat-body">
+                                <div class="chat-message">
+                                    <p>How can we help? 😄</p>
+                                    <span class="chat-time">7:45 AM</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat chat-left">
+                            <div class="chat-body">
+                                <div class="chat-message">
+                                    <p>Hey John, I am looking for the best admin template.</p>
+                                    <p>Could you please help me to find it out? 🤔</p>
+                                    <span class="chat-time">7:50 AM</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat">
+                            <div class="chat-body">
+                                <div class="chat-message">
+                                    <p>Stack admin is the responsive bootstrap 4 admin template.</p>
+                                    <span class="chat-time">8:01 AM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer border-top p-1">
+                    <form class="d-flex" onsubmit="widgetChatMessageDemo();" action="javascript:void(0);">
+                        <input type="text" class="form-control chat-message-demo mr-75" placeholder="Type here...">
+                        <button type="submit" class="btn btn-primary glow px-1"><i class="bx bx-paper-plane"></i></button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- widget chat demo ends -->
+        <!-- widget chat demo ends -->
 
-</div>*/
-?>
+    </div>
+    */
+@endphp
 <div class="sidenav-overlay"></div>
 <div class="drag-target"></div>
 
 <!-- BEGIN: Footer-->
 <footer class="footer footer-static footer-light">
-    <p class="clearfix mb-0"><span class="float-left d-inline-block">2021 &copy; FISHERMAN</span><span class="float-right d-sm-inline-block d-none">Crafted with<i class="bx bxs-heart pink mx-50 font-small-3"></i>by<a class="text-uppercase" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent</a></span>
-        <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>
+    <p class="clearfix mb-0"><span class="float-left d-inline-block">2021 &copy; FISHERMAN</span><!--<span class="float-right d-sm-inline-block d-none">Crafted with<i class="bx bxs-heart pink mx-50 font-small-3"></i>by<a class="text-uppercase" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent</a></span>
+        <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>-->
     </p>
 </footer>
 <!-- END: Footer-->
 
 
 <!-- BEGIN: Vendor JS-->
-<script src="../app-assets/vendors/js/vendors.min.js"></script>
-<script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
-<script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
-<script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
+<script src="app-assets/vendors/js/vendors.min.js"></script>
+<script src="app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
+<script src="app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
+<script src="app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
-<script src="../app-assets/vendors/js/forms/validation/jqBootstrapValidation.js"></script>
+<script src="app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+<script src="app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
-<script src="../app-assets/js/scripts/configs/vertical-menu-light.js"></script>
-<script src="../app-assets/js/core/app-menu.js"></script>
-<script src="../app-assets/js/core/app.js"></script>
-<script src="../app-assets/js/scripts/components.js"></script>
-<script src="../app-assets/js/scripts/footer.js"></script>
+<script src="app-assets/js/scripts/configs/vertical-menu-light.js"></script>
+<script src="app-assets/js/core/app-menu.js"></script>
+<script src="app-assets/js/core/app.js"></script>
+<script src="app-assets/js/scripts/components.js"></script>
+<script src="app-assets/js/scripts/footer.js"></script>
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
-<script src="../app-assets/js/scripts/forms/validation/form-validation.js"></script>
+<script src="app-assets/js/scripts/pages/page-improvements.js?time=<?php echo time();?>"></script>
 <!-- END: Page JS-->
 
 </body>

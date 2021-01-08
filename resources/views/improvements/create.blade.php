@@ -9,7 +9,7 @@
     <meta name="description" content="Frest admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Frest admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Production - Add New Record</title>
+    <title>Improvements - Add New</title>
     <link rel="apple-touch-icon" href="../app-assets/images/ico/apple-icon-120.png">
     <!--<link rel="shortcut icon" type="image/x-icon" href="../app-assets/images/ico/favicon.ico">-->
     <link rel="shortcut icon" type="image/x-icon" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_180x180.png?v=1595428268">
@@ -249,7 +249,7 @@
                 <ul class="menu-content">
                     <li><a href="{{ route('recipes.index') }}"><!--<i class="menu-livicon" data-icon="envelope-pull"></i>--><span class="menu-title" data-i18n="Email">Recipes</span></a>
                     </li>
-                    <li  class="active"><a href="{{ route('production.index') }}"><!--<i class="menu-livicon" data-icon="check-alt"></i>--><span class="menu-title" data-i18n="Todo">Today's Production</span></a>
+                    <li><a href="{{ route('production.index') }}"><!--<i class="menu-livicon" data-icon="check-alt"></i>--><span class="menu-title" data-i18n="Todo">Today's Production</span></a>
                     </li>
                     <li><a href="#"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Reception Surveillance</span></a>
                     </li>
@@ -263,7 +263,7 @@
                     </li>
                     <li><a href="#"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Typography">Templates</span></a>
                     </li>
-                    <li><a href="{{ route('improvements.index') }}"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Text Utilities">Improvements</span></a>
+                    <li class="active"><a href="{{ route('improvements.index') }}"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Text Utilities">Improvements</span></a>
                     </li>
                     <li><a href="#"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Syntax Highlighter">Maintenance Plan</span></a>
                     </li>
@@ -308,14 +308,14 @@
             <div class="content-header-left col-12 mb-2 mt-1">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h5 class="content-header-title float-left pr-1 mb-0">Add New Record</h5>
+                        <h5 class="content-header-title float-left pr-1 mb-0">Add New Improvement</h5>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb p-0 mb-0">
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bx bx-home-alt"></i></a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{ route('production.index') }}">Today's Production</a>
+                                <li class="breadcrumb-item"><a href="{{ route('improvements.index') }}">Improvements</a>
                                 </li>
-                                <li class="breadcrumb-item active">Add new record
+                                <li class="breadcrumb-item active">Add new improvement
                                 </li>
                             </ol>
                         </div>
@@ -335,142 +335,238 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Production Data</h4>
+                                <h4 class="card-title">Improvement Data</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form class="form-horizontal" novalidate method="post" action="{{ route('production.store') }}">
+                                    <form class="form-horizontal" novalidate method="post" action="{{ route('improvements.store') }}">
                                         @csrf
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Recipe</label>
-                                                    <fieldset class="form-group">
-                                                        <select class="form-control" id="recipe_id" name="recipe_id">
-                                                            <option value="" selected></option>
-                                                            @foreach ($recipes as $recipe)
-                                                                <option value="{{ $recipe->id }}">{{$recipe->title}}</option>
-                                                            @endforeach
-                                                            <!--<option value="">Select an Option</option>
-                                                            <option value="F">Cured Salmon "Gravlax "</option>
-                                                            <option value="M">Rope Hung Smoked Salmon</option>
-                                                            <option value="P">Smoked Salmon</option>
-                                                            <option value="S">Smoked salmon "húskarlabiti"</option>-->
-                                                        </select>
-                                                    </fieldset>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Production Date</label>
-                                                    <fieldset class="position-relative has-icon-left">
-                                                        <input type="text" class="form-control format-picker" placeholder="Select Date" id="production_date" name="production_date" value="@php echo date("Y-m-d");@endphp">
-                                                        <div class="form-control-position">
-                                                            <i class='bx bx-calendar'></i>
+                                            <div class="form col-md-12">
+                                                <div class="row">
+                                                    <div class="form-group col-sm">
+                                                        <label>Who notified?</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="strWhoNotified" id="strWhoNotified" value="" class="form-control" data-validation-required-message="Name is requried" placeholder="Who notified?">
                                                         </div>
-                                                    </fieldset>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Product nr.</label>
-                                                    <div class="controls">
-                                                        <input type="text" name="product_number" class="form-control" data-validation-required-message="Product nr. is required" placeholder="Product nr.">
+                                                    </div>
+                                                    <div class="form-group col-sm">
+                                                        <label>Phone Number</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="strPhoneNumber" class="form-control" data-validation-required-message="Phone number required" placeholder="Phone Number">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-sm">
+                                                        <label>Email</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="strEmail" class="form-control" data-validation-required-message="Email is required" placeholder="Email">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label>LOT nr.</label>
-                                                    <div class="controls">
-                                                        <input type="text" name="lot_number" class="form-control" data-validation-required-message="LOT nr. is required" placeholder="LOT nr. address">
+                                                <div class="row">
+                                                    <div class="form-group col-sm">
+                                                        <label>What Product?</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="strProduct" id="strProduct" value="" class="form-control" data-validation-required-message="Product is required" placeholder="What product?">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Product Name</label>
-                                                    <div class="controls">
-                                                        <input type="text" name="product_name" class="form-control" data-validation-required-message="Product Name is required" placeholder="Product Name">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Instructions</label>
-                                                    <fieldset class="form-group">
-                                                        <select class="form-control" id="instructions" name="instructions">
-                                                            <option value="-1">Select an Option</option>
-                                                            <option value="F">Freeze</option>
-                                                            <option value="M">Make</option>
-                                                            <option value="P">Pack</option>
-                                                            <option value="S">Send</option>
-                                                        </select>
-                                                    </fieldset>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Products Available/Arriving. (How much Fish in freezer-cooler or arriving today?)</label>
-                                                    <div class="controls">
-                                                        <input type="text" name="products_available_arriving" class="form-control" data-validation-required-message="Availability is required" placeholder="Products available">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Packing (Package size)</label>
-                                                    <div class="controls">
-                                                        <input type="text" name="packing_package_size" class="form-control" data-validation-required-message="Package size is required" placeholder="Packing">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Production (Total kg/packages)</label>
-                                                    <div class="input-group">
-                                                        <input type="text" aria-label="Production" class="form-control" placeholder="Total Production" id="production_total" name="production_total" style="max-width: 50% !important; box-sizing: border-box;">
-                                                        <!--<input type="text" aria-label="Last name" class="form-control" placeholder="Last Name">-->
-                                                        <fieldset style="padding-left: 30px;">
-                                                            <select class="form-control" id="production_unit" name="production_unit" style="min-width: 100% !important; box-sizing: border-box;">
-                                                                <option value=""></option>
-                                                                <option value="Kg">Kg</option>
-                                                                <option value="Packages">Packages</option>
+                                                    <div class="form-group col-sm">
+                                                        @php
+                                                        /*<label>Type of Notification</label>
+                                                        <div class="controls">
+                                                            <select class="form-control">
+                                                                <option selected=""></option>
+                                                                <option>Bone in the fish</option>
+                                                                <option>Worm in the fish</option>
+                                                                <option>Bad smell</option>
+                                                                <option>Late delivery</option>
+                                                                <option>Incorrect delivery</option>
+                                                                <option>Foreign object in product</option>
+                                                                <option>Fish skin</option>
+                                                                <option>Communication</option>
                                                             </select>
+                                                        </div>*/
+                                                        @endphp
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-sm">
+                                                        <label>Type of Notification</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-sm">
+                                                        <fieldset>
+                                                            <div class="checkbox">
+                                                                <input type="checkbox" class="checkbox-input" id="checkbox1" name="chkNotification[]" value="Bone in the fish">
+                                                                <label for="checkbox1">Bone in the fish</label>
+                                                            </div>
                                                         </fieldset>
                                                     </div>
-                                                    <?php
-                                                    /*<div class="controls">
-                                                        <input type="text" name="production_total" class="form-control" data-validation-required-message="Production quantity is required" placeholder="Production quantity">
-                                                    </div>*/
-                                                    ?>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Delivery / Storage</label>
-                                                    <fieldset class="form-group">
-                                                        <select class="form-control" id="delivery_storage" name="delivery_storage">
-                                                            <option value="-1">Select an Option</option>
-                                                            <option value="FÍ">Freezer Íslandssaga</option>
-                                                            <option value="Flytjandi">Sent today w/Flytjandi</option>
-                                                            <option value="K">Our cooler</option>
-                                                            <option value="F">Our Freezer</option>
-                                                            <option value="FBox">Blue boxes in our freezer</option>
-                                                        </select>
-                                                    </fieldset>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Delivery / Storage (Quantity)</label>
-                                                    <div class="controls">
-                                                        <input type="text" name="delivery_storage_quantity" class="form-control" data-validation-required-message="Delivery/Storage quanitity is required" placeholder="Delivery / Storage (Quantity)">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Pallet #</label>
-                                                    <div class="controls">
-                                                        <input type="text" name="pallet_number" class="form-control" data-validation-required-message="Pallet # is required" placeholder="Pallet #">
-                                                    </div>
-                                                </div>
-                                                <?php
-                                                /*<div class="form-group">
-                                                    <label>Total Production</label>
-                                                    <div class="input-group">
-                                                        <input type="text" aria-label="Production" class="form-control" placeholder="Total Production" id="production_total" name="production_total" style="max-width: 50% !important; box-sizing: border-box;">
-                                                        <!--<input type="text" aria-label="Last name" class="form-control" placeholder="Last Name">-->
-                                                        <fieldset class="form-group">
-                                                            <select class="form-control" id="production_unit" name="production_unit" style="min-width: 100% !important; box-sizing: border-box;">
-                                                                <option value=""></option>
-                                                                <option value="Kg">Kg</option>
-                                                                <option value="Packages">Packages</option>
-                                                            </select>
+                                                    <div class="form-group col-sm">
+                                                        <fieldset>
+                                                            <div class="checkbox">
+                                                                <input type="checkbox" class="checkbox-input" id="checkbox2" name="chkNotification[]" value="Worm in the fish">
+                                                                <label for="checkbox2">Worm in the fish</label>
+                                                            </div>
                                                         </fieldset>
                                                     </div>
-                                                </div>*/?>
+                                                    <div class="form-group col-sm">
+                                                        <fieldset>
+                                                            <div class="checkbox">
+                                                                <input type="checkbox" class="checkbox-input" id="checkbox3" name="chkNotification[]" value="Bad smell">
+                                                                <label for="checkbox3">Bad smell</label>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="form-group col-sm">
+                                                        <fieldset>
+                                                            <div class="checkbox">
+                                                                <input type="checkbox" class="checkbox-input" id="checkbox4" name="chkNotification[]" value="Late delivery">
+                                                                <label for="checkbox4">Late delivery</label>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-sm">
+                                                        <fieldset>
+                                                            <div class="checkbox">
+                                                                <input type="checkbox" class="checkbox-input" id="checkbox5" name="chkNotification[]" value="Incorrect delivery">
+                                                                <label for="checkbox5">Incorrect delivery</label>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="form-group col-sm">
+                                                        <fieldset>
+                                                            <div class="checkbox">
+                                                                <input type="checkbox" class="checkbox-input" id="checkbox6" name="chkNotification[]" value="Foreign object in product">
+                                                                <label for="checkbox6">Foreign object in product</label>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="form-group col-sm">
+                                                        <fieldset>
+                                                            <div class="checkbox">
+                                                                <input type="checkbox" class="checkbox-input" id="checkbox7" name="chkNotification[]" value="Fish skin">
+                                                                <label for="checkbox7">Fish skin</label>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="form-group col-sm">
+                                                        <fieldset>
+                                                            <div class="checkbox">
+                                                                <input type="checkbox" class="checkbox-input" id="checkbox8" name="chkNotification[]" value="Communication">
+                                                                <label for="checkbox8">Communication</label>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-sm">
+                                                        <label>Where was it produced?</label>
+                                                        <div class="controls">
+                                                            <select class="form-control" name="strProductionLocation">
+                                                                <option selected=""></option>
+                                                                <option value="Suðureyri">Suðureyri</option>
+                                                                <option value="Hafnarfirði">Hafnarfirði</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-sm">
+                                                        <label>Who is the supplier?</label>
+                                                            <div class="controls">
+                                                                <select class="form-control" name="strSupplier">
+                                                                    <option selected></option>
+                                                                    <option value="Íslandssaga">Íslandssaga</option>
+                                                                    <option value="Nýfiskur">Nýfiskur</option>
+                                                                    <option value="Skinney Þorlákshöfn">Skinney Þorlákshöfn</option>
+                                                                    <option value="Tungusilungur">Tungusilungur</option>
+                                                                    <option value="Hábrún">Hábrún</option>
+                                                                    <option value="Kambur Hafnarfirði">Kambur Hafnarfirði</option>
+                                                                </select>
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-sm">
+                                                        <label>Where was it sold?</label>
+                                                        <div class="controls">
+                                                            <select class="form-control" name="strWhereSold">
+                                                                <option selected></option>
+                                                                <option value="Fisherman Webstore">Fisherman Webstore</option>
+                                                                <option value="Bónus">Bónus</option>
+                                                                <option value="Nettó">Nettó</option>
+                                                                <option value="Iceland">Iceland</option>
+                                                                <option value="Krambúðin">Krambúðin</option>
+                                                                <option value="Hagkaup">Hagkaup</option>
+                                                                <option value="Fisherman wholesale">Fisherman wholesale</option>
+                                                                <option value="Other">Other</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-sm">
+                                                        <label>When was it bought?</label>
+                                                        <fieldset class="position-relative has-icon-left">
+                                                            <input type="text" class="form-control format-picker" placeholder="Select Date" id="purchase_date" name="strDateOfPurchase">
+                                                            <div class="form-control-position">
+                                                                <i class='bx bx-calendar'></i>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="form-group col-sm">
+                                                        <label>Lot nr.</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="strLotNr" class="form-control" data-validation-required-message="Lot Nr. is Required" placeholder="Lot nr.">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-sm">
+                                                        <label>Description</label>
+                                                        <div class="controls">
+                                                            <textarea name="strDescription" class="form-control" data-validation-required-message="Name is requried" placeholder="Description" rows="4"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-sm">
+                                                        <label>Who will resolve this?</label>
+                                                        <div class="controls">
+                                                            <!--<input type="text" name="strAssignedTo" id="strAssignedTo" value="" class="form-control" data-validation-required-message="Employee Name is requried" placeholder="Who will resolve this?">-->
+                                                            <select class="form-control" id="nAssignedTo" name="nAssignedTo">
+                                                                <option value=""></option>
+                                                                @foreach ($employees as $employee)
+                                                                    <option value="{{ $employee->id }}">{{ $employee->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-sm">
+                                                        @php
+                                                        /*<label>Phone Number</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="phone_number" class="form-control" data-validation-required-message="Phone number required" placeholder="Phone Number">
+                                                        </div>*/
+                                                        @endphp
+                                                    </div>
+                                                    <div class="form-group col-sm">
+                                                        @php
+                                                        /*<label>Email</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="email" class="form-control" data-validation-required-message="Email is required" placeholder="Email">
+                                                        </div>*/
+                                                        @endphp
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-sm">
+                                                        <label>Response and Improvements</label>
+                                                        <div class="controls">
+                                                            <textarea name="strResponse" class="form-control" data-validation-required-message="Name is requried" placeholder="Response and Improvements" rows="4"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -551,8 +647,7 @@
     </div>
     <!-- widget chat demo ends -->
 
-</div>
-*/?>
+</div>*/?>
 <div class="sidenav-overlay"></div>
 <div class="drag-target"></div>
 
@@ -576,8 +671,6 @@
 <script src="../app-assets/vendors/js/forms/validation/jqBootstrapValidation.js"></script>
 <script src="../app-assets/vendors/js/pickers/pickadate/picker.js"></script>
 <script src="../app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
-
-
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
@@ -590,9 +683,37 @@
 
 <!-- BEGIN: Page JS-->
 <script src="../app-assets/js/scripts/forms/validation/form-validation.js"></script>
-<!-- END: Page JS-->
 <script src="../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- END: Page JS-->
+<script>
+    $(document).ready(function(){
+        var availableEmployees = [
+            @foreach ($employees as $i => $employee)
+                "{{ $employee->name }}"
+            @if($i<count($employees)-1)
+            ,
+            @endif
+            @endforeach
+        ];
+        $( "#strWhoNotified" ).autocomplete({
+            source: availableEmployees
+        });
+        var availableRecipes = [
+            @foreach ($recipes as $i => $recipe)
+                "{{ $recipe->title }}"
+            @if($i<count($recipes)-1)
+            ,
+            @endif
+            @endforeach
+        ];
+        $( "#strProduct" ).autocomplete({
+            source: availableRecipes
+        });
+    });
 
+</script>
 </body>
 <!-- END: Body-->
 

@@ -5,6 +5,8 @@ use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\ProductionController;
 use App\Http\Controllers\RecipesController;
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\ImprovementsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,6 +29,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('employees', EmployeesController::class);
 Route::resource('production', ProductionController::class);
 Route::resource('recipes', RecipesController::class);
+Route::resource('improvements', ImprovementsController::class);
 
 Route::get('/change-password', [App\Http\Controllers\ChangePasswordController::class, 'index'])->name('change-password');
 Route::post('/change-password', [App\Http\Controllers\ChangePasswordController::class, 'store'])->name('change.password');
