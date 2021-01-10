@@ -391,10 +391,10 @@
 
                                                 <tr>
                                                     <td>{{ $Improvement->id }}</td>
-                                                    <td style="padding: 0.5rem 1.15rem">{{ $Improvement->complain_creation_date }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem; white-space:nowrap;">{!! str_replace(" ", "<br>", $Improvement->complain_creation_date) !!} </td>
                                                     <td style="padding: 0.5rem 1.15rem">{{ $Improvement->complainer }}</td>
                                                     <td style="padding: 0.5rem 1.15rem">{{ $Improvement->selling_location }}</td>
-                                                    <td style="padding: 0.5rem 1.15rem">{{ $Improvement->purchase_date }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem;  white-space:nowrap;">{{ $Improvement->purchase_date }}</td>
                                                     <td style="padding: 0.5rem 1.15rem">{{ $Improvement->lot_nr }}</td>
                                                     <td style="padding: 0.5rem 1.15rem">{{ $Improvement->product }}</td>
                                                     <td style="padding: 0.5rem 1.15rem">{{ $Improvement->name }}</td>
