@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Employees;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
 
 class User extends Authenticatable
 {
@@ -40,4 +42,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getpicture()
+    {
+        $strEmail = $this->email;
+        $objCurrentEmployee = Employees::where('email',$strEmail)->first();
+        $strPicture = "";
+        if($objCurrentEmployee)
+        {
+            if(trim($objCurrentEmployee->picture!=""))
+            {
+                $strPicture = "/uploads/".$objCurrentEmployee->picture;
+            }
+
+        }
+        if(trim($strPicture)=="")
+        {
+            $strPicture = "/app-assets/images/portrait/small/group 238_2x.jpg";
+        }
+        return $strPicture;
+    }
 }
