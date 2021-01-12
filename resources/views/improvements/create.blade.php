@@ -208,7 +208,7 @@
                     </li>
                     <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                             <?php /*<div class="user-nav d-sm-flex d-none"><span class="user-name"> {{ Auth::user()->name }}</span><span class="user-status text-muted">Available</span></div><span><img class="round" src="app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"></span>*/?>
-                            <div class="user-nav d-sm-flex d-none"><span class="user-name"> {{ Auth::user()->name }}</span><span class="user-status text-muted">Available</span></div><span><img class="round" src="app-assets/images/portrait/small/group 238_2x.jpg" alt="avatar" height="40" width="40"></span>
+                            <div class="user-nav d-sm-flex d-none"><span class="user-name"> {{ Auth::user()->name }}</span><span class="user-status text-muted">Available</span></div><span><img class="round" src="{{ Auth::user()->getpicture() }}" alt="avatar" height="40" width="40"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right pb-0">
                             <a class="dropdown-item" href="{{ route('change-password') }}"><i class="bx bx-user mr-50"></i> Change Password</a>
@@ -353,13 +353,13 @@
                                                     <div class="form-group col-sm">
                                                         <label>Phone Number</label>
                                                         <div class="controls">
-                                                            <input type="text" name="strPhoneNumber" class="form-control" data-validation-required-message="Phone number required" placeholder="Phone Number">
+                                                            <input type="text" name="strPhoneNumber" class="form-control" <?php /*data-validation-required-message="Phone number required"*/?> placeholder="Phone Number">
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-sm">
                                                         <label>Email</label>
                                                         <div class="controls">
-                                                            <input type="text" name="strEmail" class="form-control" data-validation-required-message="Email is required" placeholder="Email">
+                                                            <input type="text" name="strEmail" class="form-control" <?php /*data-validation-required-message="Email is required"*/?> placeholder="Email">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -367,7 +367,7 @@
                                                     <div class="form-group col-sm">
                                                         <label>What Product?</label>
                                                         <div class="controls">
-                                                            <input type="text" name="strProduct" id="strProduct" value="" class="form-control" data-validation-required-message="Product is required" placeholder="What product?">
+                                                            <input type="text" name="strProduct" id="strProduct" value="" class="form-control" <?php /*data-validation-required-message="Product is required"*/?> placeholder="What product?">
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-sm">
@@ -517,7 +517,7 @@
                                                     <div class="form-group col-sm">
                                                         <label>Lot nr.</label>
                                                         <div class="controls">
-                                                            <input type="text" name="strLotNr" class="form-control" data-validation-required-message="Lot Nr. is Required" placeholder="Lot nr.">
+                                                            <input type="text" name="strLotNr" class="form-control" <?php /*data-validation-required-message="Lot Nr. is Required"*/?> placeholder="Lot nr.">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -525,7 +525,7 @@
                                                     <div class="form-group col-sm">
                                                         <label>Description</label>
                                                         <div class="controls">
-                                                            <textarea name="strDescription" class="form-control" data-validation-required-message="Name is requried" placeholder="Description" rows="4"></textarea>
+                                                            <textarea name="strDescription" class="form-control" <?php /*data-validation-required-message="Name is requried"*/?> placeholder="Description" rows="4"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -563,7 +563,7 @@
                                                     <div class="form-group col-sm">
                                                         <label>Response and Improvements</label>
                                                         <div class="controls">
-                                                            <textarea name="strResponse" class="form-control" data-validation-required-message="Name is requried" placeholder="Response and Improvements" rows="4"></textarea>
+                                                            <textarea name="strResponse" class="form-control" <?php /*data-validation-required-message="Name is requried"*/?> placeholder="Response and Improvements" rows="4"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
