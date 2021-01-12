@@ -23,6 +23,10 @@ $(document).ready(function () {
                     "targets": [7]
                 },
                 {
+                    "orderable": false,
+                    "targets": [8]
+                },
+                {
                     "targets": [ 0 ],
                     "visible": false
                 }]
