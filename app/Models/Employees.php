@@ -21,6 +21,8 @@ class Employees extends Model
         'postcode',
         'city',
         'h_number',
-        'id_number'
+        'id_number',
+        'status',
+        'picture'
     ];
 }
