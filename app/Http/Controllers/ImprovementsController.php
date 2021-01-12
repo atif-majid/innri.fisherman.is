@@ -58,17 +58,17 @@ class ImprovementsController extends Controller
         echo $arrNotifications[0];*/
         $request->validate([
             'strWhoNotified' => 'required',
-            'strPhoneNumber' => 'required',
-            'strEmail' => 'required',
-            'strProduct'=> 'required',
-            'strProductionLocation' => 'required',
-            'strSupplier' => 'required',
-            'strWhereSold' => 'required',
-            'strDateOfPurchase' => 'required',
-            'strLotNr' => 'required',
-            'strDescription' => 'required',
-            'nAssignedTo' => 'required',
-            'strResponse' => 'required'
+            'strPhoneNumber' => 'sometimes',
+            'strEmail' => 'sometimes',
+            'strProduct'=> 'sometimes',
+            'strProductionLocation' => 'sometimes',
+            'strSupplier' => 'sometimes',
+            'strWhereSold' => 'sometimes',
+            'strDateOfPurchase' => 'sometimes',
+            'strLotNr' => 'sometimes',
+            'strDescription' => 'sometimes',
+            'nAssignedTo' => 'sometimes',
+            'strResponse' => 'sometimes'
         ],
             [
                 'strWhoNotified.required' => 'Name of notifying person is required',
@@ -117,15 +117,19 @@ class ImprovementsController extends Controller
         $improvement = Improvements::create($arrImpmrovement);
         $nImprovementID = $improvement->id;
         $arrNotifications = $request->all('chkNotification')['chkNotification'];
-        for($i=0; $i<count($arrNotifications); $i++)
+        if(is_array($arrNotifications))
         {
-            $strNotification = $arrNotifications[$i];
-            $arrInsert = array(
-                'improvements_id'=>$nImprovementID,
-                'notification_name'=>$strNotification
-            );
-            Improvementsnotifications::create($arrInsert);
+            for($i=0; $i<count($arrNotifications); $i++)
+            {
+                $strNotification = $arrNotifications[$i];
+                $arrInsert = array(
+                    'improvements_id'=>$nImprovementID,
+                    'notification_name'=>$strNotification
+                );
+                Improvementsnotifications::create($arrInsert);
+            }
         }
+
         return redirect()->route('improvements.index')
             ->with('success','Improvement record added successfully.');
     }
