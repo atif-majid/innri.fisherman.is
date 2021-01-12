@@ -17,6 +17,7 @@
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/vendors.min.css">
     <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/tables/datatable/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/file-uploaders/dropzone.min.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -30,6 +31,7 @@
 
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/file-uploaders/dropzone.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/pages/page-users.css">
     <!-- END: Page CSS-->
 
@@ -199,7 +201,7 @@
                     </li>
                     <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                             <?php /*<div class="user-nav d-sm-flex d-none"><span class="user-name"> {{ Auth::user()->name }}</span><span class="user-status text-muted">Available</span></div><span><img class="round" src="app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"></span>*/?>
-                            <div class="user-nav d-sm-flex d-none"><span class="user-name"> {{ Auth::user()->name }}</span><span class="user-status text-muted">Available</span></div><span><img class="round" src="app-assets/images/portrait/small/group 238_2x.jpg" alt="avatar" height="40" width="40"></span>
+                            <div class="user-nav d-sm-flex d-none"><span class="user-name"> {{ Auth::user()->name }}</span><span class="user-status text-muted">Available </span></div><span><img class="round" src="{{ Auth::user()->getpicture() }}" alt="avatar" height="40" width="40"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right pb-0">
                             <a class="dropdown-item" href="{{ route('change-password') }}"><i class="bx bx-user mr-50"></i> Change Password</a>
@@ -384,6 +386,7 @@
                                                 <th style="text-align: left; padding-left: 1rem;">Direct Phone</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Mobile phone</th>
                                                 <th style="text-align: left; padding-left: 1rem;">EMail address</th>
+                                                <td style="text-align: left; padding-left: 1rem;">Status</td>
                                                 <th style="text-align: left; padding-left: 1rem;">edit</th>
                                             </tr>
                                         </thead>
@@ -394,6 +397,11 @@
 <div class="border-secondary col-12 border">
 <table class="table table-borderless" colspan="12">
 <tbody>
+<tr>
+<td colspan="2">
+<img src="uploads/$employee->picture" style="width: 200px;" alt="No picture uploaded yet!">
+</td>
+</tr>
 <tr>
 <td>Name:</td>
 <td class="users-view-latest-activity">$employee->name</td>
@@ -425,9 +433,18 @@ EOT;
                                                     <td style="padding: 0.5rem 1.15rem">{{ $employee->direct_phone }}</td>
                                                     <td style="padding: 0.5rem 1.15rem">{{ $employee->gsm }}</td>
                                                     <td style="padding: 0.5rem 1.15rem">{{ $employee->email }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem; vertical-align: center;">
+                                                        <div class="custom-control custom-switch custom-switch-dark mb-1">
+                                                            <input type="checkbox" class="custom-control-input chkStatus" id="customSwitchcolor6" value="{{ $employee->id }}" @if($employee->status=='active') checked @endif>
+                                                            <label class="custom-control-label" for="customSwitchcolor6"></label>
+                                                        </div>
+                                                    </td>
                                                     <td style="white-space: nowrap;padding: 0.5rem 1.15rem;">
                                                         <div class="divData" style="display: none; visibility: hidden;">@php echo $strDisp;@endphp</div>
                                                         <form id="form-del" action="{{ route('employees.destroy',$employee->id) }}" method="POST">
+                                                            <a href="#" onclick="$('#nEmpIDFIle').val({{ $employee->id }}); Dropzone.forElement('#dp-accept-files').removeAllFiles(true); return false;" data-toggle="modal" data-target="#inlineForm">
+                                                                <i class="bx bx-camera"></i>
+                                                            </a>
                                                             <a href="#" class="invoice-action-view" onclick="return false;">
                                                                 <i class="bx bx-show-alt"></i>
                                                             </a>
@@ -544,6 +561,8 @@ EOT;
 <!-- BEGIN: Page Vendor JS-->
 <script src="app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
 <script src="app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>
+<script src="app-assets/vendors/js/extensions/dropzone.min.js"></script>
+<script src="app-assets/vendors/js/ui/prism.min.js"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
@@ -556,8 +575,171 @@ EOT;
 
 <!-- BEGIN: Page JS-->
 <script src="app-assets/js/scripts/pages/page-users.js?time=<?php echo time();?>"></script>
-<!-- END: Page JS-->
 
+<!-- END: Page JS-->
+<script>
+    $(document).ready(function(){
+        $('.chkStatus').change(function(){
+            var doAjax = false;
+            //var url = "{{ route('empajax.request.status')}}";
+            var empID = $(this).val();
+            var changeto = '';
+            var _token = $("input[name='_token']").val();
+            if($(this).is(':checked'))
+            {
+                if(confirm('Are you sure to mark this employee active?'))
+                {
+                    //
+                    doAjax = true;
+                    changeto = 'active';
+                }
+                else
+                {
+                    $(this).prop("checked", false);
+                }
+            }
+            else
+            {
+                if(confirm('Are you sure to change the status to inactive?'))
+                {
+                    doAjax = true;
+                    changeto = 'inactive';
+                }
+                else
+                {
+                    $(this).prop("checked", true);
+                }
+            }
+            if(doAjax)
+            {
+                $.ajax({
+                    url: "{{ route('empajax.request.status')}}",
+                    type:'POST',
+                    data: {_token:_token, id:empID, newstatus:changeto},
+                    success: function(data) {
+                        //Do nogthing
+                    }
+                });
+            }
+        })
+
+        Dropzone.options.dpAcceptFiles = {
+            paramName: "file", // The name that will be used to transfer the file
+            maxFilesize: 1, // MB
+            acceptedFiles: 'image/*',
+            maxFiles: 1,
+            autoProcessQueue: false,
+            url: "{{ route('empajax.request.picture')}}",
+            init: function(){
+                var myDropzone = this;
+                // Update selector to match your button
+                $('.uploadimg').click(function (e) {
+                    e.preventDefault();
+                    if ( $('dp-accept-files').valid() ) {
+                        myDropzone.processQueue();
+                    }
+                    return false;
+                });
+
+                this.on('sending', function (file, xhr, formData) {
+                    // Append all form inputs to the formData Dropzone will POST
+                    var data = $('dp-accept-files').serializeArray();
+                    $.each(data, function (key, el) {
+                        formData.append(el.name, el.value);
+                        this.removeAllFiles(true);
+                    });
+                });
+            },
+            error: function (file, response){
+                if ($.type(response) === "string")
+                    var message = response; //dropzone sends it's own error messages in string
+                else
+                    var message = response.message;
+                file.previewElement.classList.add("dz-error");
+                _ref = file.previewElement.querySelectorAll("[data-dz-errormessage]");
+                _results = [];
+                for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                    node = _ref[_i];
+                    _results.push(node.textContent = message);
+                }
+                this.removeAllFiles(true);
+                return _results;
+            },
+            successmultiple: function (file, response) {
+                console.log(file, response);
+                this.removeAllFiles(true);
+            },
+            completemultiple: function (file, response) {
+                console.log(file, response, "completemultiple");
+                //$modal.modal("show");
+                this.removeAllFiles(true);
+            },
+            reset: function () {
+                console.log("resetFiles");
+                this.removeAllFiles(true);
+            }
+        }
+
+
+
+
+        //var myDropzone = new Dropzone("#dp-accept-files");
+        $('.btnclear').click(function(){
+            Dropzone.forElement('#dp-accept-files').removeAllFiles(true)
+        });
+    });
+</script>
+<?php
+/*<div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel33">Upload Picture </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="bx bx-x"></i>
+                </button>
+            </div>
+            <form action="#" class="dropzone dropzone-area" id="dp-accept-files" enctype="multipart/form-data">
+                <div class="dz-message">Drop Files Here To Upload</div>
+            </form>
+        </div>
+    </div>
+</div>*/
+?>
+<div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel33">Upload Picture </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="bx bx-x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('empajax.request.picture')}}" class="dropzone dropzone-area" id="dp-accept-files" enctype="multipart/form-data">
+                    <div class="dz-message">Drop Files Here To Upload</div>
+                    <input type="hidden" id="nEmpIDFIle" name="nEmpIDFIle">
+                    @csrf
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-secondary btnclear">
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Clear</span>
+                </button>
+                <button type="button" class="btn btn-light-secondary" data-dismiss="modal">
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Close</span>
+                </button>
+                <!--<button type="button" class="btn btn-primary ml-1 uploadimg">
+                    <i class="bx bx-check d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Upload</span>
+                </button>-->
+            </div>
+
+        </div>
+    </div>
+</div>
 </body>
 <!-- END: Body-->
 

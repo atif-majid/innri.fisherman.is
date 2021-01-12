@@ -6,6 +6,7 @@ use App\Models\Employees;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class EmployeesController extends Controller
 {
@@ -141,5 +142,49 @@ class EmployeesController extends Controller
         $employee->delete();
         return redirect()->route('employees.index')
             ->with('success','Employee deleted successfully.');
+    }
+
+    /**
+     * Toggle employee status.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function empajaxRequestStore(Request $request)
+    {
+        $arrValidVal = array('active', 'inactive');
+        $nEmpID = $request->id;
+        $strNewStatus = $request->newstatus;
+        if(is_numeric($nEmpID) && $nEmpID>0 && in_array($strNewStatus, $arrValidVal))
+        {
+            $arrUpdate = array(
+                'status'=>$strNewStatus
+            );
+            $change = Employees::find($nEmpID)->update($arrUpdate);
+        }
+    }
+
+    public function empajaxRequestPicture(Request $request)
+    {
+        /*echo "<pre>";
+        print_r($_FILES);
+        echo "</pre>";*/
+        $request->validate([
+            'file' => 'required | mimes:jpeg,jpg,png',
+            'nEmpIDFIle' => 'required'
+        ]);
+        $file = $request->file('file');
+        $nEmpIDFIle = $request->nEmpIDFIle;
+        if(is_numeric($nEmpIDFIle) && $nEmpIDFIle>0)
+        {
+            $destination = 'uploads';
+            $strFileName = "employee-".$nEmpIDFIle.".".$file->getClientOriginalExtension();
+            $file->move($destination, $strFileName);
+            $arrUpdate = array(
+                'picture'=>$strFileName
+            );
+            $change = Employees::find($nEmpIDFIle)->update($arrUpdate);
+        }
+
     }
 }

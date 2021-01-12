@@ -26,7 +26,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::resource('employees', EmployeesController::class);
+//Route::get('employees/{id}', [EmployeesController::class, 'togglestatus']);
+Route::post('empajax/request/status', [EmployeesController::class, 'empajaxRequestStore'])->name('empajax.request.status');
+Route::post('empajax/request/picture', [EmployeesController::class, 'empajaxRequestPicture'])->name('empajax.request.picture');
+
 Route::resource('production', ProductionController::class);
 Route::resource('recipes', RecipesController::class);
 Route::resource('improvements', ImprovementsController::class);
