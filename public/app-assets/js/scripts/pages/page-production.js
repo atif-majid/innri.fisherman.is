@@ -20,7 +20,7 @@ $(document).ready(function () {
             'columnDefs': [
                 {
                     "orderable": false,
-                    "targets": [13]
+                    "targets": [8]
                 },
                 {
                     "targets": [ 0 ],
@@ -28,7 +28,9 @@ $(document).ready(function () {
                 }]
         });
 
-        $('#users-list-datatable tbody').on('click', '.invoice-action-view', function () {
+        $('#users-list-datatable tbody').on('click', '.invoice-action-view', function (event) {
+            event.preventDefault();
+            var thisURL = this.href;
             var tr = $(this).closest('tr');
             var row = usersTable.row(tr);
 
@@ -39,8 +41,13 @@ $(document).ready(function () {
             } else {
                 // Open this row
                 //alert(row.find('.divData').html());
-                var PrintData = $(this).closest('tr').find('.divData').html();
-                row.child(PrintData).show();
+                var strLoading = '<div class="badge badge-pill badge-glow badge-secondary mr-1 mb-1">Loading</div>';
+                row.child(strLoading).show();
+                //var PrintData = $(this).closest('tr').find('.divData').html();
+                $.get( thisURL, function( data ) {
+                    //$( ".result" ).html( data );
+                    row.child(data).show();
+                });
                 //tr.addClass('shown');
             }
         });

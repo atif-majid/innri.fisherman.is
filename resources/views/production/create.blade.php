@@ -330,7 +330,7 @@
                     <div class="alert alert-danger mb-2">{{ $error }}</div>
                 @endforeach
             @endif
-            <form class="form-horizontal" novalidate method="post" action="{{ route('production.store') }}" onsubmit="return false">
+            <form class="form-horizontal" novalidate method="post" action="{{ route('production.store') }}">
                 @csrf
                 <section class="input-validation">
                     <div class="row">
@@ -388,7 +388,7 @@
                                                 <div class="form-group col-sm">
                                                     <label>Unit</label>
                                                     <fieldset class="position-relative">
-                                                        <select class="form-control" id="packing_unit" name="packing_unit">
+                                                        <select class="form-control" id="quantity_estimate_unit" name="quantity_estimate_unit">
                                                             <option value="" selected></option>
                                                             <option value="Kg">Kg</option>
                                                             <option value="Packages">Packages</option>
@@ -404,7 +404,7 @@
                                                 <div class="form-group col-sm">
                                                     <label>Unit</label>
                                                     <fieldset class="position-relative">
-                                                        <select class="form-control" id="packing_unit" name="packing_unit">
+                                                        <select class="form-control" id="quantity_scaled_unit" name="quantity_scaled_unit">
                                                             <option value="" selected></option>
                                                             <option value="Kg">Kg</option>
                                                             <option value="Packages">Packages</option>
@@ -431,7 +431,7 @@
                                                         <div class="col-sm-4 form-group">
                                                             <label>Date</label>
                                                             <fieldset class="position-relative has-icon-left">
-                                                                <input type="text" class="form-control format-picker" placeholder="Select Date" id="production_date" name="instruction_date">
+                                                                <input type="text" class="form-control format-picker" placeholder="Select Date" id="instruction_date" name="instruction_date">
                                                                 <div class="form-control-position">
                                                                     <i class='bx bx-calendar'></i>
                                                                 </div>
@@ -439,25 +439,25 @@
                                                         </div>
                                                         <div class="col-sm form-group" style="padding-top: 40px;">
                                                             <label class="custom-control custom-checkbox checkbox-input">
-                                                                <input type="checkbox" name="chk_make" class="checkbox-input custom-control-input">
+                                                                <input type="checkbox" name="chk_make" class="checkbox-input custom-control-input" value="yes">
                                                                 <span class="custom-control-label" for="chk_make" style="padding-top: 3px !important;"> Make</span>
                                                             </label>
                                                         </div>
                                                         <div class="col-sm form-group" style="padding-top: 40px;">
                                                             <label class="custom-control custom-checkbox checkbox-input">
-                                                                <input type="checkbox" name="chk_freeze" class="checkbox-input custom-control-input">
+                                                                <input type="checkbox" name="chk_freeze" class="checkbox-input custom-control-input" value="yes">
                                                                 <span class="custom-control-label" for="chk_freeze" style="padding-top: 3px !important;"> Freeze</span>
                                                             </label>
                                                         </div>
                                                         <div class="col-sm form-group" style="padding-top: 40px;">
                                                             <label class="custom-control custom-checkbox checkbox-input">
-                                                                <input type="checkbox" name="chk_pack" class="checkbox-input custom-control-input">
+                                                                <input type="checkbox" name="chk_pack" class="checkbox-input custom-control-input" value="yes">
                                                                 <span class="custom-control-label" for="chk_pack" style="padding-top: 3px !important;"> Pack</span>
                                                             </label>
                                                         </div>
                                                         <div class="col-sm form-group" style="padding-top: 40px;">
                                                             <label class="custom-control custom-checkbox checkbox-input" style="vertical-align: bottom">
-                                                                <input type="checkbox" name="chk_send" class="checkbox-input custom-control-input">
+                                                                <input type="checkbox" name="chk_send" class="checkbox-input custom-control-input" value="yes">
                                                                 <span class="custom-control-label" for="chk_send" style="padding-top: 3px !important;"> Send</span>
                                                             </label>
                                                         </div>
@@ -496,19 +496,29 @@
                                                         <div class="form-group col-sm">
                                                             <label>Product Name</label>
                                                             <fieldset class="position-relative">
-                                                                <input type="text" class="form-control" placeholder="Product Name" id="product_name" name="product_name">
+                                                                <input type="text" class="form-control" placeholder="Product Name" id="material_name" name="material_name">
                                                             </fieldset>
                                                         </div>
                                                         <div class="form-group col-sm">
                                                             <label>Quantity</label>
                                                             <fieldset class="position-relative">
-                                                                <input type="text" class="form-control" placeholder="Quantity" id="product_quantity" name="product_name">
+                                                                <input type="text" class="form-control" placeholder="Quantity" id="material_quantity" name="material_quantity">
+                                                            </fieldset>
+                                                        </div>
+                                                        <div class="form-group col-sm">
+                                                            <label>Unit</label>
+                                                            <fieldset class="position-relative">
+                                                                <select class="form-control" id="material_unit" name="material_unit">
+                                                                    <option value="" selected></option>
+                                                                    <option value="Kg">Kg</option>
+                                                                    <option value="Packages">Packages</option>
+                                                                </select>
                                                             </fieldset>
                                                         </div>
                                                         <div class="form-group col-sm">
                                                             <label>Lot nr.</label>
                                                             <fieldset class="position-relative">
-                                                                <input type="text" class="form-control" placeholder="Lot Nr" id="product_lot_nr" name="product_name">
+                                                                <input type="text" class="form-control" placeholder="Lot Nr" id="material_lot_nr" name="material_lot_nr">
                                                             </fieldset>
                                                         </div>
                                                         <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
@@ -540,7 +550,7 @@
                                 <div class="card-content">
                                     <div class="card-body repeater-default">
                                         <div data-repeater-list="packaging">
-                                            <div data-repeater-item>
+                                            <div data-repeater-item class="repeaterpackage">
                                                 <div class="row justify-content-between">
                                                     <div class="input-group">
                                                         <div class="form-group col-sm">
@@ -625,7 +635,7 @@
                                                         <div class="form-group col-sm">
                                                             <label>Unit</label>
                                                             <fieldset class="position-relative">
-                                                                <select class="form-control" id="packing_unit" name="packing_unit">
+                                                                <select class="form-control" id="shipment_unit" name="shipment_unit">
                                                                     <option value="" selected></option>
                                                                     <option value="Kg">Kg</option>
                                                                     <option value="Packages">Packages</option>
@@ -786,10 +796,39 @@
 <!-- BEGIN: Page JS-->
 <script src="../app-assets/js/scripts/forms/validation/form-validation.js"></script>
 <!-- END: Page JS-->
-<script src="../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js"></script>
+<script src="../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js?time=<?php echo time();?>"></script>
 <script src="../app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
 <script src="../app-assets/js/scripts/forms/form-repeater.js"></script>
+<script>
+    $('body').on('keyup',"#package_size", function(){
+        var nRowIndex = $(this).closest("div.repeaterpackage").index();
+        var nPackageSize = $(this).val();
+        var strQuantityName = 'packaging['+nRowIndex+'][package_quantity]';
+        var nQuantity = $("input[name='"+strQuantityName+"']").val();
+        if(nPackageSize>0 && nQuantity>0)
+        {
+            var strTotalName = 'packaging['+nRowIndex+'][package_total]';
+            updatetotal(nPackageSize, nQuantity, strTotalName);
+        }
+    });
+    $('body').on('keyup',"#package_quantity", function(){
+        var nRowIndex = $(this).closest("div.repeaterpackage").index();
+        var nQuantity = $(this).val();
+        var strPackageSizeName = 'packaging['+nRowIndex+'][package_size]';
+        var nPackageSize = $("input[name='"+strPackageSizeName+"']").val();
+        if(nPackageSize>0 && nQuantity>0)
+        {
+            var strTotalName = 'packaging['+nRowIndex+'][package_total]';
+            updatetotal(nPackageSize, nQuantity, strTotalName);
+        }
 
+    });
+    function updatetotal(nPackageSize, nQuantity, strTotalName)
+    {
+        var nTotal = nPackageSize * nQuantity;
+        $("input[name='"+strTotalName+"']").val(nTotal);
+    }
+</script>
 </body>
 <!-- END: Body-->
 

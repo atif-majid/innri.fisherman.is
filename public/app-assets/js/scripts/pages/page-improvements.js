@@ -17,6 +17,7 @@ $(document).ready(function () {
         usersTable = $("#users-list-datatable").DataTable({
             "pageLength": 100,
             responsive: true,
+            "order": [[ 1, "desc" ]],
             'columnDefs': [
                 {
                     "orderable": false,

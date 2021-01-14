@@ -11,19 +11,16 @@ class Production extends Model
     public $timestamps = false;
     use HasFactory;
     protected $fillable = [
+        'recipe_id',
         'product_number',
         'lot_number',
-        'product_name',
-        'instructions',
-        'products_available_arriving',
-        'packing_package_size',
-        'production_total',
-        'delivery_storage',
-        'delivery_storage_quantity',
-        'pallet_number',
-        'recipe_id',
-        'production_date',
-        'production_unit'
+        'order_number',
+        'quantity_estimate',
+        'quantity_estimate_unit',
+        'quantity_scaled',
+        'quantity_scaled_unit',
+        'create_date_time',
+        'emp_id'
     ];
 
 }

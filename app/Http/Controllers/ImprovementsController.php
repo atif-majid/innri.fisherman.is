@@ -6,10 +6,11 @@ use App\Models\Improvements;
 use App\Models\Employees;
 use App\Models\Improvementsnotifications;
 use App\Models\Recipes;
-use App\Models\User;
+//use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class ImprovementsController extends Controller
 {
@@ -86,8 +87,9 @@ class ImprovementsController extends Controller
             ]
         );
 
-        $strCurrentUserEmail = Auth::user()->email;
+        /*$strCurrentUserEmail = Auth::user()->email;
         $objCurrentEmployee = Employees::where('email',$strCurrentUserEmail)->first();
+        $strFullName = $objCurrentEmployee->name;
         if($objCurrentEmployee)
         {
             $nEmployeeID = $objCurrentEmployee->id;
@@ -95,8 +97,13 @@ class ImprovementsController extends Controller
         else
         {
             $nEmployeeID = Auth::user()->id;
-        }
+        }*/
         //
+        $nEmployeeID = Auth::user()->getempid();
+        $objEmployeeSender = Employees::find($nEmployeeID);
+        $strSenderName = $objEmployeeSender->name;
+        $objEmmployeeReceiver = Employees::find($request->nAssignedTo);
+        $strReceiverName = $objEmmployeeReceiver->name;
         $arrImpmrovement = array(
             'complainer'=> $request->strWhoNotified,
             'phonenumber' => $request->phonenumber,
@@ -129,6 +136,25 @@ class ImprovementsController extends Controller
                 Improvementsnotifications::create($arrInsert);
             }
         }
+
+        $html = "<html><body>
+            <div><img src='https://innri.fisherman.is/app-assets/images/logo/fisherman-2.png'></div>
+            <div>
+                <p>
+                Hello $strReceiverName,<br><br>
+                $strSenderName has sent you this message with the below suggestion for improvement and put you in charge of resolving it:<br><br>
+                <a href='https://innri.fisherman.is/improvements/process/$nImprovementID'>https://innri.fisherman.is/improvements/process/$nImprovementID</a></p></div></body></html>";
+        $to = 'ragnar@fisherman.is';
+        $subject = 'Improvement suggestion for Fisherman';
+        $formEmail = 'innri@fisherman.is';
+        $formName = "Innri Fisherman";
+        Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
+            $message->from($formEmail, $formName);
+            $message->to($to);
+            $message->cc('elias@fisherman.is');
+            $message->subject($subject);
+            $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
+        });
 
         return redirect()->route('improvements.index')
             ->with('success','Improvement record added successfully.');
@@ -180,5 +206,13 @@ class ImprovementsController extends Controller
     public function destroy(Improvements $improvements)
     {
         //
+    }
+
+    public function process(Request $request)
+    {
+        $nID = $request->id;
+        $improvement = Improvements::find($nID);
+        $Notifications = Improvementsnotifications::where('improvements_id', $nID)->get();
+        return view('improvements.process', compact('improvement','Notifications'));
     }
 }
