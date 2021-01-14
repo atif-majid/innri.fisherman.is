@@ -33,8 +33,13 @@ Route::post('empajax/request/status', [EmployeesController::class, 'empajaxReque
 Route::post('empajax/request/picture', [EmployeesController::class, 'empajaxRequestPicture'])->name('empajax.request.picture');
 
 Route::resource('production', ProductionController::class);
+Route::get('/testmail', [ProductionController::class, 'testmail'])->name('testmail');
 Route::resource('recipes', RecipesController::class);
 Route::resource('improvements', ImprovementsController::class);
+/*Route::get('/improvements/process/{id}', function($id){
+    //return 'Improvement '.$id;
+});*/
+Route::get('improvements/process/{id}', ['as'=>'process', 'uses'=>'App\Http\Controllers\ImprovementsController@process']);
 
 Route::get('/change-password', [App\Http\Controllers\ChangePasswordController::class, 'index'])->name('change-password');
 Route::post('/change-password', [App\Http\Controllers\ChangePasswordController::class, 'store'])->name('change.password');
