@@ -73,6 +73,14 @@ class ProductionController extends Controller
             'production_date' => 'required',
             'production_unit' => 'required'
         ]);*/
+        $request->validate(
+            [
+                'recipe_id' => 'required',
+            ],
+            [
+                'recipe_id.required' => 'Please chose a recipe.'
+            ]
+        );
         $nEmpID = Auth::user()->getempid();
         $arrProduction = array(
             'recipe_id'=>$request->recipe_id,
@@ -93,33 +101,36 @@ class ProductionController extends Controller
 
         $arrInstructions = $_POST['Instructions'];
         foreach ($arrInstructions as $thisInstruction) {
-            $arrInsertInstruction = array(
-                'instruction_date'=>$thisInstruction['instruction_date'],
-                'chk_make'=>'no',
-                'chk_freeze'=>'no',
-                'chk_pack'=>'no',
-                'chk_send'=>'no',
-                'create_dae_time'=>date('Y-m-d H:i:s'),
-                'emp_id'=>$nEmpID,
-                'production_id'=>$nProductionID
-            );
-            if(isset($thisInstruction['chk_make']))
+            if(!empty($thisInstruction['instruction_date']))
             {
-                $arrInsertInstruction['chk_make'] = 'yes';
+                $arrInsertInstruction = array(
+                    'instruction_date'=>$thisInstruction['instruction_date'],
+                    'chk_make'=>'no',
+                    'chk_freeze'=>'no',
+                    'chk_pack'=>'no',
+                    'chk_send'=>'no',
+                    'create_dae_time'=>date('Y-m-d H:i:s'),
+                    'emp_id'=>$nEmpID,
+                    'production_id'=>$nProductionID
+                );
+                if(isset($thisInstruction['chk_make']))
+                {
+                    $arrInsertInstruction['chk_make'] = 'yes';
+                }
+                if(isset($thisInstruction['chk_freeze']))
+                {
+                    $arrInsertInstruction['chk_freeze'] = 'yes';
+                }
+                if(isset($thisInstruction['chk_pack']))
+                {
+                    $arrInsertInstruction['chk_pack'] = 'yes';
+                }
+                if(isset($thisInstruction['chk_send']))
+                {
+                    $arrInsertInstruction['chk_send'] = 'yes';
+                }
+                Instructions::create($arrInsertInstruction);
             }
-            if(isset($thisInstruction['chk_freeze']))
-            {
-                $arrInsertInstruction['chk_freeze'] = 'yes';
-            }
-            if(isset($thisInstruction['chk_pack']))
-            {
-                $arrInsertInstruction['chk_pack'] = 'yes';
-            }
-            if(isset($thisInstruction['chk_send']))
-            {
-                $arrInsertInstruction['chk_send'] = 'yes';
-            }
-            Instructions::create($arrInsertInstruction);
         }
 
         $arrRawMaterials = $_POST['rawmaterials'];
@@ -140,17 +151,37 @@ class ProductionController extends Controller
         $arrPackaging = $_POST['packaging'];
         foreach ($arrPackaging as $thisPackaging)
         {
-            $arrInsertPackaging = array(
-                'packing_type'=>$thisPackaging['packing_type'],
-                'package_size'=>$thisPackaging['package_size'],
-                'packing_unit'=>$thisPackaging['packing_unit'],
-                'package_quantity'=>$thisPackaging['package_quantity'],
-                'package_total'=>$thisPackaging['package_total'],
-                'create_dae_time'=>date("Y-m-d H:i:s"),
-                'emp_id'=>$nEmpID,
-                'production_id'=>$nProductionID
-            );
-            Packaging::create($arrInsertPackaging);
+            if(!empty($thisPackaging['packing_type']))
+            {
+                $arrInsertPackaging = array(
+                    'packing_type'=>$thisPackaging['packing_type'],
+                    'package_size'=>0,
+                    'packing_unit'=>'',
+                    'package_quantity'=>0,
+                    'package_total'=>0,
+                    'create_dae_time'=>date("Y-m-d H:i:s"),
+                    'emp_id'=>$nEmpID,
+                    'production_id'=>$nProductionID
+                );
+                if($thisPackaging['package_size']>0)
+                {
+                    $arrInsertPackaging['package_size'] = $thisPackaging['package_size'];
+                }
+                if(!empty($thisPackaging['packing_unit']))
+                {
+                    $arrInsertPackaging['packing_unit'] = $thisPackaging['packing_unit'];
+                }
+                if($thisPackaging['package_quantity']>0)
+                {
+                    $arrInsertPackaging['package_quantity'] = $thisPackaging['package_quantity'];
+                }
+                if($thisPackaging['package_total']>0)
+                {
+                    $arrInsertPackaging['package_total'] = $thisPackaging['package_total'];
+                }
+                Packaging::create($arrInsertPackaging);
+            }
+
         }
 
         $arrShipment = $_POST['shipment'];

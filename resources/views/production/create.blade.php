@@ -362,19 +362,19 @@
                                                 <div class="form-group col-sm">
                                                     <label>Product nr.</label>
                                                     <div class="controls">
-                                                        <input type="text" name="product_number" class="form-control" data-validation-required-message="Product nr. is required" placeholder="Product nr.">
+                                                        <input type="text" name="product_number" class="form-control" @php /*data-validation-required-message="Product nr. is required"*/ @endphp placeholder="Product nr.">
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-sm">
                                                     <label>LOT nr.</label>
                                                     <div class="controls">
-                                                        <input type="text" name="lot_number" class="form-control" data-validation-required-message="LOT nr. is required" placeholder="LOT nr.">
+                                                        <input type="text" name="lot_number" class="form-control" @php /*data-validation-required-message="LOT nr. is required"*/ @endphp placeholder="LOT nr.">
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-sm">
                                                     <label>Order nr.</label>
                                                     <div class="controls">
-                                                        <input type="text" name="order_number" class="form-control" data-validation-required-message="Order nr. is required" placeholder="Order nr.">
+                                                        <input type="text" name="order_number" class="form-control" @php /*data-validation-required-message="Order nr. is required"*/ @endphp placeholder="Order nr.">
                                                     </div>
                                                 </div>
                                             </div>
@@ -382,7 +382,7 @@
                                                 <div class="form-group col-sm">
                                                     <label>Quantity (Estimate)</label>
                                                     <div class="controls">
-                                                        <input type="text" name="quantity_estimate" class="form-control" data-validation-required-message="Quantity estimate is required" placeholder="Quantity Estimate">
+                                                        <input type="text" name="quantity_estimate" class="form-control" @php /*data-validation-required-message="Quantity estimate is required"*/ @endphp placeholder="Quantity Estimate">
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-sm">
@@ -398,7 +398,7 @@
                                                 <div class="form-group col-sm">
                                                     <label>Quantity Scaled</label>
                                                     <div class="controls">
-                                                        <input type="text" name="quantity_scaled" class="form-control" data-validation-required-message="Quantity Scaled is required" placeholder="Quantity Scaled">
+                                                        <input type="text" name="quantity_scaled" class="form-control" @php /*data-validation-required-message="Quantity Scaled is required"*/ @endphp placeholder="Quantity Scaled">
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-sm">
