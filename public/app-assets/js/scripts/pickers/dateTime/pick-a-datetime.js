@@ -15,7 +15,11 @@
   // ************************//
   // Basic date
   $('.pickadate').pickadate();
-
+    $('body').on('focus',".format-picker", function(){
+        $(this).pickadate({
+            format: 'yyyy-mm-dd'
+        });
+    });
   // Format Date Picker
   $('.format-picker').pickadate({
       //format: 'mmmm, d, yyyy'
