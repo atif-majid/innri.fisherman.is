@@ -42,7 +42,7 @@ $(document).ready(function () {
                 //alert(row.find('.divData').html());
                 var strLoading = '<div class="badge badge-pill badge-glow badge-secondary mr-1 mb-1">Loading</div>';
                 row.child(strLoading).show();
-                var PrintData = $(this).closest('tr').find('.divData').html();
+                //var PrintData = $(this).closest('tr').find('.divData').html();
                 $.get( thisURL, function( data ) {
                     //$( ".result" ).html( data );
                     row.child(data).show();
