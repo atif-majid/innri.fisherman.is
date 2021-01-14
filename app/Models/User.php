@@ -62,4 +62,16 @@ class User extends Authenticatable
         }
         return $strPicture;
     }
+
+    public function getempid()
+    {
+        $strEmail = $this->email;
+        $objCurrentEmployee = Employees::where('email',$strEmail)->first();
+        $nThisEmpID = 9;
+        if($objCurrentEmployee)
+        {
+            $nThisEmpID = $objCurrentEmployee->id;
+        }
+        return $nThisEmpID;
+    }
 }
