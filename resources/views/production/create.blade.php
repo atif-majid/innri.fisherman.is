@@ -391,7 +391,7 @@
                                                         <select class="form-control" id="quantity_estimate_unit" name="quantity_estimate_unit">
                                                             <option value="" selected></option>
                                                             <option value="Kg">Kg</option>
-                                                            <option value="Packages">Packages</option>
+                                                            <option value="Pieces">Pieces</option>
                                                         </select>
                                                     </fieldset>
                                                 </div>
