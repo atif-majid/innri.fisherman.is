@@ -300,14 +300,15 @@ class ImprovementsController extends Controller
                 $strCurrentEmployeeName has sent you this message with the below suggestion for improvement and put you in charge of resolving it:<br><br>
                 <a href='https://innri.fisherman.is/improvements/process/$nID'>https://innri.fisherman.is/improvements/process/$nID</a></p></div></body></html>";
             //$to = 'ragnar@fisherman.is';
-            $to = 'atif.majid10@gmail.com';
+            //$to = 'atif.majid10@gmail.com';
+            $to = $newAssignee->email;
             $subject = 'Improvement suggestion for Fisherman';
             $formEmail = 'innri@fisherman.is';
             $formName = "Innri Fisherman";
             Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
                 $message->from($formEmail, $formName);
                 $message->to($to);
-                //$message->cc('elias@fisherman.is');
+                $message->cc('elias@fisherman.is');
                 $message->subject($subject);
                 $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
             });
