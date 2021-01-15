@@ -22,6 +22,7 @@ class Improvements extends Model
         'lot_nr',
         'description',
         'assigned_to',
+        'due_date',
         'response_improvements',
         'complain_creation_date',
         'complain_created_by'

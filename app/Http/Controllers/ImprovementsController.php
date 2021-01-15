@@ -6,6 +6,8 @@ use App\Models\Improvements;
 use App\Models\Employees;
 use App\Models\Improvementsnotifications;
 use App\Models\Recipes;
+use App\Models\Improvementcomments;
+use App\Models\Improvementphotos;
 //use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -54,6 +56,7 @@ class ImprovementsController extends Controller
      */
     public function store(Request $request)
     {
+
         //
         /*$arrNotifications = $request->all('chkNotification')['chkNotification'];
         echo $arrNotifications[0];*/
@@ -69,6 +72,7 @@ class ImprovementsController extends Controller
             'strLotNr' => 'sometimes',
             'strDescription' => 'sometimes',
             'nAssignedTo' => 'sometimes',
+            'strDueDate' => 'sometimes',
             'strResponse' => 'sometimes'
         ],
             [
@@ -116,6 +120,7 @@ class ImprovementsController extends Controller
             'lot_nr' => $request->strLotNr,
             'description' => $request->strDescription,
             'assigned_to' => $request->nAssignedTo,
+            'due_date' => $request->strDueDate,
             'response_improvements' => $request->strResponse,
             'complain_creation_date' => date("Y-m-d H:i:s"),
             'complain_created_by' => $nEmployeeID
@@ -135,6 +140,23 @@ class ImprovementsController extends Controller
                 );
                 Improvementsnotifications::create($arrInsert);
             }
+        }
+
+        $arrPhotos = $request->file('Photos');
+        foreach ($arrPhotos as $thispic)
+        {
+            $file = $thispic['file_photo'];
+
+            $destination = 'uploads/improvements/'.$nImprovementID;
+            $strFileName = $file->getClientOriginalName();
+            $file->move($destination, $strFileName);
+            $arrPicRecord = array(
+                'improvements_id'=>$nImprovementID,
+                'file_name'=>$strFileName,
+                'file_creation_date' => date("Y-m-d H:i:s"),
+                'file_created_by' => $nEmployeeID
+            );
+            Improvementphotos::create($arrPicRecord);
         }
 
         $html = "<html><body>

@@ -26,6 +26,7 @@
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/vendors.min.css">
     <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/pickers/pickadate/pickadate.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/ui/prism.min.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -331,16 +332,16 @@
                 @endforeach
             @endif
             <section class="input-validation">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Improvement Data</h4>
-                            </div>
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <form class="form-horizontal" novalidate method="post" action="{{ route('improvements.store') }}">
-                                        @csrf
+                <form class="form-horizontal"  enctype='multipart/form-data' novalidate method="post" action="{{ route('improvements.store') }}">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Improvement Data</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
                                         <div class="row">
                                             <div class="form col-md-12">
                                                 <div class="row">
@@ -468,8 +469,8 @@
                                                         <div class="controls">
                                                             <select class="form-control" name="strProductionLocation">
                                                                 <option selected=""></option>
-                                                                <option value="Suðureyri">Suðureyri</option>
-                                                                <option value="Hafnarfirði">Hafnarfirði</option>
+                                                                <option value="Framleiðslueldhús">Framleiðslueldhús</option>
+                                                                <option value="Reykhús">Reykhús</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -478,6 +479,7 @@
                                                             <div class="controls">
                                                                 <select class="form-control" name="strSupplier">
                                                                     <option selected></option>
+                                                                    <option value="Fisherman">Fisherman</option>
                                                                     <option value="Íslandssaga">Íslandssaga</option>
                                                                     <option value="Nýfiskur">Nýfiskur</option>
                                                                     <option value="Skinney Þorlákshöfn">Skinney Þorlákshöfn</option>
@@ -492,17 +494,7 @@
                                                     <div class="form-group col-sm">
                                                         <label>Where was it sold?</label>
                                                         <div class="controls">
-                                                            <select class="form-control" name="strWhereSold">
-                                                                <option selected></option>
-                                                                <option value="Fisherman Webstore">Fisherman Webstore</option>
-                                                                <option value="Bónus">Bónus</option>
-                                                                <option value="Nettó">Nettó</option>
-                                                                <option value="Iceland">Iceland</option>
-                                                                <option value="Krambúðin">Krambúðin</option>
-                                                                <option value="Hagkaup">Hagkaup</option>
-                                                                <option value="Fisherman wholesale">Fisherman wholesale</option>
-                                                                <option value="Other">Other</option>
-                                                            </select>
+                                                            <input type="text" name="strWhereSold" id="strWhereSold" value="" class="form-control" @php /*data-validation-required-message="Selling location is requried"*/ @endphp placeholder="Where was it sold?">
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-sm">
@@ -543,12 +535,13 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-sm">
-                                                        @php
-                                                        /*<label>Phone Number</label>
-                                                        <div class="controls">
-                                                            <input type="text" name="phone_number" class="form-control" data-validation-required-message="Phone number required" placeholder="Phone Number">
-                                                        </div>*/
-                                                        @endphp
+                                                        <label>Due Date</label>
+                                                        <fieldset class="position-relative has-icon-left">
+                                                            <input type="text" class="form-control pickadate-limits" placeholder="Select Date" id="purchase_date" name="strDueDate">
+                                                            <div class="form-control-position">
+                                                                <i class='bx bx-calendar'></i>
+                                                            </div>
+                                                        </fieldset>
                                                     </div>
                                                     <div class="form-group col-sm">
                                                         @php
@@ -569,13 +562,53 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Photos</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body repeater-default">
+                                        <div data-repeater-list="Photos">
+                                            <div data-repeater-item>
+                                                <div class="row justify-content-between">
+                                                    <div class="input-group">
+                                                        <div class="col-sm-4 form-group">
+                                                            <label>Photo</label>
+                                                            <fieldset class="position-relative">
+                                                                <input type="file" class="form-control" placeholder="Upload File" id="file_photo" name="file_photo">
+                                                            </fieldset>
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
+                                                            <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
+                                                                Delete
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col p-0">
+                                                <button class="btn btn-primary" data-repeater-create type="button"><i class="bx bx-plus" style="color: #FFFFFF;"></i>
+                                                    Add
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
             </section>
             <!-- Input Validation end -->
         </div>
@@ -681,6 +714,8 @@
 <script src="../app-assets/js/core/app.js"></script>
 <script src="../app-assets/js/scripts/components.js"></script>
 <script src="../app-assets/js/scripts/footer.js"></script>
+<script src="../app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
+<script src="../app-assets/js/scripts/forms/form-repeater.js"></script>
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
@@ -723,7 +758,19 @@
             source: availableRecipes
         });
 
-
+        var arrWhereSold = [
+            "Fisherman Webstore",
+            "Bónus",
+            "Nettó",
+            "Iceland",
+            "Krambúðin",
+            "Hagkaup",
+            "Fisherman wholesale",
+            "Other"
+        ];
+        $("#strWhereSold").autocomplete({
+            source: arrWhereSold
+        });
     });
 
 </script>

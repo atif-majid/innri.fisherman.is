@@ -334,8 +334,8 @@
                                 <fieldset class="form-group">
                                     <select class="form-control" id="users-list-verified">
                                         <option value="">Any</option>
-                                        <option value="Suðureyri">Suðureyri</option>
-                                        <option value="Hafnarfirði">Hafnarfirði</option>
+                                        <option value="Framleiðslueldhús">Framleiðslueldhús</option>
+                                        <option value="Reykhús">Reykhús</option>
                                     </select>
                                 </fieldset>
                             </div>
