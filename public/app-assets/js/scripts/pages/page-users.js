@@ -31,7 +31,9 @@ $(document).ready(function () {
                     "visible": false
                 }]
         });
-        $('#users-list-datatable tbody').on('click', '.invoice-action-view', function () {
+        $('#users-list-datatable tbody').on('click', '.invoice-action-view', function (event) {
+            event.preventDefault();
+            var thisURL = this.href;
             var tr = $(this).closest('tr');
             var row = usersTable.row(tr);
 
@@ -42,8 +44,13 @@ $(document).ready(function () {
             } else {
                 // Open this row
                 //alert(row.find('.divData').html());
+                var strLoading = '<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>';
+
                 var PrintData = $(this).closest('tr').find('.divData').html();
-                row.child(PrintData).show();
+                $.get( thisURL, function( data ) {
+                    //$( ".result" ).html( data );
+                    row.child(data).show();
+                });
                 //tr.addClass('shown');
             }
         });

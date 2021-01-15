@@ -392,39 +392,6 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($employees as $employee)
-                                                @php
-                                                    $strDisp = <<<EOT
-<div class="border-secondary col-12 border">
-<table class="table table-borderless" colspan="12">
-<tbody>
-<tr>
-<td colspan="2">
-<img src="uploads/$employee->picture" style="width: 200px;" alt="No picture uploaded yet!">
-</td>
-</tr>
-<tr>
-<td>Name:</td>
-<td class="users-view-latest-activity">$employee->name</td>
-<td>Department:</td>
-<td>$employee->department</td>
-<td>Mobile Phone:</td>
-<td>$employee->gsm</td>
-</tr>
-<tr>
-<td>Job Title:</td>
-<td>$employee->designation</td>
-<td>Direct Phone:</td>
-<td>$employee->direct_phone</td>
-<td>Email Address:</td>
-<td>$employee->email</td>
-</tr>
-</tbody>
-</table>
-</div>
-EOT;
-
-
-                                                @endphp
                                                 <tr>
                                                     <td>{{ $employee->id }}</td>
                                                     <td style="padding: 0.5rem 1.15rem">{{ $employee->name }}</td>
@@ -440,12 +407,11 @@ EOT;
                                                         </div>
                                                     </td>
                                                     <td style="white-space: nowrap;padding: 0.5rem 1.15rem;">
-                                                        <div class="divData" style="display: none; visibility: hidden;">@php echo $strDisp;@endphp</div>
                                                         <form id="form-del" action="{{ route('employees.destroy',$employee->id) }}" method="POST">
                                                             <a href="#" onclick="$('#nEmpIDFIle').val({{ $employee->id }}); Dropzone.forElement('#dp-accept-files').removeAllFiles(true); return false;" data-toggle="modal" data-target="#inlineForm">
                                                                 <i class="bx bx-camera"></i>
                                                             </a>
-                                                            <a href="#" class="invoice-action-view" onclick="return false;">
+                                                            <a href="{{ route('employees.show', $employee->id) }}" class="invoice-action-view">
                                                                 <i class="bx bx-show-alt"></i>
                                                             </a>
                                                             <a href="{{ route('employees.edit', $employee->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp;
