@@ -8,6 +8,7 @@ use App\Models\Improvementsnotifications;
 use App\Models\Recipes;
 use App\Models\Improvementcomments;
 use App\Models\Improvementphotos;
+use App\Models\Improvementassigned;
 //use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -159,6 +160,31 @@ class ImprovementsController extends Controller
             Improvementphotos::create($arrPicRecord);
         }
 
+        $strCommentNewAssignee = 'Assigned to '.$strReceiverName.' by '.$strSenderName.'. Due date: '.$request->strDueDate;
+        $arrComments = array(
+            'improvements_id'=>$nImprovementID,
+            'comment'=>$strCommentNewAssignee,
+            'comment_add_date'=>date("Y-m-d H:i:s"),
+            'comment_added_by'=>$nEmployeeID
+        );
+        Improvementcomments::create($arrComments);
+
+        /**
+         * The below piece of code will keep a track of when the task was assigned to someone.
+         * This is not being displayed from this table, but just keeping a track, if needed to see somehow later.
+         */
+        $arrImprovementAssigned = array(
+            'improvements_id'=>$nImprovementID,
+            'assigned_to'=>$request->nAssignedTo,
+            'assigned_by'=>$nEmployeeID,
+            'due_date'=>$request->strDueDate,
+            'action_taken_at'=>date("Y-m-d H:i:s")
+        );
+        Improvementassigned::create($arrImprovementAssigned);
+        /**
+         * Storing assignment logs done
+         */
+
         $html = "<html><body>
             <div><img src='https://innri.fisherman.is/app-assets/images/logo/fisherman-2.png'></div>
             <div>
@@ -281,6 +307,28 @@ class ImprovementsController extends Controller
         Improvementcomments::create($arrComments);
         if($nAssignedTo>0 and trim($strDueDate!=""))
         {
+            /**
+             * The below piece of code will keep a track of when the task was assigned to someone.
+             * This is not being displayed from this table, but just keeping a track, if needed to see somehow later.
+             */
+            $arrImprovementAssigned = array(
+                'improvements_id'=>$nID,
+                'assigned_to'=>$nAssignedTo,
+                'assigned_by'=>$nCurrentEmployeeID,
+                'due_date'=>$strDueDate,
+                'action_taken_at'=>date("Y-m-d H:i:s")
+            );
+            Improvementassigned::create($arrImprovementAssigned);
+            /*
+             * Storing assignment logs end
+             */
+
+            $arrUpdate = array(
+                'assigned_to'=>$nAssignedTo,
+                'due_date'=>$strDueDate
+            );
+            Improvements::find($nID)->update($arrUpdate);
+
             $newAssignee = Employees::find($nAssignedTo);
             $strNewAssigneeName = $newAssignee->name;
             $strCommentNewAssignee = 'Assigned to '.$strNewAssigneeName.' by '.$strCurrentEmployeeName.'. Due date: '.$strDueDate;

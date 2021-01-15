@@ -37,6 +37,13 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="../../assets/css/style.css">
     <!-- END: Custom CSS-->
+    <style>
+        .carousel-control-next,
+        .carousel-control-prev /*, .carousel-indicators */ {
+            background-color: rgba(0, 0, 0, 0.1);
+            width: 30px;
+        }
+    </style>
 
 </head>
 <!-- END: Head-->
