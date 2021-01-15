@@ -500,7 +500,7 @@
     .addClass("has-sub")
 
   $(".carousel").carousel({
-    interval: 2000
+    interval: false
   })
 
   // Page full screen

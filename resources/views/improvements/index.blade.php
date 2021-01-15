@@ -364,6 +364,19 @@
                         {{ $message }}
                     </div>
                 @endif
+                @if ($message = Session::get('error'))
+                    <div class="alert alert-danger alert-dismissible mb-2" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="d-flex align-items-center">
+                            <i class="bx bx-error"></i>
+                            <span>
+                                {{ $message }}
+                            </span>
+                        </div>
+                    </div>
+                @endif
                 <div class="users-list-table">
                     <div class="card">
                         <div class="card-content">
@@ -402,9 +415,12 @@
                                                     <td style="padding: 0.5rem 1.15rem">{{ $Improvement->supplier }}</td>
                                                     <td style="white-space: nowrap;padding: 0.5rem 1.15rem;">
                                                         <form id="form-del" action="{{ route('employees.destroy',$Improvement->id) }}" method="POST">
-                                                            <a href="{{ route('improvements.show', $Improvement->id) }}" class="invoice-action-view" onclick="return false;">
-                                                                <i class="bx bx-show-alt"></i>
-                                                            </a>
+                                                            @php
+                                                                /*<a href="{{ route('improvements.show', $Improvement->id) }}" class="invoice-action-view" onclick="return false;">
+                                                                    <i class="bx bx-show-alt"></i>
+                                                                </a>*/
+                                                            @endphp
+                                                            <a href="{{ route('improvements.process', $Improvement->id) }}"><i class="bx bx-show-alt"></i></a>&nbsp;
                                                             <a href="#"><i class="bx bx-edit-alt"></i></a>&nbsp;
                                                             @csrf
                                                             @method('DELETE')

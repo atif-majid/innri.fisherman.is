@@ -166,7 +166,7 @@ class ImprovementsController extends Controller
                 Hello $strReceiverName,<br><br>
                 $strSenderName has sent you this message with the below suggestion for improvement and put you in charge of resolving it:<br><br>
                 <a href='https://innri.fisherman.is/improvements/process/$nImprovementID'>https://innri.fisherman.is/improvements/process/$nImprovementID</a></p></div></body></html>";
-        $to = 'ragnar@fisherman.is';
+        $to = $objEmmployeeReceiver->email;
         $subject = 'Improvement suggestion for Fisherman';
         $formEmail = 'innri@fisherman.is';
         $formName = "Innri Fisherman";
@@ -233,8 +233,86 @@ class ImprovementsController extends Controller
     public function process(Request $request)
     {
         $nID = $request->id;
-        $improvement = Improvements::find($nID);
-        $Notifications = Improvementsnotifications::where('improvements_id', $nID)->get();
-        return view('improvements.process', compact('improvement','Notifications'));
+        //$improvement = Improvements::find($nID);
+        $improvements = DB::table('improvements')
+            ->leftJoin('employees', 'complain_created_by', '=', 'employees.id')
+            ->select('improvements.*', 'employees.name')
+            ->where('improvements.id', $nID)
+            ->get();
+
+        if(count($improvements)>0)
+        {
+            $improvement = $improvements[0];
+            $Notifications = Improvementsnotifications::where('improvements_id', $nID)->get();
+            $employees = Employees::all();
+
+            $ImprovementComments = DB::table('improvement_comments')
+                ->leftJoin('employees', 'comment_added_by', '=', 'employees.id')
+                ->select('improvement_comments.*','employees.name')
+                ->where('improvements_id', $nID)
+                ->get();
+            $ImprovementPhotos = Improvementphotos::where('improvements_id', $nID)->get();
+            return view('improvements.process', compact('improvement','Notifications', 'employees', 'ImprovementComments', 'ImprovementPhotos'));
+        }
+        else
+        {
+            return redirect()->route('improvements.index')
+                ->with('error','The record you are looking for is not found in the system.');
+        }
+
+    }
+
+    public function updateprocess(Request $request)
+    {
+        $strResponse = $request->strResponse;
+        $nAssignedTo = $request->nAssignedTo;
+        $strDueDate = $request->strDueDate;
+        $nID = $request->id;
+        $nCurrentEmployeeID = Auth::user()->getempid();
+        $currentEmployee = Employees::find($nCurrentEmployeeID);
+        $strCurrentEmployeeName = $currentEmployee->name;
+
+        $arrComments = array(
+            'improvements_id'=>$nID,
+            'comment'=>$strResponse,
+            'comment_add_date'=>date("Y-m-d H:i:s"),
+            'comment_added_by'=>$nCurrentEmployeeID
+        );
+        Improvementcomments::create($arrComments);
+        if($nAssignedTo>0 and trim($strDueDate!=""))
+        {
+            $newAssignee = Employees::find($nAssignedTo);
+            $strNewAssigneeName = $newAssignee->name;
+            $strCommentNewAssignee = 'Assigned to '.$strNewAssigneeName.' by '.$strCurrentEmployeeName.'. Due date: '.$strDueDate;
+            $arrComments = array(
+                'improvements_id'=>$nID,
+                'comment'=>$strCommentNewAssignee,
+                'comment_add_date'=>date("Y-m-d H:i:s"),
+                'comment_added_by'=>$nCurrentEmployeeID
+            );
+            Improvementcomments::create($arrComments);
+
+            $html = "<html><body>
+            <div><img src='https://innri.fisherman.is/app-assets/images/logo/fisherman-2.png'></div>
+            <div>
+                <p>
+                Hello $strNewAssigneeName,<br><br>
+                $strCurrentEmployeeName has sent you this message with the below suggestion for improvement and put you in charge of resolving it:<br><br>
+                <a href='https://innri.fisherman.is/improvements/process/$nID'>https://innri.fisherman.is/improvements/process/$nID</a></p></div></body></html>";
+            //$to = 'ragnar@fisherman.is';
+            $to = 'atif.majid10@gmail.com';
+            $subject = 'Improvement suggestion for Fisherman';
+            $formEmail = 'innri@fisherman.is';
+            $formName = "Innri Fisherman";
+            Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
+                $message->from($formEmail, $formName);
+                $message->to($to);
+                //$message->cc('elias@fisherman.is');
+                $message->subject($subject);
+                $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
+            });
+        }
+        return redirect()->route('improvements.index')
+            ->with('success','Comment successfully added.');
     }
 }

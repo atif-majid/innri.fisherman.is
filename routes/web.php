@@ -39,7 +39,9 @@ Route::resource('improvements', ImprovementsController::class);
 /*Route::get('/improvements/process/{id}', function($id){
     //return 'Improvement '.$id;
 });*/
-Route::get('improvements/process/{id}', ['as'=>'process', 'uses'=>'App\Http\Controllers\ImprovementsController@process']);
+Route::get('improvements/process/{id}', ['as'=>'improvements.process', 'uses'=>'App\Http\Controllers\ImprovementsController@process']);
+//Route::post('improvements/updateprocess', [App\Http\Controllers\ImprovementsController::class], 'updateprocess')->name('improvements.updateprocess');
+Route::post('/improvements/updateprocess', ['as'=>'improvements.updateprocess', 'uses'=>'App\Http\Controllers\ImprovementsController@updateprocess']);
 
 Route::get('/change-password', [App\Http\Controllers\ChangePasswordController::class, 'index'])->name('change-password');
 Route::post('/change-password', [App\Http\Controllers\ChangePasswordController::class, 'store'])->name('change.password');

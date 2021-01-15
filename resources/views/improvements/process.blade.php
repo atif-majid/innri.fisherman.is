@@ -17,6 +17,7 @@
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/vendors.min.css">
     <link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/tables/datatable/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/pickers/pickadate/pickadate.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -34,7 +35,7 @@
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/style.css">
     <!-- END: Custom CSS-->
 
 </head>
@@ -312,7 +313,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="users-view-latest-activity" ><strong>Product:</strong></td>
-                                                <td class="users-view-latest-activity" colspan="6"><strong>{{ $improvement->product }}</strong></td>
+                                                <td class="users-view-latest-activity" colspan="6"><strong>{{ $improvement->product or '' }}</strong></td>
                                             </tr>
                                             <tr>
                                                 <td class="users-view-latest-activity"><strong>Who Notified:</strong></td>
@@ -356,15 +357,134 @@
                                                 <td class="users-view-latest-activity" colspan="6"><strong>Response and improvements</strong></td>
                                             </tr>
                                             <tr>
-                                                <td class="users-view-latest-activity" colspan="6">{{ $improvement->response_improvements }}</td>
+                                                <td class="users-view-latest-activity" colspan="6">
+                                                    <div class="list-group">
+                                                        @if($improvement->response_improvements!="")
+                                                            <a href="#" class="list-group-item list-group-item-action" onclick="return false;">
+                                                                <div class="d-flex w-100 justify-content-between">
+                                                                    <h5 class="mb-1">Posted by {{ $improvement->name }}</h5>
+                                                                    <small>{{ $improvement->complain_creation_date }}</small>
+                                                                </div>
+                                                                <p class="mb-1">
+                                                                    {{ $improvement->response_improvements }}
+                                                                </p>
+                                                            </a>
+                                                        @endif
+                                                        @foreach($ImprovementComments as $thisComment)
+                                                            <a href="#" class="list-group-item list-group-item-action" onclick="return false;">
+                                                                <div class="d-flex w-100 justify-content-between">
+                                                                    <h5 class="mb-1">Posted by {{ $thisComment->name }}</h5>
+                                                                    <small>{{ $thisComment->comment_add_date }}</small>
+                                                                </div>
+                                                                <p class="mb-1">
+                                                                    {{ $thisComment->comment }}
+                                                                </p>
+                                                            </a>
+                                                        @endforeach
+                                                    </div>
+                                               </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
                         </div>
                     </div>
+                </div>
+            </section>
+            <section id="carousel">
+                <div class="row match-height">
+                    <!-- Basic Carousel start -->
+                    <div class="col-lg-6">
+                        <div class="card" id="basic-carousel">
+                            <div class="card-header">
+                                <h4 class="card-title">Photos</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
+                                        <ol class="carousel-indicators">
+                                            @foreach($ImprovementPhotos as $k=>$thisPhoto)
+                                                <li data-target="#carousel-example-generic" data-slide-to="{{$k}}" @if($k==0) class="active" @endif></li>
+                                            @endforeach
+                                        </ol>
+                                        <div class="carousel-inner" role="listbox">
+                                            @foreach($ImprovementPhotos as $k=>$thisPhoto)
+                                                <div class="carousel-item @if($k==0) active @endif">
+                                                    <img style="max-height: 500px !important;" src="https://innri.fisherman.is/uploads/improvements/{{$improvement->id}}/{{$thisPhoto->file_name}}">
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                        <a class="carousel-control-prev" href="#carousel-example-generic" role="button" data-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#carousel-example-generic" role="button" data-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Basic Carousel And Optional Carousel End -->
+
+                    <!-- Basic Carousel with Caption start -->
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Response and Improvements</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <form class="form-horizontal"  enctype='multipart/form-data' novalidate method="post" action="{{ route('improvements.updateprocess') }}">
+                                    @csrf
+                                        <div class="row">
+                                            <div class="form col-md-12">
+                                                <div class="row">
+                                                    <div class="form-group col-sm">
+                                                        <label>Response</label>
+                                                        <div class="controls">
+                                                            <textarea name="strResponse" class="form-control" <?php /*data-validation-required-message="Name is requried"*/?> placeholder="Your Response" rows="6"></textarea>
+                                                            <input type="hidden" id="id" name="id" value="{{ $improvement->id }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-sm">
+                                                        <label>Who will resolve this? <small class="text-muted">(Leave empty if not assigning to anyone)</small> </label>
+                                                        <div class="controls">
+                                                            <!--<input type="text" name="strAssignedTo" id="strAssignedTo" value="" class="form-control" data-validation-required-message="Employee Name is requried" placeholder="Who will resolve this?">-->
+                                                            <select class="form-control" id="nAssignedTo" name="nAssignedTo">
+                                                                <option value=""></option>
+                                                                @foreach ($employees as $employee)
+                                                                    <option value="{{ $employee->id }}">{{ $employee->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-sm">
+                                                        <label>Due Date <small class="text-muted">(Leave empty if not assigning to anyone)</small></label>
+                                                        <fieldset class="position-relative has-icon-left">
+                                                            <input type="text" class="form-control pickadate-limits" placeholder="Select Date" id="purchase_date" name="strDueDate">
+                                                            <div class="form-control-position">
+                                                                <i class='bx bx-calendar'></i>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Basic Carousel with Caption End -->
                 </div>
             </section>
             <!-- users list ends -->
@@ -453,10 +573,14 @@
 
 
 <!-- BEGIN: Vendor JS-->
-<script src="../../app-assets/vendors/js/vendors.min.js"></script>
+<script src="../../app-assets/vendors/js/vendors.min.js?time=<?php time();?>"></script>
 <script src="../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
 <script src="../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
 <script src="../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
+<script src="../../app-assets/vendors/js/pickers/pickadate/picker.js"></script>
+<script src="../../app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
+<script src="../../app-assets/vendors/js/pickers/pickadate/picker.time.js"></script>
+<script src="../../app-assets/vendors/js/pickers/pickadate/legacy.js"></script>
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
@@ -467,7 +591,7 @@
 <!-- BEGIN: Theme JS-->
 <script src="../../app-assets/js/scripts/configs/vertical-menu-light.js"></script>
 <script src="../../app-assets/js/core/app-menu.js"></script>
-<script src="../../app-assets/js/core/app.js"></script>
+<script src="../../app-assets/js/core/app.js?time=<?php echo time();?>"></script>
 <script src="../../app-assets/js/scripts/components.js"></script>
 <script src="../../app-assets/js/scripts/footer.js"></script>
 <!-- END: Theme JS-->
@@ -475,7 +599,15 @@
 <!-- BEGIN: Page JS-->
 <script src="../../app-assets/js/scripts/pages/page-improvements.js?time=<?php echo time();?>"></script>
 <!-- END: Page JS-->
-
+<script>
+    $(document).ready(function(){
+        $('.pickadate-limits').pickadate({
+            //format: 'mmmm, d, yyyy'
+            format: 'yyyy-mm-dd',
+            max: [2021,1,13]
+        });
+    });
+</script>
 </body>
 <!-- END: Body-->
 
