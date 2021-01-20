@@ -407,7 +407,7 @@
                                                         </div>
                                                     </td>
                                                     <td style="white-space: nowrap;padding: 0.5rem 1.15rem;">
-                                                        <form id="form-del" action="{{ route('employees.destroy',$employee->id) }}" method="POST">
+                                                        <form id="form-del" action="{{ route('employees.destroy',$employee->id) }}" method="POST" onsubmit="return false;">
                                                             <a href="#" onclick="$('#nEmpIDFIle').val({{ $employee->id }}); Dropzone.forElement('#dp-accept-files').removeAllFiles(true); return false;" data-toggle="modal" data-target="#inlineForm">
                                                                 <i class="bx bx-camera"></i>
                                                             </a>
@@ -417,8 +417,8 @@
                                                             <a href="{{ route('employees.edit', $employee->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp;
                                                             @csrf
                                                             @method('DELETE')
-                                                            <a href="{{ route('employees.destroy', $employee->id) }}" onclick="event.preventDefault();
-                                                         if(confirm('Are you sure to delete?')){document.getElementById('form-del').submit();}"><i class="bx bxs-trash-alt"></i></a>
+                                                            @php /*<a href="{{ route('employees.destroy', $employee->id) }}" onclick="event.preventDefault();
+                                                         if(confirm('Are you sure to delete?')){document.getElementById('form-del').submit();}"><i class="bx bxs-trash-alt"></i></a>*/ @endphp
                                                         </form>
                                                     </td>
                                                 </tr>
