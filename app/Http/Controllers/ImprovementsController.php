@@ -107,8 +107,19 @@ class ImprovementsController extends Controller
         $nEmployeeID = Auth::user()->getempid();
         $objEmployeeSender = Employees::find($nEmployeeID);
         $strSenderName = $objEmployeeSender->name;
-        $objEmmployeeReceiver = Employees::find($request->nAssignedTo);
-        $strReceiverName = $objEmmployeeReceiver->name;
+        $nAssignedTo = 0;
+        if($request->nAssignedTo>0)
+        {
+            $nAssignedTo = $request->nAssignedTo;
+            $objEmmployeeReceiver = Employees::find($request->nAssignedTo);
+            $strReceiverName = $objEmmployeeReceiver->name;
+        }
+        $strDueDate = "";
+        if($request->strDueDate!="")
+        {
+            $strDueDate = $request->strDueDate;
+        }
+
         $arrImpmrovement = array(
             'complainer'=> $request->strWhoNotified,
             'phonenumber' => $request->phonenumber,
@@ -120,8 +131,8 @@ class ImprovementsController extends Controller
             'purchase_date' => $request->strDateOfPurchase,
             'lot_nr' => $request->strLotNr,
             'description' => $request->strDescription,
-            'assigned_to' => $request->nAssignedTo,
-            'due_date' => $request->strDueDate,
+            'assigned_to' => $nAssignedTo,
+            'due_date' => $strDueDate,
             'response_improvements' => $request->strResponse,
             'complain_creation_date' => date("Y-m-d H:i:s"),
             'complain_created_by' => $nEmployeeID
@@ -143,66 +154,79 @@ class ImprovementsController extends Controller
             }
         }
 
-        $arrPhotos = $request->file('Photos');
-        foreach ($arrPhotos as $thispic)
-        {
-            $file = $thispic['file_photo'];
 
-            $destination = 'uploads/improvements/'.$nImprovementID;
-            $strFileName = $file->getClientOriginalName();
-            $file->move($destination, $strFileName);
-            $arrPicRecord = array(
-                'improvements_id'=>$nImprovementID,
-                'file_name'=>$strFileName,
-                'file_creation_date' => date("Y-m-d H:i:s"),
-                'file_created_by' => $nEmployeeID
-            );
-            Improvementphotos::create($arrPicRecord);
+        if($request->file('Photos'))
+        {
+            $arrPhotos = $request->file('Photos');
+            {
+                foreach ($arrPhotos as $thispic)
+                {
+                    $file = $thispic['file_photo'];
+
+                    $destination = 'uploads/improvements/'.$nImprovementID;
+                    $strFileName = $file->getClientOriginalName();
+                    $file->move($destination, $strFileName);
+                    $arrPicRecord = array(
+                        'improvements_id'=>$nImprovementID,
+                        'file_name'=>$strFileName,
+                        'file_creation_date' => date("Y-m-d H:i:s"),
+                        'file_created_by' => $nEmployeeID
+                    );
+                    Improvementphotos::create($arrPicRecord);
+                }
+            }
         }
 
-        $strCommentNewAssignee = 'Assigned to '.$strReceiverName.' by '.$strSenderName.'. Due date: '.$request->strDueDate;
-        $arrComments = array(
-            'improvements_id'=>$nImprovementID,
-            'comment'=>$strCommentNewAssignee,
-            'comment_add_date'=>date("Y-m-d H:i:s"),
-            'comment_added_by'=>$nEmployeeID
-        );
-        Improvementcomments::create($arrComments);
 
-        /**
-         * The below piece of code will keep a track of when the task was assigned to someone.
-         * This is not being displayed from this table, but just keeping a track, if needed to see somehow later.
-         */
-        $arrImprovementAssigned = array(
-            'improvements_id'=>$nImprovementID,
-            'assigned_to'=>$request->nAssignedTo,
-            'assigned_by'=>$nEmployeeID,
-            'due_date'=>$request->strDueDate,
-            'action_taken_at'=>date("Y-m-d H:i:s")
-        );
-        Improvementassigned::create($arrImprovementAssigned);
-        /**
-         * Storing assignment logs done
-         */
 
-        $html = "<html><body>
+        if($nAssignedTo>0)
+        {
+            $strCommentNewAssignee = 'Assigned to '.$strReceiverName.' by '.$strSenderName.'. Due date: '.$request->strDueDate;
+            $arrComments = array(
+                'improvements_id'=>$nImprovementID,
+                'comment'=>$strCommentNewAssignee,
+                'comment_add_date'=>date("Y-m-d H:i:s"),
+                'comment_added_by'=>$nEmployeeID
+            );
+            Improvementcomments::create($arrComments);
+
+            /**
+             * The below piece of code will keep a track of when the task was assigned to someone.
+             * This is not being displayed from this table, but just keeping a track, if needed to see somehow later.
+             */
+            $arrImprovementAssigned = array(
+                'improvements_id'=>$nImprovementID,
+                'assigned_to'=>$nAssignedTo,
+                'assigned_by'=>$nEmployeeID,
+                'due_date'=>$strDueDate,
+                'action_taken_at'=>date("Y-m-d H:i:s")
+            );
+            Improvementassigned::create($arrImprovementAssigned);
+            /**
+             * Storing assignment logs done
+             */
+
+            $html = "<html><body>
             <div><img src='https://innri.fisherman.is/app-assets/images/logo/fisherman-2.png'></div>
             <div>
                 <p>
                 Hello $strReceiverName,<br><br>
                 $strSenderName has sent you this message with the below suggestion for improvement and put you in charge of resolving it:<br><br>
                 <a href='https://innri.fisherman.is/improvements/process/$nImprovementID'>https://innri.fisherman.is/improvements/process/$nImprovementID</a></p></div></body></html>";
-        $to = $objEmmployeeReceiver->email;
-        $subject = 'Improvement suggestion for Fisherman';
-        $formEmail = 'innri@fisherman.is';
-        $formName = "Innri Fisherman";
-        Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
-            $message->from($formEmail, $formName);
-            $message->to($to);
-            $message->cc('elias@fisherman.is');
-            $message->subject($subject);
-            $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
-        });
+            $to = $objEmmployeeReceiver->email;
+            $subject = 'Improvement suggestion for Fisherman';
+            $formEmail = 'innri@fisherman.is';
+            $formName = "Innri Fisherman";
+            Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
+                $message->from($formEmail, $formName);
+                $message->to($to);
+                $message->cc('elias@fisherman.is');
+                $message->subject($subject);
+                $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
+            });
+
+        }
+
 
         return redirect()->route('improvements.index')
             ->with('success','Improvement record added successfully.');

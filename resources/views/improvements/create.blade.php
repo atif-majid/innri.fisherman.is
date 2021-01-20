@@ -332,7 +332,7 @@
                 @endforeach
             @endif
             <section class="input-validation">
-                <form class="form-horizontal"  enctype='multipart/form-data' novalidate method="post" action="{{ route('improvements.store') }}">
+                <form id="frmNewImprovement" class="form-horizontal"  enctype='multipart/form-data' novalidate method="post" action="{{ route('improvements.store') }}">
                     @csrf
                     <div class="row">
                         <div class="col-md-12">
@@ -607,7 +607,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button id="btnFormSubmit" type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </section>
             <!-- Input Validation end -->
@@ -773,6 +773,20 @@
         });
     });
 
+    $(document).ready(function () {
+
+        $("#frmNewImprovement").submit(function (e) {
+
+            //stop submitting the form to see the disabled button effect
+            e.preventDefault();
+
+            //disable the submit button
+            $("#btnFormSubmit").attr("disabled", true);
+
+            return true;
+
+        });
+    });
 </script>
 </body>
 <!-- END: Body-->
