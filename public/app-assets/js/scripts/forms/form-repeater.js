@@ -10,7 +10,7 @@
 
 $(document).ready(function () {
   // form repeater jquery
-  $('.file-repeater, .contact-repeater, .repeater-default').repeater({
+  $('.file-repeater, .contact-repeater, .repeater-default, .type-of-notification, .production-site, .list-of-suppliers, .selling-locations').repeater({
     show: function () {
       $(this).slideDown();
     },
