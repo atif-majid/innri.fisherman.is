@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductionController;
 use App\Http\Controllers\RecipesController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\ImprovementsController;
+use App\Http\Controllers\SitesettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,8 @@ Route::resource('improvements', ImprovementsController::class);
 Route::get('improvements/process/{id}', ['as'=>'improvements.process', 'uses'=>'App\Http\Controllers\ImprovementsController@process']);
 //Route::post('improvements/updateprocess', [App\Http\Controllers\ImprovementsController::class], 'updateprocess')->name('improvements.updateprocess');
 Route::post('/improvements/updateprocess', ['as'=>'improvements.updateprocess', 'uses'=>'App\Http\Controllers\ImprovementsController@updateprocess']);
+
+Route::resource('sitesettings', SitesettingsController::class);
 
 Route::get('/change-password', [App\Http\Controllers\ChangePasswordController::class, 'index'])->name('change-password');
 Route::post('/change-password', [App\Http\Controllers\ChangePasswordController::class, 'store'])->name('change.password');
