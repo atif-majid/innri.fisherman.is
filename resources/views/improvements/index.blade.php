@@ -286,6 +286,12 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item"><a href="#"><span class="menu-title">Site Settings</span></a>
+                <ul class="menu-content">
+                    <li><a href="{{ route('sitesettings.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Form Values</span></a>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>
@@ -414,7 +420,7 @@
                                                     <td style="padding: 0.5rem 1.15rem">{{ $Improvement->production_location }}</td>
                                                     <td style="padding: 0.5rem 1.15rem">{{ $Improvement->supplier }}</td>
                                                     <td style="white-space: nowrap;padding: 0.5rem 1.15rem;">
-                                                        <form id="form-del" action="{{ route('employees.destroy',$Improvement->id) }}" method="POST">
+                                                        <form id="form-del" action="{{ route('improvements.destroy',$Improvement->id) }}" method="POST">
                                                             @php
                                                                 /*<a href="{{ route('improvements.show', $Improvement->id) }}" class="invoice-action-view" onclick="return false;">
                                                                     <i class="bx bx-show-alt"></i>

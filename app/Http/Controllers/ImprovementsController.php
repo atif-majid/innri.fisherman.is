@@ -9,6 +9,8 @@ use App\Models\Recipes;
 use App\Models\Improvementcomments;
 use App\Models\Improvementphotos;
 use App\Models\Improvementassigned;
+use App\Models\Sitesettings;
+
 //use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,7 +48,8 @@ class ImprovementsController extends Controller
         //
         $employees = Employees::all();
         $recipes = Recipes::all();
-        return view('improvements.create', compact('employees', 'recipes'));
+        $sitesettings = Sitesettings::all();
+        return view('improvements.create', compact('employees', 'recipes', 'sitesettings'));
     }
 
     /**
@@ -104,21 +107,11 @@ class ImprovementsController extends Controller
             $nEmployeeID = Auth::user()->id;
         }*/
         //
+
+
         $nEmployeeID = Auth::user()->getempid();
         $objEmployeeSender = Employees::find($nEmployeeID);
         $strSenderName = $objEmployeeSender->name;
-        $nAssignedTo = 0;
-        if($request->nAssignedTo>0)
-        {
-            $nAssignedTo = $request->nAssignedTo;
-            $objEmmployeeReceiver = Employees::find($request->nAssignedTo);
-            $strReceiverName = $objEmmployeeReceiver->name;
-        }
-        $strDueDate = "";
-        if($request->strDueDate!="")
-        {
-            $strDueDate = $request->strDueDate;
-        }
 
         $arrImpmrovement = array(
             'complainer'=> $request->strWhoNotified,
@@ -131,12 +124,28 @@ class ImprovementsController extends Controller
             'purchase_date' => $request->strDateOfPurchase,
             'lot_nr' => $request->strLotNr,
             'description' => $request->strDescription,
-            'assigned_to' => $nAssignedTo,
-            'due_date' => $strDueDate,
             'response_improvements' => $request->strResponse,
             'complain_creation_date' => date("Y-m-d H:i:s"),
             'complain_created_by' => $nEmployeeID
         );
+
+        $nAssignedTo = 0;
+        if($request->nAssignedTo>0)
+        {
+            $nAssignedTo = $request->nAssignedTo;
+            $objEmmployeeReceiver = Employees::find($request->nAssignedTo);
+            $strReceiverName = $objEmmployeeReceiver->name;
+            $arrImpmrovement['assigned_to'] = $nAssignedTo;
+        }
+        //$strDueDate = date("Y-m-d");
+        $strDueDate = "";
+        if($request->strDueDate!="")
+        {
+            $strDueDate = $request->strDueDate;
+            $arrImpmrovement['due_date'] = $strDueDate;
+        }
+
+
 
         $improvement = Improvements::create($arrImpmrovement);
         $nImprovementID = $improvement->id;
@@ -181,7 +190,7 @@ class ImprovementsController extends Controller
 
         if($nAssignedTo>0)
         {
-            $strCommentNewAssignee = 'Assigned to '.$strReceiverName.' by '.$strSenderName.'. Due date: '.$request->strDueDate;
+            $strCommentNewAssignee = 'Assigned to '.$strReceiverName.' by '.$strSenderName.'. Due date: '.$strDueDate;
             $arrComments = array(
                 'improvements_id'=>$nImprovementID,
                 'comment'=>$strCommentNewAssignee,

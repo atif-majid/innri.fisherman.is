@@ -450,19 +450,13 @@
             </li>-->
             <li class=" navigation-header"><span>Employees</span>
             </li>
-            <!--<li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="pie-chart"></i><span class="menu-title" data-i18n="Charts">Charts</span><span class="badge badge-pill badge-round badge-light-info float-right mr-2">3</span></a>
-                <ul class="menu-content">
-                    <li><a href="chart-apex.html"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Apex">Apex</span></a>
-                    </li>
-                    <li><a href="chart-chartjs.html"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Chartjs">Chartjs</span></a>
-                    </li>
-                    <li><a href="chart-chartist.html"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Chartist">Chartist</span></a>
-                    </li>
-                </ul>
-            </li>-->
             <li class=" nav-item"><a href="{{ route('employees.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Empoloyee Directory</span></a>
             </li>
             <li class=" nav-item"><a href="#"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Job Description</span></a>
+            </li>
+            <li class=" navigation-header"><span>Site Settings</span>
+            </li>
+            <li class=" nav-item"><a href="{{ route('sitesettings.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Form Values</span></a>
             </li>
             <!--<li class=" navigation-header"><span>Extensions</span>
             </li>

@@ -288,6 +288,12 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item"><a href="#"><span class="menu-title">Site Settings</span></a>
+                <ul class="menu-content">
+                    <li><a href="{{ route('sitesettings.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Form Values</span></a>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>
@@ -402,8 +408,8 @@
                                                     <td style="padding: 0.5rem 1.15rem">{{ $employee->email }}</td>
                                                     <td style="padding: 0.5rem 1.15rem; vertical-align: center;">
                                                         <div class="custom-control custom-switch custom-switch-dark mb-1">
-                                                            <input type="checkbox" class="custom-control-input chkStatus" id="customSwitchcolor6" value="{{ $employee->id }}" @if($employee->status=='active') checked @endif>
-                                                            <label class="custom-control-label" for="customSwitchcolor6"></label>
+                                                            <input type="checkbox" class="custom-control-input chkStatus" id="customSwitchcolor{{ $employee->id }}" value="{{ $employee->id }}" @if($employee->status=='active') checked @endif>
+                                                            <label class="custom-control-label" for="customSwitchcolor{{ $employee->id }}"></label>
                                                         </div>
                                                     </td>
                                                     <td style="white-space: nowrap;padding: 0.5rem 1.15rem;">
@@ -584,6 +590,7 @@
                     data: {_token:_token, id:empID, newstatus:changeto},
                     success: function(data) {
                         //Do nogthing
+                        //alert(data);
                     }
                 });
             }

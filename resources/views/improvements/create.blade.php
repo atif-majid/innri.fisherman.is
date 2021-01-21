@@ -296,6 +296,12 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item"><a href="#"><span class="menu-title">Site Settings</span></a>
+                <ul class="menu-content">
+                    <li><a href="{{ route('sitesettings.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Form Values</span></a>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>
@@ -395,82 +401,73 @@
                                                         <label>Type of Notification</label>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="form-group col-sm">
-                                                        <fieldset>
-                                                            <div class="checkbox">
-                                                                <input type="checkbox" class="checkbox-input" id="checkbox1" name="chkNotification[]" value="Bone in the fish">
-                                                                <label for="checkbox1">Bone in the fish</label>
+                                                <?php $i = 0; ?>
+                                                @foreach($sitesettings as $thissetting)
+                                                    <?php
+                                                        if($i%4==0)
+                                                        {
+                                                            ?>
+                                                            <div class="row">
+                                                            <?php
+                                                        }
+                                                    ?>
+                                                        @if($thissetting->field=="Notification")
+                                                            <?php
+                                                                    $i++;
+                                                            ?>
+                                                            <div class="form-group col-sm">
+                                                                <fieldset>
+                                                                    <div class="checkbox">
+                                                                        <input type="checkbox" class="checkbox-input" id="checkbox<?php echo $i;?>" name="chkNotification[]" value="{{$thissetting->value}}">
+                                                                        <label for="checkbox<?php echo $i;?>">{{$thissetting->value}}</label>
+                                                                    </div>
+                                                                </fieldset>
                                                             </div>
-                                                        </fieldset>
-                                                    </div>
-                                                    <div class="form-group col-sm">
-                                                        <fieldset>
-                                                            <div class="checkbox">
-                                                                <input type="checkbox" class="checkbox-input" id="checkbox2" name="chkNotification[]" value="Worm in the fish">
-                                                                <label for="checkbox2">Worm in the fish</label>
+                                                        @endif
+                                                        <?php
+                                                            if($i%4==0)
+                                                            {
+                                                                ?>
+                                                                </div>
+                                                                <?php
+                                                            }
+                                                        ?>
+                                                @endforeach
+                                                <?php
+                                                    if(($i%4)!=0)
+                                                    {
+                                                        do
+                                                        {
+                                                            ?>
+                                                            <div class="form-group col-sm">
+                                                                <fieldset>
+                                                                    <div class="checkbox">
+                                                                    </div>
+                                                                </fieldset>
                                                             </div>
-                                                        </fieldset>
-                                                    </div>
-                                                    <div class="form-group col-sm">
-                                                        <fieldset>
-                                                            <div class="checkbox">
-                                                                <input type="checkbox" class="checkbox-input" id="checkbox3" name="chkNotification[]" value="Bad smell">
-                                                                <label for="checkbox3">Bad smell</label>
-                                                            </div>
-                                                        </fieldset>
-                                                    </div>
-                                                    <div class="form-group col-sm">
-                                                        <fieldset>
-                                                            <div class="checkbox">
-                                                                <input type="checkbox" class="checkbox-input" id="checkbox4" name="chkNotification[]" value="Late delivery">
-                                                                <label for="checkbox4">Late delivery</label>
-                                                            </div>
-                                                        </fieldset>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="form-group col-sm">
-                                                        <fieldset>
-                                                            <div class="checkbox">
-                                                                <input type="checkbox" class="checkbox-input" id="checkbox5" name="chkNotification[]" value="Incorrect delivery">
-                                                                <label for="checkbox5">Incorrect delivery</label>
-                                                            </div>
-                                                        </fieldset>
-                                                    </div>
-                                                    <div class="form-group col-sm">
-                                                        <fieldset>
-                                                            <div class="checkbox">
-                                                                <input type="checkbox" class="checkbox-input" id="checkbox6" name="chkNotification[]" value="Foreign object in product">
-                                                                <label for="checkbox6">Foreign object in product</label>
-                                                            </div>
-                                                        </fieldset>
-                                                    </div>
-                                                    <div class="form-group col-sm">
-                                                        <fieldset>
-                                                            <div class="checkbox">
-                                                                <input type="checkbox" class="checkbox-input" id="checkbox7" name="chkNotification[]" value="Fish skin">
-                                                                <label for="checkbox7">Fish skin</label>
-                                                            </div>
-                                                        </fieldset>
-                                                    </div>
-                                                    <div class="form-group col-sm">
-                                                        <fieldset>
-                                                            <div class="checkbox">
-                                                                <input type="checkbox" class="checkbox-input" id="checkbox8" name="chkNotification[]" value="Communication">
-                                                                <label for="checkbox8">Communication</label>
-                                                            </div>
-                                                        </fieldset>
-                                                    </div>
-                                                </div>
+                                                            <?php
+                                                            $i++;
+                                                        }while(($i%4)!=0)
+                                                        ?>
+                                                        </div>
+                                                        <?php
+                                                    }
+                                                ?>
                                                 <div class="row">
                                                     <div class="form-group col-sm">
                                                         <label>Where was it produced?</label>
                                                         <div class="controls">
                                                             <select class="form-control" name="strProductionLocation">
                                                                 <option selected=""></option>
-                                                                <option value="Framleiðslueldhús">Framleiðslueldhús</option>
-                                                                <option value="Reykhús">Reykhús</option>
+                                                                @foreach($sitesettings as $thissetting)
+                                                                    @if($thissetting->field=='ProductionSite')
+                                                                        <option value="{{ $thissetting->value }}">{{ $thissetting->value }}</option>
+                                                                    @endif
+                                                                @endforeach
+                                                                @php
+                                                                /*<option value="Framleiðslueldhús">Framleiðslueldhús</option>
+                                                                <option value="Reykhús">Reykhús</option>*/
+                                                                @endphp
                                                             </select>
                                                         </div>
                                                     </div>
@@ -479,13 +476,20 @@
                                                             <div class="controls">
                                                                 <select class="form-control" name="strSupplier">
                                                                     <option selected></option>
-                                                                    <option value="Fisherman">Fisherman</option>
+                                                                    @foreach($sitesettings as $thissetting)
+                                                                        @if($thissetting->field=='SupplierName')
+                                                                            <option value="{{ $thissetting->value }}">{{ $thissetting->value }}</option>
+                                                                        @endif
+                                                                    @endforeach
+                                                                    @php
+                                                                    /*<option value="Fisherman">Fisherman</option>
                                                                     <option value="Íslandssaga">Íslandssaga</option>
                                                                     <option value="Nýfiskur">Nýfiskur</option>
                                                                     <option value="Skinney Þorlákshöfn">Skinney Þorlákshöfn</option>
                                                                     <option value="Tungusilungur">Tungusilungur</option>
                                                                     <option value="Hábrún">Hábrún</option>
-                                                                    <option value="Kambur Hafnarfirði">Kambur Hafnarfirði</option>
+                                                                    <option value="Kambur Hafnarfirði">Kambur Hafnarfirði</option>*/
+                                                                    @endphp
                                                                 </select>
                                                             </div>
                                                     </div>
@@ -759,14 +763,19 @@
         });
 
         var arrWhereSold = [
-            "Fisherman Webstore",
+            @foreach($sitesettings as $thissetting)
+                @if($thissetting->field=="SellingSite")
+                    "{{$thissetting->value}}",
+                @endif
+            @endforeach
+            /*"Fisherman Webstore",
             "Bónus",
             "Nettó",
             "Iceland",
             "Krambúðin",
             "Hagkaup",
             "Fisherman wholesale",
-            "Other"
+            "Other"*/
         ];
         $("#strWhereSold").autocomplete({
             source: arrWhereSold
@@ -778,7 +787,7 @@
         $("#frmNewImprovement").submit(function (e) {
 
             //stop submitting the form to see the disabled button effect
-            e.preventDefault();
+            //e.preventDefault();
 
             //disable the submit button
             $("#btnFormSubmit").attr("disabled", true);

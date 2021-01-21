@@ -295,6 +295,12 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item"><a href="#"><span class="menu-title">Site Settings</span></a>
+                <ul class="menu-content">
+                    <li><a href="{{ route('sitesettings.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Form Values</span></a>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>
