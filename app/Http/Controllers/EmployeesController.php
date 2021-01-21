@@ -161,7 +161,32 @@ class EmployeesController extends Controller
             $arrUpdate = array(
                 'status'=>$strNewStatus
             );
-            $change = Employees::find($nEmpID)->update($arrUpdate);
+            $objEmployee = Employees::find($nEmpID);
+            Employees::find($nEmpID)->update($arrUpdate);
+            $strEmail = $objEmployee->email;
+
+            $objUsers = User::where('email', $strEmail)->get();
+            if(count($objUsers)==1)
+            {
+                $objUser = $objUsers[0];
+                $nUserID = $objUser->id;
+                if($nUserID>0)
+                {
+                    if($strNewStatus=='active')
+                    {
+                        $arrUpdateUser = array(
+                            'active'=>1
+                        );
+                    }
+                    else{
+                        $arrUpdateUser = array(
+                            'active'=>0
+                        );
+                    }
+
+                    $updateUser = User::find($nUserID)->update($arrUpdateUser);
+                }
+            }
         }
     }
 
