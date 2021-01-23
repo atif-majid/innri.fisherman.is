@@ -420,103 +420,104 @@
                                                     <td style="padding: 0.5rem 1.15rem">{{ $Improvement->production_location }}</td>
                                                     <td style="padding: 0.5rem 1.15rem">{{ $Improvement->supplier }}</td>
                                                     <td style="white-space: nowrap;padding: 0.5rem 1.15rem;">
-                                                        <form id="form-del" action="{{ route('improvements.destroy',$Improvement->id) }}" method="POST">
-                                                            @php
-                                                                /*<a href="{{ route('improvements.show', $Improvement->id) }}" class="invoice-action-view" onclick="return false;">
-                                                                    <i class="bx bx-show-alt"></i>
-                                                                </a>*/
+                                                        @php
+                                                            /*<form id="form-del" action="{{ route('improvements.destroy',$Improvement->id) }}" method="POST">
+                                                        <a href="{{ route('improvements.show', $Improvement->id) }}" class="invoice-action-view" onclick="return false;">
+                                                                <i class="bx bx-show-alt"></i>
+                                                            </a>*/
                                                             @endphp
                                                             <a href="{{ route('improvements.process', $Improvement->id) }}"><i class="bx bx-show-alt"></i></a>&nbsp;
-                                                            <a href="#"><i class="bx bx-edit-alt"></i></a>&nbsp;
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <a href="#" onclick="event.preventDefault();
-                                                             if(confirm('Are you sure to delete?')){document.getElementById('form-del').submit();}"><i class="bx bxs-trash-alt"></i></a>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- datatable ends -->
+                                                        @php
+                                                            /*<a href="#"><i class="bx bx-edit-alt"></i></a>&nbsp;
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a href="#" onclick="event.preventDefault();
+                                                         if(confirm('Are you sure to delete?')){document.getElementById('form-del').submit();}"><i class="bx bxs-trash-alt"></i></a>
+                                                    </form>*/ @endphp
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
+                            <!-- datatable ends -->
                         </div>
                     </div>
                 </div>
-            </section>
-            <!-- users list ends -->
-        </div>
+            </div>
+        </section>
+        <!-- users list ends -->
     </div>
+</div>
 </div>
 <!-- END: Content-->
 @php
-    /*
-    <!-- demo chat-->
-    <div class="widget-chat-demo">
-        <!-- widget chat demo footer button start -->
-        <button class="btn btn-primary chat-demo-button glow px-1"><i class="livicon-evo" data-options="name: comments.svg; style: lines; size: 24px; strokeColor: #fff; autoPlay: true; repeat: loop;"></i></button>
-        <!-- widget chat demo footer button ends -->
-        <!-- widget chat demo start -->
-        <div class="widget-chat widget-chat-demo d-none">
-            <div class="card mb-0">
-                <div class="card-header border-bottom p-0">
-                    <div class="media m-75">
-                        <a href="JavaScript:void(0);">
-                            <div class="avatar mr-75">
-                                <img src="app-assets/images/portrait/small/avatar-s-2.jpg" alt="avtar images" width="32" height="32">
-                                <span class="avatar-status-online"></span>
-                            </div>
-                        </a>
-                        <div class="media-body">
-                            <h6 class="media-heading mb-0 pt-25"><a href="javaScript:void(0);">Kiara Cruiser</a></h6>
-                            <span class="text-muted font-small-3">Active</span>
+/*
+<!-- demo chat-->
+<div class="widget-chat-demo">
+    <!-- widget chat demo footer button start -->
+    <button class="btn btn-primary chat-demo-button glow px-1"><i class="livicon-evo" data-options="name: comments.svg; style: lines; size: 24px; strokeColor: #fff; autoPlay: true; repeat: loop;"></i></button>
+    <!-- widget chat demo footer button ends -->
+    <!-- widget chat demo start -->
+    <div class="widget-chat widget-chat-demo d-none">
+        <div class="card mb-0">
+            <div class="card-header border-bottom p-0">
+                <div class="media m-75">
+                    <a href="JavaScript:void(0);">
+                        <div class="avatar mr-75">
+                            <img src="app-assets/images/portrait/small/avatar-s-2.jpg" alt="avtar images" width="32" height="32">
+                            <span class="avatar-status-online"></span>
                         </div>
-                        <i class="bx bx-x widget-chat-close float-right my-auto cursor-pointer"></i>
+                    </a>
+                    <div class="media-body">
+                        <h6 class="media-heading mb-0 pt-25"><a href="javaScript:void(0);">Kiara Cruiser</a></h6>
+                        <span class="text-muted font-small-3">Active</span>
                     </div>
-                </div>
-                <div class="card-body widget-chat-container widget-chat-demo-scroll">
-                    <div class="chat-content">
-                        <div class="badge badge-pill badge-light-secondary my-1">today</div>
-                        <div class="chat">
-                            <div class="chat-body">
-                                <div class="chat-message">
-                                    <p>How can we help? 😄</p>
-                                    <span class="chat-time">7:45 AM</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat chat-left">
-                            <div class="chat-body">
-                                <div class="chat-message">
-                                    <p>Hey John, I am looking for the best admin template.</p>
-                                    <p>Could you please help me to find it out? 🤔</p>
-                                    <span class="chat-time">7:50 AM</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat">
-                            <div class="chat-body">
-                                <div class="chat-message">
-                                    <p>Stack admin is the responsive bootstrap 4 admin template.</p>
-                                    <span class="chat-time">8:01 AM</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer border-top p-1">
-                    <form class="d-flex" onsubmit="widgetChatMessageDemo();" action="javascript:void(0);">
-                        <input type="text" class="form-control chat-message-demo mr-75" placeholder="Type here...">
-                        <button type="submit" class="btn btn-primary glow px-1"><i class="bx bx-paper-plane"></i></button>
-                    </form>
+                    <i class="bx bx-x widget-chat-close float-right my-auto cursor-pointer"></i>
                 </div>
             </div>
+            <div class="card-body widget-chat-container widget-chat-demo-scroll">
+                <div class="chat-content">
+                    <div class="badge badge-pill badge-light-secondary my-1">today</div>
+                    <div class="chat">
+                        <div class="chat-body">
+                            <div class="chat-message">
+                                <p>How can we help? 😄</p>
+                                <span class="chat-time">7:45 AM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat chat-left">
+                        <div class="chat-body">
+                            <div class="chat-message">
+                                <p>Hey John, I am looking for the best admin template.</p>
+                                <p>Could you please help me to find it out? 🤔</p>
+                                <span class="chat-time">7:50 AM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat">
+                        <div class="chat-body">
+                            <div class="chat-message">
+                                <p>Stack admin is the responsive bootstrap 4 admin template.</p>
+                                <span class="chat-time">8:01 AM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer border-top p-1">
+                <form class="d-flex" onsubmit="widgetChatMessageDemo();" action="javascript:void(0);">
+                    <input type="text" class="form-control chat-message-demo mr-75" placeholder="Type here...">
+                    <button type="submit" class="btn btn-primary glow px-1"><i class="bx bx-paper-plane"></i></button>
+                </form>
+            </div>
         </div>
-        <!-- widget chat demo ends -->
-
     </div>
-    */
+    <!-- widget chat demo ends -->
+
+</div>
+*/
 @endphp
 <div class="sidenav-overlay"></div>
 <div class="drag-target"></div>

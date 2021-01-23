@@ -322,7 +322,16 @@
                                     <table class="table table-borderless" colspan="12">
                                         <tbody>
                                             <tr>
-                                                <td class="users-view-latest-activity" colspan="6"><strong>Review Improvements & Suggestion:</strong></td>
+                                                <td class="users-view-latest-activity" colspan="5"><strong>Review Improvements & Suggestion:</strong></td>
+                                                <td class="users-view-latest-activity" style="text-align: right">
+                                                    <form id="form-del" action="{{ route('improvements.destroy',$improvement->id) }}" method="POST" onsubmit="return confirm('Are you sure to delete?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-primary" data-repeater-create type="submit">@php /*<i class="bx bx-minus" style="color: #FFFFFF;"></i>*/ @endphp
+                                                            Delete
+                                                        </button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td class="users-view-latest-activity" ><strong>Product:</strong></td>

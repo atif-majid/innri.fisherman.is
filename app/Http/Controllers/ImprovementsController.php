@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\File;
 
 class ImprovementsController extends Controller
 {
@@ -281,12 +282,42 @@ class ImprovementsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Improvements  $improvements
+     * @param  \App\Models\Improvements  $improvement
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Improvements $improvements)
+    public function destroy(Improvements $improvement)
     {
         //
+        $nImprovementID = $improvement->id;
+        if($nImprovementID>0)
+        {
+            Improvementassigned::where('improvements_id', $nImprovementID)->delete();
+            Improvementcomments::where('improvements_id', $nImprovementID)->delete();
+            Improvementsnotifications::where('improvements_id', $nImprovementID)->delete();
+            $photos = Improvementphotos::where('improvements_id', $nImprovementID)->get();
+            foreach ($photos as $thisphoto)
+            {
+                $nPhotoID = $thisphoto->id;
+                $strPhotoName = $thisphoto->file_name;
+                $path = public_path('uploads/improvements/'.$nImprovementID.'/'.$strPhotoName);
+                if(File::exists($path))
+                {
+                    File::delete($path);
+                }
+                Improvementphotos::find($nPhotoID)->delete();
+            }
+            $improvement->delete();
+            return redirect()->route('improvements.index')
+                ->with('success','Improvement record deleted successfully.');
+        }
+        else
+        {
+            return redirect()->route('improvements.index')
+                ->with('error','Cannot find the requested improvement record.');
+        }
+
+
+
     }
 
     public function process(Request $request)
