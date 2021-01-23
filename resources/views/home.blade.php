@@ -545,7 +545,8 @@
                         </div>
                     </div>
                     <!-- Multi Radial Chart Starts -->
-                    <div class="col-xl-4 col-md-6 col-12 dashboard-visit">
+                    <?php
+                    /*<div class="col-xl-4 col-md-6 col-12 dashboard-visit">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h4 class="card-title">Visits of 2019</h4>
@@ -615,9 +616,10 @@
                             </div>
                             <!-- Revenue Growth Chart Starts -->
                         </div>
-                    </div>
+                    </div>*/?>
                 </div>
-                <div class="row">
+                <?php
+                /*<div class="row">
                     <div class="col-xl-8 col-12 dashboard-order-summary">
                         <div class="card">
                             <div class="row">
@@ -1470,7 +1472,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>*/?>
             </section>
             <!-- Dashboard Ecommerce ends -->
 
