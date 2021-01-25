@@ -32,11 +32,19 @@ class ImprovementsController extends Controller
     public function index()
     {
         //
-        $Improvements = DB::table('improvements')
-            ->leftJoin('employees', 'assigned_to', '=', 'employees.id')
-            ->select('improvements.*','employees.name')
-            ->get();
-        return view('improvements.index', compact('Improvements'));
+        if(Auth::user()->updated_at==null)
+        {
+            return redirect(route('change-password'));
+        }
+        else
+        {
+            $Improvements = DB::table('improvements')
+                ->leftJoin('employees', 'assigned_to', '=', 'employees.id')
+                ->select('improvements.*','employees.name')
+                ->get();
+            return view('improvements.index', compact('Improvements'));
+        }
+
     }
 
     /**

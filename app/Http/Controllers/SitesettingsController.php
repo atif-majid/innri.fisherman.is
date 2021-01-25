@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sitesettings;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SitesettingsController extends Controller
 {
@@ -15,8 +16,16 @@ class SitesettingsController extends Controller
     public function index()
     {
         //
-        $sitesettings = Sitesettings::all();
-        return view('sitesettings.index', compact('sitesettings'));
+        if(Auth::user()->updated_at==null)
+        {
+            return redirect(route('change-password'));
+        }
+        else
+        {
+            $sitesettings = Sitesettings::all();
+            return view('sitesettings.index', compact('sitesettings'));
+        }
+
     }
 
     /**

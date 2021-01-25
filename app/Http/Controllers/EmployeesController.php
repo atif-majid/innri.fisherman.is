@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employees;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,10 +24,18 @@ class EmployeesController extends Controller
     {
         //
         //$employees = Employees::paginate(10);
-        $employees = Employees::all();
+        if(Auth::user()->updated_at==null)
+        {
+            return redirect(route('change-password'));
+        }
+        else
+        {
+            $employees = Employees::all();
 
-        return view('employees.index',compact('employees'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            return view('employees.index',compact('employees'))
+                ->with('i', (request()->input('page', 1) - 1) * 5);
+        }
+
     }
 
     /**

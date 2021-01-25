@@ -6,6 +6,7 @@ use App\Models\Recipes;
 use App\Models\Ingredients;
 use App\Models\Steps;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RecipesController extends Controller
 {
@@ -18,10 +19,18 @@ class RecipesController extends Controller
     {
         //
         //return view('recipes.index');
-        $recipes = Recipes::all();
+        if(Auth::user()->updated_at==null)
+        {
+            return redirect(route('change-password'));
+        }
+        else
+        {
+            $recipes = Recipes::all();
 
-        return view('recipes.index',compact('recipes'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            return view('recipes.index',compact('recipes'))
+                ->with('i', (request()->input('page', 1) - 1) * 5);
+        }
+
     }
 
     /**

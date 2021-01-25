@@ -28,13 +28,21 @@ class ProductionController extends Controller
     {
         //
         //$productions = Production::leftJoin('production', 'recipe_id', '=')->paginate(10);
-        $productions = DB::table('production')
-            ->leftJoin('recipes', 'recipe_id', '=', 'recipes.id')
-            ->select('production.*','recipes.title')
-            ->get();
+        if(Auth::user()->updated_at==null)
+        {
+            return redirect(route('change-password'));
+        }
+        else
+        {
+            $productions = DB::table('production')
+                ->leftJoin('recipes', 'recipe_id', '=', 'recipes.id')
+                ->select('production.*','recipes.title')
+                ->get();
 
-        return view('production.index',compact('productions'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            return view('production.index',compact('productions'))
+                ->with('i', (request()->input('page', 1) - 1) * 5);
+        }
+
     }
 
     /**
