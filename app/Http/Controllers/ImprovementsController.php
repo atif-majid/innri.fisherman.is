@@ -124,7 +124,7 @@ class ImprovementsController extends Controller
 
         $arrImpmrovement = array(
             'complainer'=> $request->strWhoNotified,
-            'phonenumber' => $request->phonenumber,
+            'phonenumber' => $request->strPhoneNumber,
             'email' => $request->strEmail,
             'product' => $request->strProduct,
             'production_location' => $request->strProductionLocation,
@@ -267,12 +267,25 @@ class ImprovementsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Improvements  $improvements
+     * @param  \App\Models\Improvements  $improvement
      * @return \Illuminate\Http\Response
      */
-    public function edit(Improvements $improvements)
+    public function edit(Improvements $improvement)
     {
         //
+        $nImprovementID = $improvement->id;
+        $employees = Employees::all();
+        $recipes = Recipes::all();
+        $sitesettings = Sitesettings::all();
+        $Notifications = Improvementsnotifications::where('improvements_id', $nImprovementID)->get();
+        $arrSelectedNotification = array();
+        foreach ($Notifications as $thisNotification)
+        {
+            $strTitle = $thisNotification->notification_name;
+            $nID = $thisNotification->id;
+            $arrSelectedNotification["$strTitle"] = $nID;
+        }
+        return view('improvements.edit', compact('improvement', 'employees', 'recipes', 'sitesettings', 'arrSelectedNotification'));
     }
 
     /**
@@ -285,6 +298,113 @@ class ImprovementsController extends Controller
     public function update(Request $request, Improvements $improvements)
     {
         //
+        $nEmployeeID = Auth::user()->getempid();
+        $nImprovementID = $request->nImprovementID;
+        $arrImpmrovement = array();
+        if(isset($request->strWhoNotified) && trim($request->strWhoNotified)!="")
+        {
+            $arrImpmrovement['complainer'] = $request->strWhoNotified;
+        }
+        if(isset($request->strPhoneNumber) && trim($request->strPhoneNumber)!="")
+        {
+            $arrImpmrovement['phonenumber'] = $request->strPhoneNumber;
+        }
+        if(isset($request->strEmail) && trim($request->strEmail)!="")
+        {
+            $arrImpmrovement['email'] = $request->strEmail;
+        }
+        if(isset($request->strProduct) && trim($request->strProduct)!="")
+        {
+            $arrImpmrovement['product'] = $request->strProduct;
+        }
+        if(isset($request->strProductionLocation) && trim($request->strProductionLocation)!="")
+        {
+            $arrImpmrovement['production_location'] = $request->strProductionLocation;
+        }
+        if(isset($request->strSupplier) && trim($request->strSupplier)!="")
+        {
+            $arrImpmrovement['supplier'] = $request->strSupplier;
+        }
+        if(isset($request->strWhereSold) && trim($request->strWhereSold)!="")
+        {
+            $arrImpmrovement['selling_location'] = $request->strWhereSold;
+        }
+        if(isset($request->strDateOfPurchase) && trim($request->strDateOfPurchase)!="")
+        {
+            $arrImpmrovement['purchase_date'] = $request->strDateOfPurchase;
+        }
+        if(isset($request->strDateOfPurchase) && trim($request->strDateOfPurchase)!="")
+        {
+            $arrImpmrovement['purchase_date'] = $request->strDateOfPurchase;
+        }
+        if(isset($request->strLotNr) && trim($request->strLotNr)!="")
+        {
+            $arrImpmrovement['lot_nr'] = $request->strLotNr;
+        }
+        if(isset($request->strDescription) && trim($request->strDescription)!="")
+        {
+            $arrImpmrovement['description'] = $request->strDescription;
+        }
+        if(isset($request->strResponse) && trim($request->strResponse)!="")
+        {
+            $arrImpmrovement['response_improvements'] = $request->strResponse;
+        }
+        $nAssignedTo = 0;
+        if($request->nAssignedTo>0)
+        {
+            $nAssignedTo = $request->nAssignedTo;
+            $objEmmployeeReceiver = Employees::find($request->nAssignedTo);
+            $strReceiverName = $objEmmployeeReceiver->name;
+            $arrImpmrovement['assigned_to'] = $nAssignedTo;
+        }
+        //$strDueDate = date("Y-m-d");
+        $strDueDate = "";
+        if($request->strDueDate!="")
+        {
+            $strDueDate = $request->strDueDate;
+            $arrImpmrovement['due_date'] = $strDueDate;
+        }
+        Improvements::find($nImprovementID)->update($arrImpmrovement);
+
+        Improvementsnotifications::where('improvements_id', $nImprovementID)->delete();
+
+        $arrNotifications = $request->all('chkNotification')['chkNotification'];
+        if(is_array($arrNotifications))
+        {
+            for($i=0; $i<count($arrNotifications); $i++)
+            {
+                $strNotification = $arrNotifications[$i];
+                $arrInsert = array(
+                    'improvements_id'=>$nImprovementID,
+                    'notification_name'=>$strNotification
+                );
+                Improvementsnotifications::create($arrInsert);
+            }
+        }
+        if($request->file('Photos'))
+        {
+            $arrPhotos = $request->file('Photos');
+            {
+                foreach ($arrPhotos as $thispic)
+                {
+                    $file = $thispic['file_photo'];
+
+                    $destination = 'uploads/improvements/'.$nImprovementID;
+                    $strFileName = $file->getClientOriginalName();
+                    $file->move($destination, $strFileName);
+                    $arrPicRecord = array(
+                        'improvements_id'=>$nImprovementID,
+                        'file_name'=>$strFileName,
+                        'file_creation_date' => date("Y-m-d H:i:s"),
+                        'file_created_by' => $nEmployeeID
+                    );
+                    Improvementphotos::create($arrPicRecord);
+                }
+            }
+        }
+        return redirect()->route('improvements.index')
+            ->with('success','Improvement record updated successfully.');
+
     }
 
     /**

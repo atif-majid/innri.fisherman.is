@@ -427,9 +427,10 @@
                                                             </a>*/
                                                             @endphp
                                                             <a href="{{ route('improvements.process', $Improvement->id) }}"><i class="bx bx-show-alt"></i></a>&nbsp;
+
+                                                            <a href="{{ route('improvements.edit', $Improvement->id) }}"><i class="bx bx-edit-alt"></i></a>
                                                         @php
-                                                            /*<a href="#"><i class="bx bx-edit-alt"></i></a>&nbsp;
-                                                        @csrf
+                                                        /*@csrf
                                                         @method('DELETE')
                                                         <a href="#" onclick="event.preventDefault();
                                                          if(confirm('Are you sure to delete?')){document.getElementById('form-del').submit();}"><i class="bx bxs-trash-alt"></i></a>
