@@ -411,6 +411,8 @@
                                                                         <option value="deciliter" @if(old('Ingredients')[$i]['unit'] == 'deciliter') ? selected : null @endif>deciliter</option>
                                                                         <option value="centiliter" @if(old('Ingredients')[$i]['unit'] == 'centiliter') ? selected : null @endif>centiliter</option>
                                                                         <option value="milliliter" @if(old('Ingredients')[$i]['unit'] == 'milliliter') ? selected : null @endif>milliliter</option>
+                                                                        <option value="">------------</option>
+                                                                        <option value="pieces" @if(old('Ingredients')[$i]['unit'] == 'pieces') ? selected : null @endif>pieces</option>
                                                                     </select>
                                                                 </div>
                                                                 <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
@@ -446,6 +448,8 @@
                                                                     <option value="deciliter">deciliter</option>
                                                                     <option value="centiliter">centiliter</option>
                                                                     <option value="milliliter">milliliter</option>
+                                                                    <option value="">------------</option>
+                                                                    <option value="pieces">pieces</option>
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
