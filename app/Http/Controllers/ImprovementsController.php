@@ -489,14 +489,17 @@ class ImprovementsController extends Controller
         $nCurrentEmployeeID = Auth::user()->getempid();
         $currentEmployee = Employees::find($nCurrentEmployeeID);
         $strCurrentEmployeeName = $currentEmployee->name;
+        if(trim($strResponse)!="")
+        {
+            $arrComments = array(
+                'improvements_id'=>$nID,
+                'comment'=>$strResponse,
+                'comment_add_date'=>date("Y-m-d H:i:s"),
+                'comment_added_by'=>$nCurrentEmployeeID
+            );
+            Improvementcomments::create($arrComments);
+        }
 
-        $arrComments = array(
-            'improvements_id'=>$nID,
-            'comment'=>$strResponse,
-            'comment_add_date'=>date("Y-m-d H:i:s"),
-            'comment_added_by'=>$nCurrentEmployeeID
-        );
-        Improvementcomments::create($arrComments);
         if($nAssignedTo>0 and trim($strDueDate!=""))
         {
             /**
