@@ -368,8 +368,9 @@
                                         <thead>
                                             <tr>
                                                 <th>id</th>
-                                                <th style="text-align: left; padding-left: 1rem; width: 85%">Recipe</th>
-                                                <th style="text-align: left; padding-left: 1rem; width: 15%">Options</th>
+                                                <th style="text-align: left; padding-left: 1rem; width: 65%">Recipe</th>
+                                                <th style="text-align: left; padding-left: 1rem; width: 25%">Date Created</th>
+                                                <th style="text-align: left; padding-left: 1rem; width: 10%">Options</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -404,10 +405,11 @@ EOT;*/
                                             @endphp
                                             <tr>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $recipe->id }}</td>
-                                                <td style="padding: 0.5rem 1.15rem">{{ $recipe->title }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">@if($recipe->product_number!=""){{ $recipe->product_number }} - @endif {{ $recipe->title }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $recipe->created_date }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">
                                                     <div class="divData" style="display: none; visibility: hidden;">{{ $recipe->id }}</div>
-                                                    <form id="form-del" action="{{ route('recipes.destroy',$recipe->id) }}" method="POST">
+                                                    <form id="form-del-{{$recipe->id}}" action="{{ route('recipes.destroy',$recipe->id) }}" method="POST">
                                                         <!--<a href="{{ route('recipes.edit', $recipe->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp;-->
                                                             <a href="{{ route('recipes.show', $recipe->id) }}" class="invoice-action-view">
                                                                 <i class="bx bx-show-alt"></i>
@@ -416,7 +418,7 @@ EOT;*/
                                                         @csrf
                                                         @method('DELETE')
                                                         <a href="{{ route('recipes.destroy', $recipe->id) }}" onclick="event.preventDefault();
-                                                     if(confirm('Are you sure to delete?')){document.getElementById('form-del').submit();}"><i class="bx bxs-trash-alt"></i></a>
+                                                     if(confirm('Are you sure to delete?')){document.getElementById('form-del-{{$recipe->id}}').submit();}"><i class="bx bxs-trash-alt"></i></a>
                                                     </form>
                                                 </td>
                                             </tr>

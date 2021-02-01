@@ -16,6 +16,7 @@
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/pickers/pickadate/pickadate.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -324,7 +325,7 @@
                     <div class="alert alert-danger mb-2">{{ $error }}</div>
                 @endforeach
             @endif
-            <form class="form-horizontal" novalidate method="post" action="{{ route('recipes.store') }}">
+            <form class="form-horizontal" enctype='multipart/form-data' novalidate method="post" action="{{ route('recipes.store') }}">
             @csrf
             <!-- // Basic multiple Column Form section start -->
                 <section id="multiple-column-form">
@@ -339,32 +340,36 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
+                                                    <label>Product number</label>
+                                                    <div class="controls">
+                                                        <input type="text" name="strProductNumber" class="form-control" @php /*data-validation-required-message="Product Number is required"*/ @endphp placeholder="Product Number">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
                                                     <label>Recipe Title</label>
                                                     <div class="controls">
                                                         <input type="text" name="title" value="{{ old('title') }}" class="form-control" data-validation-required-message="Recipe title is required" placeholder="Recipe Title">
                                                     </div>
                                                 </div>
-                                                @php
-                                                /*<div class="form-group">
-                                                    <label>Cooking Time</label>
-                                                    <div class="controls">
-                                                        <input type="text" name="cooking_time" class="form-control" data-validation-required-message="Cooking time required" placeholder="Cooking Time">
-                                                    </div>
-                                                </div>
-                                                */
-                                                @endphp
                                             </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-md-6">
-                                                @php
-                                                /*
                                                 <div class="form-group">
-                                                    <label>Preparation Time</label>
+                                                    <label>Recipe Created</label>
                                                     <div class="controls">
-                                                        <input type="text" name="preparation_time" class="form-control" data-validation-required-message="Preparaion time is required" placeholder="Preparation Time">
+                                                        <fieldset class="position-relative has-icon-left">
+                                                            <input type="text" class="form-control format-picker" placeholder="Select Date" id="created_date" name="created_date">
+                                                            <div class="form-control-position">
+                                                                <i class='bx bx-calendar'></i>
+                                                            </div>
+                                                        </fieldset>
                                                     </div>
                                                 </div>
-                                                */
-                                                @endphp
                                             </div>
                                         </div>
                                     </div>
@@ -395,6 +400,10 @@
                                                                 <div class="col-md-2 col-sm-12 form-group" style="max-width: 600px;">
                                                                     <label for="text">Name </label>
                                                                     <input type="text" class="form-control" id="ingredient" name="ingredient" placeholder="Enter Item Title" style="width: 360px;" value="{{ old('Ingredients')[$i]['ingredient'] }}">
+                                                                </div>
+                                                                <div class="col-md-2 col-sm-12 form-group" style="max-width: 600px;">
+                                                                    <label for="text">Product Number </label>
+                                                                    <input type="text" class="form-control" id="ing_product_number" name="ing_product_number" placeholder="Product Number" style="width: 360px;" value="{{ old('Ingredients')[$i]['ing_product_number'] }}">
                                                                 </div>
                                                                 <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px;">
                                                                     <label for="quanity">Quantity</label>
@@ -432,6 +441,10 @@
                                                             <div class="col-md-2 col-sm-12 form-group" style="max-width: 600px;">
                                                                 <label for="text">Name </label>
                                                                 <input type="text" class="form-control" id="ingredient" name="ingredient" placeholder="Enter Item Title" style="width: 360px;">
+                                                            </div>
+                                                            <div class="col-md-2 col-sm-12 form-group" style="max-width: 600px;">
+                                                                <label for="text">Product Number </label>
+                                                                <input type="text" class="form-control" id="ing_product_number" name="ing_product_number" placeholder="Product Number" style="width: 360px;">
                                                             </div>
                                                             <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px;">
                                                                 <label for="quanity">Quantity</label>
@@ -536,6 +549,46 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Photos</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body repeater-default">
+                                        <div data-repeater-list="Photos">
+                                            <div data-repeater-item>
+                                                <div class="row justify-content-between">
+                                                    <div class="input-group">
+                                                        <div class="col-sm-4 form-group">
+                                                            <label>Photo</label>
+                                                            <fieldset class="position-relative">
+                                                                <input type="file" class="form-control" placeholder="Upload File" id="file_photo" name="file_photo">
+                                                            </fieldset>
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
+                                                            <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
+                                                                Delete
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col p-0">
+                                                <button class="btn btn-primary" data-repeater-create type="button"><i class="bx bx-plus" style="color: #FFFFFF;"></i>
+                                                    Add
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!--/ form default repeater -->
                 </section>
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -627,6 +680,8 @@
 <script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
 <script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
 <script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
+<script src="../app-assets/vendors/js/pickers/pickadate/picker.js"></script>
+<script src="../app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
@@ -642,6 +697,7 @@
 <!-- BEGIN: Page Vendor JS-->
 <script src="../app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
 <script src="../app-assets/js/scripts/forms/form-repeater.js"></script>
+<script src="../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js?time=<?php echo time();?>"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Page JS-->

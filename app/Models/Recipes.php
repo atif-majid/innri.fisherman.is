@@ -15,6 +15,9 @@ class Recipes extends Model
         'cooking_time'
     ];*/
     protected $fillable = [
-        'title'
+        'title',
+        'product_number',
+        'created_date',
+        'created_by'
     ];
 }

@@ -373,7 +373,7 @@
                                                 <td class="users-view-latest-activity" colspan="6"><strong>Description</strong></td>
                                             </tr>
                                             <tr>
-                                                <td class="users-view-latest-activity" colspan="6">{{ $improvement->description }}</td>
+                                                <td class="users-view-latest-activity" colspan="6">{!! nl2br($improvement->description) !!}</td>
                                             </tr>
                                             <tr>
                                                 <td class="users-view-latest-activity" colspan="6"><strong>Response and improvements</strong></td>
@@ -399,7 +399,7 @@
                                                                     <small>{{ $thisComment->comment_add_date }}</small>
                                                                 </div>
                                                                 <p class="mb-1">
-                                                                    {{ $thisComment->comment }}
+                                                                    {!! nl2br($thisComment->comment) !!}
                                                                 </p>
                                                             </a>
                                                         @endforeach

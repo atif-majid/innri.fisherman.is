@@ -16,6 +16,7 @@
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/pickers/pickadate/pickadate.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -196,7 +197,7 @@
                         </ul>
                     </li>
                     <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                            <?php /*<div class="user-nav d-sm-flex d-none"><span class="user-name"> {{ Auth::user()->name }}</span><span class="user-status text-muted">Available</span></div><span><img class="round" src="app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"></span>*/?>
+                            <?php /*<div class="user-nav d-sm-flex d-no<link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/pickers/pickadate/pickadate.css">ne"><span class="user-name"> {{ Auth::user()->name }}</span><span class="user-status text-muted">Available</span></div><span><img class="round" src="app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"></span>*/?>
                             <div class="user-nav d-sm-flex d-none"><span class="user-name"> {{ Auth::user()->name }}</span><span class="user-status text-muted">Available</span></div><span><img class="round" src="{{ Auth::user()->getpicture() }}" alt="avatar" height="40" width="40"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right pb-0">
@@ -324,7 +325,7 @@
                     <div class="alert alert-danger mb-2">{{ $error }}</div>
                 @endforeach
             @endif
-            <form class="form-horizontal" novalidate method="post" action="{{ route('recipes.update', $recipe->id) }}">
+            <form class="form-horizontal" enctype='multipart/form-data' novalidate method="post" action="{{ route('recipes.update', $recipe->id) }}">
             @csrf
             @method('PUT')
             <!-- // Basic multiple Column Form section start -->
@@ -340,35 +341,39 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Recipe Title</label>
+                                                    <label>Product number</label>
                                                     <div class="controls">
-                                                        <input type="text" name="title" value="@if (old('title')) {{ old('title') }} @else {{ $recipe->title }} @endif" class="form-control" data-validation-required-message="Recipe title is required" placeholder="Recipe Title">
+                                                        <input type="text" name="strProductNumber" value="@if (old('strProductNumber')) {{ old('strProductNumber') }} @else {{ $recipe->product_number }} @endif" class="form-control" @php /*data-validation-required-message="Product Number is required"*/ @endphp placeholder="Product Number">
                                                         <input type="hidden" name="nRecipeId" id="nRecipeId" value="@if (old('nRecipeId')) {{ old('nRecipeId') }} @else {{ $recipe->id }} @endif">
                                                         <input type="hidden" id="deletedingredients" name="deletedingredients" value="@if (old('deletedsteps')) {{ old('deletedsteps') }} @endif">
                                                         <input type="hidden" id="deletedsteps" name="deletedsteps" value="@if (old('deletedsteps')) {{ old('deletedsteps') }} @endif">
                                                     </div>
                                                 </div>
-                                                @php
-                                                /*<div class="form-group">
-                                                    <label>Cooking Time</label>
-                                                    <div class="controls">
-                                                        <input type="text" name="cooking_time" class="form-control" data-validation-required-message="Cooking time required" placeholder="Cooking Time">
-                                                    </div>
-                                                </div>
-                                                */
-                                                @endphp
                                             </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-md-6">
-                                                @php
-                                                /*
                                                 <div class="form-group">
-                                                    <label>Preparation Time</label>
+                                                    <label>Recipe Title</label>
                                                     <div class="controls">
-                                                        <input type="text" name="preparation_time" class="form-control" data-validation-required-message="Preparaion time is required" placeholder="Preparation Time">
+                                                        <input type="text" name="title" value="@if (old('title')) {{ old('title') }} @else {{ $recipe->title }} @endif" class="form-control" data-validation-required-message="Recipe title is required" placeholder="Recipe Title">
                                                     </div>
                                                 </div>
-                                                */
-                                                @endphp
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Recipe Created</label>
+                                                    <div class="controls">
+                                                        <fieldset class="position-relative has-icon-left">
+                                                            <input type="text" class="form-control format-picker" placeholder="Select Date" id="created_date" name="created_date" value="@if (old('created_date')) {{ old('created_date') }} @else {{ $recipe->created_date }} @endif">
+                                                            <div class="form-control-position">
+                                                                <i class='bx bx-calendar'></i>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -402,6 +407,10 @@
                                                                     @if(old('Ingredients')[$i]['ingredientid']>0)
                                                                         <input type="hidden" id="ingredientid" name="ingredientid" value="{{ old('Ingredients')[$i]['ingredientid'] }}">
                                                                     @endif
+                                                                </div>
+                                                                <div class="col-md-2 col-sm-12 form-group" style="max-width: 600px;">
+                                                                    <label for="text">Product Number </label>
+                                                                    <input type="text" class="form-control" id="ing_product_number" name="ing_product_number" placeholder="Product Number" style="width: 360px;" value="{{ old('Ingredients')[$i]['ing_product_number'] }}">
                                                                 </div>
                                                                 <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px;">
                                                                     <label for="quanity">Quantity</label>
@@ -438,7 +447,7 @@
                                                         <hr>
                                                     </div>
                                                 @endfor
-                                            @elseif ($Ingredients)
+                                            @elseif ($Ingredients && count($Ingredients)>0)
                                                 @foreach($Ingredients as $thisIngredient)
                                                     <div data-repeater-item>
                                                         <div class="row justify-content-between">
@@ -447,6 +456,10 @@
                                                                     <label for="text">Name </label>
                                                                     <input type="text" class="form-control" id="ingredient" name="ingredient" placeholder="Enter Item Title" style="width: 360px;" value="{{ $thisIngredient->name }}">
                                                                     <input type="hidden" id="ingredientid" name="ingredientid" value="{{ $thisIngredient->id }}">
+                                                                </div>
+                                                                <div class="col-md-2 col-sm-12 form-group" style="max-width: 600px;">
+                                                                    <label for="text">Product Number </label>
+                                                                    <input type="text" class="form-control" id="ing_product_number" name="ing_product_number" placeholder="Product Number" style="width: 360px;" value="{{ $thisIngredient->ing_product_number }}">
                                                                 </div>
                                                                 <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px;">
                                                                     <label for="quanity">Quantity</label>
@@ -484,6 +497,10 @@
                                                             <div class="col-md-2 col-sm-12 form-group" style="max-width: 600px;">
                                                                 <label for="text">Name </label>
                                                                 <input type="text" class="form-control" id="ingredient" name="ingredient" placeholder="Enter Item Title" style="width: 360px;">
+                                                            </div>
+                                                            <div class="col-md-2 col-sm-12 form-group" style="max-width: 600px;">
+                                                                <label for="text">Product Number </label>
+                                                                <input type="text" class="form-control" id="ing_product_number" name="ing_product_number" placeholder="Product Number" style="width: 360px;">
                                                             </div>
                                                             <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px;">
                                                                 <label for="quanity">Quantity</label>
@@ -549,12 +566,12 @@
                                                             <div class="col-md-2 col-sm-12 form-group" style="width: 800px; max-width: 80%;">
                                                                 <label for="text">Step </label>
                                                                 <textarea class="form-control" id="step" name="step" placeholder="Enter Step Detail" rows="4" style="width: 800px; max-width: 100%;">{{ old('Steps')[$i]['step'] }}</textarea>
-                                                                @if(old('Steps')[$i]['stepid']>0)
+                                                                @if(array_key_exists('stepid', old('Steps')[$i]) && old('Steps')[$i]['stepid']>0)
                                                                     <input type="hidden" id="stepid" name="stepid" value="{{ old('Steps')[$i]['stepid'] }}">
                                                                 @endif
                                                             </div>
                                                             <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
-                                                                @if(old('Steps')[$i]['stepid']>0)
+                                                                @if(array_key_exists('stepid', old('Steps')[$i]) && old('Steps')[$i]['stepid']>0)
                                                                     <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button" onclick="deletesteps({{ old('Steps')[$i]['stepid'] }})"> <i class="bx bx-x"></i>
                                                                         Delete
                                                                     </button>
@@ -569,7 +586,7 @@
                                                         <hr>
                                                     </div>
                                                 @endfor
-                                            @elseif($Steps)
+                                            @elseif($Steps && count($Steps)>0)
                                                 @foreach($Steps as $thisStep)
                                                     <div data-repeater-item>
                                                         <div class="row justify-content-between">
@@ -587,12 +604,51 @@
                                                         <hr>
                                                     </div>
                                                 @endforeach
-                                            @else
-                                                <div data-repeater-item>
-                                                    <div class="row justify-content-between">
-                                                        <div class="col-md-2 col-sm-12 form-group" style="width: 800px; max-width: 80%;">
-                                                            <label for="text">Step </label>
-                                                            <textarea class="form-control" id="step" name="step" placeholder="Enter Step Detail" rows="4" style="width: 800px; max-width: 100%;"></textarea>
+                                            @endif
+                                            <div data-repeater-item>
+                                                <div class="row justify-content-between">
+                                                    <div class="col-md-2 col-sm-12 form-group" style="width: 800px; max-width: 80%;">
+                                                        <label for="text">Step </label>
+                                                        <textarea class="form-control" id="step" name="step" placeholder="Enter Step Detail" rows="4" style="width: 800px; max-width: 100%;"></textarea>
+                                                    </div>
+                                                    <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
+                                                        <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
+                                                            Delete
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col p-0">
+                                                <button class="btn btn-primary" data-repeater-create type="button"><i class="bx bx-plus" style="color: #FFFFFF;"></i>
+                                                    Add
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Photos</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body repeater-default">
+                                        <div data-repeater-list="Photos">
+                                            <div data-repeater-item>
+                                                <div class="row justify-content-between">
+                                                    <div class="input-group">
+                                                        <div class="col-sm-4 form-group">
+                                                            <label>Photo</label>
+                                                            <fieldset class="position-relative">
+                                                                <input type="file" class="form-control" placeholder="Upload File" id="file_photo" name="file_photo">
+                                                            </fieldset>
                                                         </div>
                                                         <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
                                                             <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
@@ -600,9 +656,9 @@
                                                             </button>
                                                         </div>
                                                     </div>
-                                                    <hr>
                                                 </div>
-                                            @endif
+                                                <hr>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col p-0">
@@ -707,6 +763,8 @@
 <script src="../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
 <script src="../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
 <script src="../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
+<script src="../../app-assets/vendors/js/pickers/pickadate/picker.js"></script>
+<script src="../../app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
@@ -722,6 +780,8 @@
 <!-- BEGIN: Page Vendor JS-->
 <script src="../../app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
 <script src="../../app-assets/js/scripts/forms/form-repeater.js?time=<?php echo time();?>"></script>
+<script src="../../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js?time=<?php echo time();?>"></script>
+
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Page JS-->

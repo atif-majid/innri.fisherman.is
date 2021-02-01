@@ -391,7 +391,7 @@
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->quantity_estimate }}&nbsp;{{ $production->quantity_estimate_unit }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->quantity_scaled }}&nbsp;{{ $production->quantity_scaled_unit }}</td>
                                                 <td style="padding: 0.5rem 1.15rem; white-space: nowrap;">
-                                                    <form id="form-del" action="{{ route('production.destroy',$production->id) }}" method="POST">
+                                                    <form id="form-del-{{$production->id}}" action="{{ route('production.destroy',$production->id) }}" method="POST">
                                                         <a href="{{ route('production.show', $production->id) }}" class="invoice-action-view">
                                                             <i class="bx bx-show-alt"></i>
                                                         </a>
@@ -399,7 +399,7 @@
                                                         @csrf
                                                         @method('DELETE')
                                                         <a href="{{ route('production.destroy', $production->id) }}" onclick="event.preventDefault();
-                                                     if(confirm('Are you sure to delete?')){document.getElementById('form-del').submit();}"><i class="bx bxs-trash-alt"></i></a>
+                                                     if(confirm('Are you sure to delete?')){document.getElementById('form-del-{{$production->id}}').submit();}"><i class="bx bxs-trash-alt"></i></a>
                                                     </form>
                                                 </td>
                                             </tr>

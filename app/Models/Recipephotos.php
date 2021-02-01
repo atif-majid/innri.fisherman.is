@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ingredients extends Model
+class Recipephotos extends Model
 {
-    use HasFactory;
+    public $table = "recipephotos";
     public $timestamps = false;
+    use HasFactory;
     protected $fillable = [
-        'name',
-        'amount',
-        'unit',
         'recipe_id',
-        'ing_product_number'
+        'file_name',
+        'file_creation_date',
+        'file_created_by'
     ];
 }

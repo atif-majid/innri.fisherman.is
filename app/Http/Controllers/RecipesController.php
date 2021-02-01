@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Recipes;
 use App\Models\Ingredients;
 use App\Models\Steps;
+use App\Models\Recipephotos;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class RecipesController extends Controller
 {
@@ -58,14 +61,14 @@ class RecipesController extends Controller
                 'Ingredients.*.ingredient' => 'required',
                 'Ingredients.*.quantity' => 'required',
                 'Ingredients.*.unit' => 'required',
-                'Steps.*.step' => 'required'
+                /*'Steps.*.step' => 'required'*/
             ],
             [
                 'title.required' => 'Recipe title is required',
                 'Ingredients.*.ingredient.required' => 'Ingredient name is required',
                 'Ingredients.*.quantity.required' => 'Ingredient quantity is required',
                 'Ingredients.*.unit.required' => 'Ingredient unit is required',
-                'Steps.*.step.required' => 'Step details are required'
+                /*'Steps.*.step.required' => 'Step details are required'*/
             ]);
         /*$arrRecipe = array(
             'title'=>$request->title,
@@ -73,9 +76,17 @@ class RecipesController extends Controller
             'cooking_time'=>$request->cooking_time
             );*/
         $arrRecipe = array(
-            'title'=>$request->title
+            'title'=>$request->title,
+            'created_by'=>Auth::user()->getempid()
         );
-
+        if(trim($request->strProductNumber)!="")
+        {
+            $arrRecipe['product_number'] = $request->strProductNumber;
+        }
+        if(trim($request->created_date)!="")
+        {
+            $arrRecipe['created_date'] = $request->created_date;
+        }
         $recipe = Recipes::create($arrRecipe);
         $nRecipeID = $recipe->id;
 
@@ -86,19 +97,48 @@ class RecipesController extends Controller
                 'name'=>$thisIngredient['ingredient'],
                 'amount'=>$thisIngredient['quantity'],
                 'unit'=>$thisIngredient['unit'],
-                'recipe_id'=>$nRecipeID
+                'recipe_id'=>$nRecipeID,
             );
+            if(array_key_exists('ing_product_number', $thisIngredient) && $thisIngredient['ing_product_number']!="")
+            {
+                $arrInsert['ing_product_number'] = $thisIngredient['ing_product_number'];
+            }
             Ingredients::create($arrInsert);
         }
 
         $arrSteps = $_POST['Steps'];
         foreach ($arrSteps as $thisStep)
         {
-            $arrInsert = array(
-                'details'=>$thisStep['step'],
-                'recipe_id'=>$nRecipeID
-            );
-            Steps::create($arrInsert);
+            if(trim($thisStep['step'])!="")
+            {
+                $arrInsert = array(
+                    'details'=>$thisStep['step'],
+                    'recipe_id'=>$nRecipeID
+                );
+                Steps::create($arrInsert);
+            }
+        }
+
+        if($request->file('Photos'))
+        {
+            $arrPhotos = $request->file('Photos');
+            {
+                foreach ($arrPhotos as $thispic)
+                {
+                    $file = $thispic['file_photo'];
+
+                    $destination = 'uploads/recipes/'.$nRecipeID;
+                    $strFileName = $file->getClientOriginalName();
+                    $file->move($destination, $strFileName);
+                    $arrPicRecord = array(
+                        'recipe_id'=>$nRecipeID,
+                        'file_name'=>$strFileName,
+                        'file_creation_date' => date("Y-m-d H:i:s"),
+                        'file_created_by' => Auth::user()->getempid()
+                    );
+                    Recipephotos::create($arrPicRecord);
+                }
+            }
         }
         return redirect()->route('recipes.index')
             ->with('success','Recipe added successfully.');
@@ -116,7 +156,8 @@ class RecipesController extends Controller
         $nRecipeID = $recipe->id;
         $Ingredients = Ingredients::where('recipe_id', $nRecipeID)->get();
         $Steps = Steps::where('recipe_id', $nRecipeID)->get();
-        return view('recipes.show', compact('recipe', 'Ingredients', 'Steps'));
+        $RecipePhoto = Recipephotos::where('recipe_id', $nRecipeID)->get();
+        return view('recipes.show', compact('recipe', 'Ingredients', 'Steps', 'RecipePhoto'));
     }
 
     /**
@@ -149,18 +190,26 @@ class RecipesController extends Controller
             'Ingredients.*.ingredient' => 'required',
             'Ingredients.*.quantity' => 'required',
             'Ingredients.*.unit' => 'required',
-            'Steps.*.step' => 'required'
+            /*'Steps.*.step' => 'required'*/
         ],
             [
                 'title.required' => 'Recipe title is required',
                 'Ingredients.*.ingredient.required' => 'Ingredient name is required',
                 'Ingredients.*.quantity.required' => 'Ingredient quantity is required',
                 'Ingredients.*.unit.required' => 'Ingredient unit is required',
-                'Steps.*.step.required' => 'Step details are required'
+                /*'Steps.*.step.required' => 'Step details are required'*/
             ]);
         $arrRecipe = array(
             'title'=>$request->title
         );
+        if(trim($request->strProductNumber)!="")
+        {
+            $arrRecipe['product_number'] = $request->strProductNumber;
+        }
+        if(trim($request->created_date)!="")
+        {
+            $arrRecipe['created_date'] = $request->created_date;
+        }
         $nRecipeId = $request->nRecipeId;
 
         $deletedingredients = $_POST['deletedingredients'];
@@ -170,45 +219,63 @@ class RecipesController extends Controller
         $arrUpdatedSteps = array();
 
         Recipes::find($nRecipeId)->update($arrRecipe);
-        $arrIngredients = $_POST['Ingredients'];
-        foreach ($arrIngredients as $thisIngredient)
+        if(array_key_exists('Ingredients', $_POST))
         {
-
-            $arrUpdateIngredient = array(
-                'name'=>$thisIngredient['ingredient'],
-                'amount'=>$thisIngredient['quantity'],
-                'unit'=>$thisIngredient['unit'],
-                'recipe_id'=>$nRecipeId
-            );
-            if(isset($thisIngredient['ingredientid']) && $thisIngredient['ingredientid']>0)
+            $arrIngredients = $_POST['Ingredients'];
+            foreach ($arrIngredients as $thisIngredient)
             {
-                $nIngredientID = $thisIngredient['ingredientid'];
-                Ingredients::find($nIngredientID)->update($arrUpdateIngredient);
-                $arrUpdatedIngredients[] = $nIngredientID;
-            }
-            else{
-                Ingredients::create($arrUpdateIngredient);
-            }
 
+                $arrUpdateIngredient = array(
+                    'name'=>$thisIngredient['ingredient'],
+                    'amount'=>$thisIngredient['quantity'],
+                    'unit'=>$thisIngredient['unit'],
+                    'recipe_id'=>$nRecipeId
+                );
+                if(array_key_exists('ing_product_number', $thisIngredient) && $thisIngredient['ing_product_number']!="")
+                {
+                    $arrUpdateIngredient['ing_product_number'] = $thisIngredient['ing_product_number'];
+                }
+
+                if(isset($thisIngredient['ingredientid']) && $thisIngredient['ingredientid']>0)
+                {
+                    $nIngredientID = $thisIngredient['ingredientid'];
+                    Ingredients::find($nIngredientID)->update($arrUpdateIngredient);
+                    $arrUpdatedIngredients[] = $nIngredientID;
+                }
+                else{
+                    Ingredients::create($arrUpdateIngredient);
+                }
+
+            }
         }
 
-        $arrSteps = $_POST['Steps'];
-        foreach ($arrSteps as $thisStep)
+
+        if(array_key_exists('Steps', $_POST))
         {
-            $arrUpdateStep = array(
-                'details'=>$thisStep['step'],
-                'recipe_id'=>$nRecipeId
-            );
-            if(isset($thisStep['stepid']) && $thisStep['stepid']>0)
+
+            $arrSteps = $_POST['Steps'];
+            foreach ($arrSteps as $thisStep)
             {
-                $nStepID = $thisStep['stepid'];
-                Steps::find($nStepID)->update($arrUpdateStep);
-                $arrUpdatedSteps[] = $nStepID;
-            }
-            else{
-                Steps::create($arrUpdateStep);
+                if(trim($thisStep['step'])!="")
+                {
+                    $arrUpdateStep = array(
+                        'details'=>$thisStep['step'],
+                        'recipe_id'=>$nRecipeId
+                    );
+                    if(isset($thisStep['stepid']) && $thisStep['stepid']>0)
+                    {
+                        $nStepID = $thisStep['stepid'];
+                        Steps::find($nStepID)->update($arrUpdateStep);
+                        $arrUpdatedSteps[] = $nStepID;
+                    }
+                    else{
+                        Steps::create($arrUpdateStep);
+                    }
+                }
             }
         }
+
+
         if(trim($deletedingredients)!="")
         {
             $arrDeletedIngredients = explode(",", $deletedingredients);
@@ -234,6 +301,28 @@ class RecipesController extends Controller
             }
         }
 
+        if($request->file('Photos'))
+        {
+            $arrPhotos = $request->file('Photos');
+            {
+                foreach ($arrPhotos as $thispic)
+                {
+                    $file = $thispic['file_photo'];
+
+                    $destination = 'uploads/recipes/'.$nRecipeId;
+                    $strFileName = $file->getClientOriginalName();
+                    $file->move($destination, $strFileName);
+                    $arrPicRecord = array(
+                        'recipe_id'=>$nRecipeId,
+                        'file_name'=>$strFileName,
+                        'file_creation_date' => date("Y-m-d H:i:s"),
+                        'file_created_by' => Auth::user()->getempid()
+                    );
+                    Recipephotos::create($arrPicRecord);
+                }
+            }
+        }
+
 
         return redirect()->route('recipes.index')
             ->with('success','Recipe updated successfully.');
@@ -251,6 +340,18 @@ class RecipesController extends Controller
         $nRecipeID = $recipe->id;
         Ingredients::where('recipe_id',$nRecipeID)->delete();
         Steps::where('recipe_id',$nRecipeID)->delete();
+        $photos = Recipephotos::where('recipe_id', $nRecipeID)->get();
+        foreach ($photos as $thisphoto)
+        {
+            $nPhotoID = $thisphoto->id;
+            $strPhotoName = $thisphoto->file_name;
+            $path = public_path('uploads/recipes/'.$nRecipeID.'/'.$strPhotoName);
+            if(File::exists($path))
+            {
+                File::delete($path);
+            }
+            Recipephotos::find($nPhotoID)->delete();
+        }
         $recipe->delete();
         return redirect()->route('recipes.index')
             ->with('success','Recipe deleted successfully.');
