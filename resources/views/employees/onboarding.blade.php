@@ -9,9 +9,9 @@
     <meta name="description" content="Frest admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Frest admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Site Settings</title>
-    <link rel="apple-touch-icon" href="../app-assets/images/ico/apple-icon-120.png">
-    <!--<link rel="shortcut icon" type="image/x-icon" href="../app-assets/images/ico/favicon.ico">-->
+    <title>Employees - Onboarding Tasks</title>
+    <link rel="apple-touch-icon" href="../../app-assets/images/ico/apple-icon-120.png">
+    <!--<link rel="shortcut icon" type="image/x-icon" href="../../app-assets/images/ico/favicon.ico">-->
     <link rel="shortcut icon" type="image/x-icon" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_180x180.png?v=1595428268">
     <link rel="apple-touch-icon" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_180x180.png?v=1595428268"/>
     <link rel="apple-touch-icon" sizes="57x57" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_57x57.png?v=1595428268"/>
@@ -24,43 +24,34 @@
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/pickers/pickadate/pickadate.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/ui/prism.min.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/bootstrap.css?time=<?php echo time();?>">
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/bootstrap-extended.css?time=<?php echo time();?>">
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/colors.css?time=<?php echo time();?>">
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/components.css?time=<?php echo time();?>">
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/themes/dark-layout.css">
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/themes/semi-dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/bootstrap.css?time=<?php echo time();?>">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/bootstrap-extended.css?time=<?php echo time();?>">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/colors.css?time=<?php echo time();?>">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/components.css?time=<?php echo time();?>">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/themes/dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/themes/semi-dark-layout.css">
     <!-- END: Theme CSS-->
 
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/core/menu/menu-types/vertical-menu.css">
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/plugins/forms/validation/form-validation.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/plugins/forms/validation/form-validation.css">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/style.css">
     <!-- END: Custom CSS-->
     <style>
-        .form-group{
-            margin-bottom: 0rem !important;
+        .picker {
+            width: 500px;
         }
-        .mb-2, .my-2{
-            margin-bottom: 0.5rem !important;
-        }
-        .col-md-2{
-            padding-left: 0px !important;
-            padding-top: 1rem !important;
-        }
-        .btn-danger{
-            padding-top: 0.4rem !important;
-            padding-bottom: 0.4rem !important;
-        }
-
     </style>
+
 </head>
 <!-- END: Head-->
 
@@ -115,7 +106,7 @@
                             <li class="scrollable-container media-list"><a class="d-flex justify-content-between" href="javascript:void(0)">
                                     <div class="media d-flex align-items-center">
                                         <div class="media-left pr-0">
-                                            <div class="avatar mr-1 m-0"><img src="../app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="39" width="39"></div>
+                                            <div class="avatar mr-1 m-0"><img src="../../app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="39" width="39"></div>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">Congratulate Socrates Itumay</span> for work anniversaries</h6><small class="notification-text">Mar 15 12:32pm</small>
@@ -125,7 +116,7 @@
                                 <div class="d-flex justify-content-between read-notification cursor-pointer">
                                     <div class="media d-flex align-items-center">
                                         <div class="media-left pr-0">
-                                            <div class="avatar mr-1 m-0"><img src="../app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
+                                            <div class="avatar mr-1 m-0"><img src="../../app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">New Message</span> received</h6><small class="notification-text">You have 18 unread messages</small>
@@ -134,7 +125,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between cursor-pointer">
                                     <div class="media d-flex align-items-center py-0">
-                                        <div class="media-left pr-0"><img class="mr-1" src="../app-assets/images/icon/sketch-mac-icon.png" alt="avatar" height="39" width="39"></div>
+                                        <div class="media-left pr-0"><img class="mr-1" src="../../app-assets/images/icon/sketch-mac-icon.png" alt="avatar" height="39" width="39"></div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">Updates Available</span></h6><small class="notification-text">Sketch 50.2 is currently newly added</small>
                                         </div>
@@ -188,7 +179,7 @@
                                 <div class="d-flex justify-content-between read-notification cursor-pointer">
                                     <div class="media d-flex align-items-center">
                                         <div class="media-left pr-0">
-                                            <div class="avatar mr-1 m-0"><img src="../app-assets/images/portrait/small/avatar-s-4.jpg" alt="avatar" height="39" width="39"></div>
+                                            <div class="avatar mr-1 m-0"><img src="../../app-assets/images/portrait/small/avatar-s-4.jpg" alt="avatar" height="39" width="39"></div>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">New file</span> has been uploaded</h6><small class="notification-text">4 hrs ago</small>
@@ -210,7 +201,7 @@
                                 <div class="d-flex justify-content-between cursor-pointer">
                                     <div class="media d-flex align-items-center border-0">
                                         <div class="media-left pr-0">
-                                            <div class="avatar mr-1 m-0"><img src="../app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
+                                            <div class="avatar mr-1 m-0"><img src="../../app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading"><span class="text-bold-500">New customer</span> comment recieved</h6><small class="notification-text">2 days ago</small>
@@ -251,7 +242,7 @@
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto"><a class="navbar-brand" href="{{ route('home') }}">
-                    <div class="brand-logo" style="width: 100%; max-width: 211px;"><!--<img class="logo" src="app-assets/images/logo/logo.png" />--><img class="logo" src="../app-assets/images/logo/fisherman-2.png" style="width: 100%; max-width: 211px; height: 47px; max-height: 47px;" /></div>
+                    <div class="brand-logo" style="width: 100%; max-width: 211px;"><!--<img class="logo" src="app-assets/images/logo/logo.png" />--><img class="logo" src="../../app-assets/images/logo/fisherman-2.png" style="width: 100%; max-width: 211px; height: 47px; max-height: 47px;" /></div>
                     <!--<h2 class="brand-text mb-0">Frest</h2>-->
                 </a></li>
             <!--<li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="bx bx-x d-block d-xl-none font-medium-4 primary"></i><i class="toggle-icon bx bx-disc font-medium-4 d-none d-xl-block primary" data-ticon="bx-disc"></i></a></li>-->
@@ -306,7 +297,7 @@
                 <ul class="menu-content">
                     <li><a href="{{ route('employees.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Employee Directory</span></a>
                     </li>
-                    <li><a href="#"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Job Description</span></a>
+                    <li class="active"><a href="#"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Job Description</span></a>
                     </li>
                     <li><a href="{{ route('employees.outstandingitems') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Outstanding items</span></a>
                     </li>
@@ -314,7 +305,7 @@
             </li>
             <li class="nav-item"><a href="#"><span class="menu-title">Site Settings</span></a>
                 <ul class="menu-content">
-                    <li class="active"><a href="{{ route('sitesettings.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Form Values</span></a>
+                    <li><a href="{{ route('sitesettings.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Form Values</span></a>
                     </li>
                     <li><a href="{{ route('sitesettings.onboardingsections') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Onboarding Categories</span></a>
                     </li>
@@ -335,15 +326,15 @@
             <div class="content-header-left col-12 mb-2 mt-1">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h5 class="content-header-title float-left pr-1 mb-0">Site Settings</h5>
+                        <h5 class="content-header-title float-left pr-1 mb-0">Add New Task</h5>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb p-0 mb-0">
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bx bx-home-alt"></i></a>
                                 </li>
-                                <li class="breadcrumb-item active">Site Settings
+                                <li class="breadcrumb-item"><a href="{{ route('employees.index') }}">Employees</a>
                                 </li>
-                                <!--<li class="breadcrumb-item active">Add new employee
-                                </li>-->
+                                <li class="breadcrumb-item active">Onboarding Tasks
+                                </li>
                             </ol>
                         </div>
                     </div>
@@ -352,261 +343,297 @@
         </div>
         <div class="content-body">
             <!-- Input Validation start -->
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger mb-2">{{ $error }}</div>
+                @endforeach
+            @endif
             @if ($message = Session::get('success'))
                 <div class="alert alert-info mb-2">
                     {{ $message }}
                 </div>
             @endif
-            <form class="form-horizontal" novalidate method="post" action="{{ route('sitesettings.store') }}">
-                @csrf
-                <input type="hidden" id="deletedsettings" name="deletedsettings" value="">
-                <section id="form-control-repeater">
+            <section class="input-validation">
+                <form id="frmNewTask" class="form-horizontal"   novalidate method="post" action="{{ route('employees.storeonboarding') }}">
+                    @csrf
+                    <input type="hidden" id="nForEmpID" name="nForEmpID" value="{{ $forEmployee->id }}">
                     <div class="row">
-                        <!-- file repeater  -->
-                        <div class="col-xl-6 col-lg-12">
+                        <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Type of Notification</h4>
+                                    <h4 class="card-title">Onboarding tasks for {{ $forEmployee->name }}</h4>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-12 form-group type-of-notification">
-                                                <div data-repeater-list="Notifications">
-                                                    @foreach($sitesettings as $thissetting)
-                                                        @if($thissetting->field=='Notification')
+                                        <div class="card-body repeater-default">
+                                            <div data-repeater-list="OnBoardingTasks">
+                                                @foreach($onboardingsection as $thisSection)
+                                                    <h4>{{$thisSection->value}}</h4>
+                                                    @php
+                                                        $strKey =  str_replace(' ', '_', $thisSection->value);
+                                                        $TasksThisKey = $arrTasks["$strKey"];
+                                                    @endphp
+                                                    @foreach($TasksThisKey as $thissetting)
+                                                        @php
+                                                            $taskKey = str_replace(" ", "_", $thissetting->value);
+                                                        @endphp
+                                                        @if(array_key_exists($taskKey, $arrPreset))
                                                             <div data-repeater-item>
-                                                                <div class="row mb-2 justify-content-between">
-                                                                    <div class="form-group col-sm">
-                                                                        <label>Notification Title</label>
-                                                                        <fieldset class="position-relative">
-                                                                            <input type="text" id="strNotificationType" name="strNotificationType" value="{{ $thissetting->value }}">
-                                                                            <input type="hidden" id="nID" name="nID" value="{{ $thissetting->id }}">
-                                                                        </fieldset>
-                                                                    </div>
-                                                                    <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
-                                                                        <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button" onclick="deletesettings({{ $thissetting->id }})"> <i class="bx bx-x"></i>
-                                                                            Delete
-                                                                        </button>
+                                                                <div class="row">
+                                                                    <div class="input-group">
+                                                                        <div class="col-sm-2 form-group">
+                                                                            <label>Status</label>
+                                                                            <fieldset class="position-relative">
+                                                                                <select class="form-control" name="strStatus">
+                                                                                    <option value="" selected></option>
+                                                                                    @foreach($arrStatus as $status)
+                                                                                        <option value="{{ $status }}" @if($arrPreset["$taskKey"]->status==$status) selected @endif>{{ $status }}</option>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                            </fieldset>
+                                                                        </div>
+                                                                        <div class="col-sm-5 form-group">
+                                                                            <label>Task</label>
+                                                                            <fieldset class="position-relative">
+                                                                                <input type="hidden" id="strTask" name="strTask" value="{{$thissetting->value}}">
+                                                                                <input type="hidden" id="nTaskID" name="nTaskID" value="{{$arrPreset["$taskKey"]->id}}">
+                                                                                {{$thissetting->value}}
+                                                                            </fieldset>
+                                                                        </div>
+                                                                        <div class="col-sm-3 form-group">
+                                                                            <label>Responsible Person</label>
+                                                                            <fieldset class="position-relative">
+                                                                                <select class="form-control" id="nAssignedTo" name="nAssignedTo">
+                                                                                    <option value="" selected></option>
+                                                                                    @foreach ($employees as $employee)
+                                                                                        <option value="{{ $employee->id }}" @if($employee->id == $arrPreset["$taskKey"]->responsible_person) selected @endif>{{ $employee->name }}</option>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                            </fieldset>
+                                                                        </div>
+                                                                        <div class="col-sm-2 form-group">
+                                                                            <label>Due Date</label>
+                                                                            <fieldset class="position-relative has-icon-left">
+                                                                                <input type="text" class="form-control format-picker" placeholder="Select Date" id="purchase_date" name="strDueDate" value="{{ $arrPreset["$taskKey"]->due_date }}">
+                                                                                <div class="form-control-position">
+                                                                                    <i class='bx bx-calendar'></i>
+                                                                                </div>
+                                                                            </fieldset>
+                                                                        </div>
+                                                                        @php
+                                                                            /*<div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
+                                                                            <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
+                                                                                Delete
+                                                                            </button>
+                                                                        </div>*/
+                                                                        @endphp
                                                                     </div>
                                                                 </div>
+                                                                <hr>
+                                                            </div>
+                                                        @else
+                                                            <div data-repeater-item>
+                                                                <div class="row justify-content-between">
+                                                                    <div class="input-group">
+                                                                        <div class="col-sm-2 form-group">
+                                                                            <label>Status</label>
+                                                                            <fieldset class="position-relative">
+                                                                                <select class="form-control" name="strStatus">
+                                                                                    <option value="" selected></option>
+                                                                                    @foreach($arrStatus as $status)
+                                                                                        <option value="{{ $status }}" @if($status=='Not Started') selected @endif>{{ $status }}</option>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                            </fieldset>
+                                                                        </div>
+                                                                        <div class="col-sm-5 form-group">
+                                                                            <label>Task</label>
+                                                                            <fieldset class="position-relative">
+                                                                                <input type="hidden" id="strTask" name="strTask" value="{{$thissetting->value}}">
+                                                                                {{$thissetting->value}}
+                                                                            </fieldset>
+                                                                        </div>
+                                                                        <div class="col-sm-3 form-group">
+                                                                            <label>Responsible Person</label>
+                                                                            <fieldset class="position-relative">
+                                                                                <select class="form-control" id="nAssignedTo" name="nAssignedTo">
+                                                                                    <option value="" selected></option>
+                                                                                    @foreach ($employees as $employee)
+                                                                                        <option value="{{ $employee->id }}">{{ $employee->name }}</option>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                            </fieldset>
+                                                                        </div>
+                                                                        <div class="col-sm-2 form-group">
+                                                                            <label>Due Date</label>
+                                                                            <fieldset class="position-relative has-icon-left">
+                                                                                <input type="text" class="form-control format-picker" placeholder="Select Date" id="purchase_date" name="strDueDate">
+                                                                                <div class="form-control-position">
+                                                                                    <i class='bx bx-calendar'></i>
+                                                                                </div>
+                                                                            </fieldset>
+                                                                        </div>
+                                                                        @php
+                                                                            /*<div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
+                                                                            <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
+                                                                                Delete
+                                                                            </button>
+                                                                        </div>*/
+                                                                        @endphp
+                                                                    </div>
+                                                                </div>
+                                                                <hr>
                                                             </div>
                                                         @endif
                                                     @endforeach
-                                                    <div data-repeater-item>
-                                                        <div class="row mb-2">
-                                                            <div class="form-group col-sm">
-                                                                <label>Notification Title</label>
-                                                                <fieldset class="position-relative">
-                                                                    <input type="text" id="strNotificationType" name="strNotificationType">
-                                                                </fieldset>
-                                                            </div>
-                                                            <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
-                                                                <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
-                                                                    Delete
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col form-group p-0">
-                                                    <button class="btn btn-primary" data-repeater-create type="button">
-                                                        <i class="bx bx-plus"></i>Add
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /file repeater -->
-                        <!-- phone repeater -->
-                        <div class="col-xl-6 col-lg-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Production Sites</h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-12 form-group production-site">
-                                                <div data-repeater-list="ProductionSites">
-                                                    @foreach($sitesettings as $thissetting)
-                                                        @if($thissetting->field=='ProductionSite')
-                                                            <div data-repeater-item>
-                                                                <div class="row mb-2">
-                                                                    <div class="form-group col-sm">
-                                                                        <label>Site Name</label>
-                                                                        <fieldset class="position-relative">
-                                                                            <input type="text" id="strProductionSite" name="strProductionSite" value="{{ $thissetting->value }}">
-                                                                            <input type="hidden" id="nID" name="nID" value="{{ $thissetting->id }}">
-                                                                        </fieldset>
-                                                                    </div>
-                                                                    <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
-                                                                        <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button" onclick="deletesettings({{ $thissetting->id }})"> <i class="bx bx-x"></i>
-                                                                            Delete
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        @endif
-                                                    @endforeach
-                                                    <div data-repeater-item>
-                                                        <div class="row mb-2">
-                                                            <div class="form-group col-sm">
-                                                                <label>Site Name</label>
-                                                                <fieldset class="position-relative">
-                                                                    <input type="text" id="strProductionSite" name="strProductionSite">
-                                                                </fieldset>
-                                                            </div>
-                                                            <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
-                                                                <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
-                                                                    Delete
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col form-group p-0">
-                                                    <button class="btn btn-primary" data-repeater-create type="button">
-                                                        <i class="bx bx-plus"></i>Add
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /phone repeater -->
-                    </div>
-                </section>
+                                                @endforeach
 
-                <section id="form-control-repeater1">
-                    <div class="row">
-                        <!-- file repeater  -->
-                        <div class="col-xl-6 col-lg-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Supplier</h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-12 form-group list-of-suppliers">
-                                                <div data-repeater-list="Suppliers">
-                                                    @foreach($sitesettings as $thissetting)
-                                                        @if($thissetting->field=='SupplierName')
-                                                            <div data-repeater-item>
-                                                                <div class="row mb-2">
-                                                                    <div class="form-group col-sm">
-                                                                        <label>Suppliers</label>
+                                                @php
+                                                /*
+                                                @if(count($onboarding)>0)
+                                                    @foreach($onboarding as $task)
+                                                        <div data-repeater-item>
+                                                            <div class="row justify-content-between">
+                                                                <div class="input-group">
+                                                                    <div class="col-sm-2 form-group">
+                                                                        <label>Status</label>
                                                                         <fieldset class="position-relative">
-                                                                            <input type="text" id="strSupplierName" name="strSupplierName" value="{{ $thissetting->value }}">
-                                                                            <input type="hidden" id="nID" name="nID" value="{{ $thissetting->id }}">
+                                                                            <select class="form-control" name="strStatus">
+                                                                                <option value="" selected></option>
+                                                                                @foreach($arrStatus as $status)
+                                                                                    <option value="{{ $status }}" @if($status == $task->status) selected @endif>{{ $status }}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                            <input type="hidden" name="nTaskID" value="{{ $task->id }}">
+                                                                        </fieldset>
+                                                                    </div>
+                                                                    <div class="col-sm-3 form-group">
+                                                                        <label>Task</label>
+                                                                        <fieldset class="position-relative">
+                                                                            <select class="form-control" name="strTask">
+                                                                                <option value="" selected></option>
+                                                                                @foreach($arrTasks as $key=>$val)
+                                                                                    <optgroup label="{{$key}}">
+                                                                                        @for($i=0; $i<count($val);$i++)
+                                                                                            <option value="{{$val[$i]}}" @if($val[$i]==$task->task) selected @endif>{{$val[$i]}}</option>
+                                                                                        @endfor
+                                                                                    </optgroup>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </fieldset>
+                                                                    </div>
+                                                                    <div class="col-sm-2 form-group">
+                                                                        <label>Responsible Person</label>
+                                                                        <fieldset class="position-relative">
+                                                                            <select class="form-control" id="nAssignedTo" name="nAssignedTo">
+                                                                                <option value="" selected></option>
+                                                                                @foreach ($employees as $employee)
+                                                                                    <option value="{{ $employee->id }}" @if($task->responsible_person==$employee->id ) { selected } @endif>{{ $employee->name }}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </fieldset>
+                                                                    </div>
+                                                                    <div class="col-sm-3 form-group">
+                                                                        <label>Due Date</label>
+                                                                        <fieldset class="position-relative has-icon-left">
+                                                                            <input type="text" class="form-control format-picker" placeholder="Select Date" id="purchase_date" name="strDueDate" value="{{ $task->due_date }}">
+                                                                            <div class="form-control-position">
+                                                                                <i class='bx bx-calendar'></i>
+                                                                            </div>
                                                                         </fieldset>
                                                                     </div>
                                                                     <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
-                                                                        <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button" onclick="deletesettings({{ $thissetting->id }})"> <i class="bx bx-x"></i>
+                                                                        <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
                                                                             Delete
                                                                         </button>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        @endif
+                                                            <hr>
+                                                        </div>
+                                                    @endforeach
+                                                @else
+                                                    @foreach()
                                                     @endforeach
                                                     <div data-repeater-item>
-                                                        <div class="row mb-2">
-                                                            <div class="form-group col-sm">
-                                                                <label>Suppliers</label>
-                                                                <fieldset class="position-relative">
-                                                                    <input type="text" id="strSupplierName" name="strSupplierName">
-                                                                </fieldset>
-                                                            </div>
-                                                            <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
-                                                                <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
-                                                                    Delete
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col form-group p-0">
-                                                    <button class="btn btn-primary" data-repeater-create type="button">
-                                                        <i class="bx bx-plus"></i>Add
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /file repeater -->
-                        <!-- phone repeater -->
-                        <div class="col-xl-6 col-lg-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Selling Locations</h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-12 form-group selling-locations">
-                                                <div data-repeater-list="SellingLocations">
-                                                    @foreach($sitesettings as $thissetting)
-                                                        @if($thissetting->field=='SellingSite')
-                                                            <div data-repeater-item>
-                                                                <div class="row mb-2">
-                                                                    <div class="form-group col-sm">
-                                                                        <label>Location Name</label>
-                                                                        <fieldset class="position-relative">
-                                                                            <input type="text" id="strSellingSite" name="strSellingSite" value="{{ $thissetting->value }}">
-                                                                            <input type="hidden" id="nID" name="nID" value="{{ $thissetting->id }}">
-                                                                        </fieldset>
-                                                                    </div>
-                                                                    <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
-                                                                        <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button" onclick="deletesettings({{ $thissetting->id }})"> <i class="bx bx-x"></i>
-                                                                            Delete
-                                                                        </button>
-                                                                    </div>
+                                                        <div class="row justify-content-between">
+                                                            <div class="input-group">
+                                                                <div class="col-sm-2 form-group">
+                                                                    <label>Status</label>
+                                                                    <fieldset class="position-relative">
+                                                                        <select class="form-control" name="strStatus">
+                                                                            <option value="" selected></option>
+                                                                            @foreach($arrStatus as $status)
+                                                                                <option value="{{ $status }}">{{ $status }}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div class="col-sm-3 form-group">
+                                                                    <label>Task</label>
+                                                                    <fieldset class="position-relative">
+                                                                        <select class="form-control" name="strTask">
+                                                                            <option value="" selected></option>
+                                                                            @foreach($arrTasks as $key=>$val)
+                                                                                <optgroup label="{{$key}}">
+                                                                                    @for($i=0; $i<count($val);$i++)
+                                                                                        <option value="{{$val[$i]}}">{{$val[$i]}}</option>
+                                                                                    @endfor
+                                                                                </optgroup>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div class="col-sm-2 form-group">
+                                                                    <label>Responsible Person</label>
+                                                                    <fieldset class="position-relative">
+                                                                        <select class="form-control" id="nAssignedTo" name="nAssignedTo">
+                                                                            <option value="" selected></option>
+                                                                            @foreach ($employees as $employee)
+                                                                                <option value="{{ $employee->id }}" @if(old('nAssignedTo')==$employee->id ) { selected } @endif>{{ $employee->name }}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div class="col-sm-3 form-group">
+                                                                    <label>Due Date</label>
+                                                                    <fieldset class="position-relative has-icon-left">
+                                                                        <input type="text" class="form-control format-picker" placeholder="Select Date" id="purchase_date" name="strDueDate">
+                                                                        <div class="form-control-position">
+                                                                            <i class='bx bx-calendar'></i>
+                                                                        </div>
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
+                                                                    <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
+                                                                        Delete
+                                                                    </button>
                                                                 </div>
                                                             </div>
-                                                        @endif
-                                                    @endforeach
-                                                    <div data-repeater-item>
-                                                        <div class="row mb-2">
-                                                            <div class="form-group col-sm">
-                                                                <label>Location Name</label>
-                                                                <fieldset class="position-relative">
-                                                                    <input type="text" id="strSellingSite" name="strSellingSite">
-                                                                </fieldset>
-                                                            </div>
-                                                            <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
-                                                                <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
-                                                                    Delete
-                                                                </button>
-                                                            </div>
                                                         </div>
+                                                        <hr>
                                                     </div>
-                                                </div>
-                                                <div class="col form-group p-0">
-                                                    <button class="btn btn-primary" data-repeater-create type="button">
-                                                        <i class="bx bx-plus"></i>Add
+                                                @endif*/
+                                                @endphp
+                                            </div>
+                                            @php
+                                            /*<div class="form-group">
+                                                <div class="col p-0">
+                                                    <button class="btn btn-primary" data-repeater-create type="button"><i class="bx bx-plus" style="color: #FFFFFF;"></i>
+                                                        Add
                                                     </button>
                                                 </div>
-                                            </div>
+                                            </div>*/
+                                            @endphp
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- /phone repeater -->
                     </div>
-                </section>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+                    <button id="btnFormSubmit" type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </section>
             <!-- Input Validation end -->
         </div>
     </div>
@@ -626,7 +653,7 @@
                 <div class="media m-75">
                     <a href="JavaScript:void(0);">
                         <div class="avatar mr-75">
-                            <img src="../app-assets/images/portrait/small/avatar-s-2.jpg" alt="avtar images" width="32" height="32">
+                            <img src="../../app-assets/images/portrait/small/avatar-s-2.jpg" alt="avtar images" width="32" height="32">
                             <span class="avatar-status-online"></span>
                         </div>
                     </a>
@@ -691,41 +718,60 @@
 
 
 <!-- BEGIN: Vendor JS-->
-<script src="../app-assets/vendors/js/vendors.min.js"></script>
-<script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
-<script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
-<script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
+<script src="../../app-assets/vendors/js/vendors.min.js"></script>
+<script src="../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
+<script src="../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
+<script src="../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
-<script src="../app-assets/vendors/js/forms/validation/jqBootstrapValidation.js"></script>
-<script src="../app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
+<script src="../../app-assets/vendors/js/forms/validation/jqBootstrapValidation.js"></script>
+<script src="../../app-assets/vendors/js/pickers/pickadate/picker.js"></script>
+<script src="../../app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
+<script src="../../app-assets/vendors/js/pickers/pickadate/picker.time.js"></script>
+<script src="../../app-assets/vendors/js/pickers/pickadate/legacy.js"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
-<script src="../app-assets/js/scripts/configs/vertical-menu-light.js"></script>
-<script src="../app-assets/js/core/app-menu.js"></script>
-<script src="../app-assets/js/core/app.js"></script>
-<script src="../app-assets/js/scripts/components.js"></script>
-<script src="../app-assets/js/scripts/footer.js"></script>
+<script src="../../app-assets/js/scripts/configs/vertical-menu-light.js"></script>
+<script src="../../app-assets/js/core/app-menu.js"></script>
+<script src="../../app-assets/js/core/app.js"></script>
+<script src="../../app-assets/js/scripts/components.js"></script>
+<script src="../../app-assets/js/scripts/footer.js"></script>
+<script src="../../app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
+<script src="../../app-assets/js/scripts/forms/form-repeater.js"></script>
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
-<script src="../app-assets/js/scripts/forms/validation/form-validation.js"></script>
-<script src="../app-assets/js/scripts/forms/form-repeater.js?time=<?php echo time();?>"></script>
+<script src="../../app-assets/js/scripts/forms/validation/form-validation.js"></script>
+<script src="../../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js?time=<?php echo time();?>"></script>
+<?php /*<script src="../../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js?time=<?php echo time();?>"></script>*/?>
+<script>
+    /*$(document).ready(function(){
+        $('.pickadate-limits').pickadate({
+            //format: 'mmmm, d, yyyy'
+            format: 'yyyy-mm-dd'
+        });
+    });*/
+</script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- END: Page JS-->
 <script>
-    function deletesettings(nID)
-    {
-        if($('#deletedsettings').val()=="")
-        {
-            $('#deletedsettings').val(nID);
-        }
-        else {
-            var currDelSettings = $('#deletedsettings').val() + "," + nID;
-            $('#deletedsettings').val(currDelSettings);
-        }
-    }
+    $(document).ready(function () {
+
+        $("#frmNewTask").submit(function (e) {
+
+            //stop submitting the form to see the disabled button effect
+            //e.preventDefault();
+
+            //disable the submit button
+            $("#btnFormSubmit").attr("disabled", true);
+
+            return true;
+
+        });
+    });
 </script>
 </body>
 <!-- END: Body-->

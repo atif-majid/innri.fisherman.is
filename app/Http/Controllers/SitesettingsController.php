@@ -214,4 +214,107 @@ class SitesettingsController extends Controller
     {
         //
     }
+
+    public function onboardingsections()
+    {
+        $onboardingsection = Sitesettings::where('field', 'OnBoardingSection')->get();
+        return view('sitesettings.onboardingsections', compact('onboardingsection'));
+    }
+
+    public function storeonboardingcategories(Request $request)
+    {
+        $arrOnBoardingCategory = $request->OnBoardingCategory;
+        $arrEdited = array();
+        foreach ($arrOnBoardingCategory as $thisCategory)
+        {
+            if($thisCategory['strCategoryTitle']!=""){
+                $arrData = array(
+                    "field"=>"OnBoardingSection",
+                    "value"=>$thisCategory['strCategoryTitle']
+                );
+                if(isset($thisCategory['nID']) && $thisCategory['nID']>0)
+                {
+                    $nID = $thisCategory['nID'];
+                    Sitesettings::find($nID)->update($arrData);
+                    $arrEdited[] = $nID;
+                }
+                else
+                {
+                    Sitesettings::create($arrData);
+                }
+            }
+
+        }
+        $deletedsettings = $request->deletedsettings;
+        if(trim($deletedsettings)!="")
+        {
+            $arrDeletedSettings = explode(",", $deletedsettings);
+            for($i=0; $i<count($arrDeletedSettings); $i++)
+            {
+                $nCurrDelete = $arrDeletedSettings[$i];
+                if(!in_array($nCurrDelete, $arrEdited))
+                {
+                    Sitesettings::find($nCurrDelete)->delete();
+                }
+            }
+        }
+        return redirect()->route('sitesettings.onboardingsections')
+            ->with('success','Onboarding categories added successfully.');
+    }
+
+    public function onboardingtasks()
+    {
+        $onboardingsection = Sitesettings::where('field', 'OnBoardingSection')->get();
+        $arrTasks = array();
+        foreach ($onboardingsection as $thisSection)
+        {
+            $strSectionKey = str_replace(" ", "_", $thisSection['value']);
+            $onBoardingTasks = Sitesettings::where('field', $strSectionKey)->get();
+            $arrTasks["$strSectionKey"] = $onBoardingTasks;
+        }
+        return view('sitesettings.onboardingtasks', compact('onboardingsection', 'arrTasks'));
+    }
+
+    public function storeonboardingtasks(Request $request)
+    {
+        $onboardingsection = Sitesettings::where('field', 'OnBoardingSection')->get();
+        $arrEdited = array();
+        foreach ($onboardingsection as $thisSection) {
+            $strSectionKey = str_replace(" ", "_", $thisSection['value']);
+            $arrData = $request->$strSectionKey;
+            foreach($arrData as $thisTask)
+            {
+                if(!empty($thisTask['strCategoryTitle'])) {
+                    $arrRecord = array(
+                        "field" => $strSectionKey,
+                        "value" => $thisTask['strCategoryTitle']
+                    );
+                    if (isset($thisTask['nID']) && $thisTask['nID'] > 0) {
+                        $nID = $thisTask['nID'];
+                        Sitesettings::find($nID)->update($arrRecord);
+                        $arrEdited[] = $nID;
+                    }
+                    else
+                    {
+                        Sitesettings::create($arrRecord);
+                    }
+                }
+            }
+        }
+        $deletedsettings = $request->deletedsettings;
+        if(trim($deletedsettings)!="")
+        {
+            $arrDeletedSettings = explode(",", $deletedsettings);
+            for($i=0; $i<count($arrDeletedSettings); $i++)
+            {
+                $nCurrDelete = $arrDeletedSettings[$i];
+                if(!in_array($nCurrDelete, $arrEdited))
+                {
+                    Sitesettings::find($nCurrDelete)->delete();
+                }
+            }
+        }
+        return redirect()->route('sitesettings.onboardingtasks')
+            ->with('success','Onboarding tasks added successfully.');
+    }
 }

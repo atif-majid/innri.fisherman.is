@@ -24,6 +24,13 @@
             <td>Email Address:</td>
             <td>{{$employee->email}}</td>
         </tr>
+        <tr>
+            <td colspan="4">
+                <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center" onclick="window.location.href='{{ route('employees.onboarding', $employee->id) }}'">
+                    <button type="reset" class="btn btn-primary btn-block glow users-list-clear mb-0">Onboarding Tasks</button>
+                </div>
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>

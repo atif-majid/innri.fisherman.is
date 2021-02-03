@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,7 +31,13 @@ class HomeController extends Controller
         }
         else
         {
-            return view('home');
+            $nEmployeeID = Auth::user()->getempid();
+            $tasks = DB::table('onboardingtasks')
+                ->leftJoin('employees', 'employee', '=', 'employees.id')
+                ->select('onboardingtasks.*','employees.name')
+                ->where('responsible_person', $nEmployeeID)
+                ->get();
+            return view('home', compact('tasks'));
         }
     }
 }

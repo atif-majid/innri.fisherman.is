@@ -454,9 +454,15 @@
             </li>
             <li class=" nav-item"><a href="#"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Job Description</span></a>
             </li>
+            <li class=" nav-item"><a href="{{ route('employees.outstandingitems') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Outstanding items</span></a>
+            </li>
             <li class=" navigation-header"><span>Site Settings</span>
             </li>
             <li class=" nav-item"><a href="{{ route('sitesettings.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Form Values</span></a>
+            </li>
+            <li class=" nav-item"><a href="{{ route('sitesettings.onboardingsections') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Onboarding Categories</span></a>
+            </li>
+            <li class=" nav-item"><a href="{{ route('sitesettings.onboardingtasks') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Onboarding Tasks</span></a>
             </li>
             <!--<li class=" navigation-header"><span>Extensions</span>
             </li>
@@ -541,6 +547,62 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-12 dashboard-marketing-campaign">
+                        <div class="card marketing-campaigns">
+                            <div class="card-header d-flex justify-content-between align-items-center pb-1">
+                                <h4 class="card-title">My Tasks</h4>
+                                <i class="bx bx-dots-vertical-rounded font-medium-3 cursor-pointer"></i>
+                            </div>
+                            <div class="table-responsive">
+                                <!-- table start -->
+                                @if(count($tasks)>0)
+                                    <table id="table-marketing-campaigns" class="table table-borderless table-marketing-campaigns mb-0">
+                                        <thead>
+                                        <tr>
+                                            <th>For</th>
+                                            <th>Task</th>
+                                            <th>Due Date</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($tasks as $task)
+                                            <tr>
+                                                <td class="py-1">
+                                                    {{$task->name}}
+                                                </td>
+                                                <td class="py-1">
+                                                    {{$task->task}}
+                                                </td>
+                                                <td class="py-1">
+                                                    {{$task->due_date}}
+                                                </td>
+                                                <td class="py-1">
+                                                    <select id="selStatus" name="selStatus" class="form-control">
+                                                        <option value="Not Started" @if('Not Started'== $task->status) selected @endif>Not Started</option>
+                                                        <option value="In Progress" @if('In Progress'== $task->status) selected @endif>In Progress</option>
+                                                        <option value="Completed" @if('Completed'== $task->status) selected @endif>Completed</option>
+                                                    </select>
+                                                    <input type="hidden" id="nID" name="nID" value="{{$task->id}}" class="taskid" />
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                @else
+                                    <table id="table-marketing-campaigns" class="table table-borderless table-marketing-campaigns mb-0">
+                                        <tr>
+                                            <td class="py-1">
+                                                No pending tasks!
+                                            </td>
+                                        </tr>
+                                    </table>
+                                @endif
+
+                                <!-- table ends -->
                             </div>
                         </div>
                     </div>
@@ -1582,7 +1644,23 @@
 <!-- BEGIN: Page JS-->
 <script src="app-assets/js/scripts/pages/dashboard-ecommerce.js"></script>
 <!-- END: Page JS-->
-
+<script>
+    $(document).ready(function(){
+        $('select.form-control').on('change', function() {
+            var strNewStatus = $(this).val();
+            var nID = $(this).next('.taskid').val();
+            $(this).attr('disaled', true);
+            $.ajax({
+                method: "POST",
+                url: "{{ route('employees.updateonboardstatus') }}",
+                data: { "_token": "{{ csrf_token() }}", strNewStatus: strNewStatus, nID: nID }
+            })
+                .done(function( msg ) {
+                    $(this).attr('disaled', false);
+                });
+        });
+    });
+</script>
 </body>
 <!-- END: Body-->
 

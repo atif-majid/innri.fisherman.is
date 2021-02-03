@@ -9,14 +9,22 @@
     <meta name="description" content="Frest admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Frest admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Innri - Add New Recipe</title>
+    <title>Site Settings - Onboarding Tasks</title>
     <link rel="apple-touch-icon" href="../app-assets/images/ico/apple-icon-120.png">
-    <link rel="shortcut icon" type="image/x-icon" href="../app-assets/images/ico/favicon.ico">
+    <!--<link rel="shortcut icon" type="image/x-icon" href="../app-assets/images/ico/favicon.ico">-->
+    <link rel="shortcut icon" type="image/x-icon" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_180x180.png?v=1595428268">
+    <link rel="apple-touch-icon" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_180x180.png?v=1595428268"/>
+    <link rel="apple-touch-icon" sizes="57x57" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_57x57.png?v=1595428268"/>
+    <link rel="apple-touch-icon" sizes="60x60" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_60x60.png?v=1595428268"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_72x72.png?v=1595428268"/>
+    <link rel="apple-touch-icon" sizes="76x76" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_76x76.png?v=1595428268"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_114x114.png?v=1595428268"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_180x180.png?v=1595428268"/>
+    <link rel="apple-touch-icon" sizes="228x228" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_228x228.png?v=1595428268"/>
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/vendors.min.css">
-    <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/pickers/pickadate/pickadate.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -30,12 +38,29 @@
 
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="../app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css/plugins/forms/validation/form-validation.css">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
     <!-- END: Custom CSS-->
+    <style>
+        .form-group{
+            margin-bottom: 0rem !important;
+        }
+        .mb-2, .my-2{
+            margin-bottom: 0.5rem !important;
+        }
+        .col-md-2{
+            padding-left: 0px !important;
+            padding-top: 1rem !important;
+        }
+        .btn-danger{
+            padding-top: 0.4rem !important;
+            padding-bottom: 0.4rem !important;
+        }
 
+    </style>
 </head>
 <!-- END: Head-->
 
@@ -225,8 +250,8 @@
 <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
-            <li class="nav-item mr-auto"><a class="navbar-brand" href="home.html">
-                    <div class="brand-logo" style="width: 100%; max-width: 211px;"><!--<img class="logo" src="../app-assets/images/logo/logo.png" />--><img class="logo" src="../app-assets/images/logo/fisherman-2.png" style="width: 100%; max-width: 211px; height: 47px; max-height: 47px;" /></div>
+            <li class="nav-item mr-auto"><a class="navbar-brand" href="{{ route('home') }}">
+                    <div class="brand-logo" style="width: 100%; max-width: 211px;"><!--<img class="logo" src="app-assets/images/logo/logo.png" />--><img class="logo" src="../app-assets/images/logo/fisherman-2.png" style="width: 100%; max-width: 211px; height: 47px; max-height: 47px;" /></div>
                     <!--<h2 class="brand-text mb-0">Frest</h2>-->
                 </a></li>
             <!--<li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="bx bx-x d-block d-xl-none font-medium-4 primary"></i><i class="toggle-icon bx bx-disc font-medium-4 d-none d-xl-block primary" data-ticon="bx-disc"></i></a></li>-->
@@ -237,7 +262,7 @@
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
             <li class="nav-item"><a href="#"><span class="menu-title">Production System</span></a>
                 <ul class="menu-content">
-                    <li class="active"><a href="{{ route('recipes.index') }}"><!--<i class="menu-livicon" data-icon="envelope-pull"></i>--><span class="menu-title" data-i18n="Email">Recipes</span></a>
+                    <li><a href="{{ route('recipes.index') }}"><!--<i class="menu-livicon" data-icon="envelope-pull"></i>--><span class="menu-title" data-i18n="Email">Recipes</span></a>
                     </li>
                     <li><a href="{{ route('production.index') }}"><!--<i class="menu-livicon" data-icon="check-alt"></i>--><span class="menu-title" data-i18n="Todo">Today's Production</span></a>
                     </li>
@@ -293,7 +318,7 @@
                     </li>
                     <li><a href="{{ route('sitesettings.onboardingsections') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Onboarding Categories</span></a>
                     </li>
-                    <li><a href="{{ route('sitesettings.onboardingtasks') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Onboarding Tasks</span></a>
+                    <li class="active"><a href="{{ route('sitesettings.onboardingtasks') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Onboarding Tasks</span></a>
                     </li>
                 </ul>
             </li>
@@ -310,15 +335,15 @@
             <div class="content-header-left col-12 mb-2 mt-1">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h5 class="content-header-title float-left pr-1 mb-0">New Recipe</h5>
+                        <h5 class="content-header-title float-left pr-1 mb-0">Site Settings</h5>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb p-0 mb-0">
-                                <li class="breadcrumb-item"><a href="index.html"><i class="bx bx-home-alt"></i></a>
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bx bx-home-alt"></i></a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{ route('recipes.index') }}">Recipes</a>
+                                <li class="breadcrumb-item active">Onboarding Tasks
                                 </li>
-                                <li class="breadcrumb-item active"><a href="#">New Recipe</a>
-                                </li>
+                                <!--<li class="breadcrumb-item active">Add new employee
+                                </li>-->
                             </ol>
                         </div>
                     </div>
@@ -326,287 +351,96 @@
             </div>
         </div>
         <div class="content-body">
-            @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    <div class="alert alert-danger mb-2">{{ $error }}</div>
-                @endforeach
+            <!-- Input Validation start -->
+            @if ($message = Session::get('success'))
+                <div class="alert alert-info mb-2">
+                    {{ $message }}
+                </div>
             @endif
-            <form class="form-horizontal" enctype='multipart/form-data' novalidate method="post" action="{{ route('recipes.store') }}">
-            @csrf
-            <!-- // Basic multiple Column Form section start -->
-                <section id="multiple-column-form">
-                    <div class="row match-height">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Recipe General Information</h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Product number</label>
-                                                    <div class="controls">
-                                                        <input type="text" name="strProductNumber" class="form-control" @php /*data-validation-required-message="Product Number is required"*/ @endphp placeholder="Product Number">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Recipe Title</label>
-                                                    <div class="controls">
-                                                        <input type="text" name="title" value="{{ old('title') }}" class="form-control" data-validation-required-message="Recipe title is required" placeholder="Recipe Title">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Recipe Created</label>
-                                                    <div class="controls">
-                                                        <fieldset class="position-relative has-icon-left">
-                                                            <input type="text" class="form-control format-picker" placeholder="Select Date" id="created_date" name="created_date">
-                                                            <div class="form-control-position">
-                                                                <i class='bx bx-calendar'></i>
-                                                            </div>
-                                                        </fieldset>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+            <form class="form-horizontal" novalidate method="post" action="{{ route('sitesettings.storeonboardingtasks') }}">
+                @csrf
+                <input type="hidden" id="deletedsettings" name="deletedsettings" value="">
+                @foreach($onboardingsection as $thisSection)
+                    <section id="form-control-repeater">
+                        <div class="row">
+                            <!-- file repeater  -->
+                            <div class="col-xl-4 col-lg-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">{{ $thisSection->value }}</h4>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- // Basic multiple Column Form section end -->
-                <section id="form-repeater-wrapper">
-                    <!-- form default repeater -->
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">
-                                        Ingredients
-                                    </h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body repeater-default">
-                                        <div data-repeater-list="Ingredients">
-                                            @if (old('Ingredients'))
-                                                @for( $i =0; $i < count(old('Ingredients')); $i++)
-                                                    <div data-repeater-item>
-                                                        <div class="row justify-content-between">
-                                                            <div class="input-group">
-                                                                <div class="col-md-2 col-sm-12 form-group" style="max-width: 600px;">
-                                                                    <label for="text">Name </label>
-                                                                    <input type="text" class="form-control" id="ingredient" name="ingredient" placeholder="Enter Item Title" style="width: 360px;" value="{{ old('Ingredients')[$i]['ingredient'] }}">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-12 form-group type-of-notification">
+                                                    <div data-repeater-list="{{str_replace(' ', '_', $thisSection->value)}}">
+                                                        @php
+                                                            $strKey =  str_replace(' ', '_', $thisSection->value);
+                                                            $TasksThisKey = $arrTasks["$strKey"];
+                                                        @endphp
+                                                        @foreach($TasksThisKey as $thissetting)
+                                                            <div data-repeater-item>
+                                                                <div class="row mb-2 justify-content-between">
+                                                                    <div class="form-group col-sm">
+                                                                        <label>Task</label>
+                                                                        <fieldset class="position-relative">
+                                                                            <input type="text" id="strCategoryTitle" name="strCategoryTitle" value="{{ $thissetting->value }}">
+                                                                            <input type="hidden" id="nID" name="nID" value="{{ $thissetting->id }}">
+                                                                        </fieldset>
+                                                                    </div>
+                                                                    <div class="col-md-3 col-sm-12 form-group d-flex align-items-center pt-2">
+                                                                        <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button" onclick="deletesettings({{ $thissetting->id }})"> <i class="bx bx-x"></i>
+                                                                            Delete
+                                                                        </button>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="col-md-2 col-sm-12 form-group" style="max-width: 600px;">
-                                                                    <label for="text">Product Number </label>
-                                                                    <input type="text" class="form-control" id="ing_product_number" name="ing_product_number" placeholder="Product Number" style="width: 360px;" value="{{ old('Ingredients')[$i]['ing_product_number'] }}">
+                                                            </div>
+                                                        @endforeach
+                                                        <div data-repeater-item>
+                                                            <div class="row mb-2">
+                                                                <div class="form-group col-sm">
+                                                                    <label>Task</label>
+                                                                    <fieldset class="position-relative">
+                                                                        <input type="text" id="strCategoryTitle" name="strCategoryTitle">
+                                                                    </fieldset>
                                                                 </div>
-                                                                <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px;">
-                                                                    <label for="quanity">Quantity</label>
-                                                                    <input type="text" class="form-control" id="quantity" name="quantity" placeholder="Enter Quantity" style="width: 125px;" value="{{ old('Ingredients')[$i]['quantity'] }}">
-                                                                </div>
-                                                                <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px; margin-left: 30px; margin-right: 30px;">
-                                                                    <label for="unit">Unit</label>
-                                                                    <select name="unit" id="unit" class="form-control" style="width: 125px;">
-                                                                        <option value="" selected></option>
-                                                                        <option value="kg" @if(old('Ingredients')[$i]['unit'] == 'kg') ? selected : null @endif>kg</option>
-                                                                        <option value="grams" @if(old('Ingredients')[$i]['unit'] == 'grams') ? selected : null @endif>grams</option>
-                                                                        <option value="">------------</option>
-                                                                        <option value="liter" @if(old('Ingredients')[$i]['unit'] == 'liter') ? selected : null @endif>liter</option>
-                                                                        <option value="deciliter" @if(old('Ingredients')[$i]['unit'] == 'deciliter') ? selected : null @endif>deciliter</option>
-                                                                        <option value="centiliter" @if(old('Ingredients')[$i]['unit'] == 'centiliter') ? selected : null @endif>centiliter</option>
-                                                                        <option value="milliliter" @if(old('Ingredients')[$i]['unit'] == 'milliliter') ? selected : null @endif>milliliter</option>
-                                                                        <option value="">------------</option>
-                                                                        <option value="pieces" @if(old('Ingredients')[$i]['unit'] == 'pieces') ? selected : null @endif>pieces</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
+                                                                <div class="col-md-3 col-sm-12 form-group d-flex align-items-center pt-2">
                                                                     <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
                                                                         Delete
                                                                     </button>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <hr>
                                                     </div>
-                                                @endfor
-                                            @else
-                                                <div data-repeater-item>
-                                                    <div class="row justify-content-between">
-                                                        <div class="input-group">
-                                                            <div class="col-md-2 col-sm-12 form-group" style="max-width: 600px;">
-                                                                <label for="text">Name </label>
-                                                                <input type="text" class="form-control" id="ingredient" name="ingredient" placeholder="Enter Item Title" style="width: 360px;">
-                                                            </div>
-                                                            <div class="col-md-2 col-sm-12 form-group" style="max-width: 600px;">
-                                                                <label for="text">Product Number </label>
-                                                                <input type="text" class="form-control" id="ing_product_number" name="ing_product_number" placeholder="Product Number" style="width: 360px;">
-                                                            </div>
-                                                            <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px;">
-                                                                <label for="quanity">Quantity</label>
-                                                                <input type="text" class="form-control" id="quantity" name="quantity" placeholder="Enter Quantity" style="width: 125px;">
-                                                            </div>
-                                                            <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px; margin-left: 30px; margin-right: 30px;">
-                                                                <label for="unit">Unit</label>
-                                                                <select name="unit" id="unit" class="form-control" style="width: 125px;">
-                                                                    <option value="" selected></option>
-                                                                    <option value="kg">kg</option>
-                                                                    <option value="grams">grams</option>
-                                                                    <option value="">------------</option>
-                                                                    <option value="liter">liter</option>
-                                                                    <option value="deciliter">deciliter</option>
-                                                                    <option value="centiliter">centiliter</option>
-                                                                    <option value="milliliter">milliliter</option>
-                                                                    <option value="">------------</option>
-                                                                    <option value="pieces">pieces</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
-                                                                <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
-                                                                    Delete
-                                                                </button>
-                                                            </div>
-                                                        </div>
+                                                    <div class="col form-group p-0">
+                                                        <button class="btn btn-primary" data-repeater-create type="button">
+                                                            <i class="bx bx-plus"></i>Add
+                                                        </button>
                                                     </div>
-                                                    <hr>
                                                 </div>
-                                            @endif
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col p-0">
-                                                <button class="btn btn-primary" data-repeater-create type="button"><i class="bx bx-plus" style="color: #FFFFFF;"></i>
-                                                    Add
-                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- /file repeater -->
+                            <!-- phone repeater -->
                         </div>
-                    </div>
-                    <!--/ form default repeater -->
-                </section>
-                <section id="form-repeater-wrapper">
-                    <!-- form default repeater -->
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">
-                                        Steps
-                                    </h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body repeater-default">
-                                        <div data-repeater-list="Steps">
-                                            @if (old('Steps'))
-                                                @for( $i =0; $i < count(old('Steps')); $i++)
-                                                    <div data-repeater-item>
-                                                        <div class="row justify-content-between">
-                                                            <div class="col-md-2 col-sm-12 form-group" style="width: 800px; max-width: 80%;">
-                                                                <label for="text">Step </label>
-                                                                <textarea class="form-control" id="step" name="step" placeholder="Enter Step Detail" rows="4" style="width: 800px; max-width: 100%;">{{ old('Steps')[$i]['step'] }}</textarea>
-                                                            </div>
-                                                            <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
-                                                                <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
-                                                                    Delete
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                        <hr>
-                                                    </div>
-                                                @endfor
-                                            @else
-                                                <div data-repeater-item>
-                                                    <div class="row justify-content-between">
-                                                        <div class="col-md-2 col-sm-12 form-group" style="width: 800px; max-width: 80%;">
-                                                            <label for="text">Step </label>
-                                                            <textarea class="form-control" id="step" name="step" placeholder="Enter Step Detail" rows="4" style="width: 800px; max-width: 100%;"></textarea>
-                                                        </div>
-                                                        <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
-                                                            <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
-                                                                Delete
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                    <hr>
-                                                </div>
-                                            @endif
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col p-0">
-                                                <button class="btn btn-primary" data-repeater-create type="button"><i class="bx bx-plus" style="color: #FFFFFF;"></i>
-                                                    Add
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Photos</h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body repeater-default">
-                                        <div data-repeater-list="Photos">
-                                            <div data-repeater-item>
-                                                <div class="row justify-content-between">
-                                                    <div class="input-group">
-                                                        <div class="col-sm-4 form-group">
-                                                            <label>Photo</label>
-                                                            <fieldset class="position-relative">
-                                                                <input type="file" class="form-control" placeholder="Upload File" id="file_photo" name="file_photo">
-                                                            </fieldset>
-                                                        </div>
-                                                        <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
-                                                            <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
-                                                                Delete
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col p-0">
-                                                <button class="btn btn-primary" data-repeater-create type="button"><i class="bx bx-plus" style="color: #FFFFFF;"></i>
-                                                    Add
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--/ form default repeater -->
-                </section>
+                    </section>
+                @endforeach
+
+
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+            <!-- Input Validation end -->
         </div>
     </div>
 </div>
 <!-- END: Content-->
 
+<!-- demo chat-->
 <?php
-/*<!-- demo chat-->
-<div class="widget-chat-demo">
+/*<div class="widget-chat-demo">
     <!-- widget chat demo footer button start -->
     <button class="btn btn-primary chat-demo-button glow px-1"><i class="livicon-evo" data-options="name: comments.svg; style: lines; size: 24px; strokeColor: #fff; autoPlay: true; repeat: loop;"></i></button>
     <!-- widget chat demo footer button ends -->
@@ -668,7 +502,7 @@
     </div>
     <!-- widget chat demo ends -->
 
-</div>*/ ?>
+</div>*/?>
 <div class="sidenav-overlay"></div>
 <div class="drag-target"></div>
 
@@ -686,11 +520,11 @@
 <script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
 <script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
 <script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
-<script src="../app-assets/vendors/js/pickers/pickadate/picker.js"></script>
-<script src="../app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
+<script src="../app-assets/vendors/js/forms/validation/jqBootstrapValidation.js"></script>
+<script src="../app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
@@ -700,15 +534,24 @@
 <script src="../app-assets/js/scripts/components.js"></script>
 <script src="../app-assets/js/scripts/footer.js"></script>
 <!-- END: Theme JS-->
-<!-- BEGIN: Page Vendor JS-->
-<script src="../app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
-<script src="../app-assets/js/scripts/forms/form-repeater.js"></script>
-<script src="../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js?time=<?php echo time();?>"></script>
-<!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Page JS-->
+<script src="../app-assets/js/scripts/forms/validation/form-validation.js"></script>
+<script src="../app-assets/js/scripts/forms/form-repeater.js?time=<?php echo time();?>"></script>
 <!-- END: Page JS-->
-
+<script>
+    function deletesettings(nID)
+    {
+        if($('#deletedsettings').val()=="")
+        {
+            $('#deletedsettings').val(nID);
+        }
+        else {
+            var currDelSettings = $('#deletedsettings').val() + "," + nID;
+            $('#deletedsettings').val(currDelSettings);
+        }
+    }
+</script>
 </body>
 <!-- END: Body-->
 
