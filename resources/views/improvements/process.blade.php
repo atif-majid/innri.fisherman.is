@@ -399,14 +399,22 @@
                                                             </a>
                                                         @endif
                                                         @foreach($ImprovementComments as $thisComment)
-                                                            <a href="#" class="list-group-item list-group-item-action" onclick="return false;">
+                                                            @php
+                                                                $strClass = "sysgen";
+                                                                if(strpos($thisComment->comment, 'Assigned to ')===false && strpos($thisComment->comment, 'Marked as completed by ')===false)
+                                                                {
+                                                                    $strClass = "comment";
+                                                                }
+                                                            @endphp
+                                                            <a href="#" class="list-group-item list-group-item-action" onclick="return false;" id="{{$thisComment->id}}">
                                                                 <div class="d-flex w-100 justify-content-between">
                                                                     <h5 class="mb-1">Posted by {{ $thisComment->name }}</h5>
-                                                                    <small>{{ $thisComment->comment_add_date }}</small>
+                                                                    <small>{{ $thisComment->comment_add_date }} </small>
                                                                 </div>
                                                                 <p class="mb-1">
-                                                                    {!! nl2br($thisComment->comment) !!}
+                                                                    {!! trim(nl2br($thisComment->comment)) !!}
                                                                 </p>
+                                                                <small class="{{$strClass}}">Edit</small>
                                                             </a>
                                                         @endforeach
                                                     </div>
@@ -466,7 +474,7 @@
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form class="form-horizontal"  enctype='multipart/form-data' novalidate method="post" action="{{ route('improvements.updateprocess') }}">
+                                    <form class="form-horizontal"  enctype='multipart/form-data' novalidate method="post" action="{{ route('improvements.updateprocess') }}" enctype="multipart/form-data">
                                     @csrf
                                         <div class="row">
                                             <div class="form col-md-12">
@@ -504,8 +512,35 @@
                                                         </fieldset>
                                                     </div>
                                                 </div>
+                                                <div class="row">
+                                                    <div class="form-group col-sm">
+                                                        <label>Photo</label>
+                                                        <div class="controls">
+                                                            <input type="file" name="Photo1" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-sm">
+                                                        <label>Photo</label>
+                                                        <div class="controls">
+                                                            <input type="file" name="Photo2" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-sm">
+                                                        <fieldset>
+                                                            <div class="checkbox">
+                                                                <input type="checkbox" class="checkbox-input" id="chkCompleted" name="chkCompleted" value="Completed" @if($improvement->completed=='yes') checked @endif>
+                                                                <label for="chkCompleted">Completed?</label>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>
                                 </div>
@@ -609,6 +644,8 @@
 <script src="../../app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
 <script src="../../app-assets/vendors/js/pickers/pickadate/picker.time.js"></script>
 <script src="../../app-assets/vendors/js/pickers/pickadate/legacy.js"></script>
+<script src="../../app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
+<script src="../../app-assets/js/scripts/forms/form-repeater.js"></script>
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
@@ -634,8 +671,103 @@
             format: 'yyyy-mm-dd',
             max: [2021,1,13]
         });
+
+        $('.comment').click(function(event){
+            event.preventDefault();
+            var strComment = $(this).prev('p.mb-1').html();
+            strComment = strComment.replaceAll('<br>','');
+            var nCommentID = $(this).attr('id');
+            $('#txtComment').val($.trim(strComment));
+            $('#nCommentID').val(nCommentID);
+            $('#inlineForm').modal('show');
+        });
+
+        $('.sysgen').click(function(){
+            $('#modalsysgen').modal('show');
+        });
+
+        $('#btnModalSubmit').click(function(){
+            $(this).attr('disabled', true);
+            var strNewComment = $('#txtComment').val();
+            var nCommentID = $('#nCommentID').val();
+            $.ajax({
+                method: "POST",
+                url: "{{ route('improvements.updatecomment') }}",
+                data: { "_token": "{{ csrf_token() }}", strNewComment: strNewComment, nCommentID: nCommentID }
+            })
+                .done(function( msg ) {
+                    if(msg=='success')
+                    {
+                        $('#'+nCommentID).find('p.mb-1').html(strNewComment.replace(/\n/g,'<br/>'));
+                    }
+                    $('#btnModalSubmit').attr('disabled', false);
+                    $('#inlineForm').modal('hide');
+
+                });
+        });
     });
 </script>
+<div class="modal fade text-left" id="modalsysgen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel33">Notice </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="bx bx-x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>This is a system generated comment and cannot be edited!</p>
+            </div>
+            <div class="modal-footer">
+                <!--<button type="button" class="btn btn-light-secondary btnclear">
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Clear</span>
+                </button>-->
+                <button type="button" class="btn btn-light-secondary" data-dismiss="modal">
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Close</span>
+                </button>
+                <!--<button type="button" class="btn btn-primary ml-1 submit">
+                    <i class="bx bx-check d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Submit</span>
+                </button>-->
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel33">Edit Comment </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="bx bx-x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="nCommentID" name="nCommentID">
+                <textarea id="txtComment" name="txtComment" class="form-control" rows="6"></textarea>
+            </div>
+            <div class="modal-footer">
+                <!--<button type="button" class="btn btn-light-secondary btnclear">
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Clear</span>
+                </button>-->
+                <button type="button" class="btn btn-light-secondary" data-dismiss="modal">
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Close</span>
+                </button>
+                <button type="button" class="btn btn-primary ml-1" id="btnModalSubmit">
+                    <i class="bx bx-check d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Submit</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
 </body>
 <!-- END: Body-->
 

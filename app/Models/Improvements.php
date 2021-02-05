@@ -25,6 +25,7 @@ class Improvements extends Model
         'due_date',
         'response_improvements',
         'complain_creation_date',
-        'complain_created_by'
+        'complain_created_by',
+        'completed'
     ];
 }

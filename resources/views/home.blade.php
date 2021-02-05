@@ -1656,7 +1656,7 @@
                 data: { "_token": "{{ csrf_token() }}", strNewStatus: strNewStatus, nID: nID }
             })
                 .done(function( msg ) {
-                    $(this).attr('disaled', false);
+                    $(this).attr('disabled', false);
                 });
         });
     });

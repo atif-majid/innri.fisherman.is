@@ -522,6 +522,7 @@ class ImprovementsController extends Controller
                 'assigned_to'=>$nAssignedTo,
                 'due_date'=>$strDueDate
             );
+
             Improvements::find($nID)->update($arrUpdate);
 
             $newAssignee = Employees::find($nAssignedTo);
@@ -556,7 +557,70 @@ class ImprovementsController extends Controller
                 $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
             });
         }
+
+        if( $request->has('chkCompleted') ){
+            //...
+            $arrUpdate = array("completed" => 'yes');
+
+            $strCommentCompleted = 'Marked as completed by '.$strCurrentEmployeeName;
+            $arrComments = array(
+                'improvements_id'=>$nID,
+                'comment'=>$strCommentCompleted,
+                'comment_add_date'=>date("Y-m-d H:i:s"),
+                'comment_added_by'=>$nCurrentEmployeeID
+            );
+            Improvementcomments::create($arrComments);
+            Improvements::find($nID)->update($arrUpdate);
+        }
+
+        if($request->has('Photo1'))
+        {
+            $file = $request->Photo1;
+            $destination = 'uploads/improvements/'.$nID;
+            $strFileName = $file->getClientOriginalName();
+            $file->move($destination, $strFileName);
+            $arrPicRecord = array(
+                'improvements_id'=>$nID,
+                'file_name'=>$strFileName,
+                'file_creation_date' => date("Y-m-d H:i:s"),
+                'file_created_by' => $nCurrentEmployeeID
+            );
+            Improvementphotos::create($arrPicRecord);
+        }
+        if($request->has('Photo2'))
+        {
+            $file = $request->Photo2;
+            $destination = 'uploads/improvements/'.$nID;
+            $strFileName = $file->getClientOriginalName();
+            $file->move($destination, $strFileName);
+            $arrPicRecord = array(
+                'improvements_id'=>$nID,
+                'file_name'=>$strFileName,
+                'file_creation_date' => date("Y-m-d H:i:s"),
+                'file_created_by' => $nCurrentEmployeeID
+            );
+            Improvementphotos::create($arrPicRecord);
+        }
+
         return redirect()->route('improvements.index')
             ->with('success','Comment successfully added.');
+    }
+
+    public function updatecomment(Request $request)
+    {
+        $strNewComment = $request->strNewComment;
+        $nCommentID = $request->nCommentID;
+        $nCurrentEmployeeID = Auth::user()->getempid();
+        if($nCommentID>0 && trim($strNewComment)!="")
+        {
+            $arrComments = array(
+                'comment'=>$strNewComment,
+                'comment_add_date'=>date("Y-m-d H:i:s"),
+                'comment_added_by'=>$nCurrentEmployeeID
+            );
+            Improvementcomments::find($nCommentID)->update($arrComments);
+            echo "success";
+        }
+
     }
 }
