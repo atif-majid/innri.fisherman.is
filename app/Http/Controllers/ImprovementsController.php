@@ -32,9 +32,11 @@ class ImprovementsController extends Controller
     public function index()
     {
         //
-        if(Auth::user()->updated_at==null)
+        if(Auth::user()->updated_at==null || Auth::user()->updated_at==Auth::user()->created_at)
         {
-            return redirect(route('change-password'));
+            //return redirect(route('change-password'));
+            return redirect()->route('change-password')
+                ->with('success','You haven\'t changed your password in a while. Please change it now to access the system!' );
         }
         else
         {
@@ -549,13 +551,13 @@ class ImprovementsController extends Controller
             $subject = 'Improvement suggestion for Fisherman';
             $formEmail = 'innri@fisherman.is';
             $formName = "Innri Fisherman";
-            Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
+            /*Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
                 $message->from($formEmail, $formName);
                 $message->to($to);
                 $message->cc('elias@fisherman.is');
                 $message->subject($subject);
                 $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
-            });
+            });*/
         }
 
         if( $request->has('chkCompleted') ){
@@ -601,8 +603,26 @@ class ImprovementsController extends Controller
             );
             Improvementphotos::create($arrPicRecord);
         }
+        if($request->has('file'))
+        {
+            $file = $request->file('file');
+            if(is_numeric($nID) && $nID>0)
+            {
+                $destination = 'uploads/improvements/'.$nID;
+                $strFileName = $file->getClientOriginalName();
+                $file->move($destination, $strFileName);
+                $arrPicRecord = array(
+                    'improvements_id'=>$nID,
+                    'file_name'=>$strFileName,
+                    'file_creation_date' => date("Y-m-d H:i:s"),
+                    'file_created_by' => $nCurrentEmployeeID
+                );
+                Improvementphotos::create($arrPicRecord);
+            }
+        }
 
-        return redirect()->route('improvements.index')
+
+        return redirect()->route('improvements.process', [$nID])
             ->with('success','Comment successfully added.');
     }
 

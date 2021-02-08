@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/vendors.min.css">
     <link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/tables/datatable/datatables.min.css">
     <link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/pickers/pickadate/pickadate.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/file-uploaders/dropzone.min.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -32,6 +33,7 @@
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="../../app-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="../../app-assets/css/pages/page-users.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/plugins/file-uploaders/dropzone.css">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
@@ -447,7 +449,7 @@
                                         <div class="carousel-inner" role="listbox">
                                             @foreach($ImprovementPhotos as $k=>$thisPhoto)
                                                 <div class="carousel-item @if($k==0) active @endif">
-                                                    <img style="max-height: 500px !important;" src="https://innri.fisherman.is/uploads/improvements/{{$improvement->id}}/{{$thisPhoto->file_name}}">
+                                                    <img style="max-height: 500px !important;" src="/uploads/improvements/{{$improvement->id}}/{{$thisPhoto->file_name}}">
                                                 </div>
                                             @endforeach
                                         </div>
@@ -459,6 +461,14 @@
                                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                             <span class="sr-only">Next</span>
                                         </a>
+                                        @php
+                                            /*<ol class="carousel-indicators">
+                                            @foreach($ImprovementPhotos as $k=>$thisPhoto)
+                                            <li data-target="#carousel-thumb" data-slide-to="{{$k}}" @if($k==0) class="active" @endif> <img class="d-block w-100" src="https://innri.fisherman.is/uploads/improvements/{{$improvement->id}}/{{$thisPhoto->file_name}}"
+                                                                                                                     class="img-fluid"></li>
+                                            @endforeach
+                                        </ol>*/
+                                        @endphp
                                     </div>
                                 </div>
                             </div>
@@ -474,7 +484,7 @@
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form class="form-horizontal"  enctype='multipart/form-data' novalidate method="post" action="{{ route('improvements.updateprocess') }}" enctype="multipart/form-data">
+                                    <form class="form-horizontal"  id="frmOnlyComment" novalidate method="post" action="{{ route('improvements.updateprocess') }}" enctype="multipart/form-data">
                                     @csrf
                                         <div class="row">
                                             <div class="form col-md-12">
@@ -482,7 +492,7 @@
                                                     <div class="form-group col-sm">
                                                         <label>Response</label>
                                                         <div class="controls">
-                                                            <textarea name="strResponse" class="form-control" <?php /*data-validation-required-message="Name is requried"*/?> placeholder="Your Response" rows="6"></textarea>
+                                                            <textarea id="strResponse" name="strResponse" class="form-control" <?php /*data-validation-required-message="Name is requried"*/?> placeholder="Your Response" rows="6"></textarea>
                                                             <input type="hidden" id="id" name="id" value="{{ $improvement->id }}">
                                                         </div>
                                                     </div>
@@ -505,7 +515,7 @@
                                                     <div class="form-group col-sm">
                                                         <label>Due Date <small class="text-muted">(Leave empty if not assigning to anyone)</small></label>
                                                         <fieldset class="position-relative has-icon-left">
-                                                            <input type="text" class="form-control pickadate-limits" placeholder="Select Date" id="purchase_date" name="strDueDate">
+                                                            <input type="text" class="form-control pickadate-limits" placeholder="Select Date" id="strDueDate" name="strDueDate">
                                                             <div class="form-control-position">
                                                                 <i class='bx bx-calendar'></i>
                                                             </div>
@@ -514,35 +524,29 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="form-group col-sm">
-                                                        <label>Photo</label>
-                                                        <div class="controls">
-                                                            <input type="file" name="Photo1" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="form-group col-sm">
-                                                        <label>Photo</label>
-                                                        <div class="controls">
-                                                            <input type="file" name="Photo2" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="form-group col-sm">
                                                         <fieldset>
                                                             <div class="checkbox">
                                                                 <input type="checkbox" class="checkbox-input" id="chkCompleted" name="chkCompleted" value="Completed" @if($improvement->completed=='yes') checked @endif>
-                                                                <label for="chkCompleted">Completed?</label>
+                                                                <label for="chkCompleted">Completed!</label>
                                                             </div>
                                                         </fieldset>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row" style="width: 100% !important;">
+                                        <form action="{{ route('improvements.updateprocess') }}" class="dropzone dropzone-area" id="dpz-remove-thumb" style="margin-left: 20px;width:100% !important;">
+                                            <div class="dz-message" style="height: 200px !important;">Drop Files Here To Upload</div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <button type="submit" class="btn btn-primary" id="btnAllSubmit">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -646,6 +650,7 @@
 <script src="../../app-assets/vendors/js/pickers/pickadate/legacy.js"></script>
 <script src="../../app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
 <script src="../../app-assets/js/scripts/forms/form-repeater.js"></script>
+<script src="../../app-assets/vendors/js/extensions/dropzone.min.js"></script>
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
@@ -706,6 +711,55 @@
                 });
         });
     });
+    var myDropzone;
+    Dropzone.options.dpzRemoveThumb = {
+        paramName: "file", // The name that will be used to transfer the file
+        acceptedFiles: "image/*",
+        maxFilesize: 1, // MB
+        addRemoveLinks: true,
+        dictRemoveFile: " Trash",
+        autoProcessQueue: false,
+        init: function (e) {
+            var myDropzone = this;
+            $('#btnAllSubmit').on("click", function() {
+                var nFiles = myDropzone.files.length;
+                if(nFiles==0)
+                {
+                    $('#frmOnlyComment').submit();
+                }
+                else {
+                    myDropzone.processQueue();
+                }
+            });
+            myDropzone.on("sending", function(file, xhr, data) {
+
+                // First param is the variable name used server side
+                // Second param is the value, you can add what you what
+                // Here I added an input value
+                data.append("_token", "{{ csrf_token() }}");
+                data.append('id', $('#id').val());
+                /*if(nCount==0)
+                {
+                    data.append('strResponse', $('#strResponse').val());
+                    data.append('nAssignedTo', $('#nAssignedTo').val());
+                    data.append('strDueDate', $('#strDueDate').val());
+                    var active = $('#chkCompleted').prop("checked") ? 1 : 0 ;
+                    if(active==1)
+                    {
+                        data.append('chkCompleted', $('#chkCompleted').val());
+                    }
+                }
+                nCount = nCount +1;*/
+
+            });
+            myDropzone.on("complete", function (file) {
+                if (myDropzone.getUploadingFiles().length === 0 && myDropzone.getQueuedFiles().length === 0) {
+                    //location.reload();
+                    $('#frmOnlyComment').submit();
+                }
+            });
+        }
+    }
 </script>
 <div class="modal fade text-left" id="modalsysgen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">

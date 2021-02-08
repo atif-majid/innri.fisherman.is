@@ -21,12 +21,34 @@ $(document).ready(function () {
             'columnDefs': [
                 {
                     "orderable": false,
-                    "targets": [10]
+                    "targets": [11]
                 },
                 {
                     "targets": [ 0 ],
                     "visible": false
-                }]
+                },
+                {
+                    "targets": [ 10 ],
+                    "visible": false
+                }
+            ],
+
+            initComplete: function () {
+                // Apply the search
+
+                /*this.api().columns().every( function () {
+                    var that = this;
+
+                    $( '#imp-status').on( 'change', function () {
+                        if ( that.search() !== this.value ) {
+                            that
+                                .search( this.value )
+                                .draw();
+                        }
+                    } );
+                } );*/
+            }
+
         });
         $('#users-list-datatable tbody').on('click', '.invoice-action-view', function (event) {
             event.preventDefault();
@@ -52,6 +74,23 @@ $(document).ready(function () {
                 //tr.addClass('shown');
             }
         });
+
+        $( '#imp-status').on( 'change', function () {
+            var selStatus = $(this).val();
+            usersTable
+                .columns( 10 )
+                .search( selStatus )
+                .draw();
+        });
+
+        $(document).ready(function(){
+            var selStatus = $( '#imp-status').val();
+            usersTable
+                .columns( 10 )
+                .search( selStatus )
+                .draw();
+        });
+
     };
     // on click selected users data from table(page named page-users-list)
     // to store into local storage to get rendered on second page named page-users-view

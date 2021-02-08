@@ -334,6 +334,11 @@
         </div>
         <div class="content-body">
             <!-- Input Validation start -->
+            @if ($message = Session::get('success'))
+                <div class="alert alert-info mb-2">
+                    {{ $message }}
+                </div>
+            @endif
             @if ($errors->any())
                 @foreach ($errors->all() as $error)
                     <div class="alert alert-danger mb-2">{{ $error }}</div>

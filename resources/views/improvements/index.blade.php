@@ -365,6 +365,16 @@
                                     </select>
                                 </fieldset>
                             </div>
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <label for="users-list-status">Status</label>
+                                <fieldset class="form-group">
+                                    <select class="form-control" id="imp-status">
+                                        <option value="">All</option>
+                                        <option value="In Progress" selected>In Progress</option>
+                                        <option value="Completed">Completed</option>
+                                    </select>
+                                </fieldset>
+                            </div>
                             <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center">
                                 <button type="reset" class="btn btn-primary btn-block glow users-list-clear mb-0">Clear</button>
                             </div>
@@ -408,6 +418,7 @@
                                                 <th style="text-align: left; padding-left: 1rem;">Responsible</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Production site</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Supplier</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Status</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Options</th>
                                             </tr>
                                             </thead>
@@ -425,6 +436,13 @@
                                                     <td style="padding: 0.5rem 1.15rem">{{ $Improvement->name }}</td>
                                                     <td style="padding: 0.5rem 1.15rem">{{ $Improvement->production_location }}</td>
                                                     <td style="padding: 0.5rem 1.15rem">{{ $Improvement->supplier }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem">
+                                                        @if($Improvement->completed=='yes')
+                                                            Completed
+                                                        @else
+                                                            In Progress
+                                                        @endif
+                                                    </td>
                                                     <td style="white-space: nowrap;padding: 0.5rem 1.15rem;">
                                                         @php
                                                             /*<form id="form-del" action="{{ route('improvements.destroy',$Improvement->id) }}" method="POST">

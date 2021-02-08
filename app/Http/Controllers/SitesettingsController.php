@@ -16,9 +16,11 @@ class SitesettingsController extends Controller
     public function index()
     {
         //
-        if(Auth::user()->updated_at==null)
+        if(Auth::user()->updated_at==null || Auth::user()->updated_at==Auth::user()->created_at)
         {
-            return redirect(route('change-password'));
+            //return redirect(route('change-password'));
+            return redirect()->route('change-password')
+                ->with('success','You haven\'t changed your password in a while. Please change it now to access the system!' );
         }
         else
         {
