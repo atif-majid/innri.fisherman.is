@@ -236,7 +236,7 @@
 <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
-            <li class="nav-item mr-auto"><a class="navbar-brand" href="home.html">
+            <li class="nav-item mr-auto"><a class="navbar-brand" href="{{ route('home') }}">
                 <div class="brand-logo" style="width: 100%; max-width: 211px;"><!--<img class="logo" src="app-assets/images/logo/logo.png" />--><img class="logo" src="app-assets/images/logo/fisherman-2.png" style="width: 100%; max-width: 211px; height: 47px; max-height: 47px;" /></div>
                 <!--<h2 class="brand-text mb-0">Frest</h2>-->
             </a></li>
@@ -558,38 +558,78 @@
                             </div>
                             <div class="table-responsive">
                                 <!-- table start -->
-                                @if(count($tasks)>0)
+                                @if(count($tasks)>0 || count($Improvements)>0)
                                     <table id="table-marketing-campaigns" class="table table-borderless table-marketing-campaigns mb-0">
                                         <thead>
                                         <tr>
                                             <th>For</th>
                                             <th>Task</th>
                                             <th>Due Date</th>
+                                            <th>Type</th>
                                             <th>Status</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($tasks as $task)
-                                            <tr>
-                                                <td class="py-1">
-                                                    {{$task->name}}
-                                                </td>
-                                                <td class="py-1">
-                                                    {{$task->task}}
-                                                </td>
-                                                <td class="py-1">
-                                                    {{$task->due_date}}
-                                                </td>
-                                                <td class="py-1">
-                                                    <select id="selStatus" name="selStatus" class="form-control">
-                                                        <option value="Not Started" @if('Not Started'== $task->status) selected @endif>Not Started</option>
-                                                        <option value="In Progress" @if('In Progress'== $task->status) selected @endif>In Progress</option>
-                                                        <option value="Completed" @if('Completed'== $task->status) selected @endif>Completed</option>
-                                                    </select>
-                                                    <input type="hidden" id="nID" name="nID" value="{{$task->id}}" class="taskid" />
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                        @if(count($Improvements)>0)
+                                            @foreach($Improvements as $improvement)
+                                                <tr>
+                                                    <td class="py-1">
+                                                        {{$improvement->complainer}}
+                                                    </td>
+                                                    <td class="py-1">
+                                                        <a href="{{ route('improvements.process', $improvement->id) }}" style="display: flex; align-items: center; justify-content: center; height: 100%; "><i class="bx bx-show-alt"></i></a>&nbsp;
+                                                        @if(strlen($improvement->description)>50)
+                                                            {{substr($improvement->description, 0, 50)}}...
+                                                        @else
+                                                            {{$improvement->description}}
+                                                        @endif
+                                                    </td>
+                                                    <td class="py-1">
+                                                        {{$improvement->due_date}}
+                                                    </td>
+                                                    <td class="py-1">
+                                                        Improvement
+                                                    </td>
+                                                    <td class="py-1">
+                                                        <select id="selImprovement" name="selImprovement" class="form-control">
+                                                            <option value="no" @if('no'== $improvement->completed) selected @endif>In Progress</option>
+                                                            <option value="yes" @if('yes'== $improvement->completed) selected @endif>Completed</option>
+                                                        </select>
+                                                        <input type="hidden" id="nID" name="nID" value="{{$improvement->id}}" class="improvementid" />
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
+                                        @if(count($tasks)>0)
+                                            @foreach($tasks as $task)
+                                                <tr>
+                                                    <td class="py-1">
+                                                        {{$task->name}}
+                                                    </td>
+                                                    <td class="py-1">
+                                                        {{$task->task}}
+                                                    </td>
+                                                    <td class="py-1">
+                                                        {{$task->due_date}}
+                                                    </td>
+                                                    <td class="py-1">
+                                                        @if(strpos($task->field, 'quit')>0)
+                                                            Off-boarding
+                                                        @else
+                                                            On-boarding
+                                                        @endif
+                                                    </td>
+                                                    <td class="py-1">
+                                                        <select id="selStatus" name="selStatus" class="form-control">
+                                                            <option value="Not Started" @if('Not Started'== $task->status) selected @endif>Not Started</option>
+                                                            <option value="In Progress" @if('In Progress'== $task->status) selected @endif>In Progress</option>
+                                                            <option value="Completed" @if('Completed'== $task->status) selected @endif>Completed</option>
+                                                        </select>
+                                                        <input type="hidden" id="nID" name="nID" value="{{$task->id}}" class="taskid" />
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                         </tbody>
                                     </table>
                                 @else
@@ -1647,17 +1687,35 @@
 <script>
     $(document).ready(function(){
         $('select.form-control').on('change', function() {
-            var strNewStatus = $(this).val();
-            var nID = $(this).next('.taskid').val();
-            $(this).attr('disaled', true);
-            $.ajax({
-                method: "POST",
-                url: "{{ route('employees.updateonboardstatus') }}",
-                data: { "_token": "{{ csrf_token() }}", strNewStatus: strNewStatus, nID: nID }
-            })
+            var strFieldID = $(this).attr('id');
+            if(strFieldID=="selStatus")
+            {
+                var strNewStatus = $(this).val();
+                var nID = $(this).next('.taskid').val();
+                $(this).attr('disaled', true);
+                $.ajax({
+                    method: "POST",
+                    url: "{{ route('employees.updateonboardstatus') }}",
+                    data: { "_token": "{{ csrf_token() }}", strNewStatus: strNewStatus, nID: nID }
+                })
                 .done(function( msg ) {
                     $(this).attr('disabled', false);
                 });
+            }
+            else if(strFieldID=="selImprovement")
+            {
+                var strNewStatus = $(this).val();
+                var nID = $(this).next('.improvementid').val();
+                $(this).attr('disaled', true);
+                $.ajax({
+                    method: "POST",
+                    url: "{{ route('improvements.updateimpstatus') }}",
+                    data: { "_token": "{{ csrf_token() }}", strNewStatus: strNewStatus, nID: nID }
+                })
+                    .done(function( msg ) {
+                        $(this).attr('disabled', false);
+                    });
+            }
         });
     });
 </script>

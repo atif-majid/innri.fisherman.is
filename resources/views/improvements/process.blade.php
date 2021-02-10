@@ -370,6 +370,10 @@
                                                 <td class="users-view-latest-activity"></td>
                                             </tr>
                                             <tr>
+                                                <td class="users-view-latest-activity"><strong>Registered By:</strong></td>
+                                                <td class="users-view-latest-activity">{{ $improvement->name }}</td>
+                                            </tr>
+                                            <tr>
                                                 <td class="users-view-latest-activity" colspan="6"><strong>Notifications</strong></td>
                                             </tr>
                                             @foreach($Notifications as $thisNotification)

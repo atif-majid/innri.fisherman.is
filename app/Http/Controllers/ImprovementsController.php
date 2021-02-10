@@ -87,7 +87,6 @@ class ImprovementsController extends Controller
             'strLotNr' => 'sometimes',
             'strDescription' => 'sometimes',
             'nAssignedTo' => 'sometimes',
-            'strDueDate' => 'sometimes',
             'strResponse' => 'sometimes'
         ],
             [
@@ -105,6 +104,18 @@ class ImprovementsController extends Controller
                 'strResponse.required' => 'Response is required'
             ]
         );
+
+        if(isset($request->nAssignedTo) && is_numeric($request->nAssignedTo) && $request->nAssignedTo>0)
+        {
+            $rules['strDueDate'] = 'required|date';//your rule here
+            $request->validate([
+                'strDueDate' => 'required'
+            ],
+                [
+                    'strDueDate.required' => 'Due date is required to assign improvement to someone!'
+                ]
+            );
+        }
 
         /*$strCurrentUserEmail = Auth::user()->email;
         $objCurrentEmployee = Employees::where('email',$strCurrentUserEmail)->first();
@@ -551,13 +562,13 @@ class ImprovementsController extends Controller
             $subject = 'Improvement suggestion for Fisherman';
             $formEmail = 'innri@fisherman.is';
             $formName = "Innri Fisherman";
-            /*Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
+            Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
                 $message->from($formEmail, $formName);
                 $message->to($to);
                 $message->cc('elias@fisherman.is');
                 $message->subject($subject);
                 $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
-            });*/
+            });
         }
 
         if( $request->has('chkCompleted') ){
@@ -575,34 +586,7 @@ class ImprovementsController extends Controller
             Improvements::find($nID)->update($arrUpdate);
         }
 
-        if($request->has('Photo1'))
-        {
-            $file = $request->Photo1;
-            $destination = 'uploads/improvements/'.$nID;
-            $strFileName = $file->getClientOriginalName();
-            $file->move($destination, $strFileName);
-            $arrPicRecord = array(
-                'improvements_id'=>$nID,
-                'file_name'=>$strFileName,
-                'file_creation_date' => date("Y-m-d H:i:s"),
-                'file_created_by' => $nCurrentEmployeeID
-            );
-            Improvementphotos::create($arrPicRecord);
-        }
-        if($request->has('Photo2'))
-        {
-            $file = $request->Photo2;
-            $destination = 'uploads/improvements/'.$nID;
-            $strFileName = $file->getClientOriginalName();
-            $file->move($destination, $strFileName);
-            $arrPicRecord = array(
-                'improvements_id'=>$nID,
-                'file_name'=>$strFileName,
-                'file_creation_date' => date("Y-m-d H:i:s"),
-                'file_created_by' => $nCurrentEmployeeID
-            );
-            Improvementphotos::create($arrPicRecord);
-        }
+
         if($request->has('file'))
         {
             $file = $request->file('file');
@@ -642,5 +626,36 @@ class ImprovementsController extends Controller
             echo "success";
         }
 
+    }
+
+    public function updateimpstatus(Request $request)
+    {
+
+        $strNewStatus = $request->strNewStatus;
+        $nID = $request->nID;
+
+        if($nID>0 && ($strNewStatus=='yes' || $strNewStatus=='no'))
+        {
+            $arrUpdate = array("completed" => $strNewStatus);
+            $nCurrentEmployeeID = Auth::user()->getempid();
+            $currentEmployee = Employees::find($nCurrentEmployeeID);
+            $strCurrentEmployeeName = $currentEmployee->name;
+
+            $strCommentCompleted = 'Marked as in progress by '.$strCurrentEmployeeName;
+            if($strNewStatus=='yes')
+            {
+                $strCommentCompleted = 'Marked as completed by '.$strCurrentEmployeeName;
+            }
+
+
+            $arrComments = array(
+                'improvements_id'=>$nID,
+                'comment'=>$strCommentCompleted,
+                'comment_add_date'=>date("Y-m-d H:i:s"),
+                'comment_added_by'=>$nCurrentEmployeeID
+            );
+            Improvementcomments::create($arrComments);
+            Improvements::find($nID)->update($arrUpdate);
+        }
     }
 }

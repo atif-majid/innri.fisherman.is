@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Improvements;
 
 class HomeController extends Controller
 {
@@ -36,10 +37,15 @@ class HomeController extends Controller
             $nEmployeeID = Auth::user()->getempid();
             $tasks = DB::table('onboardingtasks')
                 ->leftJoin('employees', 'employee', '=', 'employees.id')
-                ->select('onboardingtasks.*','employees.name')
+                ->leftJoin('sitesettings', 'onboardingtasks.task', '=', 'sitesettings.value')
+                ->select('onboardingtasks.*','employees.name', 'sitesettings.field')
                 ->where('responsible_person', $nEmployeeID)
                 ->get();
-            return view('home', compact('tasks'));
+            $Improvements = Improvements::
+                where('completed', 'no')
+                //->where('assigned_to', $nEmployeeID)
+                ->get();
+            return view('home', compact('tasks', 'Improvements'));
         }
     }
 }

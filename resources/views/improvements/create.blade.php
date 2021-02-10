@@ -360,19 +360,19 @@
                                                     <div class="form-group col-sm">
                                                         <label>Who notified?</label>
                                                         <div class="controls">
-                                                            <input type="text" name="strWhoNotified" id="strWhoNotified" value="" class="form-control" data-validation-required-message="Name is requried" placeholder="Who notified?">
+                                                            <input type="text" name="strWhoNotified" id="strWhoNotified" value="{{old('strWhoNotified')}}" class="form-control" data-validation-required-message="Name is requried" placeholder="Who notified?">
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-sm">
                                                         <label>Phone Number</label>
                                                         <div class="controls">
-                                                            <input type="text" name="strPhoneNumber" class="form-control" <?php /*data-validation-required-message="Phone number required"*/?> placeholder="Phone Number">
+                                                            <input type="text" name="strPhoneNumber" value="{{old('strPhoneNumber')}}" class="form-control" <?php /*data-validation-required-message="Phone number required"*/?> placeholder="Phone Number">
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-sm">
                                                         <label>Email</label>
                                                         <div class="controls">
-                                                            <input type="text" name="strEmail" class="form-control" <?php /*data-validation-required-message="Email is required"*/?> placeholder="Email">
+                                                            <input type="text" name="strEmail" class="form-control" value="{{old('strEmail')}}" <?php /*data-validation-required-message="Email is required"*/?> placeholder="Email">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -380,7 +380,7 @@
                                                     <div class="form-group col-sm">
                                                         <label>What Product?</label>
                                                         <div class="controls">
-                                                            <input type="text" name="strProduct" id="strProduct" value="" class="form-control" <?php /*data-validation-required-message="Product is required"*/?> placeholder="What product?">
+                                                            <input type="text" name="strProduct" id="strProduct" value="{{old('strProduct')}}" class="form-control" <?php /*data-validation-required-message="Product is required"*/?> placeholder="What product?">
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-sm">
@@ -420,11 +420,24 @@
                                                         @if($thissetting->field=="Notification")
                                                             <?php
                                                                     $i++;
+                                                                    $strChecked = "";
+                                                                    $old = session()->getOldInput();
+                                                                    if(is_array($old) && isset($old['chkNotification']))
+                                                                    {
+                                                                        for($nOldi=0; $nOldi<count($old['chkNotification']); $nOldi++)
+                                                                        {
+                                                                            if($old['chkNotification'][$nOldi] == $thissetting->value)
+                                                                            {
+                                                                                $strChecked = "checked";
+                                                                            }
+                                                                        }
+                                                                    }
+
                                                             ?>
                                                             <div class="form-group col-sm">
                                                                 <fieldset>
                                                                     <div class="checkbox">
-                                                                        <input type="checkbox" class="checkbox-input" id="checkbox<?php echo $i;?>" name="chkNotification[]" value="{{$thissetting->value}}">
+                                                                        <input type="checkbox" class="checkbox-input" id="checkbox<?php echo $i;?>" name="chkNotification[]" value="{{$thissetting->value}}" {{$strChecked}}>
                                                                         <label for="checkbox<?php echo $i;?>">{{$thissetting->value}}</label>
                                                                     </div>
                                                                 </fieldset>
@@ -467,7 +480,7 @@
                                                                 <option selected=""></option>
                                                                 @foreach($sitesettings as $thissetting)
                                                                     @if($thissetting->field=='ProductionSite')
-                                                                        <option value="{{ $thissetting->value }}">{{ $thissetting->value }}</option>
+                                                                        <option value="{{ $thissetting->value }}" @if(old('strProductionLocation')==$thissetting->value) selected @endif>{{ $thissetting->value }}</option>
                                                                     @endif
                                                                 @endforeach
                                                                 @php
@@ -484,7 +497,7 @@
                                                                     <option selected></option>
                                                                     @foreach($sitesettings as $thissetting)
                                                                         @if($thissetting->field=='SupplierName')
-                                                                            <option value="{{ $thissetting->value }}">{{ $thissetting->value }}</option>
+                                                                            <option value="{{ $thissetting->value }}" @if(old('strSupplier')==$thissetting->value) selected @endif>{{ $thissetting->value }}</option>
                                                                         @endif
                                                                     @endforeach
                                                                     @php
@@ -504,13 +517,13 @@
                                                     <div class="form-group col-sm">
                                                         <label>Where was it sold?</label>
                                                         <div class="controls">
-                                                            <input type="text" name="strWhereSold" id="strWhereSold" value="" class="form-control" @php /*data-validation-required-message="Selling location is requried"*/ @endphp placeholder="Where was it sold?">
+                                                            <input type="text" name="strWhereSold" id="strWhereSold" value="{{old('strWhereSold')}}" class="form-control" @php /*data-validation-required-message="Selling location is requried"*/ @endphp placeholder="Where was it sold?">
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-sm">
                                                         <label>When was it bought?</label>
                                                         <fieldset class="position-relative has-icon-left">
-                                                            <input type="text" class="form-control pickadate-limits" placeholder="Select Date" id="purchase_date" name="strDateOfPurchase">
+                                                            <input type="text" class="form-control pickadate-limits" placeholder="Select Date" id="purchase_date" name="strDateOfPurchase" value="{{old('strDateOfPurchase')}}">
                                                             <div class="form-control-position">
                                                                 <i class='bx bx-calendar'></i>
                                                             </div>
@@ -519,7 +532,7 @@
                                                     <div class="form-group col-sm">
                                                         <label>Lot nr.</label>
                                                         <div class="controls">
-                                                            <input type="text" name="strLotNr" class="form-control" <?php /*data-validation-required-message="Lot Nr. is Required"*/?> placeholder="Lot nr.">
+                                                            <input type="text" name="strLotNr" class="form-control" value="{{old('strLotNr')}}" <?php /*data-validation-required-message="Lot Nr. is Required"*/?> placeholder="Lot nr.">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -527,7 +540,7 @@
                                                     <div class="form-group col-sm">
                                                         <label>Description</label>
                                                         <div class="controls">
-                                                            <textarea name="strDescription" class="form-control" <?php /*data-validation-required-message="Name is requried"*/?> placeholder="Description" rows="4"></textarea>
+                                                            <textarea name="strDescription" class="form-control" <?php /*data-validation-required-message="Name is requried"*/?> placeholder="Description" rows="4">{{old('strDescription')}}</textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -539,7 +552,7 @@
                                                             <select class="form-control" id="nAssignedTo" name="nAssignedTo">
                                                                 <option value=""></option>
                                                                 @foreach ($employees as $employee)
-                                                                    <option value="{{ $employee->id }}">{{ $employee->name }}</option>
+                                                                    <option value="{{ $employee->id }}" @if(old('nAssignedTo')==$employee->id) selected @endif>{{ $employee->name }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -547,7 +560,7 @@
                                                     <div class="form-group col-sm">
                                                         <label>Due Date</label>
                                                         <fieldset class="position-relative has-icon-left">
-                                                            <input type="text" class="form-control pickadate-limits" placeholder="Select Date" id="purchase_date" name="strDueDate">
+                                                            <input type="text" class="form-control pickadate-limits" placeholder="Select Date" id="purchase_date" name="strDueDate" value="{{old('strDueDate')}}">
                                                             <div class="form-control-position">
                                                                 <i class='bx bx-calendar'></i>
                                                             </div>
@@ -566,7 +579,7 @@
                                                     <div class="form-group col-sm">
                                                         <label>Response and Improvements</label>
                                                         <div class="controls">
-                                                            <textarea name="strResponse" class="form-control" <?php /*data-validation-required-message="Name is requried"*/?> placeholder="Response and Improvements" rows="4"></textarea>
+                                                            <textarea name="strResponse" class="form-control" <?php /*data-validation-required-message="Name is requried"*/?> placeholder="Response and Improvements" rows="4">{{old('strResponse')}}</textarea>
                                                         </div>
                                                     </div>
                                                 </div>
