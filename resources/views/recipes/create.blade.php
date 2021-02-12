@@ -348,7 +348,7 @@
                                                 <div class="form-group">
                                                     <label>Product number</label>
                                                     <div class="controls">
-                                                        <input type="text" name="strProductNumber" class="form-control" @php /*data-validation-required-message="Product Number is required"*/ @endphp placeholder="Product Number">
+                                                        <input type="text" name="strProductNumber" class="form-control" value="{{ old('strProductNumber') }}" @php /*data-validation-required-message="Product Number is required"*/ @endphp placeholder="Product Number">
                                                     </div>
                                                 </div>
                                             </div>
