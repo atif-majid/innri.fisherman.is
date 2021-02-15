@@ -539,18 +539,20 @@
                                             </div>
                                         </div>
                                     </form>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row" style="width: 100% !important;">
-                                        <form action="{{ route('improvements.updateprocess') }}" class="dropzone dropzone-area" id="dpz-remove-thumb" style="margin-left: 20px;width:100% !important;">
-                                            <div class="dz-message" style="height: 200px !important;">Drop Files Here To Upload</div>
+                                    <div class="row" style="padding: 20px !important;">
+                                        <form action="{{ route('improvements.uploadpicture') }}" class="dropzone dropzone-area" id="dpz-remove-thumb" style="margin-left: 20px;width:100% !important;">
+                                            <div class="dz-message" style="height: 60% !important;">Drop Files Here To Upload</div>
+                                            <input type="hidden" id="nImpId" name="nImpId" value="{{ $improvement->id }}">
+                                            <input type="hidden" id="pgProcess" name="pgProcess" value="{{ $improvement->id }}">
                                         </form>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <button type="submit" class="btn btn-primary" id="btnAllSubmit">Submit</button>
+                                    <div class="row">
+                                        <button type="submit" class="btn btn-primary" id="btnAllSubmit">Submit</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -678,7 +680,6 @@
         $('.pickadate-limits').pickadate({
             //format: 'mmmm, d, yyyy'
             format: 'yyyy-mm-dd',
-            max: [2021,1,13]
         });
 
         $('.comment').click(function(event){
@@ -715,55 +716,6 @@
                 });
         });
     });
-    var myDropzone;
-    Dropzone.options.dpzRemoveThumb = {
-        paramName: "file", // The name that will be used to transfer the file
-        acceptedFiles: "image/*",
-        maxFilesize: 1, // MB
-        addRemoveLinks: true,
-        dictRemoveFile: " Trash",
-        autoProcessQueue: false,
-        init: function (e) {
-            var myDropzone = this;
-            $('#btnAllSubmit').on("click", function() {
-                var nFiles = myDropzone.files.length;
-                if(nFiles==0)
-                {
-                    $('#frmOnlyComment').submit();
-                }
-                else {
-                    myDropzone.processQueue();
-                }
-            });
-            myDropzone.on("sending", function(file, xhr, data) {
-
-                // First param is the variable name used server side
-                // Second param is the value, you can add what you what
-                // Here I added an input value
-                data.append("_token", "{{ csrf_token() }}");
-                data.append('id', $('#id').val());
-                /*if(nCount==0)
-                {
-                    data.append('strResponse', $('#strResponse').val());
-                    data.append('nAssignedTo', $('#nAssignedTo').val());
-                    data.append('strDueDate', $('#strDueDate').val());
-                    var active = $('#chkCompleted').prop("checked") ? 1 : 0 ;
-                    if(active==1)
-                    {
-                        data.append('chkCompleted', $('#chkCompleted').val());
-                    }
-                }
-                nCount = nCount +1;*/
-
-            });
-            myDropzone.on("complete", function (file) {
-                if (myDropzone.getUploadingFiles().length === 0 && myDropzone.getQueuedFiles().length === 0) {
-                    //location.reload();
-                    $('#frmOnlyComment').submit();
-                }
-            });
-        }
-    }
 </script>
 <div class="modal fade text-left" id="modalsysgen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -823,6 +775,89 @@
                 </button>
             </div>
 
+        </div>
+    </div>
+</div>
+<script>
+    var myDropzone;
+    Dropzone.options.dpzRemoveThumb = {
+        paramName: "file", // The name that will be used to transfer the file
+        acceptedFiles: "image/*",
+        maxFilesize: 10, // MB
+        addRemoveLinks: true,
+        dictRemoveFile: " Trash",
+        autoProcessQueue: false,
+        init: function (e) {
+            var myDropzone = this;
+            $('#btnAllSubmit').on("click", function() {
+                $('.modalerror').html('');
+                var nFiles = myDropzone.files.length;
+                var arrFormData = $('#frmOnlyComment').serialize();
+                $.ajax({
+                    type: "post",
+                    url: "{{ route('improvements.updateprocess') }}",
+                    data: arrFormData,
+                    dataType: 'json',              // let's set the expected response format
+                    success: function(data){
+                        var nFiles = myDropzone.files.length;
+                        if(nFiles==0)
+                        {
+                            window.location.href = "{{route('improvements.process', $improvement->id)}}";
+                        }
+                        else
+                        {
+                            myDropzone.processQueue();
+                        }
+                    },
+                    error: function (err) {
+                        if (err.status == 422) { // when status code is 422, it's a validation issue
+                            console.log(err.responseJSON);
+                            // you can loop through the errors object and show it to the user
+                            /*console.warn(err.responseJSON.errors);*/
+                            // display errors on each form field
+                            var errDisplay = ''
+                            $.each(err.responseJSON.errors, function (i, error) {
+                                errDisplay = errDisplay + '<div class="alert alert-danger mb-2">'+error[0]+'</div>';
+                                $('.modal-body').html(errDisplay);
+                                $('#modalError').modal('show');
+                            });
+                        }
+                    }
+                });
+            });
+            myDropzone.on("sending", function(file, xhr, data) {
+                // First param is the variable name used server side
+                // Second param is the value, you can add what you what
+                // Here I added an input value
+                data.append("_token", "{{ csrf_token() }}");
+            });
+            myDropzone.on("complete", function (file) {
+                if (myDropzone.getUploadingFiles().length === 0 && myDropzone.getQueuedFiles().length === 0) {
+                    //location.reload();
+                    window.location.href = "{{route('improvements.process', $improvement->id)}}";
+                }
+            });
+        }
+    }
+</script>
+<div class="modal fade text-left" id="modalError" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel33">Notice </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="bx bx-x"></i>
+                </button>
+            </div>
+            <div class="modal-body modalerror">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-secondary" data-dismiss="modal">
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Close</span>
+                </button>
+            </div>
         </div>
     </div>
 </div>

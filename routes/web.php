@@ -50,6 +50,7 @@ Route::get('improvements/process/{id}', ['as'=>'improvements.process', 'uses'=>'
 Route::post('/improvements/updateprocess', ['as'=>'improvements.updateprocess', 'uses'=>'App\Http\Controllers\ImprovementsController@updateprocess']);
 Route::post('/improvements/updatecomment', ['as'=>'improvements.updatecomment', 'uses'=>'App\Http\Controllers\ImprovementsController@updatecomment']);
 Route::post('/improvements/updateimpstatus', ['as'=>'improvements.updateimpstatus', 'uses'=>'App\Http\Controllers\ImprovementsController@updateimpstatus']);
+Route::post('/improvements/uploadpicture', ['as'=>'improvements.uploadpicture', 'uses'=>'App\Http\Controllers\ImprovementsController@uploadpicture']);
 
 Route::post('sitesettings/storeonboardingcategories', ['as'=>'sitesettings.storeonboardingcategories', 'uses'=>'App\Http\Controllers\SitesettingsController@storeonboardingcategories']);
 Route::post('sitesettings/storeonboardingtasks', ['as'=>'sitesettings.storeonboardingtasks', 'uses'=>'App\Http\Controllers\SitesettingsController@storeonboardingtasks']);

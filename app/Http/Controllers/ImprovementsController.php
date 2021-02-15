@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\File;
+use mysql_xdevapi\Exception;
 
 class ImprovementsController extends Controller
 {
@@ -257,10 +258,10 @@ class ImprovementsController extends Controller
             });
 
         }
-
-
-        return redirect()->route('improvements.index')
-            ->with('success','Improvement record added successfully.');
+        $request->session()->flash('success', 'Improvement record added successfully.');
+        echo $nImprovementID;
+        /*return redirect()->route('improvements.index')
+            ->with('success','Improvement record added successfully.');*/
     }
 
     /**
@@ -499,6 +500,19 @@ class ImprovementsController extends Controller
         $nAssignedTo = $request->nAssignedTo;
         $strDueDate = $request->strDueDate;
         $nID = $request->id;
+
+        if(isset($request->nAssignedTo) && is_numeric($request->nAssignedTo) && $request->nAssignedTo>0)
+        {
+            $rules['strDueDate'] = 'required|date';//your rule here
+            $request->validate([
+                'strDueDate' => 'required'
+            ],
+                [
+                    'strDueDate.required' => 'Due date is required to assign improvement to someone!'
+                ]
+            );
+        }
+
         $nCurrentEmployeeID = Auth::user()->getempid();
         $currentEmployee = Employees::find($nCurrentEmployeeID);
         $strCurrentEmployeeName = $currentEmployee->name;
@@ -513,7 +527,7 @@ class ImprovementsController extends Controller
             Improvementcomments::create($arrComments);
         }
 
-        if($nAssignedTo>0 and trim($strDueDate!=""))
+        if($nAssignedTo>0 and trim($strDueDate)!="")
         {
             /**
              * The below piece of code will keep a track of when the task was assigned to someone.
@@ -550,12 +564,12 @@ class ImprovementsController extends Controller
             Improvementcomments::create($arrComments);
 
             $html = "<html><body>
-            <div><img src='https://innri.fisherman.is/app-assets/images/logo/fisherman-2.png'></div>
-            <div>
-                <p>
-                Hello $strNewAssigneeName,<br><br>
-                $strCurrentEmployeeName has sent you this message with the below suggestion for improvement and put you in charge of resolving it:<br><br>
-                <a href='https://innri.fisherman.is/improvements/process/$nID'>https://innri.fisherman.is/improvements/process/$nID</a></p></div></body></html>";
+        <div><img src='https://innri.fisherman.is/app-assets/images/logo/fisherman-2.png'></div>
+        <div>
+            <p>
+            Hello $strNewAssigneeName,<br><br>
+            $strCurrentEmployeeName has sent you this message with the below suggestion for improvement and put you in charge of resolving it:<br><br>
+            <a href='https://innri.fisherman.is/improvements/process/$nID'>https://innri.fisherman.is/improvements/process/$nID</a></p></div></body></html>";
             //$to = 'ragnar@fisherman.is';
             //$to = 'atif.majid10@gmail.com';
             $to = $newAssignee->email;
@@ -587,27 +601,12 @@ class ImprovementsController extends Controller
         }
 
 
-        if($request->has('file'))
-        {
-            $file = $request->file('file');
-            if(is_numeric($nID) && $nID>0)
-            {
-                $destination = 'uploads/improvements/'.$nID;
-                $strFileName = $file->getClientOriginalName();
-                $file->move($destination, $strFileName);
-                $arrPicRecord = array(
-                    'improvements_id'=>$nID,
-                    'file_name'=>$strFileName,
-                    'file_creation_date' => date("Y-m-d H:i:s"),
-                    'file_created_by' => $nCurrentEmployeeID
-                );
-                Improvementphotos::create($arrPicRecord);
-            }
-        }
+        $request->session()->flash('success', 'Improvement updated successfully.');
+        return "{\"msg\":\"success\"}";
 
 
-        return redirect()->route('improvements.process', [$nID])
-            ->with('success','Comment successfully added.');
+        /*return redirect()->route('improvements.process', [$nID])
+            ->with('success','Comment successfully added.');*/
     }
 
     public function updatecomment(Request $request)
@@ -657,5 +656,38 @@ class ImprovementsController extends Controller
             Improvementcomments::create($arrComments);
             Improvements::find($nID)->update($arrUpdate);
         }
+    }
+
+    public function uploadpicture(Request $request)
+    {
+        /*$request->validate([
+            'file' => 'required | mimes:jpeg,jpg,png',
+            'nImpId' => 'required'
+        ]);*/
+        $nImpId = $request->nImpId;
+        if(is_numeric($nImpId) && $nImpId>0 && $request->has('file'))
+        {
+            $nCurrentEmployeeID = Auth::user()->getempid();
+            $file = $request->file('file');
+            $destination = 'uploads/improvements/'.$nImpId;
+            $strFileName = $file->getClientOriginalName();
+            $file->move($destination, $strFileName);
+            $arrPicRecord = array(
+                'improvements_id'=>$nImpId,
+                'file_name'=>$strFileName,
+                'file_creation_date' => date("Y-m-d H:i:s"),
+                'file_created_by' => $nCurrentEmployeeID
+            );
+            Improvementphotos::create($arrPicRecord);
+        }
+        if($request->has('pgProcess') && $request->pgProcess>0)
+        {
+            $request->session()->flash('success', 'Improvement record updated successfully.');
+        }
+        else
+        {
+            $request->session()->flash('success', 'Improvement record added successfully.');
+        }
+
     }
 }
