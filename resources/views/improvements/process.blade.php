@@ -343,7 +343,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="users-view-latest-activity" ><strong>Product:</strong></td>
-                                                <td class="users-view-latest-activity" colspan="6"><strong>{{ $improvement->product or '' }}</strong></td>
+                                                <td class="users-view-latest-activity" colspan="6"><strong>{{ $improvement->product }}</strong></td>
                                             </tr>
                                             <tr>
                                                 <td class="users-view-latest-activity"><strong>Who Notified:</strong></td>
@@ -452,7 +452,7 @@
                                         </ol>
                                         <div class="carousel-inner" role="listbox">
                                             @foreach($ImprovementPhotos as $k=>$thisPhoto)
-                                                <div class="carousel-item @if($k==0) active @endif">
+                                                <div class="carousel-item @if($k==0) active @endif" style="text-align:center; width:100%;">
                                                     <img style="max-height: 500px !important;" src="/uploads/improvements/{{$improvement->id}}/{{$thisPhoto->file_name}}">
                                                 </div>
                                             @endforeach
@@ -539,26 +539,31 @@
                                             </div>
                                         </div>
                                     </form>
-                                    <div class="row" style="padding: 20px !important;">
-                                        <form action="{{ route('improvements.uploadpicture') }}" class="dropzone dropzone-area" id="dpz-remove-thumb" style="margin-left: 20px;width:100% !important;">
-                                            <div class="dz-message" style="height: 60% !important;">Drop Files Here To Upload</div>
-                                            <input type="hidden" id="nImpId" name="nImpId" value="{{ $improvement->id }}">
-                                            <input type="hidden" id="pgProcess" name="pgProcess" value="{{ $improvement->id }}">
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <button type="submit" class="btn btn-primary" id="btnAllSubmit">Submit</button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- Basic Carousel with Caption End -->
                 </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Photos</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <form action="{{ route('improvements.uploadpicture') }}" class="dropzone dropzone-area" id="dpz-remove-thumb" style="margin-left: 20px;width:100% !important;">
+                                        <div class="dz-message" style="height: 60% !important;">Drop Files Here To Upload</div>
+                                        <input type="hidden" id="nImpId" name="nImpId" value="{{ $improvement->id }}">
+                                        <input type="hidden" id="pgProcess" name="pgProcess" value="{{ $improvement->id }}">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" id="btnAllSubmit">Submit</button>
             </section>
             <!-- users list ends -->
         </div>

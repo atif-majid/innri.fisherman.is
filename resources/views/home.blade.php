@@ -1700,6 +1700,7 @@
                 })
                 .done(function( msg ) {
                     $(this).attr('disabled', false);
+                    alert('The status for this task has been changed!');
                 });
             }
             else if(strFieldID=="selImprovement")
@@ -1714,6 +1715,7 @@
                 })
                     .done(function( msg ) {
                         $(this).attr('disabled', false);
+                        alert('The status for this task has been changed!');
                     });
             }
         });
