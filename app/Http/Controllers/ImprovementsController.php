@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\File;
+use Image;
 use mysql_xdevapi\Exception;
 
 class ImprovementsController extends Controller
@@ -464,6 +465,7 @@ class ImprovementsController extends Controller
 
     public function process(Request $request)
     {
+
         $nID = $request->id;
         //$improvement = Improvements::find($nID);
         $improvements = DB::table('improvements')
@@ -669,9 +671,29 @@ class ImprovementsController extends Controller
         {
             $nCurrentEmployeeID = Auth::user()->getempid();
             $file = $request->file('file');
-            $destination = 'uploads/improvements/'.$nImpId;
+            $destination = 'uploads/improvements/'.$nImpId."/";
             $strFileName = $file->getClientOriginalName();
-            $file->move($destination, $strFileName);
+
+            $height = Image::make($file)->height();
+            $width = Image::make($file)->width();
+
+            $image_resize = Image::make($file->getRealPath());
+            if($width>500)
+            {
+                $image_resize->resize(500, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            }
+            else if ($height>500)
+            {
+                $image_resize->resize(null, 500, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            }
+            $image_resize->save(public_path($destination .$strFileName));
+
+
+            //$file->move($destination, $strFileName);
             $arrPicRecord = array(
                 'improvements_id'=>$nImpId,
                 'file_name'=>$strFileName,
