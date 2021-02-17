@@ -673,6 +673,10 @@ class ImprovementsController extends Controller
             $file = $request->file('file');
             $destination = 'uploads/improvements/'.$nImpId."/";
             $strFileName = $file->getClientOriginalName();
+            if (!file_exists(public_path($destination))) {
+                $file->move($destination, $strFileName);
+            }
+
 
             $height = Image::make($file)->height();
             $width = Image::make($file)->width();
