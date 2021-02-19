@@ -296,7 +296,7 @@
             </li>
             <li class="nav-item"><a href="#"><span class="menu-title">Sales</span></a>
                 <ul class="menu-content">
-                    <li><a href="#"><!--<i class="menu-livicon" data-icon="user"></i>--><span class="menu-title" data-i18n="User Profile">Sales Opportunities</span></a>
+                    <li><a href="{{ route('salesopportunity.index') }}"><!--<i class="menu-livicon" data-icon="user"></i>--><span class="menu-title" data-i18n="User Profile">Sales Opportunities</span></a>
                     </li>
                     <li><a href="#"><!--<i class="menu-livicon" data-icon="question-alt"></i>--><span class="menu-title" data-i18n="FAQ">CRM System</span></a>
                     </li>

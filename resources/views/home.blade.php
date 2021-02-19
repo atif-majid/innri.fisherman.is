@@ -380,7 +380,7 @@
 
             <li class=" navigation-header"><span>Sales</span>
             </li>
-            <li class=" nav-item"><a href="#"><!--<i class="menu-livicon" data-icon="user"></i>--><span class="menu-title" data-i18n="User Profile">Sales Opportunities</span></a>
+            <li class=" nav-item"><a href="{{ route('salesopportunity.index') }}"><!--<i class="menu-livicon" data-icon="user"></i>--><span class="menu-title" data-i18n="User Profile">Sales Opportunities</span></a>
             </li>
             <li class=" nav-item"><a href="#"><!--<i class="menu-livicon" data-icon="question-alt"></i>--><span class="menu-title" data-i18n="FAQ">CRM System</span></a>
             </li>
@@ -1700,7 +1700,7 @@
                 })
                 .done(function( msg ) {
                     $(this).attr('disabled', false);
-                    alert('The status for this task has been changed!');
+                    //alert('The status for this task has been changed!');
                 });
             }
             else if(strFieldID=="selImprovement")
@@ -1715,7 +1715,7 @@
                 })
                     .done(function( msg ) {
                         $(this).attr('disabled', false);
-                        alert('The status for this task has been changed!');
+                        //alert('The status for this task has been changed!');
                     });
             }
         });

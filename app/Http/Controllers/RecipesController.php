@@ -6,6 +6,7 @@ use App\Models\Recipes;
 use App\Models\Ingredients;
 use App\Models\Steps;
 use App\Models\Recipephotos;
+use App\Models\Sitesettings;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -33,7 +34,6 @@ class RecipesController extends Controller
         else
         {
             $recipes = Recipes::all();
-
             return view('recipes.index',compact('recipes'))
                 ->with('i', (request()->input('page', 1) - 1) * 5);
         }
@@ -48,7 +48,8 @@ class RecipesController extends Controller
     public function create()
     {
         //
-        return view('recipes.create');
+        $Suppliers = Sitesettings::where('field', 'SupplierName')->get();
+        return view('recipes.create', compact('Suppliers'));
     }
 
     /**
@@ -108,6 +109,11 @@ class RecipesController extends Controller
                 {
                     $arrInsert['ing_product_number'] = $thisIngredient['ing_product_number'];
                 }
+                if(array_key_exists('supplier', $thisIngredient) && $thisIngredient['supplier']!="")
+                {
+                    $arrInsert['supplier_name'] = $thisIngredient['supplier'];
+                }
+
                 Ingredients::create($arrInsert);
             }
 
@@ -194,7 +200,8 @@ class RecipesController extends Controller
         $nRecipeID = $recipe->id;
         $Ingredients = Ingredients::where('recipe_id', $nRecipeID)->get();
         $Steps = Steps::where('recipe_id', $nRecipeID)->get();
-        return view('recipes.edit', compact('recipe', 'Ingredients', 'Steps'));
+        $Suppliers = Sitesettings::where('field', 'SupplierName')->get();
+        return view('recipes.edit', compact('recipe', 'Ingredients', 'Steps', 'Suppliers'));
     }
 
     /**
@@ -256,6 +263,10 @@ class RecipesController extends Controller
                 if(array_key_exists('ing_product_number', $thisIngredient) && $thisIngredient['ing_product_number']!="")
                 {
                     $arrUpdateIngredient['ing_product_number'] = $thisIngredient['ing_product_number'];
+                }
+                if(array_key_exists('supplier', $thisIngredient) && $thisIngredient['supplier']!="")
+                {
+                    $arrUpdateIngredient['supplier_name'] = $thisIngredient['supplier'];
                 }
 
                 if(isset($thisIngredient['ingredientid']) && $thisIngredient['ingredientid']>0)

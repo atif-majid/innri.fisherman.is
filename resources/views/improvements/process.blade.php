@@ -42,7 +42,7 @@
     <style>
         .carousel-control-next,
         .carousel-control-prev /*, .carousel-indicators */ {
-            background-color: rgba(0, 0, 0, 0.1);
+            background-color: rgba(0, 0, 0, 0.8);
             width: 30px;
         }
     </style>
@@ -282,7 +282,7 @@
             </li>
             <li class="nav-item"><a href="#"><span class="menu-title">Sales</span></a>
                 <ul class="menu-content">
-                    <li><a href="#"><!--<i class="menu-livicon" data-icon="user"></i>--><span class="menu-title" data-i18n="User Profile">Sales Opportunities</span></a>
+                    <li><a href="{{ route('salesopportunity.index') }}"><!--<i class="menu-livicon" data-icon="user"></i>--><span class="menu-title" data-i18n="User Profile">Sales Opportunities</span></a>
                     </li>
                     <li><a href="#"><!--<i class="menu-livicon" data-icon="question-alt"></i>--><span class="menu-title" data-i18n="FAQ">CRM System</span></a>
                     </li>
@@ -453,7 +453,7 @@
                                         <div class="carousel-inner" role="listbox">
                                             @foreach($ImprovementPhotos as $k=>$thisPhoto)
                                                 <div class="carousel-item @if($k==0) active @endif" style="text-align:center; width:100%;">
-                                                    <img style="max-height: 500px !important;" src="/uploads/improvements/{{$improvement->id}}/{{$thisPhoto->file_name}}">
+                                                    <img style="max-width: 500px !important; max-height: 400px !important;" src="/uploads/improvements/{{$improvement->id}}/{{$thisPhoto->file_name}}">
                                                 </div>
                                             @endforeach
                                         </div>
@@ -691,7 +691,7 @@
             event.preventDefault();
             var strComment = $(this).prev('p.mb-1').html();
             strComment = strComment.replaceAll('<br>','');
-            var nCommentID = $(this).attr('id');
+            var nCommentID = $(this).parent().attr('id');
             $('#txtComment').val($.trim(strComment));
             $('#nCommentID').val(nCommentID);
             $('#inlineForm').modal('show');

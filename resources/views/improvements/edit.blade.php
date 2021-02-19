@@ -282,7 +282,7 @@
             </li>
             <li class="nav-item"><a href="#"><span class="menu-title">Sales</span></a>
                 <ul class="menu-content">
-                    <li><a href="#"><!--<i class="menu-livicon" data-icon="user"></i>--><span class="menu-title" data-i18n="User Profile">Sales Opportunities</span></a>
+                    <li><a href="{{ route('salesopportunity.index') }}"><!--<i class="menu-livicon" data-icon="user"></i>--><span class="menu-title" data-i18n="User Profile">Sales Opportunities</span></a>
                     </li>
                     <li><a href="#"><!--<i class="menu-livicon" data-icon="question-alt"></i>--><span class="menu-title" data-i18n="FAQ">CRM System</span></a>
                     </li>
@@ -554,7 +554,7 @@
                                                     <div class="form-group col-sm">
                                                         <label>Due Date</label>
                                                         <fieldset class="position-relative has-icon-left">
-                                                            <input type="text" class="form-control pickadate-limits" placeholder="Select Date" id="purchase_date" name="strDueDate" value="{{$improvement->due_date}}">
+                                                            <input type="text" class="form-control pickadate-all" placeholder="Select Date" id="purchase_date" name="strDueDate" value="{{$improvement->due_date}}">
                                                             <div class="form-control-position">
                                                                 <i class='bx bx-calendar'></i>
                                                             </div>
@@ -743,7 +743,11 @@
         $('.pickadate-limits').pickadate({
             //format: 'mmmm, d, yyyy'
             format: 'yyyy-mm-dd',
-            max: [2021,1,13]
+            max: '0'
+        });
+        $('.pickadate-all').pickadate({
+            //format: 'mmmm, d, yyyy'
+            format: 'yyyy-mm-dd',
         });
     });
 </script>

@@ -1,7 +1,7 @@
 <style>
     .carousel-control-next,
     .carousel-control-prev /*, .carousel-indicators */ {
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: rgba(0, 0, 0, 0.8);
         width: 30px;
     }
 </style>
@@ -21,8 +21,9 @@
                         <tbody>
                             @foreach($Ingredients as $key=>$thisIngredient)
                                 <tr>
-                                    <th class="text-nowrap" scope="row" style="padding-top: 0.15rem !important; padding-bottom: 0.15rem !important; width: 15% !important;white-space: nowrap;">@if($thisIngredient->ing_product_number!=""){{ $thisIngredient->ing_product_number }} - @endif {{ $thisIngredient->name }}</th>
-                                    <td style="padding-top: 0.15rem !important; padding-bottom: 0.15rem !important; width: 85% !important;white-space: nowrap;">{{ $thisIngredient->amount }}&nbsp;{{ $thisIngredient->unit }}</td>
+                                    <td class="text-nowrap" scope="row" style="padding-right: 1rem !important; padding-top: 0.15rem !important; padding-bottom: 0.15rem !important; width: 2% !important;white-space: nowrap;text-align: right">{{$key+1}}</td>
+                                    <td class="text-nowrap" scope="row" style="padding-left: 1rem !important; padding-top: 0.15rem !important; padding-bottom: 0.15rem !important; width: 32% !important; white-space: nowrap;">{{ $thisIngredient->name }}</td>
+                                    <td style="padding-top: 0.15rem !important; padding-bottom: 0.15rem !important; white-space: nowrap; width: 66% !important;">{{ $thisIngredient->amount }}&nbsp;{{ $thisIngredient->unit }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -39,13 +40,21 @@
             @endphp
         @endforeach
         <tr>
-            <td class="users-view-latest-activity"><b>Steps</b></td>
+            <td class="users-view-latest-activity" colspan="2"><b>Steps</b></td>
         </tr>
-        @foreach($Steps as $thisStep)
-            <tr>
-                <td colspan="2">{!! nl2br( $thisStep->details) !!}</td>
-            </tr>
-        @endforeach
+        <tr>
+            <td colspan="2">
+                <table class="table table-borderless" colspan="12">
+                    @foreach($Steps as $k=>$thisStep)
+                        <tr>
+                            <td style="width: 3% !important; padding-right: 0.5rem !important; vertical-align: top">{{ $k+1 }}</td>
+                            <td style="width: 97% !important; padding-left: 0.5rem !important;">{!! nl2br( $thisStep->details) !!}</td>
+                        </tr>
+                    @endforeach
+                </table>
+            </td>
+        </tr>
+
         @if(count($RecipePhoto)>0)
             <tr>
                 <td colspan="2">
@@ -67,16 +76,16 @@
                                                 </ol>
                                                 <div class="carousel-inner" role="listbox">
                                                     @foreach($RecipePhoto as $k=>$thisPhoto)
-                                                        <div class="carousel-item @if($k==0) active @endif">
-                                                            <img style="max-height: 500px !important;" src="https://innri.fisherman.is/uploads/recipes/{{$recipe->id}}/{{$thisPhoto->file_name}}">
+                                                        <div class="carousel-item @if($k==0) active @endif" style="text-align:center; width:100%;">
+                                                            <img style="max-height: 400px !important; max-width: 500px;" src="https://innri.fisherman.is/uploads/recipes/{{$recipe->id}}/{{$thisPhoto->file_name}}">
                                                         </div>
                                                     @endforeach
                                                 </div>
-                                                <a class="carousel-control-prev" href="#carousel-example-generic" role="button" data-slide="prev">
+                                                <a class="carousel-control-prev" href="#carousel-example-generic" role="button" data-slide="prev" style="display:flex !important;">
                                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                     <span class="sr-only">Previous</span>
                                                 </a>
-                                                <a class="carousel-control-next" href="#carousel-example-generic" role="button" data-slide="next">
+                                                <a class="carousel-control-next" href="#carousel-example-generic" role="button" data-slide="next" style="display:flex !important;">
                                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                     <span class="sr-only">Next</span>
                                                 </a>

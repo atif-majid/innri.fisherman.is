@@ -601,6 +601,23 @@ class ImprovementsController extends Controller
             Improvementcomments::create($arrComments);
             Improvements::find($nID)->update($arrUpdate);
         }
+        else{
+            $improvement = Improvements::find($nID);
+            if($improvement->completed=='yes')
+            {
+                $arrUpdate = array("completed" => 'no');
+
+                $strCommentCompleted = 'Marked as in progress by '.$strCurrentEmployeeName;
+                $arrComments = array(
+                    'improvements_id'=>$nID,
+                    'comment'=>$strCommentCompleted,
+                    'comment_add_date'=>date("Y-m-d H:i:s"),
+                    'comment_added_by'=>$nCurrentEmployeeID
+                );
+                Improvementcomments::create($arrComments);
+                Improvements::find($nID)->update($arrUpdate);
+            }
+        }
 
 
         $request->session()->flash('success', 'Improvement updated successfully.');
@@ -673,7 +690,7 @@ class ImprovementsController extends Controller
             $file = $request->file('file');
             $destination = 'uploads/improvements/'.$nImpId."/";
             $strFileName = $file->getClientOriginalName();
-            if (!file_exists(public_path($destination))) {
+            /*if (!file_exists(public_path($destination))) {
                 $file->move($destination, $strFileName);
             }
 
@@ -682,6 +699,7 @@ class ImprovementsController extends Controller
             $width = Image::make($file)->width();
 
             $image_resize = Image::make($file->getRealPath());
+            $image_resize->orientate();
             if($width>500)
             {
                 $image_resize->resize(500, null, function ($constraint) {
@@ -694,10 +712,11 @@ class ImprovementsController extends Controller
                     $constraint->aspectRatio();
                 });
             }
-            $image_resize->save(public_path($destination .$strFileName));
+
+            $image_resize->save(public_path($destination .$strFileName));*/
 
 
-            //$file->move($destination, $strFileName);
+            $file->move($destination, $strFileName);
             $arrPicRecord = array(
                 'improvements_id'=>$nImpId,
                 'file_name'=>$strFileName,

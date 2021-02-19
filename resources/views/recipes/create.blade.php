@@ -271,7 +271,7 @@
             </li>
             <li class="nav-item"><a href="#"><span class="menu-title">Sales</span></a>
                 <ul class="menu-content">
-                    <li><a href="#"><!--<i class="menu-livicon" data-icon="user"></i>--><span class="menu-title" data-i18n="User Profile">Sales Opportunities</span></a>
+                    <li><a href="{{ route('salesopportunity.index') }}"><!--<i class="menu-livicon" data-icon="user"></i>--><span class="menu-title" data-i18n="User Profile">Sales Opportunities</span></a>
                     </li>
                     <li><a href="#"><!--<i class="menu-livicon" data-icon="question-alt"></i>--><span class="menu-title" data-i18n="FAQ">CRM System</span></a>
                     </li>
@@ -405,11 +405,20 @@
                                                             <div class="input-group">
                                                                 <div class="col-md-2 col-sm-12 form-group" style="max-width: 600px;">
                                                                     <label for="text">Name </label>
-                                                                    <input type="text" class="form-control" id="ingredient" name="ingredient" placeholder="Enter Item Title" style="width: 360px;" value="{{ old('Ingredients')[$i]['ingredient'] }}">
+                                                                    <input type="text" class="form-control" id="ingredient" name="ingredient" placeholder="Enter Item Title" style="width: 330px;" value="{{ old('Ingredients')[$i]['ingredient'] }}">
                                                                 </div>
                                                                 <div class="col-md-2 col-sm-12 form-group" style="max-width: 600px;">
                                                                     <label for="text">Product Number </label>
-                                                                    <input type="text" class="form-control" id="ing_product_number" name="ing_product_number" placeholder="Product Number" style="width: 360px;" value="{{ old('Ingredients')[$i]['ing_product_number'] }}">
+                                                                    <input type="text" class="form-control" id="ing_product_number" name="ing_product_number" placeholder="Product Number" style="width: 330px;" value="{{ old('Ingredients')[$i]['ing_product_number'] }}">
+                                                                </div>
+                                                                <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px; margin-left: 10px; margin-right: 50px;">
+                                                                    <label for="unit">Supplier</label>
+                                                                    <select name="supplier" id="supplier" class="form-control" style="width: 170px;">
+                                                                        <option value="" selected></option>
+                                                                        @foreach($Suppliers as $Supplier)
+                                                                            <option value="{{$Supplier->value}}" @if(old('Ingredients')[$i]['supplier'] == $Supplier->value) ? selected : null @endif>{{$Supplier->value}}</option>
+                                                                        @endforeach
+                                                                    </select>
                                                                 </div>
                                                                 <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px;">
                                                                     <label for="quanity">Quantity</label>
@@ -446,11 +455,20 @@
                                                         <div class="input-group">
                                                             <div class="col-md-2 col-sm-12 form-group" style="max-width: 600px;">
                                                                 <label for="text">Name </label>
-                                                                <input type="text" class="form-control" id="ingredient" name="ingredient" placeholder="Enter Item Title" style="width: 360px;">
+                                                                <input type="text" class="form-control" id="ingredient" name="ingredient" placeholder="Enter Item Title" style="width: 330px;">
                                                             </div>
                                                             <div class="col-md-2 col-sm-12 form-group" style="max-width: 600px;">
                                                                 <label for="text">Product Number </label>
-                                                                <input type="text" class="form-control" id="ing_product_number" name="ing_product_number" placeholder="Product Number" style="width: 360px;">
+                                                                <input type="text" class="form-control" id="ing_product_number" name="ing_product_number" placeholder="Product Number" style="width: 330px;">
+                                                            </div>
+                                                            <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px; margin-left: 10px; margin-right: 50px;">
+                                                                <label for="unit">Supplier</label>
+                                                                <select name="supplier" id="supplier" class="form-control" style="width: 150px;">
+                                                                    <option value="" selected></option>
+                                                                    @foreach($Suppliers as $Supplier)
+                                                                        <option value="{{$Supplier->value}}">{{$Supplier->value}}</option>
+                                                                    @endforeach
+                                                                </select>
                                                             </div>
                                                             <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px;">
                                                                 <label for="quanity">Quantity</label>

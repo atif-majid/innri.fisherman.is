@@ -14,6 +14,7 @@ class Ingredients extends Model
         'amount',
         'unit',
         'recipe_id',
-        'ing_product_number'
+        'ing_product_number',
+        'supplier_name'
     ];
 }
