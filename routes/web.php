@@ -7,6 +7,7 @@ use App\Http\Controllers\RecipesController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\ImprovementsController;
 use App\Http\Controllers\SitesettingsController;
+use App\Http\Controllers\SalesopportunityController;
 
 
 /*
@@ -58,4 +59,9 @@ Route::get('sitesettings/onboardingsections/', [SitesettingsController::class, '
 Route::get('sitesettings/onboardingtasks', ['as'=>'sitesettings.onboardingtasks', 'uses'=>'App\Http\Controllers\SitesettingsController@onboardingtasks']);
 Route::resource('sitesettings', SitesettingsController::class, ['middleware' => 'auth']);
 
-
+Route::resource('salesopportunity', SalesopportunityController::class, ['middleware' => 'auth']);
+Route::post('/salesopportunity/uploadpicture', ['as'=>'salesopportunity.uploadpicture', 'uses'=>'App\Http\Controllers\SalesopportunityController@uploadpicture']);
+Route::post('/salesopportunity/updatepost', ['as'=>'salesopportunity.updatepost', 'uses'=>'App\Http\Controllers\SalesopportunityController@updatepost']);
+Route::get('salesopportunity/process/{id}', ['as'=>'salesopportunity.process', 'uses'=>'App\Http\Controllers\SalesopportunityController@process']);
+Route::post('/salesopportunity/updateprocess', ['as'=>'salesopportunity.updateprocess', 'uses'=>'App\Http\Controllers\SalesopportunityController@updateprocess']);
+Route::post('/salesopportunity/updatecomment', ['as'=>'salesopportunity.updatecomment', 'uses'=>'App\Http\Controllers\SalesopportunityController@updatecomment']);
