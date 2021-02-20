@@ -45,6 +45,7 @@ Route::resource('production', ProductionController::class, ['middleware' => 'aut
 Route::get('/testmail', [ProductionController::class, 'testmail'])->name('testmail');
 
 Route::resource('recipes', RecipesController::class, ['middleware' => 'auth']);
+Route::get('recipes/getpdf/{id}', ['as'=>'recipes.getpdf', 'uses'=>'App\Http\Controllers\RecipesController@getpdf']);
 
 Route::resource('improvements', ImprovementsController::class, ['middleware' => 'auth']);
 Route::get('improvements/process/{id}', ['as'=>'improvements.process', 'uses'=>'App\Http\Controllers\ImprovementsController@process']);

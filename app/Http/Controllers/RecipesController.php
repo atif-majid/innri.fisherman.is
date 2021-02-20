@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
+use PDF;
 
 class RecipesController extends Controller
 {
@@ -404,5 +405,20 @@ class RecipesController extends Controller
     public function getdetails(Recipes $recipe)
     {
         echo $recipe->id;
+    }
+
+    public function getpdf(Request $request)
+    {
+        $nRecipeID = $request->id;
+        $recipe = Recipes::find($nRecipeID);
+        $Ingredients = Ingredients::where('recipe_id', $nRecipeID)->get();
+        $Steps = Steps::where('recipe_id', $nRecipeID)->get();
+        $RecipePhoto = Recipephotos::where('recipe_id', $nRecipeID)->get();
+        //view()->share($recipe, $Ingredients, $Steps, $RecipePhoto);
+        $pdf = PDF::loadView('recipes.printpdf', compact('recipe', 'Ingredients', 'Steps', 'RecipePhoto'));
+
+        // download PDF file with download method
+        return $pdf->download($recipe->title.'.pdf');
+        //return view('recipes.printpdf', compact('recipe', 'Ingredients', 'Steps', 'RecipePhoto'));
     }
 }
