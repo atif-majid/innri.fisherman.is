@@ -196,6 +196,7 @@ class SalesopportunityController extends Controller
         echo "<pre>";
         print_r($request->all());
         echo "</pre>";
+
         //
         /*$nEmployeeID = Auth::user()->getempid();
         $objEmployeeSender = Employees::find($nEmployeeID);
@@ -256,8 +257,9 @@ class SalesopportunityController extends Controller
         );
         Saleopcomments::create($arrComments);
 
-        //$request->session()->flash('success', 'Sales opportunity updated successfully.');
-        echo "Done";
+        $request->session()->flash('success', 'Sales opportunity updated successfully.');
+
+        return "{\"msg\":\"success\"}";
     }
     /**
      * Remove the specified resource from storage.

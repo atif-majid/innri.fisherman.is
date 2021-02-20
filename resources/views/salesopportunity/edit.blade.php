@@ -346,7 +346,7 @@
                 @endforeach
             @endif
             <section class="input-validation">
-                <form id="frmNewSales" class="form-horizontal" novalidate method="post" action="{{ route('salesopportunity.updatepost') }}">
+                <form id="frmNewSales" class="form-horizontal" novalidate method="post" action="{{ route('salesopportunity.update', $salesopportunity->id) }}">
                     @csrf
                     <div class="row">
                         <div class="col-md-12">
@@ -645,7 +645,6 @@
                         }
                     },
                     error: function (err) {
-                        console.log(err);
                         if (err.status == 422) { // when status code is 422, it's a validation issue
                             //console.log(err.responseJSON);
                             // you can loop through the errors object and show it to the user
@@ -657,6 +656,17 @@
                                 $('.modal-body').html(errDisplay);
                                 $('#modalError').modal('show');
                             });
+                        }
+                        else
+                        {
+                            if(nFiles==0)
+                            {
+                                window.location.href = "{{route('salesopportunity.index')}}";
+                            }
+                            else
+                            {
+                                myDropzone.processQueue();
+                            }
                         }
                     }
                 });

@@ -438,11 +438,9 @@
                                                         </a>*/
                                                     @endphp
                                                     <a href="{{ route('salesopportunity.process', $Saleop->id) }}"><i class="bx bx-show-alt"></i></a>&nbsp;
-
-
+                                                    <a href="{{ route('salesopportunity.edit', $Saleop->id) }}"><i class="bx bx-edit-alt"></i></a>
                                                     @php
-                                                        /*<a href="{{ route('salesopportunity.edit', $Saleop->id) }}"><i class="bx bx-edit-alt"></i></a>
-                                                        @csrf
+                                                        /*@csrf
                                                         @method('DELETE')
                                                         <a href="#" onclick="event.preventDefault();
                                                          if(confirm('Are you sure to delete?')){document.getElementById('form-del').submit();}"><i class="bx bxs-trash-alt"></i></a>
