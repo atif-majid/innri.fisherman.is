@@ -498,4 +498,35 @@ class SalesopportunityController extends Controller
             echo "success";
         }
     }
+
+    public function updatesopstatus(Request $request)
+    {
+
+        $strNewStatus = $request->strNewStatus;
+        $nID = $request->nID;
+
+        if($nID>0 && ($strNewStatus=='In Progress' || $strNewStatus=='Completed'))
+        {
+            $arrUpdate = array("status" => $strNewStatus);
+            $nCurrentEmployeeID = Auth::user()->getempid();
+            $currentEmployee = Employees::find($nCurrentEmployeeID);
+            $strCurrentEmployeeName = $currentEmployee->name;
+
+            $strCommentCompleted = 'Marked as in progress by '.$strCurrentEmployeeName;
+            if($strNewStatus=='Completed')
+            {
+                $strCommentCompleted = 'Marked as completed by '.$strCurrentEmployeeName;
+            }
+
+
+            $arrComments = array(
+                'salesop_id'=>$nID,
+                'comment'=>$strCommentCompleted,
+                'comment_add_date'=>date("Y-m-d H:i:s"),
+                'comment_added_by'=>$nCurrentEmployeeID
+            );
+            Saleopcomments::create($arrComments);
+            Salesopportunity::find($nID)->update($arrUpdate);
+        }
+    }
 }

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Improvements;
+use App\Models\Salesopportunity;
 
 class HomeController extends Controller
 {
@@ -35,17 +36,43 @@ class HomeController extends Controller
         else
         {
             $nEmployeeID = Auth::user()->getempid();
-            $tasks = DB::table('onboardingtasks')
-                ->leftJoin('employees', 'employee', '=', 'employees.id')
-                ->leftJoin('sitesettings', 'onboardingtasks.task', '=', 'sitesettings.value')
-                ->select('onboardingtasks.*','employees.name', 'sitesettings.field')
-                ->where('responsible_person', $nEmployeeID)
-                ->get();
-            $Improvements = Improvements::
-                where('completed', 'no')
-                //->where('assigned_to', $nEmployeeID)
-                ->get();
-            return view('home', compact('tasks', 'Improvements'));
+            if($nEmployeeID==9)
+            {
+                $tasks = DB::table('onboardingtasks')
+                    ->leftJoin('employees', 'employee', '=', 'employees.id')
+                    ->leftJoin('sitesettings', 'onboardingtasks.task', '=', 'sitesettings.value')
+                    ->select('onboardingtasks.*','employees.name', 'sitesettings.field')
+                    //->where('responsible_person', $nEmployeeID)
+                    ->get();
+                $Improvements = Improvements::
+                    where('completed', 'no')
+                        //->where('assigned_to', $nEmployeeID)
+                        ->get();
+
+                $Salesopportunities = Salesopportunity::
+                    where('status', 'In Progress')
+                    ->get();
+            }
+            else
+            {
+                $tasks = DB::table('onboardingtasks')
+                    ->leftJoin('employees', 'employee', '=', 'employees.id')
+                    ->leftJoin('sitesettings', 'onboardingtasks.task', '=', 'sitesettings.value')
+                    ->select('onboardingtasks.*','employees.name', 'sitesettings.field')
+                    ->where('responsible_person', $nEmployeeID)
+                    ->get();
+                $Improvements = Improvements::
+                    where('completed', 'no')
+                    ->where('assigned_to', $nEmployeeID)
+                    ->get();
+
+                $Salesopportunities = Salesopportunity::
+                    where('status', 'In Progress')
+                    ->where('assigned_to', $nEmployeeID)
+                    ->get();
+            }
+
+            return view('home', compact('tasks', 'Improvements', 'Salesopportunities'));
         }
     }
 }
