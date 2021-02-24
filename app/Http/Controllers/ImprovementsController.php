@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\File;
 use Image;
-use mysql_xdevapi\Exception;
+//use mysql_xdevapi\Exception;
+use Exception;
 
 class ImprovementsController extends Controller
 {
@@ -73,194 +74,221 @@ class ImprovementsController extends Controller
      */
     public function store(Request $request)
     {
-
-        //
-        /*$arrNotifications = $request->all('chkNotification')['chkNotification'];
-        echo $arrNotifications[0];*/
-        $request->validate([
-            'strWhoNotified' => 'required',
-            'strPhoneNumber' => 'sometimes',
-            'strEmail' => 'sometimes',
-            'strProduct'=> 'sometimes',
-            'strProductionLocation' => 'sometimes',
-            'strSupplier' => 'sometimes',
-            'strWhereSold' => 'sometimes',
-            'strDateOfPurchase' => 'sometimes',
-            'strLotNr' => 'sometimes',
-            'strDescription' => 'sometimes',
-            'nAssignedTo' => 'sometimes',
-            'strResponse' => 'sometimes'
-        ],
-            [
-                'strWhoNotified.required' => 'Name of notifying person is required',
-                'strPhoneNumber.required' => 'Phone number is required',
-                'strEmail.required' => 'Email address is required',
-                'strProduct.required' => 'Product is required',
-                'strProductionLocation.required' => 'Please provide production location',
-                'strSupplier.required' => 'Please chose Supplier',
-                'strWhereSold.required' => 'Please select sold location',
-                'strDateOfPurchase.required' => 'Please provide date of purchase',
-                'strLotNr.required' => 'Lot number is required',
-                'strDescription.required' => 'Complain description is required',
-                'nAssignedTo.required' => 'Please select who will work on this improvement?',
-                'strResponse.required' => 'Response is required'
-            ]
-        );
-
-        if(isset($request->nAssignedTo) && is_numeric($request->nAssignedTo) && $request->nAssignedTo>0)
-        {
-            $rules['strDueDate'] = 'required|date';//your rule here
+        try{
+            //
+            /*$arrNotifications = $request->all('chkNotification')['chkNotification'];
+            echo $arrNotifications[0];*/
             $request->validate([
-                'strDueDate' => 'required'
+                'strWhoNotified' => 'required',
+                'strPhoneNumber' => 'sometimes',
+                'strEmail' => 'sometimes',
+                'strProduct'=> 'sometimes',
+                'strProductionLocation' => 'sometimes',
+                'strSupplier' => 'sometimes',
+                'strWhereSold' => 'sometimes',
+                'strDateOfPurchase' => 'sometimes',
+                'strLotNr' => 'sometimes',
+                'strDescription' => 'sometimes',
+                'nAssignedTo' => 'sometimes',
+                'strResponse' => 'sometimes'
             ],
                 [
-                    'strDueDate.required' => 'Due date is required to assign improvement to someone!'
+                    'strWhoNotified.required' => 'Name of notifying person is required',
+                    'strPhoneNumber.required' => 'Phone number is required',
+                    'strEmail.required' => 'Email address is required',
+                    'strProduct.required' => 'Product is required',
+                    'strProductionLocation.required' => 'Please provide production location',
+                    'strSupplier.required' => 'Please chose Supplier',
+                    'strWhereSold.required' => 'Please select sold location',
+                    'strDateOfPurchase.required' => 'Please provide date of purchase',
+                    'strLotNr.required' => 'Lot number is required',
+                    'strDescription.required' => 'Complain description is required',
+                    'nAssignedTo.required' => 'Please select who will work on this improvement?',
+                    'strResponse.required' => 'Response is required'
                 ]
             );
-        }
 
-        /*$strCurrentUserEmail = Auth::user()->email;
-        $objCurrentEmployee = Employees::where('email',$strCurrentUserEmail)->first();
-        $strFullName = $objCurrentEmployee->name;
-        if($objCurrentEmployee)
-        {
-            $nEmployeeID = $objCurrentEmployee->id;
-        }
-        else
-        {
-            $nEmployeeID = Auth::user()->id;
-        }*/
-        //
-
-
-        $nEmployeeID = Auth::user()->getempid();
-        $objEmployeeSender = Employees::find($nEmployeeID);
-        $strSenderName = $objEmployeeSender->name;
-
-        $arrImpmrovement = array(
-            'complainer'=> $request->strWhoNotified,
-            'phonenumber' => $request->strPhoneNumber,
-            'email' => $request->strEmail,
-            'product' => $request->strProduct,
-            'production_location' => $request->strProductionLocation,
-            'supplier' => $request->strSupplier,
-            'selling_location' => $request->strWhereSold,
-            'purchase_date' => $request->strDateOfPurchase,
-            'lot_nr' => $request->strLotNr,
-            'description' => $request->strDescription,
-            'response_improvements' => $request->strResponse,
-            'complain_creation_date' => date("Y-m-d H:i:s"),
-            'complain_created_by' => $nEmployeeID
-        );
-
-        $nAssignedTo = 0;
-        if($request->nAssignedTo>0)
-        {
-            $nAssignedTo = $request->nAssignedTo;
-            $objEmmployeeReceiver = Employees::find($request->nAssignedTo);
-            $strReceiverName = $objEmmployeeReceiver->name;
-            $arrImpmrovement['assigned_to'] = $nAssignedTo;
-        }
-        //$strDueDate = date("Y-m-d");
-        $strDueDate = "";
-        if($request->strDueDate!="")
-        {
-            $strDueDate = $request->strDueDate;
-            $arrImpmrovement['due_date'] = $strDueDate;
-        }
-
-
-
-        $improvement = Improvements::create($arrImpmrovement);
-        $nImprovementID = $improvement->id;
-        $arrNotifications = $request->all('chkNotification')['chkNotification'];
-        if(is_array($arrNotifications))
-        {
-            for($i=0; $i<count($arrNotifications); $i++)
+            if(isset($request->nAssignedTo) && is_numeric($request->nAssignedTo) && $request->nAssignedTo>0)
             {
-                $strNotification = $arrNotifications[$i];
-                $arrInsert = array(
-                    'improvements_id'=>$nImprovementID,
-                    'notification_name'=>$strNotification
+                $rules['strDueDate'] = 'required|date';//your rule here
+                $request->validate([
+                    'strDueDate' => 'required'
+                ],
+                    [
+                        'strDueDate.required' => 'Due date is required to assign improvement to someone!'
+                    ]
                 );
-                Improvementsnotifications::create($arrInsert);
             }
-        }
 
-
-        if($request->file('Photos'))
-        {
-            $arrPhotos = $request->file('Photos');
+            /*$strCurrentUserEmail = Auth::user()->email;
+            $objCurrentEmployee = Employees::where('email',$strCurrentUserEmail)->first();
+            $strFullName = $objCurrentEmployee->name;
+            if($objCurrentEmployee)
             {
-                foreach ($arrPhotos as $thispic)
-                {
-                    $file = $thispic['file_photo'];
+                $nEmployeeID = $objCurrentEmployee->id;
+            }
+            else
+            {
+                $nEmployeeID = Auth::user()->id;
+            }*/
+            //
 
-                    $destination = 'uploads/improvements/'.$nImprovementID;
-                    $strFileName = $file->getClientOriginalName();
-                    $file->move($destination, $strFileName);
-                    $arrPicRecord = array(
+
+            $nEmployeeID = Auth::user()->getempid();
+            $objEmployeeSender = Employees::find($nEmployeeID);
+            $strSenderName = $objEmployeeSender->name;
+
+            $arrImpmrovement = array(
+                'complainer'=> $request->strWhoNotified,
+                'phonenumber' => $request->strPhoneNumber,
+                'email' => $request->strEmail,
+                'product' => $request->strProduct,
+                'production_location' => $request->strProductionLocation,
+                'supplier' => $request->strSupplier,
+                'selling_location' => $request->strWhereSold,
+                'purchase_date' => $request->strDateOfPurchase,
+                'lot_nr' => $request->strLotNr,
+                'description' => $request->strDescription,
+                'response_improvements' => $request->strResponse,
+                'complain_creation_date' => date("Y-m-d H:i:s"),
+                'complain_created_by' => $nEmployeeID
+            );
+
+            $nAssignedTo = 0;
+            if($request->nAssignedTo>0)
+            {
+                $nAssignedTo = $request->nAssignedTo;
+                $objEmmployeeReceiver = Employees::find($request->nAssignedTo);
+                $strReceiverName = $objEmmployeeReceiver->name;
+                $arrImpmrovement['assigned_to'] = $nAssignedTo;
+            }
+            //$strDueDate = date("Y-m-d");
+            $strDueDate = "";
+            if($request->strDueDate!="")
+            {
+                $strDueDate = $request->strDueDate;
+                $arrImpmrovement['due_date'] = $strDueDate;
+            }
+
+
+
+            $improvement = Improvements::create($arrImpmrovement);
+            $nImprovementID = $improvement->id;
+            $arrNotifications = $request->all('chkNotification')['chkNotification'];
+            if(is_array($arrNotifications))
+            {
+                for($i=0; $i<count($arrNotifications); $i++)
+                {
+                    $strNotification = $arrNotifications[$i];
+                    $arrInsert = array(
                         'improvements_id'=>$nImprovementID,
-                        'file_name'=>$strFileName,
-                        'file_creation_date' => date("Y-m-d H:i:s"),
-                        'file_created_by' => $nEmployeeID
+                        'notification_name'=>$strNotification
                     );
-                    Improvementphotos::create($arrPicRecord);
+                    Improvementsnotifications::create($arrInsert);
                 }
             }
-        }
+
+
+            if($request->file('Photos'))
+            {
+                $arrPhotos = $request->file('Photos');
+                {
+                    foreach ($arrPhotos as $thispic)
+                    {
+                        $file = $thispic['file_photo'];
+
+                        $destination = 'uploads/improvements/'.$nImprovementID;
+                        $strFileName = $file->getClientOriginalName();
+                        $file->move($destination, $strFileName);
+                        $arrPicRecord = array(
+                            'improvements_id'=>$nImprovementID,
+                            'file_name'=>$strFileName,
+                            'file_creation_date' => date("Y-m-d H:i:s"),
+                            'file_created_by' => $nEmployeeID
+                        );
+                        Improvementphotos::create($arrPicRecord);
+                    }
+                }
+            }
 
 
 
-        if($nAssignedTo>0)
-        {
-            $strCommentNewAssignee = 'Assigned to '.$strReceiverName.' by '.$strSenderName.'. Due date: '.$strDueDate;
-            $arrComments = array(
-                'improvements_id'=>$nImprovementID,
-                'comment'=>$strCommentNewAssignee,
-                'comment_add_date'=>date("Y-m-d H:i:s"),
-                'comment_added_by'=>$nEmployeeID
-            );
-            Improvementcomments::create($arrComments);
+            if($nAssignedTo>0)
+            {
+                $strCommentNewAssignee = 'Assigned to '.$strReceiverName.' by '.$strSenderName.'. Due date: '.$strDueDate;
+                $arrComments = array(
+                    'improvements_id'=>$nImprovementID,
+                    'comment'=>$strCommentNewAssignee,
+                    'comment_add_date'=>date("Y-m-d H:i:s"),
+                    'comment_added_by'=>$nEmployeeID
+                );
+                Improvementcomments::create($arrComments);
 
-            /**
-             * The below piece of code will keep a track of when the task was assigned to someone.
-             * This is not being displayed from this table, but just keeping a track, if needed to see somehow later.
-             */
-            $arrImprovementAssigned = array(
-                'improvements_id'=>$nImprovementID,
-                'assigned_to'=>$nAssignedTo,
-                'assigned_by'=>$nEmployeeID,
-                'due_date'=>$strDueDate,
-                'action_taken_at'=>date("Y-m-d H:i:s")
-            );
-            Improvementassigned::create($arrImprovementAssigned);
-            /**
-             * Storing assignment logs done
-             */
+                /**
+                 * The below piece of code will keep a track of when the task was assigned to someone.
+                 * This is not being displayed from this table, but just keeping a track, if needed to see somehow later.
+                 */
+                $arrImprovementAssigned = array(
+                    'improvements_id'=>$nImprovementID,
+                    'assigned_to'=>$nAssignedTo,
+                    'assigned_by'=>$nEmployeeID,
+                    'due_date'=>$strDueDate,
+                    'action_taken_at'=>date("Y-m-d H:i:s")
+                );
+                Improvementassigned::create($arrImprovementAssigned);
+                /**
+                 * Storing assignment logs done
+                 */
 
-            $html = "<html><body>
+                $html = "<html><body>
             <div><img src='https://innri.fisherman.is/app-assets/images/logo/fisherman-2.png'></div>
             <div>
                 <p>
                 Hello $strReceiverName,<br><br>
                 $strSenderName has sent you this message with the below suggestion for improvement and put you in charge of resolving it:<br><br>
                 <a href='https://innri.fisherman.is/improvements/process/$nImprovementID'>https://innri.fisherman.is/improvements/process/$nImprovementID</a></p></div></body></html>";
-            $to = $objEmmployeeReceiver->email;
-            $subject = 'Improvement suggestion for Fisherman';
+                $to = $objEmmployeeReceiver->email;
+                $subject = 'Improvement suggestion for Fisherman';
+                $formEmail = 'innri@fisherman.is';
+                $formName = "Innri Fisherman";
+                Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
+                    $message->from($formEmail, $formName);
+                    $message->to($to);
+                    $message->cc('elias@fisherman.is');
+                    $message->subject($subject);
+                    $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
+                });
+
+            }
+            $request->session()->flash('success', 'Improvement record added successfully.');
+            echo $nImprovementID;
+        }
+        catch (\Exception $e)
+        {
+            $strPostData = "";
+            $data = $request->all();
+
+            foreach ($data as $key => $value) {
+                $strPostData .=  $key." = ".$value;
+            }
+            $html = "<html><body>
+            <div><img src='https://innri.fisherman.is/app-assets/images/logo/fisherman-2.png'></div>
+            <div>
+                <p>".$strPostData."<br><br>".$e->getMessage()."</p></div></body></html>";
+            $subject = 'Innri Error for Improvement';
             $formEmail = 'innri@fisherman.is';
             $formName = "Innri Fisherman";
-            Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
+            $to = "atif.majid10@gmail.com";
+            /*Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
                 $message->from($formEmail, $formName);
                 $message->to($to);
-                $message->cc('elias@fisherman.is');
                 $message->subject($subject);
                 $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
-            });
-
+            });*/
+            echo $html;
         }
-        $request->session()->flash('success', 'Improvement record added successfully.');
-        echo $nImprovementID;
+
+
         /*return redirect()->route('improvements.index')
             ->with('success','Improvement record added successfully.');*/
     }
