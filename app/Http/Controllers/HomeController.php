@@ -42,6 +42,7 @@ class HomeController extends Controller
                     ->leftJoin('employees', 'employee', '=', 'employees.id')
                     ->leftJoin('sitesettings', 'onboardingtasks.task', '=', 'sitesettings.value')
                     ->select('onboardingtasks.*','employees.name', 'sitesettings.field')
+                    ->whereIn('onboardingtasks.status', array('Not Started', 'In Progress'))
                     //->where('responsible_person', $nEmployeeID)
                     ->get();
                 $Improvements = Improvements::
@@ -60,6 +61,7 @@ class HomeController extends Controller
                     ->leftJoin('sitesettings', 'onboardingtasks.task', '=', 'sitesettings.value')
                     ->select('onboardingtasks.*','employees.name', 'sitesettings.field')
                     ->where('responsible_person', $nEmployeeID)
+                    ->whereIn('onboardingtasks.status', array('Not Started', 'In Progress'))
                     ->get();
                 $Improvements = Improvements::
                     where('completed', 'no')
