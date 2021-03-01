@@ -385,7 +385,7 @@
                             </div>
                             <div class="table-responsive">
                                 <!-- table start -->
-                                @if(count($tasks)>0 || count($Improvements)>0)
+                                @if(count($tasks)>0 || count($Improvements)>0 || count($Salesopportunities)>0)
                                     <table id="table-marketing-campaigns" class="table table-borderless table-marketing-campaigns mb-0">
                                         <thead>
                                         <tr>
