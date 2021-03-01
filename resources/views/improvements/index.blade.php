@@ -153,25 +153,25 @@
                             <div class="col-12 col-sm-6 col-lg-3">
                                 <label for="users-list-role">Who Notified</label>
                                 <fieldset class="form-group">
-                                    <input type="text" class="form-control" id="users-list-role">
+                                    <input type="text" class="form-control" id="who_notified">
                                 </fieldset>
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3">
                                 <label for="users-list-role">Lot Nr.</label>
                                 <fieldset class="form-group">
-                                    <input type="text" class="form-control" id="users-list-role">
+                                    <input type="text" class="form-control" id="lot_Number">
                                 </fieldset>
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3">
                                 <label for="users-list-role">Product</label>
                                 <fieldset class="form-group">
-                                    <input type="text" class="form-control" id="users-list-role">
+                                    <input type="text" class="form-control" id="product">
                                 </fieldset>
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3">
                                 <label for="users-list-verified">Production Site</label>
                                 <fieldset class="form-group">
-                                    <select class="form-control" id="users-list-verified">
+                                    <select class="form-control" id="production_site">
                                         <option value="">Any</option>
                                         <option value="Framleiðslueldhús">Framleiðslueldhús</option>
                                         <option value="Reykhús">Reykhús</option>
@@ -181,7 +181,7 @@
                             <div class="col-12 col-sm-6 col-lg-3">
                                 <label for="users-list-status">Supplier</label>
                                 <fieldset class="form-group">
-                                    <select class="form-control" id="users-list-status">
+                                    <select class="form-control" id="supplier">
                                         <option value="">Any</option>
                                         <option value="Íslandssaga">Íslandssaga</option>
                                         <option value="Nýfiskur">Nýfiskur</option>
@@ -200,6 +200,12 @@
                                         <option value="In Progress" selected>In Progress</option>
                                         <option value="Completed">Completed</option>
                                     </select>
+                                </fieldset>
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <label for="users-list-role">Search All</label>
+                                <fieldset class="form-group">
+                                    <input type="text" class="form-control" id="searchAll">
                                 </fieldset>
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center">

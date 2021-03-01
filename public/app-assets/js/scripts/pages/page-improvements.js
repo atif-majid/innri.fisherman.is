@@ -75,6 +75,53 @@ $(document).ready(function () {
             }
         });
 
+        $('#who_notified').keyup(function(){
+            var whoNotified = $(this).val();
+            usersTable
+                .columns( 2 )
+                .search( whoNotified )
+                .draw();
+        });
+
+        $('#lot_Number').keyup(function(){
+            var lotNumber = $(this).val();
+            usersTable
+                .columns( 5 )
+                .search( lotNumber )
+                .draw();
+        });
+
+        $('#product').keyup(function(){
+            var product = $(this).val();
+            usersTable
+                .columns( 6 )
+                .search( product )
+                .draw();
+        });
+
+        $( '#production_site').on( 'change', function () {
+            var productionSite = $(this).val();
+            usersTable
+                .columns( 8 )
+                .search( productionSite )
+                .draw();
+        });
+
+        $( '#supplier').on( 'change', function () {
+            var supplier = $(this).val();
+            usersTable
+                .columns( 9 )
+                .search( supplier )
+                .draw();
+        });
+
+        $( '#searchAll').keyup(function(){
+            var searchAll = $(this).val();
+            usersTable
+                .search( searchAll )
+                .draw();
+        });
+
         $( '#imp-status').on( 'change', function () {
             var selStatus = $(this).val();
             usersTable
