@@ -45,6 +45,9 @@
             background-color: rgba(0, 0, 0, 0.8);
             width: 30px;
         }
+        .row{
+            padding: 1.15rem 2rem;
+        }
     </style>
 
 </head>
@@ -153,108 +156,116 @@
                     <div class="card">
                         <div class="card-content">
                             <div class="card-body">
-                                <div class="border-secondary col-12 border">
-                                    <table class="table table-borderless" colspan="12">
-                                        <tbody>
-                                            <tr>
-                                                <td class="users-view-latest-activity" colspan="5"><strong>Review Improvements & Suggestion:</strong></td>
-                                                <td class="users-view-latest-activity" style="text-align: right">
-                                                    <form id="form-del" action="{{ route('improvements.destroy',$improvement->id) }}" method="POST" onsubmit="return confirm('Are you sure to delete?');">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="btn btn-primary" data-repeater-create type="submit">@php /*<i class="bx bx-minus" style="color: #FFFFFF;"></i>*/ @endphp
-                                                            Delete
-                                                        </button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="users-view-latest-activity" ><strong>Product:</strong></td>
-                                                <td class="users-view-latest-activity" colspan="6"><strong>{{ $improvement->product }}</strong></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="users-view-latest-activity"><strong>Who Notified:</strong></td>
-                                                <td class="users-view-latest-activity">{{ $improvement->complainer }}</td>
-                                                <td class="users-view-latest-activity"><strong>Phone:</strong></td>
-                                                <td class="users-view-latest-activity">{{ $improvement->phonenumber }}</td>
-                                                <td class="users-view-latest-activity"><strong>Email:</strong></td>
-                                                <td class="users-view-latest-activity">{{ $improvement->email }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="users-view-latest-activity"><strong>Where bought ?:</strong></td>
-                                                <td class="users-view-latest-activity">{{ $improvement->selling_location }}</td>
-                                                <td class="users-view-latest-activity"><strong>When bought ?:</strong></td>
-                                                <td class="users-view-latest-activity">{{ $improvement->purchase_date }}</td>
-                                                <td class="users-view-latest-activity"><strong>LOT number:</strong></td>
-                                                <td class="users-view-latest-activity">{{ $improvement->lot_nr }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="users-view-latest-activity"><strong>Production Site:</strong></td>
-                                                <td class="users-view-latest-activity">{{ $improvement->production_location }}</td>
-                                                <td class="users-view-latest-activity"><strong>Supplier:</strong></td>
-                                                <td class="users-view-latest-activity">{{ $improvement->supplier }}</td>
-                                                <td class="users-view-latest-activity"><strong></strong></td>
-                                                <td class="users-view-latest-activity"></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="users-view-latest-activity"><strong>Registered By:</strong></td>
-                                                <td class="users-view-latest-activity">{{ $improvement->name }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="users-view-latest-activity" colspan="6"><strong>Notifications</strong></td>
-                                            </tr>
-                                            @foreach($Notifications as $thisNotification)
-                                                <tr>
-                                                    <td class="users-view-latest-activity" colspan="2">{{ $thisNotification->notification_name }}</td>
-                                                </tr>
-                                            @endforeach
-                                            <tr>
-                                                <td class="users-view-latest-activity" colspan="6"><strong>Description</strong></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="users-view-latest-activity" colspan="6">{!! nl2br($improvement->description) !!}</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="users-view-latest-activity" colspan="6"><strong>Response and improvements</strong></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="users-view-latest-activity" colspan="6">
-                                                    <div class="list-group">
-                                                        @if($improvement->response_improvements!="")
-                                                            <a href="#" class="list-group-item list-group-item-action" onclick="return false;">
-                                                                <div class="d-flex w-100 justify-content-between">
-                                                                    <h5 class="mb-1">Posted by {{ $improvement->name }}</h5>
-                                                                    <small>{{ $improvement->complain_creation_date }}</small>
-                                                                </div>
-                                                                <p class="mb-1">
-                                                                    {{ $improvement->response_improvements }}
-                                                                </p>
-                                                            </a>
-                                                        @endif
-                                                        @foreach($ImprovementComments as $thisComment)
-                                                            @php
-                                                                $strClass = "sysgen";
-                                                                if(strpos($thisComment->comment, 'Assigned to ')===false && strpos($thisComment->comment, 'Marked as completed by ')===false)
-                                                                {
-                                                                    $strClass = "comment";
-                                                                }
-                                                            @endphp
-                                                            <a href="#" class="list-group-item list-group-item-action" onclick="return false;" id="{{$thisComment->id}}">
-                                                                <div class="d-flex w-100 justify-content-between">
-                                                                    <h5 class="mb-1">Posted by {{ $thisComment->name }}</h5>
-                                                                    <small>{{ $thisComment->comment_add_date }} </small>
-                                                                </div>
-                                                                <p class="mb-1">
-                                                                    {!! trim(nl2br($thisComment->comment)) !!}
-                                                                </p>
-                                                                <small class="{{$strClass}}">Edit</small>
-                                                            </a>
-                                                        @endforeach
+                                <div class="table-responsive border" style="padding: 1.15rem 2rem">
+                                    <div class="row">
+                                        <div class="col-12 col-md-8"><strong>Review Improvements & Suggestion:</strong></div>
+                                        <div class="col-12 col-md-4" style="text-align: right;">
+                                            <form id="form-del" action="{{ route('improvements.destroy',$improvement->id) }}" method="POST" onsubmit="return confirm('Are you sure to delete?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-primary" data-repeater-create type="submit">@php /*<i class="bx bx-minus" style="color: #FFFFFF;"></i>*/ @endphp
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-2"><strong>Product:</strong></div>
+                                        <div class="col-12 col-md-10"><strong>{{ $improvement->product }}</strong></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-2"><strong>Who Notified:</strong></div>
+                                        <div class="col-12 col-md-2">{{ $improvement->complainer }}</div>
+                                        <div class="col-12 col-md-2"><strong>Phone:</strong></div>
+                                        <div class="col-12 col-md-2">{{ $improvement->phonenumber }}</div>
+                                        <div class="col-12 col-md-2"><strong>Email:</strong></div>
+                                        <div class="col-12 col-md-2">{{ $improvement->email }}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-2"><strong>Where bought ?:</strong></div>
+                                        <div class="col-12 col-md-2">{{ $improvement->selling_location }}</div>
+                                        <div class="col-12 col-md-2"><strong>When bought ?:</strong></div>
+                                        <div class="col-12 col-md-2">{{ $improvement->purchase_date }}</div>
+                                        <div class="col-12 col-md-2"><strong>LOT number:</strong></div>
+                                        <div class="col-12 col-md-2">{{ $improvement->lot_nr }}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-2"><strong>Production Site:</strong></div>
+                                        <div class="col-12 col-md-2">{{ $improvement->production_location }}</div>
+                                        <div class="col-12 col-md-2"><strong>Supplier:</strong></div>
+                                        <div class="col-12 col-md-2">{{ $improvement->supplier }}</div>
+                                        <div class="col-12 col-md-2"><strong></strong></div>
+                                        <div class="col-12 col-md-2"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-2"><strong>Registered By:</strong></div>
+                                        <div class="col-12 col-md-2">{{ $improvement->name }}</div>
+                                        <div class="col-12 col-md-2"></div>
+                                        <div class="col-12 col-md-2"></div>
+                                        <div class="col-12 col-md-2"></div>
+                                        <div class="col-12 col-md-2"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <strong>Notifications</strong>
+                                        </div>
+                                    </div>
+                                    @foreach($Notifications as $thisNotification)
+                                        <div class="row">
+                                            <div class="col-12">
+                                                {{ $thisNotification->notification_name }}
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <strong>Description</strong>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            {!! nl2br($improvement->description) !!}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <strong>Response and improvements</strong>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="list-group">
+                                            @if($improvement->response_improvements!="")
+                                                <a href="#" class="list-group-item list-group-item-action" onclick="return false;">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">Posted by {{ $improvement->name }}</h5>
+                                                        <small>{{ $improvement->complain_creation_date }}</small>
                                                     </div>
-                                               </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                                    <p class="mb-1">
+                                                        {{ $improvement->response_improvements }}
+                                                    </p>
+                                                </a>
+                                            @endif
+                                            @foreach($ImprovementComments as $thisComment)
+                                                @php
+                                                    $strClass = "sysgen";
+                                                    if(strpos($thisComment->comment, 'Assigned to ')===false && strpos($thisComment->comment, 'Marked as completed by ')===false)
+                                                    {
+                                                        $strClass = "comment";
+                                                    }
+                                                @endphp
+                                                <a href="#" class="list-group-item list-group-item-action" onclick="return false;" id="{{$thisComment->id}}">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">Posted by {{ $thisComment->name }}</h5>
+                                                        <small>{{ $thisComment->comment_add_date }} </small>
+                                                    </div>
+                                                    <p class="mb-1">
+                                                        {!! trim(nl2br($thisComment->comment)) !!}
+                                                    </p>
+                                                    <small class="{{$strClass}}">Edit</small>
+                                                </a>
+                                            @endforeach
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
