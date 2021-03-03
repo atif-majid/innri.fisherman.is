@@ -110,11 +110,13 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item"><a href="#"><span class="menu-title">Sales</span></a>
+            <li class="nav-item"><a href="#"><span class="menu-title">Marketing and Sales</span></a>
                 <ul class="menu-content">
                     <li><a href="{{ route('salesopportunity.index') }}"><!--<i class="menu-livicon" data-icon="user"></i>--><span class="menu-title" data-i18n="User Profile">Sales Opportunities</span></a>
                     </li>
                     <li><a href="#"><!--<i class="menu-livicon" data-icon="question-alt"></i>--><span class="menu-title" data-i18n="FAQ">CRM System</span></a>
+                    </li>
+                    <li><a href="/uploads/brandguide/Fisherman-Brandbook-2021.pdf" download target="_blank"><!--<i class="menu-livicon" data-icon="question-alt"></i>--><span class="menu-title" data-i18n="FAQ">Brand Guide 2021</span></a>
                     </li>
                 </ul>
             </li>
@@ -291,7 +293,7 @@
                                         <div class="carousel-inner" role="listbox">
                                             @foreach($ImprovementPhotos as $k=>$thisPhoto)
                                                 <div class="carousel-item @if($k==0) active @endif" style="text-align:center; width:100%;">
-                                                    <img style="max-width: 500px !important; max-height: 400px !important;" src="/uploads/improvements/{{$improvement->id}}/{{$thisPhoto->file_name}}">
+                                                    <img style="max-width: 500px !important; max-height: 400px !important;" src="/uploads/improvements/{{$improvement->id}}/{{$thisPhoto->file_name}}" data-toggle="modal" data-target="#modalpicture">
                                                 </div>
                                             @endforeach
                                         </div>
@@ -701,6 +703,54 @@
                     <span class="d-none d-sm-block">Close</span>
                 </button>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text-left" id="modalpicture" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel33">Photos </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="bx bx-x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <ol class="carousel-indicators">
+                        @foreach($ImprovementPhotos as $k=>$thisPhoto)
+                            <li data-target="#carousel-example-generic1" data-slide-to="{{$k}}" @if($k==0) class="active" @endif></li>
+                        @endforeach
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        @foreach($ImprovementPhotos as $k=>$thisPhoto)
+                            <div class="carousel-item @if($k==0) active @endif" style="text-align:center; width:100%;">
+                                <img style="max-width: 1500px !important; max-height: 800px !important;" src="/uploads/improvements/{{$improvement->id}}/{{$thisPhoto->file_name}}">
+                            </div>
+                        @endforeach
+                    </div>
+                    <a class="carousel-control-prev" href="#carousel-example-generic1" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carousel-example-generic1" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                    @php
+                        /*<ol class="carousel-indicators">
+                        @foreach($ImprovementPhotos as $k=>$thisPhoto)
+                        <li data-target="#carousel-thumb" data-slide-to="{{$k}}" @if($k==0) class="active" @endif> <img class="d-block w-100" src="https://innri.fisherman.is/uploads/improvements/{{$improvement->id}}/{{$thisPhoto->file_name}}"
+                                                                                                 class="img-fluid"></li>
+                        @endforeach
+                    </ol>*/
+                    @endphp
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+
         </div>
     </div>
 </div>

@@ -121,11 +121,13 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item"><a href="#"><span class="menu-title">Sales</span></a>
+            <li class="nav-item"><a href="#"><span class="menu-title">Marketing and Sales</span></a>
                 <ul class="menu-content">
                     <li><a href="{{ route('salesopportunity.index') }}"><!--<i class="menu-livicon" data-icon="user"></i>--><span class="menu-title" data-i18n="User Profile">Sales Opportunities</span></a>
                     </li>
                     <li><a href="#"><!--<i class="menu-livicon" data-icon="question-alt"></i>--><span class="menu-title" data-i18n="FAQ">CRM System</span></a>
+                    </li>
+                    <li><a href="/uploads/brandguide/Fisherman-Brandbook-2021.pdf" download target="_blank"><!--<i class="menu-livicon" data-icon="question-alt"></i>--><span class="menu-title" data-i18n="FAQ">Brand Guide 2021</span></a>
                     </li>
                 </ul>
             </li>

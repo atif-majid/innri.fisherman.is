@@ -109,11 +109,13 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item"><a href="#"><span class="menu-title">Sales</span></a>
+            <li class="nav-item"><a href="#"><span class="menu-title">Marketing and Sales</span></a>
                 <ul class="menu-content">
                     <li><a href="{{ route('salesopportunity.index') }}"><!--<i class="menu-livicon" data-icon="user"></i>--><span class="menu-title" data-i18n="User Profile">Sales Opportunities</span></a>
                     </li>
                     <li><a href="#"><!--<i class="menu-livicon" data-icon="question-alt"></i>--><span class="menu-title" data-i18n="FAQ">CRM System</span></a>
+                    </li>
+                    <li><a href="/uploads/brandguide/Fisherman-Brandbook-2021.pdf" download target="_blank"><!--<i class="menu-livicon" data-icon="question-alt"></i>--><span class="menu-title" data-i18n="FAQ">Brand Guide 2021</span></a>
                     </li>
                 </ul>
             </li>
@@ -638,6 +640,7 @@
         init: function (e) {
             var myDropzone = this;
             $('#btnAllSubmit').on("click", function() {
+                $('#btnAllSubmit').attr('disabled', 'true');
                 $('.modal-body').html('');
                 var nFiles = myDropzone.files.length;
                 var arrFormData = $('#frmNewImprovement').serialize();
@@ -670,11 +673,13 @@
                                 $('.modal-body').html(errDisplay);
                                 $('#modalError').modal('show');
                             });
+                            $('#btnAllSubmit').attr('disabled', 'false');
                         }
                         else{
                             errDisplay = '<div class="alert alert-danger mb-2">An error occured. The developer has been notified. Please try again later!</div>';
                             $('.modal-body').html(errDisplay);
                             $('#modalError').modal('show');
+                            $('#btnAllSubmit').attr('disabled', 'false');
                         }
                     }
                 });
