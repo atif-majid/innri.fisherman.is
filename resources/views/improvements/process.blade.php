@@ -202,8 +202,8 @@
                                     <div class="row">
                                         <div class="col-12 col-md-2"><strong>Registered By:</strong></div>
                                         <div class="col-12 col-md-2">{{ $improvement->name }}</div>
-                                        <div class="col-12 col-md-2"></div>
-                                        <div class="col-12 col-md-2"></div>
+                                        <div class="col-12 col-md-2"><strong>Registered At:</strong></div>
+                                        <div class="col-12 col-md-2">{{ $improvement->complain_creation_date }}</div>
                                         <div class="col-12 col-md-2"></div>
                                         <div class="col-12 col-md-2"></div>
                                     </div>
@@ -632,6 +632,7 @@
         addRemoveLinks: true,
         dictRemoveFile: " Trash",
         autoProcessQueue: false,
+        parallelUploads:20,
         init: function (e) {
             var myDropzone = this;
             $('#btnAllSubmit').on("click", function() {

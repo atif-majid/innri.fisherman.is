@@ -451,6 +451,7 @@
         addRemoveLinks: true,
         dictRemoveFile: " Trash",
         autoProcessQueue: false,
+        parallelUploads:20,
         init: function (e) {
             var myDropzone = this;
             $('#btnAllSubmit').on("click", function() {
