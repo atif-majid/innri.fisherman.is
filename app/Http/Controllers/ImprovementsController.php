@@ -316,6 +316,13 @@ class ImprovementsController extends Controller
     public function edit(Improvements $improvement)
     {
         //
+        $nEmployeeID = Auth::user()->getempid();
+        if($nEmployeeID!=$improvement->complain_created_by)
+        {
+            return redirect()->route('improvements.index')
+                ->with('success','Improvements can only be edited by the user who registered it.');
+        }
+
         $nImprovementID = $improvement->id;
         $employees = Employees::all();
         $recipes = Recipes::all();
