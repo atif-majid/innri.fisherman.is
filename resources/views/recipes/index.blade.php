@@ -114,6 +114,9 @@
                         {{ $message }}
                     </div>
                 @endif
+                @if($errors->any())
+                    <div class="alert alert-warning mb-2">{{$errors->first()}}</div>
+                @endif
                 <div class="users-list-table">
                     <div class="card">
                         <div class="card-content">

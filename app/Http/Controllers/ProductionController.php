@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employeerights;
 use App\Models\Production;
 use App\Models\Employees;
 use App\Models\Instructions;
@@ -13,11 +14,53 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
+
 class ProductionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $strFullRoute = request()->route()->getActionName();
+            $strAcionName = substr($strFullRoute, strpos($strFullRoute, "@")+1);
+            $arrAllowedPages = array(
+                "View"=>array('index', 'show'),
+                "Edit"=>array("index", "create", "store", "show", "edit", "update"),
+                "Admin"=>array("index", "create", "store", "show", "edit", "update", "destroy"),
+                "No Access"=>array("none")
+            );
+
+            $nCurrUserID = Auth::user()->getempid();
+            $objRights = Employeerights::
+            where('emp_id', $nCurrUserID)
+                ->where('routename','today_production')
+                ->get();
+            $bShowTarget = false;
+            if(!$objRights->isEmpty())
+            {
+                $strRight = $objRights[0]->rights;
+                $arrRightPages = $arrAllowedPages["$strRight"];
+                if($strRight=='Admin')
+                {
+                    $bShowTarget = true;
+                }
+                else
+                {
+                    if(in_array($strAcionName, $arrRightPages))
+                    {
+                        $bShowTarget = true;
+                    }
+                }
+            }
+            if($bShowTarget)
+            {
+                return $next($request);
+            }
+            else
+            {
+                return Redirect::back()->withErrors(['You cannot perform this action!']);
+            }
+        });
     }
     /**
      * Display a listing of the resource.

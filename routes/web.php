@@ -8,6 +8,8 @@ use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\ImprovementsController;
 use App\Http\Controllers\SitesettingsController;
 use App\Http\Controllers\SalesopportunityController;
+use App\Http\Controllers\DeptrightsController;
+use App\Http\Controllers\EmprightsController;
 
 
 /*
@@ -67,3 +69,6 @@ Route::get('salesopportunity/process/{id}', ['as'=>'salesopportunity.process', '
 Route::post('/salesopportunity/updateprocess', ['as'=>'salesopportunity.updateprocess', 'uses'=>'App\Http\Controllers\SalesopportunityController@updateprocess']);
 Route::post('/salesopportunity/updatecomment', ['as'=>'salesopportunity.updatecomment', 'uses'=>'App\Http\Controllers\SalesopportunityController@updatecomment']);
 Route::post('/salesopportunity/updatesopstatus', ['as'=>'salesopportunity.updatesopstatus', 'uses'=>'App\Http\Controllers\SalesopportunityController@updatesopstatus']);
+
+Route::resource('deptrights', DeptrightsController::class, ['middleware' => 'auth']);
+Route::resource('emprights', EmprightsController::class, ['middleware' => 'auth']);

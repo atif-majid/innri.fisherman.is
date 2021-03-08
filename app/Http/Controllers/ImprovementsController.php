@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employeerights;
 use App\Models\Improvements;
 use App\Models\Employees;
 use App\Models\Improvementsnotifications;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Redirect;
 use Image;
 //use mysql_xdevapi\Exception;
 use Exception;
@@ -25,7 +27,49 @@ class ImprovementsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $strFullRoute = request()->route()->getActionName();
+            $strAcionName = substr($strFullRoute, strpos($strFullRoute, "@")+1);
+            $arrAllowedPages = array(
+                "View"=>array('index', 'show', "process"),
+                "Edit"=>array("index", "create", "store", "show", "edit", "update", "process", "updateprocess", "updatecomment",
+                    "updateimpstatus", "uploadpicture"),
+                "Admin"=>array("index", "create", "store", "show", "edit", "update", "destroy", "process", "updateprocess", "updatecomment",
+                    "updateimpstatus", "uploadpicture"),
+                "No Access"=>array("none")
+            );
+
+            $nCurrUserID = Auth::user()->getempid();
+            $objRights = Employeerights::
+            where('emp_id', $nCurrUserID)
+                ->where('routename','improvements')
+                ->get();
+            $bShowTarget = false;
+            if(!$objRights->isEmpty())
+            {
+                $strRight = $objRights[0]->rights;
+                $arrRightPages = $arrAllowedPages["$strRight"];
+                if($strRight=='Admin')
+                {
+                    $bShowTarget = true;
+                }
+                else
+                {
+                    if(in_array($strAcionName, $arrRightPages))
+                    {
+                        $bShowTarget = true;
+                    }
+                }
+            }
+            if($bShowTarget)
+            {
+                return $next($request);
+            }
+            else
+            {
+                return Redirect::back()->withErrors(['You cannot perform this action!']);
+            }
+        });
     }
     /**
      * Display a listing of the resource.

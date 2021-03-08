@@ -1,4 +1,5 @@
 @php
+    $nCurrUserID = Auth::user()->getempid();
     $strFullRoute = request()->route()->getActionName();
     $strAcionName = substr($strFullRoute, strpos($strFullRoute, "@")+1);
     preg_match('/([a-z]*)@/i', request()->route()->getActionName(), $matches);
@@ -43,7 +44,7 @@
             </li>
             <li class="nav-item"><a href="#"><span class="menu-title">Education &amp; News</span></a>
                 <ul class="menu-content">
-                    <li><a href="#"><!--<i class="menu-livicon" data-icon="settings"></i>--><span class="menu-title" data-i18n="Form Layout">Educational site</span></a>
+                    <li><a href="http://www.kennsla.is" target="_blank"><!--<i class="menu-livicon" data-icon="settings"></i>--><span class="menu-title" data-i18n="Form Layout">Educational site</span></a>
                     </li>
                     <li><a href="#"><!--<i class="menu-livicon" data-icon="priority-low"></i>--><span class="menu-title" data-i18n="Form Wizard">Create a news item</span></a>
                     </li>
@@ -81,6 +82,16 @@
                     </li>
                 </ul>
             </li>
+            @if($nCurrUserID==9 || $nCurrUserID==40)
+                <li class="nav-item"><a href="#"><span class="menu-title">Access Rights</span></a>
+                    <ul class="menu-content">
+                        <li @if($controllerName=='DeptrightsController') class="active" @endif><a href="{{ route('deptrights.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Department Based</span></a>
+                        </li>
+                        <li @if($controllerName=='EmprightsController') class="active" @endif><a href="{{ route('emprights.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Employee Rights</span></a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
         </ul>
     </div>
 </div>

@@ -107,6 +107,9 @@
                     {{ $message }}
                 </div>
             @endif
+            @if($errors->any())
+                <div class="alert alert-warning mb-2">{{$errors->first()}}</div>
+            @endif
             <form class="form-horizontal" novalidate method="post" action="{{ route('sitesettings.store') }}">
                 @csrf
                 <input type="hidden" id="deletedsettings" name="deletedsettings" value="">

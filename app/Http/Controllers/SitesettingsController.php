@@ -2,12 +2,58 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employeerights;
 use App\Models\Sitesettings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class SitesettingsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            $strFullRoute = request()->route()->getActionName();
+            $strAcionName = substr($strFullRoute, strpos($strFullRoute, "@")+1);
+            $arrAllowedPages = array(
+                "View"=>array('index'),
+                "Edit"=>array("index", "store", "onboardingsections", "storeonboardingcategories", "onboardingtasks". "storeonboardingtasks"),
+                "Admin"=>array("index", "store", "onboardingsections", "storeonboardingcategories", "onboardingtasks". "storeonboardingtasks"),
+                "No Access"=>array("none")
+            );
+
+            $nCurrUserID = Auth::user()->getempid();
+            $objRights = Employeerights::
+            where('emp_id', $nCurrUserID)
+                ->where('routename','site_settings')
+                ->get();
+            $bShowTarget = false;
+            if(!$objRights->isEmpty())
+            {
+                $strRight = $objRights[0]->rights;
+                $arrRightPages = $arrAllowedPages["$strRight"];
+                if($strRight=='Admin')
+                {
+                    $bShowTarget = true;
+                }
+                else
+                {
+                    if(in_array($strAcionName, $arrRightPages))
+                    {
+                        $bShowTarget = true;
+                    }
+                }
+            }
+            if($bShowTarget)
+            {
+                return $next($request);
+            }
+            else
+            {
+                return Redirect::back()->withErrors(['You cannot perform this action!']);
+            }
+        });
+    }
     /**
      * Display a listing of the resource.
      *
