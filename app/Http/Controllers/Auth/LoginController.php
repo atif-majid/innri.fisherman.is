@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use http\Cookie;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Mail;
 
 class LoginController extends Controller
 {
@@ -56,6 +58,30 @@ class LoginController extends Controller
             // Make sure the user is active
             if ($user->active && $this->attemptLogin($request)) {
                 // Send the normal successful login response
+                if($request->hasCookie('innridevice')) {
+                }
+                else{
+                    \Cookie::queue('innridevice', $_SERVER['REMOTE_ADDR'], 2628000);
+                    $strUserName = $user->name;
+                    $strIPAddress = $_SERVER['REMOTE_ADDR'];
+                    $html = "<html><body>
+                    <div>
+                        <h2>Hi</h2>
+                        <p>The following user has access <a href='https://innri.fisherman.is'>https://innri.fisherman.is</a> from a new device!</p><br>
+                        <p>Username: $strUserName <br>
+                        IP address $strIPAddress</p>
+                        </div></body></html>";
+                    $to = "elias@fisherman.is";
+                    $subject = 'Login from a new device';
+                    $formEmail = 'innri@fisherman.is';
+                    $formName = "Innri Fisherman";
+                    Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
+                        $message->from($formEmail, $formName);
+                        $message->to($to);
+                        $message->subject($subject);
+                        $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
+                    });
+                }
                 return $this->sendLoginResponse($request);
             } else {
                 // Increment the failed login attempts and redirect back to the
