@@ -27,6 +27,8 @@ class SalesopportunityController extends Controller
                 "View"=>array('index', 'show', "process"),
                 "Edit"=>array("index", "create", "store", "show", "edit", "updatepost", "uploadpicture", "process",
                     "updateprocess", "updatecomment", "updatesopstatus"),
+                "Admin"=>array("index", "create", "store", "show", "edit", "updatepost", "uploadpicture", "process","destroy",
+                    "updateprocess", "updatecomment", "updatesopstatus"),
                 "No Access"=>array("none")
             );
 

@@ -160,7 +160,7 @@
                                                                 <div class="col-md-2 col-sm-12 form-group" style="max-width: 600px;">
                                                                     <label for="text">Name </label>
                                                                     <input type="text" class="form-control" id="ingredient" name="ingredient" placeholder="Enter Item Title" style="width: 330px;" value="{{ old('Ingredients')[$i]['ingredient'] }}">
-                                                                    @if(old('Ingredients')[$i]['ingredientid']>0)
+                                                                    @if(isset(old('Ingredients')[$i]['ingredientid']))
                                                                         <input type="hidden" id="ingredientid" name="ingredientid" value="{{ old('Ingredients')[$i]['ingredientid'] }}">
                                                                     @endif
                                                                 </div>
@@ -197,7 +197,7 @@
                                                                     </select>
                                                                 </div>
                                                                 <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
-                                                                    @if(old('Ingredients')[$i]['ingredientid']>0)
+                                                                    @if(isset(old('Ingredients')[$i]['ingredientid']))
                                                                         <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button" onclick="deleteingredients({{ old('Ingredients')[$i]['ingredientid'] }})"> <i class="bx bx-x"></i>
                                                                             Delete
                                                                         </button>
