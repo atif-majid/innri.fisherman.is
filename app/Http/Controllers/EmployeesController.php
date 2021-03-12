@@ -22,7 +22,7 @@ class EmployeesController extends Controller
             $strAcionName = substr($strFullRoute, strpos($strFullRoute, "@")+1);
             $arrAllowedPages = array(
                 "View"=>array('index', 'show'),
-                "Edit"=>array("index", "create", "store", "show", "edit","update", "empajaxRequestStore", "empajaxRequestPicture"),
+                "Edit"=>array("index", "create", "store", "show", "edit","update", "destroy","empajaxRequestStore", "empajaxRequestPicture"),
                 "Admin"=>array("index", "create", "store", "show", "edit", "update", "destroy",
                     "empajaxRequestStore", "empajaxRequestPicture", "onboarding", "storeonboarding",
                     "updateonboardstatus", "outstandingitems"),
@@ -57,7 +57,7 @@ class EmployeesController extends Controller
             }
             else
             {
-                return Redirect::back()->withErrors(['You cannot perform this action!']);
+                return Redirect::back()->withErrors(['User rights need to be added in order to perform this action.']);
             }
         });
     }

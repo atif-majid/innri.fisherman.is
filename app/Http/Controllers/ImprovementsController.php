@@ -32,7 +32,7 @@ class ImprovementsController extends Controller
             $strAcionName = substr($strFullRoute, strpos($strFullRoute, "@")+1);
             $arrAllowedPages = array(
                 "View"=>array('index', 'show', "process"),
-                "Edit"=>array("index", "create", "store", "show", "edit", "update", "process", "updateprocess", "updatecomment",
+                "Edit"=>array("index", "create", "store", "show", "edit", "update", "process", "destroy","updateprocess", "updatecomment",
                     "updateimpstatus", "uploadpicture"),
                 "Admin"=>array("index", "create", "store", "show", "edit", "update", "destroy", "process", "updateprocess", "updatecomment",
                     "updateimpstatus", "uploadpicture"),
@@ -67,7 +67,7 @@ class ImprovementsController extends Controller
             }
             else
             {
-                return Redirect::back()->withErrors(['You cannot perform this action!']);
+                return Redirect::back()->withErrors(['User rights need to be added in order to perform this action.']);
             }
         });
     }

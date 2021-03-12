@@ -50,7 +50,7 @@ class SitesettingsController extends Controller
             }
             else
             {
-                return Redirect::back()->withErrors(['You cannot perform this action!']);
+                return Redirect::back()->withErrors(['User rights need to be added in order to perform this action.']);
             }
         });
     }
