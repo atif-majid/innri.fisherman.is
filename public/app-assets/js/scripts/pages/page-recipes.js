@@ -23,9 +23,10 @@ $(document).ready(function () {
                     "targets": [3]
                 },
                 {
-                    "targets": [ 0 ],
+                    "targets": [ 0 , 4, 5],
                     "visible": false
-                }]
+                }],
+            "order": [[5, "asc"], [ 4, "asc" ]]
         });
         $('#users-list-datatable tbody').on('click', '.invoice-action-view', function (event) {
             event.preventDefault();
@@ -52,6 +53,7 @@ $(document).ready(function () {
             }
         });
     };
+
     // on click selected users data from table(page named page-users-list)
     // to store into local storage to get rendered on second page named page-users-view
     $(document).on("click", "#users-list-datatable tr", function () {

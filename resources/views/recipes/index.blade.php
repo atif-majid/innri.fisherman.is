@@ -130,6 +130,8 @@
                                                 <th style="text-align: left; padding-left: 1rem; width: 65%">Recipe</th>
                                                 <th style="text-align: left; padding-left: 1rem; width: 25%">Date Created</th>
                                                 <th style="text-align: left; padding-left: 1rem; width: 10%">Options</th>
+                                                <td style="text-align: left; padding-left: 1rem; width: 10%">Title</td>
+                                                <td style="text-align: left; padding-left: 1rem; width: 10%">Product Number</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -183,6 +185,12 @@ EOT;*/
                                                     </form>
 
                                                 </td>
+                                                <td>
+                                                    {{ $recipe->title }}
+                                                </td><td>
+                                                    {{ $recipe->product_number }}
+                                                </td>
+
                                             </tr>
                                         @endforeach
                                         <?php
