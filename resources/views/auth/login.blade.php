@@ -141,7 +141,7 @@
                                                                 in</small></label>
                                                         </div>
                                                     </div>
-                                                    <div class="text-right"><a href="#" class="card-link" style="color: #475F7B !important;"><small>Forgot Password?</small></a></div>
+                                                    <div class="text-right"><a href="{{route('password.request')}}" class="card-link" style="color: #475F7B !important;"><small>Forgot Password?</small></a></div>
                                                 </div>
                                                 <button type="submit" class="btn btn-primary glow w-100 position-relative">Login@php /*<i id="icon-arrow" class="bx bx-right-arrow-alt"></i>*/@endphp</button>
                                             </form>
