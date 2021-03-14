@@ -18,3 +18,4 @@ resources/views/*/*.bkp.php
 /public/uploads
 /app/Models/Tasks.php
 /app/Http/Controllers/TasksController.php
+resources/views/auth/passwords/*.bkp.php
