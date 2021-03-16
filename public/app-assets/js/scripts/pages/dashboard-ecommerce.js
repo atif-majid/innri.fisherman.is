@@ -328,9 +328,9 @@ $(window).on("load", function () {
 
   //add class active content of active slide
   function activeSlide(index) {
-    var slideEl = mySwiper.slides[index]
+    /*var slideEl = mySwiper.slides[index]
     var slideId = $(slideEl).attr('id');
     $(".wrapper-content").removeClass("active");
-    $("[data-earnings=" + slideId + "]").addClass('active')
+    $("[data-earnings=" + slideId + "]").addClass('active')*/
   };
 });
