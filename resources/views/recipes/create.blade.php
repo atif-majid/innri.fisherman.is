@@ -128,6 +128,37 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Quantity</label>
+                                                    <div class="controls">
+                                                        <input type="text" name="nRecipeQuantity" class="form-control" value="{{ old('nRecipeQuantity') }}" @php /*data-validation-required-message="Product Number is required"*/ @endphp placeholder="Quantity">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="RecipeUnit">Unit</label>
+                                                    <div class="controls">
+                                                        <select name="RecipeUnit" id="RecipeUnit" class="form-control">
+                                                            <option value="" selected></option>
+                                                            <option value="kg" @if(old('RecipeUnit') == 'kg') ? selected : null @endif>kg</option>
+                                                            <option value="grams" @if(old('RecipeUnit') == 'grams') ? selected : null @endif>grams</option>
+                                                            <option value="">------------</option>
+                                                            <option value="liter" @if(old('RecipeUnit') == 'liter') ? selected : null @endif>liter</option>
+                                                            <option value="deciliter" @if(old('RecipeUnit') == 'deciliter') ? selected : null @endif>deciliter</option>
+                                                            <option value="centiliter" @if(old('RecipeUnit') == 'centiliter') ? selected : null @endif>centiliter</option>
+                                                            <option value="milliliter" @if(old('RecipeUnit')== 'milliliter') ? selected : null @endif>milliliter</option>
+                                                            <option value="">------------</option>
+                                                            <option value="pieces" @if(old('RecipeUnit') == 'pieces') ? selected : null @endif>pieces</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -141,6 +141,14 @@ class RecipesController extends Controller
             {
                 $arrRecipe['created_date'] = $request->created_date;
             }
+            if(trim($request->nRecipeQuantity)!="")
+            {
+                $arrRecipe['amount'] = $request->nRecipeQuantity;
+            }
+            if(trim($request->RecipeUnit)!="")
+            {
+                $arrRecipe['unit'] = $request->RecipeUnit;
+            }
             $recipe = Recipes::create($arrRecipe);
             $nRecipeID = $recipe->id;
 
@@ -286,6 +294,14 @@ class RecipesController extends Controller
         if(trim($request->created_date)!="")
         {
             $arrRecipe['created_date'] = $request->created_date;
+        }
+        if(trim($request->nRecipeQuantity)!="")
+        {
+            $arrRecipe['amount'] = $request->nRecipeQuantity;
+        }
+        if(trim($request->RecipeUnit)!="")
+        {
+            $arrRecipe['unit'] = $request->RecipeUnit;
         }
         $nRecipeId = $request->nRecipeId;
 

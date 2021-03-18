@@ -132,6 +132,37 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Quantity</label>
+                                                    <div class="controls">
+                                                        <input type="text" name="nRecipeQuantity" class="form-control" value="@if (old('nRecipeQuantity')) {{ old('nRecipeQuantity') }} @else {{ $recipe->amount }} @endif" @php /*data-validation-required-message="Product Number is required"*/ @endphp placeholder="Quantity">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="RecipeUnit">Unit</label>
+                                                    <div class="controls">
+                                                        <select name="RecipeUnit" id="RecipeUnit" class="form-control">
+                                                            <option value="" selected></option>
+                                                            <option value="kg" @if($recipe->unit == 'kg') ? selected : null @endif>kg</option>
+                                                            <option value="grams" @if($recipe->unit == 'grams') ? selected : null @endif>grams</option>
+                                                            <option value="">------------</option>
+                                                            <option value="liter" @if($recipe->unit == 'liter') ? selected : null @endif>liter</option>
+                                                            <option value="deciliter" @if($recipe->unit == 'deciliter') ? selected : null @endif>deciliter</option>
+                                                            <option value="centiliter" @if($recipe->unit == 'centiliter') ? selected : null @endif>centiliter</option>
+                                                            <option value="milliliter" @if($recipe->unit== 'milliliter') ? selected : null @endif>milliliter</option>
+                                                            <option value="">------------</option>
+                                                            <option value="pieces" @if($recipe->unit == 'pieces') ? selected : null @endif>pieces</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

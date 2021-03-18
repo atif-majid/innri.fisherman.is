@@ -10,6 +10,7 @@ use App\Models\Packaging;
 use App\Models\Rawmaterials;
 use App\Models\Shipment;
 use App\Models\Recipes;
+use App\Models\Ingredients;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -364,5 +365,97 @@ class ProductionController extends Controller
             $message->subject($subject);
             $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
         });
+    }
+
+    public function calculate(Request $request)
+    {
+        $nRecipe = $request->nRecipe;
+        $nQuantity = $request->nQuantity;
+        $nUnit = $request->nUnit;
+
+        $recipe = Recipes::find($nRecipe);
+        $nRecipeQuantity = $recipe->amount;
+        $nRecipeUnit = $recipe->unit;
+        $nMultiplier = 0;
+        $arrSameUnits = array();
+        //'grams','kg','liter','pieces','deciliter','centiliter','milliliter'
+        $arrSameUnits['weight'] = array("grams", "kg");
+        $arrSameUnits['volume'] = array("deciliter", "centiliter", "milliliter", "liter");
+        $arrSameUnits['pieces'] = array('pieces');
+        $bCalculate = false;
+        if(in_array($nUnit, $arrSameUnits['pieces']) && in_array($nRecipeUnit, $arrSameUnits['pieces']))
+        {
+            //$nMultiplier = 1;
+            $bCalculate = true;
+        }
+        else if(in_array($nUnit, $arrSameUnits['volume']) && in_array($nRecipeUnit, $arrSameUnits['volume']))
+        {
+            //Check volume based conversion
+            $bCalculate = true;
+            if($nUnit==$nRecipeUnit){
+                //$nMultiplier = round($nQuantity/$nRecipeQuantity, 2);
+            }
+            else{
+                $arrConversion = array("deciliter"=>10, "centiliter"=>100, "milliliter"=>1000);
+                if($nUnit!="liter")
+                {
+                    $nQuantity = $nQuantity / $arrConversion["$nUnit"];
+                    $nUnit = "liter";
+                }
+                if($nRecipeUnit!="liter")
+                {
+                    $nRecipeQuantity = $nRecipeQuantity / $arrConversion["$nRecipeUnit"];
+                    $nRecipeUnit = "liter";
+                }
+                //$nMultiplier = round($nQuantity/$nRecipeQuantity, 2);
+            }
+
+        }
+        else if(in_array($nUnit, $arrSameUnits['weight']) && in_array($nRecipeUnit, $arrSameUnits['weight']))
+        {
+            //Check volume based conversion
+            $bCalculate = true;
+            if($nUnit==$nRecipeUnit){
+                //$nMultiplier = round($nQuantity/$nRecipeQuantity, 2);
+            }
+            else
+            {
+                $arrConversion = array("grams"=>1000);
+                if($nUnit!="kg")
+                {
+                    $nQuantity = $nQuantity / $arrConversion["$nUnit"];
+                    $nUnit = "kg";
+                }
+                if($nRecipeUnit!="kg")
+                {
+                    $nRecipeQuantity = $nRecipeQuantity / $arrConversion["$nRecipeUnit"];
+                    $nRecipeUnit = "kg";
+                }
+                //$nMultiplier = round($nQuantity/$nRecipeQuantity, 2);
+            }
+        }
+        else
+        {
+            echo "Either recipe does not have units associated or Recipe and production have different units";
+        }
+
+        if($bCalculate)
+        {
+            $nMultiplier = round($nQuantity/$nRecipeQuantity, 2);
+            $Ingredients = Ingredients::where('recipe_id',$nRecipe)->get();
+            foreach ($Ingredients as $thisIngredient)
+            {
+                $strIngredientTitle = $thisIngredient->name;
+                $strIngredientAmount = $thisIngredient->amount;
+                $strIngredientUnit = $thisIngredient->unit;
+                if(strpos(",", $strIngredientAmount)>=0)
+                {
+                    $strIngredientAmount = str_replace(",", ".", $strIngredientAmount);
+                }
+                //echo $strIngredientAmount." - ".$nMultiplier."<br />";
+                $FinalAount = $strIngredientAmount * $nMultiplier;
+                echo $strIngredientTitle." : ".$FinalAount." ".$strIngredientUnit."<br>";
+            }
+        }
     }
 }

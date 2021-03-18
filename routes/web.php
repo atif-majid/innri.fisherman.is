@@ -99,6 +99,7 @@ Route::post('/employees/updateonboardstatus', ['as'=>'employees.updateonboardsta
 
 Route::resource('production', ProductionController::class, ['middleware' => 'auth']);
 Route::get('/testmail', [ProductionController::class, 'testmail'])->name('testmail');
+Route::post('production/calculate', ['as'=>'production.calculate', 'uses'=>'App\Http\Controllers\ProductionController@calculate']);
 
 Route::resource('recipes', RecipesController::class, ['middleware' => 'auth']);
 Route::get('recipes/getpdf/{id}', ['as'=>'recipes.getpdf', 'uses'=>'App\Http\Controllers\RecipesController@getpdf']);

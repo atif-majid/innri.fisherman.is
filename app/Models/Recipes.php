@@ -18,6 +18,8 @@ class Recipes extends Model
         'title',
         'product_number',
         'created_date',
-        'created_by'
+        'created_by',
+        'amount',
+        'unit'
     ];
 }
