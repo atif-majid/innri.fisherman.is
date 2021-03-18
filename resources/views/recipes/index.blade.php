@@ -127,9 +127,9 @@
                                         <thead>
                                             <tr>
                                                 <th>id</th>
+                                                <th style="text-align: left; padding-left: 1rem; width: 10%">Options</th>
                                                 <th style="text-align: left; padding-left: 1rem; width: 65%">Recipe</th>
                                                 <th style="text-align: left; padding-left: 1rem; width: 25%">Date Created</th>
-                                                <th style="text-align: left; padding-left: 1rem; width: 10%">Options</th>
                                                 <td style="text-align: left; padding-left: 1rem; width: 10%">Title</td>
                                                 <td style="text-align: left; padding-left: 1rem; width: 10%">Product Number</td>
                                             </tr>
@@ -166,9 +166,7 @@ EOT;*/
                                             @endphp
                                             <tr>
                                                 <td style="padding: 0.5rem 1.15rem;">{{ $recipe->id }}</td>
-                                                <td style="padding: 0.5rem 1.15rem; width: 50%">@if($recipe->product_number!=""){{ $recipe->product_number }} - @endif {{ $recipe->title }}</td>
-                                                <td style="padding: 0.5rem 1.15rem; width: 30%;">{{ $recipe->created_date }}</td>
-                                                <td style="padding: 0.5rem 1.15rem; white-space: nowrap; width: 20%">
+                                                <td style="padding: 0.5rem 1.15rem; white-space: nowrap; width: 10%">
                                                     <div class="divData" style="display: none; visibility: hidden;">{{ $recipe->id }}</div>
                                                     <form id="form-del-{{$recipe->id}}" action="{{ route('recipes.destroy',$recipe->id) }}" method="POST">
                                                         <a href="{{ route('recipes.show', $recipe->id) }}" class="invoice-action-view">
@@ -176,15 +174,17 @@ EOT;*/
                                                         </a>&nbsp;
                                                         <a href="{{ route('recipes.edit', $recipe->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp
 
-                                                            <!--<a href="{{ route('recipes.edit', $recipe->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp;-->
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <a href="{{ route('recipes.destroy', $recipe->id) }}" onclick="event.preventDefault();
-                                                         if(confirm('Are you sure to delete?')){document.getElementById('form-del-{{$recipe->id}}').submit();}"><i class="bx bxs-trash-alt"></i></a>
+                                                    <!--<a href="{{ route('recipes.edit', $recipe->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp;-->
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a href="{{ route('recipes.destroy', $recipe->id) }}" onclick="event.preventDefault();
+                                                            if(confirm('Are you sure to delete?')){document.getElementById('form-del-{{$recipe->id}}').submit();}"><i class="bx bxs-trash-alt"></i></a>
                                                         &nbsp;<a href="{{ route('recipes.getpdf', $recipe->id) }}"><i class="bx bxs-file-pdf"></i></a>
                                                     </form>
 
                                                 </td>
+                                                <td style="padding: 0.5rem 1.15rem; width: 60%">@if($recipe->product_number!=""){{ $recipe->product_number }} - @endif {{ $recipe->title }}</td>
+                                                <td style="padding: 0.5rem 1.15rem; width: 30%;">{{ $recipe->created_date }}</td>
                                                 <td>
                                                     {{ $recipe->title }}
                                                 </td><td>

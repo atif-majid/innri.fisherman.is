@@ -17,20 +17,16 @@ $(document).ready(function () {
         usersTable = $("#users-list-datatable").DataTable({
             "pageLength": 100,
             responsive: true,
-            "order": [[ 1, "desc" ]],
+            "order": [[ 2, "desc" ]],
             'columnDefs': [
                 {
                     "orderable": false,
-                    "targets": [11]
+                    "targets": [1]
                 },
                 {
-                    "targets": [ 0 ],
+                    "targets": [ 0, 11 ],
                     "visible": false
                 },
-                {
-                    "targets": [ 10 ],
-                    "visible": false
-                }
             ],
 
             initComplete: function () {
@@ -78,7 +74,7 @@ $(document).ready(function () {
         $('#who_notified').keyup(function(){
             var whoNotified = $(this).val();
             usersTable
-                .columns( 2 )
+                .columns( 3 )
                 .search( whoNotified )
                 .draw();
         });
@@ -86,7 +82,7 @@ $(document).ready(function () {
         $('#lot_Number').keyup(function(){
             var lotNumber = $(this).val();
             usersTable
-                .columns( 5 )
+                .columns( 6 )
                 .search( lotNumber )
                 .draw();
         });
@@ -94,7 +90,7 @@ $(document).ready(function () {
         $('#product').keyup(function(){
             var product = $(this).val();
             usersTable
-                .columns( 6 )
+                .columns( 7 )
                 .search( product )
                 .draw();
         });
@@ -102,7 +98,7 @@ $(document).ready(function () {
         $( '#production_site').on( 'change', function () {
             var productionSite = $(this).val();
             usersTable
-                .columns( 8 )
+                .columns( 9 )
                 .search( productionSite )
                 .draw();
         });
@@ -110,7 +106,7 @@ $(document).ready(function () {
         $( '#supplier').on( 'change', function () {
             var supplier = $(this).val();
             usersTable
-                .columns( 9 )
+                .columns( 10 )
                 .search( supplier )
                 .draw();
         });
@@ -125,7 +121,7 @@ $(document).ready(function () {
         $( '#imp-status').on( 'change', function () {
             var selStatus = $(this).val();
             usersTable
-                .columns( 10 )
+                .columns( 11 )
                 .search( selStatus )
                 .draw();
         });
@@ -133,7 +129,7 @@ $(document).ready(function () {
         $(document).ready(function(){
             var selStatus = $( '#imp-status').val();
             usersTable
-                .columns( 10 )
+                .columns( 11 )
                 .search( selStatus )
                 .draw();
         });

@@ -168,6 +168,7 @@
                                             <thead>
                                             <tr>
                                                 <th>id</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Options</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Time reported</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Who notified ?</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Where bought ?</th>
@@ -178,61 +179,60 @@
                                                 <th style="text-align: left; padding-left: 1rem;">Production site</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Supplier</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Status</th>
-                                                <th style="text-align: left; padding-left: 1rem;">Options</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach ($Improvements as $Improvement)
+                                                @foreach ($Improvements as $Improvement)
 
-                                                <tr>
-                                                    <td>{{ $Improvement->id }}</td>
-                                                    <td style="padding: 0.5rem 1.15rem; white-space:nowrap;">{!! str_replace(" ", "<br>", $Improvement->complain_creation_date) !!} </td>
-                                                    <td style="padding: 0.5rem 1.15rem">{{ $Improvement->complainer }}</td>
-                                                    <td style="padding: 0.5rem 1.15rem">{{ $Improvement->selling_location }}</td>
-                                                    <td style="padding: 0.5rem 1.15rem;  white-space:nowrap;">{{ $Improvement->purchase_date }}</td>
-                                                    <td style="padding: 0.5rem 1.15rem">{{ $Improvement->lot_nr }}</td>
-                                                    <td style="padding: 0.5rem 1.15rem">{{ $Improvement->product }}</td>
-                                                    <td style="padding: 0.5rem 1.15rem">{{ $Improvement->name }}</td>
-                                                    <td style="padding: 0.5rem 1.15rem">{{ $Improvement->production_location }}</td>
-                                                    <td style="padding: 0.5rem 1.15rem">{{ $Improvement->supplier }}</td>
-                                                    <td style="padding: 0.5rem 1.15rem">
-                                                        @if($Improvement->completed=='yes')
-                                                            Completed
-                                                        @else
-                                                            In Progress
-                                                        @endif
-                                                    </td>
-                                                    <td style="white-space: nowrap;padding: 0.5rem 1.15rem;">
-                                                        @php
-                                                            /*<form id="form-del" action="{{ route('improvements.destroy',$Improvement->id) }}" method="POST">
-                                                        <a href="{{ route('improvements.show', $Improvement->id) }}" class="invoice-action-view" onclick="return false;">
-                                                                <i class="bx bx-show-alt"></i>
-                                                            </a>*/
+                                                    <tr>
+                                                        <td>{{ $Improvement->id }}</td>
+                                                        <td style="white-space: nowrap;padding: 0.5rem 1.15rem;">
+                                                            @php
+                                                                /*<form id="form-del" action="{{ route('improvements.destroy',$Improvement->id) }}" method="POST">
+                                                            <a href="{{ route('improvements.show', $Improvement->id) }}" class="invoice-action-view" onclick="return false;">
+                                                                    <i class="bx bx-show-alt"></i>
+                                                                </a>*/
                                                             @endphp
                                                             <a href="{{ route('improvements.process', $Improvement->id) }}"><i class="bx bx-show-alt"></i></a>&nbsp;
 
                                                             <a href="{{ route('improvements.edit', $Improvement->id) }}"><i class="bx bx-edit-alt"></i></a>
-                                                        @php
-                                                        /*@csrf
-                                                        @method('DELETE')
-                                                        <a href="#" onclick="event.preventDefault();
-                                                         if(confirm('Are you sure to delete?')){document.getElementById('form-del').submit();}"><i class="bx bxs-trash-alt"></i></a>
-                                                    </form>*/ @endphp
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                                            @php
+                                                                /*@csrf
+                                                                @method('DELETE')
+                                                                <a href="#" onclick="event.preventDefault();
+                                                                 if(confirm('Are you sure to delete?')){document.getElementById('form-del').submit();}"><i class="bx bxs-trash-alt"></i></a>
+                                                            </form>*/ @endphp
+                                                        </td>
+                                                        <td style="padding: 0.5rem 1.15rem; white-space:nowrap;">{!! str_replace(" ", "<br>", $Improvement->complain_creation_date) !!} </td>
+                                                        <td style="padding: 0.5rem 1.15rem">{{ $Improvement->complainer }}</td>
+                                                        <td style="padding: 0.5rem 1.15rem">{{ $Improvement->selling_location }}</td>
+                                                        <td style="padding: 0.5rem 1.15rem;  white-space:nowrap;">{{ $Improvement->purchase_date }}</td>
+                                                        <td style="padding: 0.5rem 1.15rem">{{ $Improvement->lot_nr }}</td>
+                                                        <td style="padding: 0.5rem 1.15rem">{{ $Improvement->product }}</td>
+                                                        <td style="padding: 0.5rem 1.15rem">{{ $Improvement->name }}</td>
+                                                        <td style="padding: 0.5rem 1.15rem">{{ $Improvement->production_location }}</td>
+                                                        <td style="padding: 0.5rem 1.15rem">{{ $Improvement->supplier }}</td>
+                                                        <td style="padding: 0.5rem 1.15rem">
+                                                            @if($Improvement->completed=='yes')
+                                                                Completed
+                                                            @else
+                                                                In Progress
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                <!-- datatable ends -->
                             </div>
-                            <!-- datatable ends -->
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
         <!-- users list ends -->
+        </div>
     </div>
-</div>
 </div>
 <!-- END: Content-->
 @php

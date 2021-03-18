@@ -20,7 +20,7 @@ $(document).ready(function () {
             'columnDefs': [
                 {
                     "orderable": false,
-                    "targets": [7]
+                    "targets": [1]
                 },
                 {
                     "orderable": false,

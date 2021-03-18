@@ -21,14 +21,14 @@ $(document).ready(function () {
             'columnDefs': [
                 {
                     "orderable": false,
-                    "targets": [5]
+                    "targets": [1]
                 },
                 {
                     "targets": [ 0 ],
                     "visible": false
                 },
                 {
-                    "targets": [ 4 ],
+                    "targets": [ 5 ],
                     "visible": false
                 }
             ],
@@ -78,7 +78,7 @@ $(document).ready(function () {
         $( '#imp-status').on( 'change', function () {
             var selStatus = $(this).val();
             usersTable
-                .columns( 4 )
+                .columns( 5 )
                 .search( selStatus )
                 .draw();
         });
@@ -86,7 +86,7 @@ $(document).ready(function () {
         $(document).ready(function(){
             var selStatus = $( '#imp-status').val();
             usersTable
-                .columns( 4 )
+                .columns( 5 )
                 .search( selStatus )
                 .draw();
         });

@@ -164,11 +164,11 @@
                                         <thead>
                                         <tr>
                                             <th>id</th>
+                                            <th style="text-align: left; padding-left: 1rem;">Options</th>
                                             <th style="text-align: left; padding-left: 1rem;">Time reported</th>
                                             <th style="text-align: left; padding-left: 1rem;">Who notified ?</th>
                                             <th style="text-align: left; padding-left: 1rem;">Responsible</th>
                                             <th style="text-align: left; padding-left: 1rem;">Status</th>
-                                            <th style="text-align: left; padding-left: 1rem;">Options</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -176,13 +176,6 @@
 
                                             <tr>
                                                 <td>{{ $Saleop->id }}</td>
-                                                @php /*<td style="padding: 0.5rem 1.15rem; white-space:nowrap;">{!! str_replace(" ", "<br>", $Saleop->creation_time) !!} </td>*/ @endphp
-                                                <td style="padding: 0.5rem 1.15rem; white-space:nowrap;">{{ $Saleop->creation_time }} </td>
-                                                <td style="padding: 0.5rem 1.15rem">{{ $Saleop->who_notified }}</td>
-                                                <td style="padding: 0.5rem 1.15rem">{{ $Saleop->name }}</td>
-                                                <td style="padding: 0.5rem 1.15rem">
-                                                    {{$Saleop->status}}
-                                                </td>
                                                 <td style="white-space: nowrap;padding: 0.5rem 1.15rem;">
                                                     @php
                                                         /*<form id="form-del" action="{{ route('improvements.destroy',$Improvement->id) }}" method="POST">
@@ -199,6 +192,14 @@
                                                          if(confirm('Are you sure to delete?')){document.getElementById('form-del').submit();}"><i class="bx bxs-trash-alt"></i></a>
                                                     </form>*/ @endphp
                                                 </td>
+                                                @php /*<td style="padding: 0.5rem 1.15rem; white-space:nowrap;">{!! str_replace(" ", "<br>", $Saleop->creation_time) !!} </td>*/ @endphp
+                                                <td style="padding: 0.5rem 1.15rem; white-space:nowrap;">{{ $Saleop->creation_time }} </td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $Saleop->who_notified }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $Saleop->name }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">
+                                                    {{$Saleop->status}}
+                                                </td>
+
                                             </tr>
                                         @endforeach
                                         </tbody>

@@ -128,6 +128,7 @@
                                         <thead>
                                             <tr>
                                                 <th>id</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Options</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Date</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Recipe</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Product NR.</th>
@@ -135,20 +136,12 @@
                                                 <th style="text-align: left; padding-left: 1rem;">Order NR.</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Quantity Estimate</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Quantity Scalled</th>
-                                                <th style="text-align: left; padding-left: 1rem;">Options</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         @foreach ($productions as $production)
                                             <tr>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->id }}</td>
-                                                <td style="padding: 0.5rem 1.15rem">{!! $production->create_date_time !!}</td>
-                                                <td style="padding: 0.5rem 1.15rem">{{ $production->title }}</td>
-                                                <td style="padding: 0.5rem 1.15rem">{{ $production->product_number }}</td>
-                                                <td style="padding: 0.5rem 1.15rem">{{ $production->lot_number }}</td>
-                                                <td style="padding: 0.5rem 1.15rem">{{ $production->order_number }}</td>
-                                                <td style="padding: 0.5rem 1.15rem">{{ $production->quantity_estimate }}&nbsp;{{ $production->quantity_estimate_unit }}</td>
-                                                <td style="padding: 0.5rem 1.15rem">{{ $production->quantity_scaled }}&nbsp;{{ $production->quantity_scaled_unit }}</td>
                                                 <td style="padding: 0.5rem 1.15rem; white-space: nowrap;">
                                                     <form id="form-del-{{$production->id}}" action="{{ route('production.destroy',$production->id) }}" method="POST">
                                                         <a href="{{ route('production.show', $production->id) }}" class="invoice-action-view">
@@ -158,9 +151,16 @@
                                                         @csrf
                                                         @method('DELETE')
                                                         <a href="{{ route('production.destroy', $production->id) }}" onclick="event.preventDefault();
-                                                     if(confirm('Are you sure to delete?')){document.getElementById('form-del-{{$production->id}}').submit();}"><i class="bx bxs-trash-alt"></i></a>
+                                                            if(confirm('Are you sure to delete?')){document.getElementById('form-del-{{$production->id}}').submit();}"><i class="bx bxs-trash-alt"></i></a>
                                                     </form>
                                                 </td>
+                                                <td style="padding: 0.5rem 1.15rem">{!! $production->create_date_time !!}</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $production->title }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $production->product_number }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $production->lot_number }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $production->order_number }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $production->quantity_estimate }}&nbsp;{{ $production->quantity_estimate_unit }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $production->quantity_scaled }}&nbsp;{{ $production->quantity_scaled_unit }}</td>
                                             </tr>
                                         @endforeach
                                         <?php

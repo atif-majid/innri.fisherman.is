@@ -145,6 +145,7 @@
                                         <thead>
                                             <tr>
                                                 <th>id</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Options</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Employee Name</th>
                                                 <th style="text-align: left; padding-left: 1rem;">JOb Title</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Department</th>
@@ -152,25 +153,12 @@
                                                 <th style="text-align: left; padding-left: 1rem;">Mobile phone</th>
                                                 <th style="text-align: left; padding-left: 1rem;">EMail address</th>
                                                 <td style="text-align: left; padding-left: 1rem;">Status</td>
-                                                <th style="text-align: left; padding-left: 1rem;">edit</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($employees as $employee)
                                                 <tr>
                                                     <td>{{ $employee->id }}</td>
-                                                    <td style="padding: 0.5rem 1.15rem">{{ $employee->name }}</td>
-                                                    <td style="padding: 0.5rem 1.15rem">{{ $employee->designation }}</td>
-                                                    <td style="padding: 0.5rem 1.15rem">{{ $employee->department }}</td>
-                                                    <td style="padding: 0.5rem 1.15rem">{{ $employee->direct_phone }}</td>
-                                                    <td style="padding: 0.5rem 1.15rem">{{ $employee->gsm }}</td>
-                                                    <td style="padding: 0.5rem 1.15rem">{{ $employee->email }}</td>
-                                                    <td style="padding: 0.5rem 1.15rem; vertical-align: center;">
-                                                        <div class="custom-control custom-switch custom-switch-dark mb-1">
-                                                            <input type="checkbox" class="custom-control-input chkStatus" id="customSwitchcolor{{ $employee->id }}" value="{{ $employee->id }}" @if($employee->status=='active') checked @endif>
-                                                            <label class="custom-control-label" for="customSwitchcolor{{ $employee->id }}"></label>
-                                                        </div>
-                                                    </td>
                                                     <td style="white-space: nowrap;padding: 0.5rem 1.15rem;">
                                                         <form id="form-del" action="{{ route('employees.destroy',$employee->id) }}" method="POST" onsubmit="return false;">
                                                             <a href="#" onclick="$('#nEmpIDFIle').val({{ $employee->id }}); Dropzone.forElement('#dp-accept-files').removeAllFiles(true); return false;" data-toggle="modal" data-target="#inlineForm">
@@ -185,6 +173,18 @@
                                                             @php /*<a href="{{ route('employees.destroy', $employee->id) }}" onclick="event.preventDefault();
                                                          if(confirm('Are you sure to delete?')){document.getElementById('form-del').submit();}"><i class="bx bxs-trash-alt"></i></a>*/ @endphp
                                                         </form>
+                                                    </td>
+                                                    <td style="padding: 0.5rem 1.15rem">{{ $employee->name }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem">{{ $employee->designation }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem">{{ $employee->department }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem">{{ $employee->direct_phone }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem">{{ $employee->gsm }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem">{{ $employee->email }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem; vertical-align: center;">
+                                                        <div class="custom-control custom-switch custom-switch-dark mb-1">
+                                                            <input type="checkbox" class="custom-control-input chkStatus" id="customSwitchcolor{{ $employee->id }}" value="{{ $employee->id }}" @if($employee->status=='active') checked @endif>
+                                                            <label class="custom-control-label" for="customSwitchcolor{{ $employee->id }}"></label>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             @endforeach
