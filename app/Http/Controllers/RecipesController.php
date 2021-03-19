@@ -96,7 +96,7 @@ class RecipesController extends Controller
     public function create()
     {
         //
-        $Suppliers = Sitesettings::where('field', 'SupplierName')->get();
+        $Suppliers = Sitesettings::where('field', 'SupplierName')->orderBy('value')->get();
         return view('recipes.create', compact('Suppliers'));
     }
 
@@ -256,7 +256,7 @@ class RecipesController extends Controller
         $nRecipeID = $recipe->id;
         $Ingredients = Ingredients::where('recipe_id', $nRecipeID)->get();
         $Steps = Steps::where('recipe_id', $nRecipeID)->get();
-        $Suppliers = Sitesettings::where('field', 'SupplierName')->get();
+        $Suppliers = Sitesettings::where('field', 'SupplierName')->orderBy('value')->get();
         return view('recipes.edit', compact('recipe', 'Ingredients', 'Steps', 'Suppliers'));
     }
 
