@@ -72,6 +72,9 @@
     </div>
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
+        @php
+            $nCurrUserID = Auth::user()->getempid();
+        @endphp
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
             <!--<li class=" nav-item"><a href="html/ltr/vertical-menu-template/index.html"><i class="menu-livicon" data-icon="desktop"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span><span class="badge badge-light-danger badge-pill badge-round float-right mr-2">2</span></a>
                 <ul class="menu-content">
@@ -87,7 +90,11 @@
             </li>
             <li class=" nav-item"><a href="{{ route('production.index') }}"><!--<i class="menu-livicon" data-icon="check-alt"></i>--><span class="menu-title" data-i18n="Todo">Today's Production</span></a>
             </li>
-            <li class=" nav-item"><a href="#"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Reception Surveillance</span></a>
+            @if($nCurrUserID==9 || $nCurrUserID==40 || $nCurrUserID==36)
+                <li class=" nav-item"><a href="{{ route('receptionsurveillance.create') }}"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Reception Surveillance</span></a>
+            @else
+                <li class=" nav-item"><a href="#"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Reception Surveillance</span></a>
+            @endif
             </li>
             <!--<li class=" nav-item"><a href="app-calendar.html"><i class="menu-livicon" data-icon="calendar"></i><span class="menu-title" data-i18n="Calendar">Calendar</span></a>
             </li>
@@ -155,9 +162,7 @@
             </li>
             <li class=" nav-item"><a href="{{ route('sitesettings.onboardingtasks') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Onboarding Tasks</span></a>
             </li>
-            @php
-                $nCurrUserID = Auth::user()->getempid();
-            @endphp
+
             @if($nCurrUserID==9 || $nCurrUserID==40)
                 <li class=" navigation-header"><span>Access Rights</span>
                 </li>

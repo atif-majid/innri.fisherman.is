@@ -10,6 +10,7 @@ use App\Http\Controllers\SitesettingsController;
 use App\Http\Controllers\SalesopportunityController;
 use App\Http\Controllers\DeptrightsController;
 use App\Http\Controllers\EmprightsController;
+use App\Http\Controllers\ReceptionsurveillanceController;
 
 
 /*
@@ -127,3 +128,6 @@ Route::post('/salesopportunity/updatesopstatus', ['as'=>'salesopportunity.update
 
 Route::resource('deptrights', DeptrightsController::class, ['middleware' => 'auth']);
 Route::resource('emprights', EmprightsController::class, ['middleware' => 'auth']);
+
+
+Route::resource('receptionsurveillance', ReceptionsurveillanceController::class, ['middleware' => 'auth']);

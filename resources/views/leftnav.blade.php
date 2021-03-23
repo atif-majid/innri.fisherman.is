@@ -24,7 +24,11 @@
                     </li>
                     <li @if($controllerName=='ProductionController') class="active" @endif><a href="{{ route('production.index') }}"><!--<i class="menu-livicon" data-icon="check-alt"></i>--><span class="menu-title" data-i18n="Todo">Today's Production</span></a>
                     </li>
-                    <li><a href="#"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Reception Surveillance</span></a>
+                    @if($nCurrUserID==9 || $nCurrUserID==40 || $nCurrUserID==36)
+                        <li @if($controllerName=='ReceptionsurveillanceController') class="active" @endif><a href="{{ route('receptionsurveillance.create') }}"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Reception Surveillance</span></a>
+                    @else
+                        <li><a href="#"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Reception Surveillance</span></a>
+                    @endif
                     </li>
                 </ul>
             </li>
