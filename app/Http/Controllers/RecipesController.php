@@ -26,8 +26,8 @@ class RecipesController extends Controller
             $strAcionName = substr($strFullRoute, strpos($strFullRoute, "@")+1);
             $arrAllowedPages = array(
                 "View"=>array('index', 'show', 'getpdf'),
-                "Edit"=>array("index", "create", "store", "show", "edit","update", "getpdf", "destroy"),
-                "Admin"=>array("index", "create", "store", "show", "edit", "update", "destroy","getpdf", "update"),
+                "Edit"=>array("index", "create", "store", "show", "edit","update", "getpdf", "destroy","uploadpicture"),
+                "Admin"=>array("index", "create", "store", "show", "edit", "update", "destroy","getpdf", "update", "uploadpicture"),
                 "No Access"=>array("none")
             );
 
@@ -207,8 +207,8 @@ class RecipesController extends Controller
                     }
                 }
             }
-            return redirect()->route('recipes.index')
-                ->with('success','Recipe added successfully.');
+            /*return redirect()->route('recipes.index')
+                ->with('success','Recipe added successfully.');*/
         }
         catch (QueryException $e)
         {
@@ -223,8 +223,11 @@ class RecipesController extends Controller
                 $message->subject($subject);
                 $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
             });
-            return back()->withInput()->withErrors('An error occured. The developer has been notified!');
+            //return back()->withInput()->withErrors('An error occured. The developer has been notified!');
+            $request->session()->flash('Error', 'An error occured. The developer has been notified!');
         }
+        $request->session()->flash('success', 'Recipe added successfully.');
+        echo $nRecipeID;
 
     }
 
@@ -483,5 +486,38 @@ class RecipesController extends Controller
         // download PDF file with download method
         return $pdf->download($recipe->title.'.pdf');
         //return view('recipes.printpdf', compact('recipe', 'Ingredients', 'Steps', 'RecipePhoto'));
+    }
+
+    public function uploadpicture(Request $request)
+    {
+        /*$request->validate([
+            'file' => 'required | mimes:jpeg,jpg,png',
+            'nImpId' => 'required'
+        ]);*/
+        $nRecipeID = $request->nRecipeID;
+        if(is_numeric($nRecipeID) && $nRecipeID>0 && $request->has('file'))
+        {
+            //$nCurrentEmployeeID = Auth::user()->getempid();
+            $file = $request->file('file');
+            $destination = 'uploads/recipes/'.$nRecipeID;
+            $strFileName = $file->getClientOriginalName();
+            $file->move($destination, $strFileName);
+            $arrPicRecord = array(
+                'recipe_id'=>$nRecipeID,
+                'file_name'=>$strFileName,
+                'file_creation_date' => date("Y-m-d H:i:s"),
+                'file_created_by' => Auth::user()->getempid()
+            );
+            Recipephotos::create($arrPicRecord);
+        }
+        if($request->has('pgProcess') && $request->pgProcess>0)
+        {
+            $request->session()->flash('success', 'Recipe updated successfully.');
+        }
+        else
+        {
+            $request->session()->flash('success', 'Recipe added successfully.');
+        }
+
     }
 }
