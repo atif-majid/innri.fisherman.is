@@ -110,9 +110,9 @@
                                             <div class="form col-md-12">
                                                 <div class="row">
                                                     <div class="form-group col-sm">
-                                                        <label>Who notified?</label>
+                                                        <label>Customer</label>
                                                         <div class="controls">
-                                                            <input type="text" name="strWhoNotified" id="strWhoNotified" value="{{old('strWhoNotified')}}" class="form-control" data-validation-required-message="Name is requried" placeholder="Who notified?">
+                                                            <input type="text" name="strWhoNotified" id="strWhoNotified" value="{{old('strWhoNotified')}}" class="form-control" data-validation-required-message="Name is requried" placeholder="Customer">
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-sm">
@@ -125,6 +125,20 @@
                                                         <label>Email</label>
                                                         <div class="controls">
                                                             <input type="text" name="strEmail" class="form-control" value="{{old('strEmail')}}" <?php /*data-validation-required-message="Email is required"*/?> placeholder="Email">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-4">
+                                                        <label>Potential business per month</label>
+                                                        <div class="controls">
+                                                            <select class="form-control" id="nBusiness" name="nBusiness">
+                                                                <option value=""></option>
+                                                                <option value="1" @if(old('nBusiness')==1) selected @endif>Less than 250.000 kr</option>
+                                                                <option value="2" @if(old('nBusiness')==2) selected @endif>250.000 kr - 500.000 kr</option>
+                                                                <option value="3" @if(old('nBusiness')==3) selected @endif>500.000 kr - 1.000.000 kr</option>
+                                                                <option value="4" @if(old('nBusiness')==4) selected @endif>1.000.000 kr or more</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>

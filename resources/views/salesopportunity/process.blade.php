@@ -92,7 +92,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="users-view-latest-activity"><strong>Who Notified:</strong></td>
+                                                <td class="users-view-latest-activity"><strong>Customer:</strong></td>
                                                 <td class="users-view-latest-activity">{{ $SaleOp->who_notified }}</td>
                                                 <td class="users-view-latest-activity"><strong>Phone:</strong></td>
                                                 <td class="users-view-latest-activity">{{ $SaleOp->phone_number }}</td>
@@ -102,6 +102,20 @@
                                             <tr>
                                                 <td class="users-view-latest-activity"><strong>Registered By:</strong></td>
                                                 <td class="users-view-latest-activity">{{ $SaleOp->name }}</td>
+                                                @if($SaleOp->business_potential>0)
+                                                    <td class="users-view-latest-activity"><strong>Business Potential:</strong></td>
+                                                    <td class="users-view-latest-activity">
+                                                        @if($SaleOp->business_potential==1)
+                                                            Less than 250.000 kr
+                                                        @elseif($SaleOp->business_potential==2)
+                                                            250.000 kr - 500.000 kr
+                                                        @elseif($SaleOp->business_potential==3)
+                                                            500.000 kr - 1.000.000 kr
+                                                        @elseif($SaleOp->business_potential==4)
+                                                            1.000.000 kr or more
+                                                        @endif
+                                                    </td>
+                                                @endif
                                             </tr>
                                             <tr>
                                                 <td class="users-view-latest-activity" colspan="6"><strong>Description</strong></td>

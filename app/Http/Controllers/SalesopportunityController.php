@@ -149,6 +149,10 @@ class SalesopportunityController extends Controller
             $strReceiverName = $objEmmployeeReceiver->name;
             $arrSalesOpportunity['assigned_to'] = $nAssignedTo;
         }
+        if(isset($request->nBusiness) && $request->nBusiness>0)
+        {
+            $arrSalesOpportunity['business_potential'] = $request->nBusiness;
+        }
 
         $SalesOp = Salesopportunity::create($arrSalesOpportunity);
         $nSalesID = $SalesOp->id;
@@ -294,6 +298,10 @@ class SalesopportunityController extends Controller
         $arrSalesOp['description'] = $request->strDescription;
         $arrSalesOp['assigned_to'] = $request->nAssignedTo;
         $arrSalesOp['response'] = $request->strResponse;
+        if(isset($request->nBusiness) && $request->nBusiness>0)
+        {
+            $arrSalesOp['business_potential'] = $request->nBusiness;
+        }
         Salesopportunity::find($nSalesOpID)->update($arrSalesOp);
 
         $strCommentEdited = 'Edited by '.$strSenderName;
