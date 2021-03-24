@@ -74,7 +74,7 @@
                     <form onsubmit="return false;">
                         <div class="row border rounded py-2 mb-2">
                             <div class="col-12 col-sm-6 col-lg-3">
-                                <label for="users-list-role">Who Notified</label>
+                                <label for="users-list-role">Customer</label>
                                 <fieldset class="form-group">
                                     <input type="text" class="form-control" id="users-list-role">
                                 </fieldset>
@@ -166,7 +166,8 @@
                                             <th>id</th>
                                             <th style="text-align: left; padding-left: 1rem;">Options</th>
                                             <th style="text-align: left; padding-left: 1rem;">Time reported</th>
-                                            <th style="text-align: left; padding-left: 1rem;">Who notified ?</th>
+                                            <th style="text-align: left; padding-left: 1rem;">Customer</th>
+                                            <th style="text-align: left; padding-left: 1rem;">Business Potential</th>
                                             <th style="text-align: left; padding-left: 1rem;">Responsible</th>
                                             <th style="text-align: left; padding-left: 1rem;">Status</th>
                                         </tr>
@@ -195,6 +196,17 @@
                                                 @php /*<td style="padding: 0.5rem 1.15rem; white-space:nowrap;">{!! str_replace(" ", "<br>", $Saleop->creation_time) !!} </td>*/ @endphp
                                                 <td style="padding: 0.5rem 1.15rem; white-space:nowrap;">{{ $Saleop->creation_time }} </td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $Saleop->who_notified }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">
+                                                    @if($Saleop->business_potential==1)
+                                                        250,000 kr (or less)
+                                                    @elseif($Saleop->business_potential==2)
+                                                        250,000 kr - 500,000 kr
+                                                    @elseif($Saleop->business_potential==3)
+                                                        500,000 kr - 1,000,000 kr
+                                                    @elseif($Saleop->business_potential==4)
+                                                        1,000,000 (or more)
+                                                    @endif
+                                                </td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $Saleop->name }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">
                                                     {{$Saleop->status}}

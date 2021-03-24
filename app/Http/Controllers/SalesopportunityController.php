@@ -149,6 +149,10 @@ class SalesopportunityController extends Controller
             $strReceiverName = $objEmmployeeReceiver->name;
             $arrSalesOpportunity['assigned_to'] = $nAssignedTo;
         }
+        if(isset($request->nBusiness) && $request->nBusiness>0)
+        {
+            $arrSalesOpportunity['business_potential'] = $request->nBusiness;
+        }
 
         $SalesOp = Salesopportunity::create($arrSalesOpportunity);
         $nSalesID = $SalesOp->id;
@@ -294,6 +298,10 @@ class SalesopportunityController extends Controller
         $arrSalesOp['description'] = $request->strDescription;
         $arrSalesOp['assigned_to'] = $request->nAssignedTo;
         $arrSalesOp['response'] = $request->strResponse;
+        if(isset($request->nBusiness) && $request->nBusiness>0)
+        {
+            $arrSalesOp['business_potential'] = $request->nBusiness;
+        }
         Salesopportunity::find($nSalesOpID)->update($arrSalesOp);
 
         $strCommentEdited = 'Edited by '.$strSenderName;
@@ -448,14 +456,17 @@ class SalesopportunityController extends Controller
         $nEmployeeID = Auth::user()->getempid();
         $objEmployeeSender = Employees::find($nEmployeeID);
         $strSenderName = $objEmployeeSender->name;
+        if(trim($strResponse)!="" && $nSalesID>0 && $nEmployeeID>0)
+        {
+            $arrComments = array(
+                'salesop_id'=>$nSalesID,
+                'comment'=>$strResponse,
+                'comment_add_date'=>date("Y-m-d H:i:s"),
+                'comment_added_by'=>$nEmployeeID
+            );
+            Saleopcomments::create($arrComments);
+        }
 
-        $arrComments = array(
-            'salesop_id'=>$nSalesID,
-            'comment'=>$strResponse,
-            'comment_add_date'=>date("Y-m-d H:i:s"),
-            'comment_added_by'=>$nEmployeeID
-        );
-        Saleopcomments::create($arrComments);
         $nAssignedTo = $request->nAssignedTo;
         if($nAssignedTo>0)
         {

@@ -104,6 +104,7 @@ Route::post('production/calculate', ['as'=>'production.calculate', 'uses'=>'App\
 
 Route::resource('recipes', RecipesController::class, ['middleware' => 'auth']);
 Route::get('recipes/getpdf/{id}', ['as'=>'recipes.getpdf', 'uses'=>'App\Http\Controllers\RecipesController@getpdf']);
+Route::post('/recipes/uploadpicture', ['as'=>'recipes.uploadpicture', 'uses'=>'App\Http\Controllers\RecipesController@uploadpicture']);
 
 Route::resource('improvements', ImprovementsController::class, ['middleware' => 'auth']);
 Route::get('improvements/process/{id}', ['as'=>'improvements.process', 'uses'=>'App\Http\Controllers\ImprovementsController@process'])->middleware('auth');;

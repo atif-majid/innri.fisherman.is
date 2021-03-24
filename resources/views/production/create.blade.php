@@ -291,8 +291,17 @@
                                                             <fieldset class="position-relative">
                                                                 <select class="form-control" id="material_unit" name="material_unit">
                                                                     <option value="" selected></option>
-                                                                    <option value="Kg">Kg</option>
-                                                                    <option value="Packages">Packages</option>
+                                                                    <option value="kg" @if(old('material_unit') == 'kg') ? selected : null @endif>kg</option>
+                                                                    <option value="grams" @if(old('material_unit') == 'grams') ? selected : null @endif>grams</option>
+                                                                    <option value="">------------</option>
+                                                                    <option value="liter" @if(old('material_unit') == 'liter') ? selected : null @endif>liter</option>
+                                                                    <option value="deciliter" @if(old('material_unit') == 'deciliter') ? selected : null @endif>deciliter</option>
+                                                                    <option value="centiliter" @if(old('material_unit') == 'centiliter') ? selected : null @endif>centiliter</option>
+                                                                    <option value="milliliter" @if(old('material_unit')== 'milliliter') ? selected : null @endif>milliliter</option>
+                                                                    <option value="">------------</option>
+                                                                    <option value="pieces" @if(old('material_unit') == 'pieces') ? selected : null @endif>pieces</option>
+                                                                    <option value="">------------</option>
+                                                                    <option value="packages" @if(old('material_unit') == 'packages') ? selected : null @endif>packages</option>
                                                                 </select>
                                                             </fieldset>
                                                         </div>
@@ -358,8 +367,17 @@
                                                             <fieldset class="position-relative">
                                                                 <select class="form-control" id="packing_unit" name="packing_unit">
                                                                     <option value="" selected></option>
-                                                                    <option value="Kg">Kg</option>
-                                                                    <option value="Packages">Packages</option>
+                                                                    <option value="kg" @if(old('packing_unit') == 'kg') ? selected : null @endif>kg</option>
+                                                                    <option value="grams" @if(old('packing_unit') == 'grams') ? selected : null @endif>grams</option>
+                                                                    <option value="">------------</option>
+                                                                    <option value="liter" @if(old('packing_unit') == 'liter') ? selected : null @endif>liter</option>
+                                                                    <option value="deciliter" @if(old('packing_unit') == 'deciliter') ? selected : null @endif>deciliter</option>
+                                                                    <option value="centiliter" @if(old('packing_unit') == 'centiliter') ? selected : null @endif>centiliter</option>
+                                                                    <option value="milliliter" @if(old('packing_unit')== 'milliliter') ? selected : null @endif>milliliter</option>
+                                                                    <option value="">------------</option>
+                                                                    <option value="pieces" @if(old('packing_unit') == 'pieces') ? selected : null @endif>pieces</option>
+                                                                    <option value="">------------</option>
+                                                                    <option value="packages" @if(old('packing_unit') == 'packages') ? selected : null @endif>packages</option>
                                                                 </select>
                                                             </fieldset>
                                                         </div>
@@ -418,8 +436,17 @@
                                                             <fieldset class="position-relative">
                                                                 <select class="form-control" id="shipment_unit" name="shipment_unit">
                                                                     <option value="" selected></option>
-                                                                    <option value="Kg">Kg</option>
-                                                                    <option value="Packages">Packages</option>
+                                                                    <option value="kg" @if(old('shipment_unit') == 'kg') ? selected : null @endif>kg</option>
+                                                                    <option value="grams" @if(old('shipment_unit') == 'grams') ? selected : null @endif>grams</option>
+                                                                    <option value="">------------</option>
+                                                                    <option value="liter" @if(old('shipment_unit') == 'liter') ? selected : null @endif>liter</option>
+                                                                    <option value="deciliter" @if(old('shipment_unit') == 'deciliter') ? selected : null @endif>deciliter</option>
+                                                                    <option value="centiliter" @if(old('shipment_unit') == 'centiliter') ? selected : null @endif>centiliter</option>
+                                                                    <option value="milliliter" @if(old('shipment_unit')== 'milliliter') ? selected : null @endif>milliliter</option>
+                                                                    <option value="">------------</option>
+                                                                    <option value="pieces" @if(old('shipment_unit') == 'pieces') ? selected : null @endif>pieces</option>
+                                                                    <option value="">------------</option>
+                                                                    <option value="packages" @if(old('shipment_unit') == 'packages') ? selected : null @endif>packages</option>
                                                                 </select>
                                                             </fieldset>
                                                         </div>

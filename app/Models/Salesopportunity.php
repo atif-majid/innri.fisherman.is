@@ -20,6 +20,7 @@ class Salesopportunity extends Model
         'response',
         'created_by',
         'creation_time',
-        'status'
+        'status',
+        'business_potential'
     ];
 }

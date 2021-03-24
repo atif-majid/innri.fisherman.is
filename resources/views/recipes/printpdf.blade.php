@@ -31,6 +31,9 @@
                         <td class="users-view-latest-activity" colspan="2"><strong>@if($recipe->product_number!=""){{ $recipe->product_number }} - @endif {{ $recipe->title }}</strong></td>
                     </tr>
                     <tr>
+                        <td class="users-view-latest-activity" colspan="2"><b>Total Production: </b>{{ $recipe->amount }}&nbsp;{{ $recipe->unit }}</td>
+                    </tr>
+                    <tr>
                         <td class="users-view-latest-activity" colspan="2"><b>Ingredients</b></td>
                     </tr>
                     <tr>

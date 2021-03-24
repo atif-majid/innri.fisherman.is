@@ -26,8 +26,8 @@ class ProductionController extends Controller
             $strAcionName = substr($strFullRoute, strpos($strFullRoute, "@")+1);
             $arrAllowedPages = array(
                 "View"=>array('index', 'show'),
-                "Edit"=>array("index", "create", "store", "show", "edit", "update"),
-                "Admin"=>array("index", "create", "store", "show", "edit", "update", "destroy"),
+                "Edit"=>array("index", "create", "store", "show", "edit", "update", "calculate"),
+                "Admin"=>array("index", "create", "store", "show", "edit", "update", "destroy", "calculate"),
                 "No Access"=>array("none")
             );
 
