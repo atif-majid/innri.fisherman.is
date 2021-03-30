@@ -375,28 +375,50 @@ class RecipesController extends Controller
             }
         }
 
-
-        if(trim($deletedingredients)!="")
-        {
-            $arrDeletedIngredients = explode(",", $deletedingredients);
-            for($i=0; $i<count($arrDeletedIngredients); $i++)
+        try {
+            if(trim($deletedingredients)!="")
             {
-                $nDelThisIngredient = $arrDeletedIngredients[$i];
-                if(!in_array($nDelThisIngredient, $arrUpdatedIngredients))
+                $arrDeletedIngredients = explode(",", $deletedingredients);
+                for($i=0; $i<count($arrDeletedIngredients); $i++)
                 {
-                    Ingredients::find($nDelThisIngredient)->delete();
+                    $nDelThisIngredient = $arrDeletedIngredients[$i];
+                    if(is_numeric($nDelThisIngredient) && $nDelThisIngredient>0)
+                    {
+                        if(!in_array($nDelThisIngredient, $arrUpdatedIngredients))
+                        {
+                            //Ingredients::find($nDelThisIngredient)->delete();
+                            Ingredients::where('id',$nDelThisIngredient)->delete();
+                        }
+                    }
                 }
             }
         }
+        catch (QueryException $e)
+        {
+            $html = '<html><body><div><p>'.$e->getMessage().'</p></div></body></html>';
+            $to = "atif.majid10@gmail.com";
+            $subject = 'Error Report on Innri recipe edit!';
+            $formEmail = 'innri@fisherman.is';
+            $formName = "Innri Fisherman";
+            Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
+                $message->from($formEmail, $formName);
+                $message->to($to);
+                $message->subject($subject);
+                $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
+            });
+            //return back()->withInput()->withErrors('An error occured. The developer has been notified!');
+            $request->session()->flash('Error', 'An error occured. The developer has been notified!');
+        }
+
         if(trim($deletedsteps)!="")
         {
             $arrDeletedSteps = explode(",", $deletedsteps);
-            for($i=0; $i<count($arrDeletedSteps); $i++)
-            {
+            for($i=0; $i<count($arrDeletedSteps); $i++) {
                 $nDelThisStep = $arrDeletedSteps[$i];
-                if(!in_array($nDelThisStep, $arrUpdatedSteps))
-                {
-                    Steps::where('id',$nDelThisStep)->delete();
+                if (is_numeric($nDelThisStep) && $nDelThisStep > 0) {
+                    if (!in_array($nDelThisStep, $arrUpdatedSteps)) {
+                        Steps::where('id', $nDelThisStep)->delete();
+                    }
                 }
             }
         }
