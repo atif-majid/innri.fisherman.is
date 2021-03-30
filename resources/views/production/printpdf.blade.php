@@ -21,20 +21,12 @@
                     <td class="users-view-latest-activity">{{ $production->product_number }}</td>
                 </tr>
                 <tr>
-                    <td class="users-view-latest-activity"><strong>Lot Number:</strong></td>
-                    <td class="users-view-latest-activity">{{ $production->lot_number }}</td>
-                </tr>
-                <tr>
                     <td class="users-view-latest-activity"><strong>Order Number:</strong></td>
                     <td class="users-view-latest-activity">{{ $production->order_number }}</td>
                 </tr>
                 <tr>
                     <td class="users-view-latest-activity"><strong>Quantity Estimate:</strong></td>
                     <td class="users-view-latest-activity">{{ $production->quantity_estimate }} &nbsp;{{ $production->quantity_estimate_unit }}</td>
-                </tr>
-                <tr>
-                    <td class="users-view-latest-activity"><strong>QUANTITY SCALED:</strong></td>
-                    <td class="users-view-latest-activity">{{ $production->quantity_scaled }} &nbsp;{{ $production->quantity_scaled_unit }}</td>
                 </tr>
                 <tr>
                     <td class="users-view-latest-activity" colspan="2"><strong>Instructions</strong></td>
@@ -160,14 +152,22 @@
                 </tbody>
             </table>
         </div>
+        <div class="page-break"></div>
         <div class="col-12">
             <table class="table table-borderless" colspan="12">
                 <tbody>
                     <tr>
-                        <td class="users-view-latest-activity" colspan="2"><strong>@if($recipe->product_number!=""){{ $recipe->product_number }} - @endif {{ $recipe->title }}</strong></td>
+                        <td class="users-view-latest-activity" colspan="2"><strong>Recipe: @if($recipe->product_number!=""){{ $recipe->product_number }} - @endif {{ $recipe->title }}</strong></td>
                     </tr>
                     <tr>
                         <td class="users-view-latest-activity" colspan="2"><b>Total Production: </b>{{ $recipe->amount }}&nbsp;{{ $recipe->unit }}</td>
+                    </tr>
+                    <tr>
+                        <td class="users-view-latest-activity"><strong>Lot Number:</strong></td>
+                        <td class="users-view-latest-activity">{{ $production->lot_number }}</td>
+                    </tr>
+                    <tr>
+                        <td class="users-view-latest-activity" colspan="2" style="text-align: right">{{ $production->create_date_time }}</td>
                     </tr>
                     <tr>
                         <td class="users-view-latest-activity" colspan="2"><b>Ingredients</b></td>
@@ -222,8 +222,26 @@
                                         <td><b>Completed</b></td>
                                         <td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></td>
                                     </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="padding:0px !important; margin-top: 0px !important;">
+                                <table>
                                     <tr>
-                                        <td><b>Confirmed by</b></td>
+                                        <td style="white-space: nowrap"><b>Confirmed by</b></td>
+                                        <td colspan="3"><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="3"><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="3"><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
                                         <td colspan="3"><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></td>
                                     </tr>
                                 </table>
@@ -248,5 +266,19 @@
                 </table>
             </div>
         @endif
+        <div class="col-12">
+            <table class="table table-borderless" colspan="12">
+                <tbody>
+                    <tr>
+                        <td class="users-view-latest-activity"><strong>QUANTITY SCALED:</strong></td>
+                        <td class="users-view-latest-activity"><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $production->quantity_estimate_unit }}</u></td>
+                    </tr>
+                    <tr>
+                        <td><b>Confirmed by</b></td>
+                        <td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </body>
 </html>

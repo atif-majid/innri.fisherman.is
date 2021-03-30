@@ -139,4 +139,7 @@
     strong{
         font-size: 1.1rem;
     }
+    .page-break {
+        page-break-after: always;
+    }
 </style>
