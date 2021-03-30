@@ -122,13 +122,13 @@
                                 <fieldset class="form-group">
                                     <select class="form-control" id="imp-status">
                                         <option value="">All</option>
-                                        <option value="In Progress" selected>In Progress</option>
+                                        <option value="In Progress">In Progress</option>
                                         <option value="Completed">Completed</option>
                                     </select>
                                 </fieldset>
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center">
-                                <button type="reset" class="btn btn-primary btn-block glow users-list-clear mb-0">Clear</button>
+                                <button id="btnFilter" type="reset" class="btn btn-primary btn-block glow users-list-clear mb-0">Clear</button>
                             </div>
                         </div>
                     </form>
@@ -170,6 +170,7 @@
                                             <th style="text-align: left; padding-left: 1rem;">Business Potential</th>
                                             <th style="text-align: left; padding-left: 1rem;">Responsible</th>
                                             <th style="text-align: left; padding-left: 1rem;">Status</th>
+                                            <th style="text-align: left; padding-left: 1rem;">B-OP</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -211,7 +212,9 @@
                                                 <td style="padding: 0.5rem 1.15rem">
                                                     {{$Saleop->status}}
                                                 </td>
-
+                                                <td style="padding: 0.5rem 1.15rem">
+                                                    {{$Saleop->business_potential}}
+                                                </td>
                                             </tr>
                                         @endforeach
                                         </tbody>

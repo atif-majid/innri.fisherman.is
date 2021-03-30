@@ -28,8 +28,12 @@ $(document).ready(function () {
                     "visible": false
                 },
                 {
-                    "targets": [ 6 ],
+                    "targets": [ 6, 7 ],
                     "visible": false
+                },
+                {
+                    "targets": [ 4 ],
+                    "orderData": [ 7 ]
                 }
             ],
 
@@ -84,11 +88,20 @@ $(document).ready(function () {
         });
 
         $(document).ready(function(){
+            $( '#imp-status').val("In Progress");
             var selStatus = $( '#imp-status').val();
             usersTable
                 .columns( 6 )
                 .search( selStatus )
                 .draw();
+
+            $('#btnFilter').click(function(){
+                $( '#imp-status').val("");
+                usersTable
+                    .columns( 6 )
+                    .search( selStatus )
+                    .draw();
+            });
         });
 
     };
