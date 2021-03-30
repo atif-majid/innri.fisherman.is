@@ -8,14 +8,17 @@ use App\Models\Employees;
 use App\Models\Instructions;
 use App\Models\Packaging;
 use App\Models\Rawmaterials;
+use App\Models\Recipephotos;
 use App\Models\Shipment;
 use App\Models\Recipes;
 use App\Models\Ingredients;
+use App\Models\Steps;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
+use PDF;
 
 class ProductionController extends Controller
 {
@@ -26,8 +29,8 @@ class ProductionController extends Controller
             $strAcionName = substr($strFullRoute, strpos($strFullRoute, "@")+1);
             $arrAllowedPages = array(
                 "View"=>array('index', 'show'),
-                "Edit"=>array("index", "create", "store", "show", "edit", "update", "calculate"),
-                "Admin"=>array("index", "create", "store", "show", "edit", "update", "destroy", "calculate"),
+                "Edit"=>array("index", "create", "store", "show", "edit", "update", "calculate", "getpdf"),
+                "Admin"=>array("index", "create", "store", "show", "edit", "update", "destroy", "calculate", "getpdf"),
                 "No Access"=>array("none")
             );
 
@@ -367,12 +370,8 @@ class ProductionController extends Controller
         });
     }
 
-    public function calculate(Request $request)
+    private function doCalculation($nRecipe, $nQuantity, $nUnit)
     {
-        $nRecipe = $request->nRecipe;
-        $nQuantity = $request->nQuantity;
-        $nUnit = $request->nUnit;
-
         $recipe = Recipes::find($nRecipe);
         $nRecipeQuantity = $recipe->amount;
         $nRecipeUnit = $recipe->unit;
@@ -383,6 +382,7 @@ class ProductionController extends Controller
         $arrSameUnits['volume'] = array("deciliter", "centiliter", "milliliter", "liter");
         $arrSameUnits['pieces'] = array('pieces');
         $bCalculate = false;
+        $arrOutPut = array();
         if(in_array($nUnit, $arrSameUnits['pieces']) && in_array($nRecipeUnit, $arrSameUnits['pieces']))
         {
             //$nMultiplier = 1;
@@ -436,7 +436,7 @@ class ProductionController extends Controller
         }
         else
         {
-            echo "Either recipe does not have units associated or Recipe and production have different units";
+            return null;
         }
 
         if($bCalculate)
@@ -454,8 +454,65 @@ class ProductionController extends Controller
                 }
                 //echo $strIngredientAmount." - ".$nMultiplier."<br />";
                 $FinalAount = $strIngredientAmount * $nMultiplier;
-                echo $strIngredientTitle." : ".$FinalAount." ".$strIngredientUnit."<br>";
+                //$arrOutPut[] = $strIngredientTitle." : ".$FinalAount." ".$strIngredientUnit;
+                $arrOutPut[] = array("name"=>$strIngredientTitle, "amount"=>$FinalAount, "unit"=>$strIngredientUnit);
             }
+        }
+        return $arrOutPut;
+
+    }
+
+    public function calculate(Request $request)
+    {
+        $nRecipe = $request->nRecipe;
+        $nQuantity = $request->nQuantity;
+        $nUnit = $request->nUnit;
+        $arrOutPut = $this->doCalculation($nRecipe, $nQuantity, $nUnit);
+        if(count($arrOutPut)>0)
+        {
+            //for($i=0; $i<count($arrOutPut); $i++)
+            foreach($arrOutPut as $thisIngredient)
+            {
+                echo $thisIngredient['name']." : ".$thisIngredient['amount']." ".$thisIngredient['unit']."<br>";
+            }
+        }
+        else{
+            echo "Either recipe does not have units associated or Recipe and production have different units";
+        }
+    }
+
+    public function getpdf(Request $request)
+    {
+        $nProductionID = $request->id;
+        $production = Production::find($nProductionID);
+        if($production)
+        {
+            $nRecipeID = $production->recipe_id;
+            $recipe = Recipes::find($nRecipeID);
+            $Instructions = Instructions::where('production_id', $nProductionID)->get();
+            $RawMetirals = Rawmaterials::where('production_id', $nProductionID)->get();
+            $Packagings = Packaging::where('production_id', $nProductionID)->get();
+            $Shipments = Shipment::where('production_id', $nProductionID)->get();
+
+            $Ingredients = Ingredients::where('recipe_id', $nRecipeID)->get();
+            $Steps = Steps::where('recipe_id', $nRecipeID)->get();
+            $RecipePhoto = Recipephotos::where('recipe_id', $nRecipeID)->get();
+
+            $arrCalculatedIngredietns = array();
+            if($nRecipeID>0 && $production->quantity_estimate>0)
+            {
+                $arrCalculatedIngredietns = $this->doCalculation($nRecipeID, $production->quantity_estimate, $production->quantity_estimate_unit);
+            }
+
+            /*return view('production.printpdf', compact('production', 'Instructions', 'RawMetirals',
+               'Packagings',  'Shipments', 'recipe', 'Ingredients', 'Steps', 'RecipePhoto', 'arrCalculatedIngredietns'));*/
+            $pdf = PDF::loadView('production.printpdf', compact('production', 'Instructions', 'RawMetirals',
+                'Packagings',  'Shipments', 'recipe', 'Ingredients', 'Steps', 'RecipePhoto', 'arrCalculatedIngredietns'));
+            return $pdf->download($recipe->title.' (Production)'.'.pdf');
+        }
+        else
+        {
+            return Redirect::back()->withErrors(['This production is not found.']);
         }
     }
 }

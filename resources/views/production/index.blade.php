@@ -152,6 +152,7 @@
                                                         @method('DELETE')
                                                         <a href="{{ route('production.destroy', $production->id) }}" onclick="event.preventDefault();
                                                             if(confirm('Are you sure to delete?')){document.getElementById('form-del-{{$production->id}}').submit();}"><i class="bx bxs-trash-alt"></i></a>
+                                                        <a href="{{ route('production.getpdf', $production->id) }}"><i class="bx bxs-file-pdf"></i></a>
                                                     </form>
                                                 </td>
                                                 <td style="padding: 0.5rem 1.15rem">{!! $production->create_date_time !!}</td>

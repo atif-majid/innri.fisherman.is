@@ -44,7 +44,7 @@
                                 <label class="custom-control-label" for="customCheck3"></label>
                             @else
                                 <input type="checkbox" class="custom-control-input" name="customCheck" disabled id="customCheck4">
-                                <label class="custom-control-label" for="customCheck4">Inactive - disabled</label>
+                                <label class="custom-control-label" for="customCheck4"></label>
                             @endif
                         </div>
                     </fieldset>
