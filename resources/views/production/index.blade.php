@@ -129,13 +129,14 @@
                                             <tr>
                                                 <th>id</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Options</th>
-                                                <th style="text-align: left; padding-left: 1rem;">Date</th>
-                                                <th style="text-align: left; padding-left: 1rem;">Recipe</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Product NR.</th>
                                                 <th style="text-align: left; padding-left: 1rem;">LOT NR.</th>
-                                                <th style="text-align: left; padding-left: 1rem;">Order NR.</th>
-                                                <th style="text-align: left; padding-left: 1rem;">Quantity Estimate</th>
-                                                <th style="text-align: left; padding-left: 1rem;">Quantity Scalled</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Product</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Make</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Pack</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Freeze</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Send</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Raw Material</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -155,13 +156,50 @@
                                                         <a href="{{ route('production.getpdf', $production->id) }}"><i class="bx bxs-file-pdf"></i></a>
                                                     </form>
                                                 </td>
-                                                <td style="padding: 0.5rem 1.15rem">{!! $production->create_date_time !!}</td>
-                                                <td style="padding: 0.5rem 1.15rem">{{ $production->title }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->product_number }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->lot_number }}</td>
-                                                <td style="padding: 0.5rem 1.15rem">{{ $production->order_number }}</td>
-                                                <td style="padding: 0.5rem 1.15rem">{{ $production->quantity_estimate }}&nbsp;{{ $production->quantity_estimate_unit }}</td>
-                                                <td style="padding: 0.5rem 1.15rem">{{ $production->quantity_scaled }}&nbsp;{{ $production->quantity_scaled_unit }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">{{ $production->title }}</td>
+                                                <td style="padding: 0.5rem 1.15rem">@if(array_key_exists($production->id, $Instructions)){{ $Instructions["$production->id"]["Make"] }}@endif</td>
+                                                <td style="padding: 0.5rem 1.15rem">@if(array_key_exists($production->id, $Instructions)){{ $Instructions["$production->id"]["Pack"] }}@endif</td>
+                                                <td style="padding: 0.5rem 1.15rem">@if(array_key_exists($production->id, $Instructions)){{ $Instructions["$production->id"]["Freeze"] }}@endif</td>
+                                                <td style="padding: 0.5rem 1.15rem">@if(array_key_exists($production->id, $Instructions)){{ $Instructions["$production->id"]["Send"] }}@endif</td>
+                                                <td style="padding: 0.5rem 1.15rem">
+                                                    @if(array_key_exists($production->id, $Rawmaterials))
+                                                        @php
+                                                            $strMaterials = '<div class="table-responsive border" style="padding: 1.15rem 2rem">';
+                                                            $strMaterials .= '<div class="row">';
+                                                            $strMaterials .= '<div class="col">';
+                                                            $strMaterials .= 'Material';
+                                                            $strMaterials .= '</div>';
+                                                            $strMaterials .= '<div class="col">';
+                                                            $strMaterials .= 'Quantity';
+                                                            $strMaterials .= '</div>';
+                                                            $strMaterials .= '<div class="col">';
+                                                            $strMaterials .= 'Lot Nr.';
+                                                            $strMaterials .= '</div>';
+                                                            $strMaterials .= '</div>';
+                                                        @endphp
+                                                        @foreach($Rawmaterials["$production->id"] as $i=>$thisRawMateria)
+                                                            @php
+                                                                $strMaterials .= '<div class="row">';
+                                                                $strMaterials .= '<div class="col">';
+                                                                $strMaterials .= $thisRawMateria['material_name'];
+                                                                $strMaterials .= '</div>';
+                                                                $strMaterials .= '<div class="col">';
+                                                                $strMaterials .= $thisRawMateria['material_quantity']." ".$thisRawMateria['material_unit'];
+                                                                $strMaterials .= '</div>';
+                                                                $strMaterials .= '<div class="col">';
+                                                                $strMaterials .= $thisRawMateria['material_lot_nr'];
+                                                                $strMaterials .= '</div>';
+                                                                $strMaterials .= '</div>';
+                                                            @endphp
+                                                            <i class="bx bx-plus" onclick="showmaterials('{{$strMaterials}}');" style="cursor: pointer;"></i>
+                                                            @if($i==0)
+                                                                &nbsp;{{$thisRawMateria["material_name"]}}
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </td>
                                             </tr>
                                         @endforeach
                                         <?php
@@ -356,8 +394,30 @@
 <script src="../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js"></script>
 
 <!-- END: Page JS-->
+<script>
+    function showmaterials(strMaterials)
+    {
+        $('.modal-body').html(strMaterials);
+        $('#modalRawMaterial').modal('show');
+    }
+</script>
+<div class="modal fade text-left" id="modalRawMaterial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel33">Raw Materials </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="bx bx-x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
 
-
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <!-- END: Body-->
 

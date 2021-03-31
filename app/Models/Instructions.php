@@ -17,7 +17,7 @@ class Instructions extends Model
         'chk_freeze',
         'chk_pack',
         'chk_send',
-        'create_dae_time',
+        'create_date_time',
         'emp_id',
         'production_id'
     ];

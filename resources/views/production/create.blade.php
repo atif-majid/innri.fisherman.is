@@ -348,11 +348,14 @@
                                                             <fieldset class="position-relative">
                                                                 <select class="form-control" id="packing_type" name="packing_type">
                                                                     <option value="" selected></option>
-                                                                    <option value="Gastro">Gastro</option>
-                                                                    <option value="Aluminum tray">Aluminum tray</option>
-                                                                    <option value="Paper tray">Paper tray</option>
+                                                                    <option value="Gastro 5 kg">Gastro 5 kg</option>
+                                                                    <option value="Gastro 800 g">Gastro 800 g</option>
+                                                                    <option value="Halo 400 g">Halo 400 g</option>
+                                                                    <option value="Box 800 g">Box 800 g</option>
                                                                     <option value="Blue bag">Blue bag</option>
                                                                     <option value="MV">MV</option>
+                                                                    <option value="Fisherman box 10 kg">Fisherman box 10 kg</option>
+                                                                    <option value="Smartbox">Smartbox</option>
                                                                 </select>
                                                             </fieldset>
                                                         </div>

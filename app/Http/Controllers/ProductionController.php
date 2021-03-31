@@ -88,7 +88,43 @@ class ProductionController extends Controller
                 ->select('production.*','recipes.title')
                 ->get();
 
-            return view('production.index',compact('productions'))
+            $Instructions = array();
+            $allInstructions = Instructions::all();
+            foreach($allInstructions as $thisInstruction)
+            {
+                $nProductionID = $thisInstruction->production_id;
+                if(!array_key_exists($nProductionID, $Instructions))
+                {
+                    $Instructions["$nProductionID"] = array("Make"=>"", "Pack"=>"", "Freeze"=>"", "Send"=>"");
+                }
+                if($thisInstruction->chk_make=='yes')
+                {
+                    $Instructions["$nProductionID"]["Make"] = $thisInstruction->instruction_date;
+                }
+                if($thisInstruction->chk_pack=='yes')
+                {
+                    $Instructions["$nProductionID"]["Pack"] = $thisInstruction->instruction_date;
+                }
+                if($thisInstruction->chk_freeze=='yes')
+                {
+                    $Instructions["$nProductionID"]["Freeze"] = $thisInstruction->instruction_date;
+                }
+                if($thisInstruction->chk_send=='yes')
+                {
+                    $Instructions["$nProductionID"]["Send"] = $thisInstruction->instruction_date;
+                }
+            }
+
+            $Rawmaterials = array();
+            $allRawMaterials = Rawmaterials::all();
+            foreach ($allRawMaterials as $thisMaterial)
+            {
+                $nProductionID = $thisMaterial->production_id;
+                $Rawmaterials["$nProductionID"][] = array("material_name"=>$thisMaterial->material_name,
+                    "material_quantity"=>$thisMaterial->material_quantity, "material_unit"=>$thisMaterial->material_unit,
+                    "material_lot_nr"=>$thisMaterial->material_lot_nr);
+            }
+            return view('production.index',compact('productions', 'Instructions', 'Rawmaterials'))
                 ->with('i', (request()->input('page', 1) - 1) * 5);
         }
 
@@ -166,7 +202,7 @@ class ProductionController extends Controller
                     'chk_freeze'=>'no',
                     'chk_pack'=>'no',
                     'chk_send'=>'no',
-                    'create_dae_time'=>date('Y-m-d H:i:s'),
+                    'create_date_time'=>date('Y-m-d H:i:s'),
                     'emp_id'=>$nEmpID,
                     'production_id'=>$nProductionID
                 );
@@ -216,7 +252,7 @@ class ProductionController extends Controller
                     'packing_unit'=>'',
                     'package_quantity'=>0,
                     'package_total'=>0,
-                    'create_dae_time'=>date("Y-m-d H:i:s"),
+                    'create_date_time'=>date("Y-m-d H:i:s"),
                     'emp_id'=>$nEmpID,
                     'production_id'=>$nProductionID
                 );

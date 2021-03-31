@@ -17,7 +17,7 @@ class Packaging extends Model
         'packing_unit',
         'package_quantity',
         'package_total',
-        'create_dae_time',
+        'create_date_time',
         'emp_id',
         'production_id'
     ];
