@@ -29,7 +29,8 @@ $(document).ready(function () {
                 {
                     "targets": [ 0 ],
                     "visible": false
-                }]
+                }],
+            "order": [[ 2, "asc" ]]
         });
         $('#users-list-datatable tbody').on('click', '.invoice-action-view', function (event) {
             event.preventDefault();
