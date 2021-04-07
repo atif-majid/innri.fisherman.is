@@ -208,14 +208,18 @@
                                     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
                                         <ol class="carousel-indicators">
                                             @foreach($ImprovementPhotos as $k=>$thisPhoto)
-                                                <li data-target="#carousel-example-generic" data-slide-to="{{$k}}" @if($k==0) class="active" @endif></li>
+                                                @if(strpos($thisPhoto->file_type, 'image')===0)
+                                                    <li data-target="#carousel-example-generic" data-slide-to="{{$k}}" @if($k==0) class="active" @endif></li>
+                                                @endif
                                             @endforeach
                                         </ol>
                                         <div class="carousel-inner" role="listbox">
                                             @foreach($ImprovementPhotos as $k=>$thisPhoto)
-                                                <div class="carousel-item @if($k==0) active @endif" style="text-align:center; width:100%;">
-                                                    <img style="max-width: 500px !important; max-height: 400px !important;" src="/uploads/improvements/{{$improvement->id}}/{{$thisPhoto->file_name}}" data-toggle="modal" data-target="#modalpicture">
-                                                </div>
+                                                @if(strpos($thisPhoto->file_type, 'image')===0)
+                                                    <div class="carousel-item @if($k==0) active @endif" style="text-align:center; width:100%;">
+                                                        <img style="max-width: 500px !important; max-height: 400px !important;" src="/uploads/improvements/{{$improvement->id}}/{{$thisPhoto->file_name}}" data-toggle="modal" data-target="#modalpicture">
+                                                    </div>
+                                                @endif
                                             @endforeach
                                         </div>
                                         <a class="carousel-control-prev" href="#carousel-example-generic" role="button" data-slide="prev">
@@ -305,6 +309,26 @@
                         </div>
                     </div>
                     <!-- Basic Carousel with Caption End -->
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Other files</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    @foreach($ImprovementPhotos as $k=>$thisPhoto)
+                                        @if(strpos($thisPhoto->file_type, 'image')!==0)
+                                            <div class="col">
+                                                <a href="/uploads/improvements/{{$improvement->id}}/{{$thisPhoto->file_name}}">{{$thisPhoto->file_name}}</a>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
@@ -548,14 +572,63 @@
     var myDropzone;
     Dropzone.options.dpzRemoveThumb = {
         paramName: "file", // The name that will be used to transfer the file
-        acceptedFiles: "image/*",
+        acceptedFiles: "image/*,application/pdf,.doc,.docx,.xls,.xlsx,.csv,.tsv,.ppt,.pptx,.pages,.odt,.rtf",
+        accept: function(file, done) {
+            //var thumbnail = $('.dropzone .dz-preview.dz-file-preview .dz-image:last');
+            var thumbnail = $(file.previewElement).find('.dz-details img');
+            switch (file.type) {
+                case 'application/pdf':
+                    thumbnail.attr('src', '/uploads/fileicons/pdf.png');
+                    thumbnail.css('display', 'inline');
+                    break;
+                case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+                    thumbnail.attr('src', '/uploads/fileicons/doc.png');
+                    thumbnail.css('display', 'inline');
+                    break;
+                case 'application/msword':
+                    thumbnail.attr('src', '/uploads/fileicons/doc.png');
+                    thumbnail.css('display', 'inline');
+                    break;
+                case 'text/csv':
+                    thumbnail.attr('src', '/uploads/fileicons/csv.png');
+                    thumbnail.css('display', 'inline');
+                    break;
+            }
+
+            done();
+        },
         maxFilesize: 10, // MB
         addRemoveLinks: true,
         dictRemoveFile: " Trash",
         autoProcessQueue: false,
         parallelUploads:20,
+        dictRemoveFileConfirmation: "Do you want to remove this?",
         init: function (e) {
             var myDropzone = this;
+            $.getJSON('{{ route('improvements.getfiles', $improvement->id) }}', function(data) {
+                $.each(data, function(index, val) {
+                    var mockFile = { id: val.id, name: val.name, size: val.size };
+                    myDropzone.options.addedfile.call(myDropzone, mockFile);
+                    myDropzone.options.thumbnail.call(myDropzone, mockFile, "/uploads/improvements/{{$improvement->id}}/" + val.name);
+
+                    var thumbnail = $(mockFile.previewElement).find('.dz-details img');
+                    switch (val.type) {
+                        case 'application/pdf':
+                            thumbnail.attr('src', '/uploads/fileicons/pdf.png');
+                            thumbnail.css('display', 'inline');
+                            break;
+                        case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+                            thumbnail.attr('src', '/uploads/fileicons/doc.png');
+                            thumbnail.css('display', 'inline');
+                            break;
+                        case 'application/msword':
+                            thumbnail.attr('src', '/uploads/fileicons/doc.png');
+                            thumbnail.css('display', 'inline');
+                            break;
+                    }
+                });
+            });
+
             $('#btnAllSubmit').on("click", function() {
                 $('.modalerror').html('');
                 var nFiles = myDropzone.files.length;
@@ -604,7 +677,48 @@
                     window.location.href = "{{route('improvements.process', $improvement->id)}}";
                 }
             });
-        }
+            myDropzone.on("success", function(file, response) {
+                //$(file.previewTemplate).append('<input type="text" id="strCaption" name="strCaption" value="Testing">');
+            });
+            myDropzone.on("addedfile", function(file) {
+                /*var strFileName = file.name;
+                var ext = strFileName.split('.').pop();
+                alert(ext);
+                alert($(file.previewElement).find(".dz-details").html());
+                alert($(file.previewElement).find(".dz-details img").attr('src'));
+                if (ext == "pdf") {
+                    $(file.previewElement).find(".dz-details img").attr("src", "/uploads/fileicons/pdf.png");
+                } else if (ext.indexOf("doc") != -1 || ext.indexOf("docx") != -1) {
+                    $(file.previewElement).find(".dz-details img").attr("src", "/uploads/fileicons/doc.png");
+                } else if (ext.indexOf("xls") != -1 || ext.indexOf("xlsx") != -1) {
+                    $(file.previewElement).find(".dz-details img").attr("src", "/Content/Images/xls.jpg");
+                } else if (ext.indexOf("txt") != -1) {
+                    $(file.previewElement).find(".dz-details img").attr("src", "/Content/Images/txt.jpg");
+                }*/
+                //$(file.previewTemplate).append('<input type="text" id="strCaption" name="strCaption" value="">');
+                /*caption = file.caption == undefined ? "" : file.caption;
+                file._captionLabel = Dropzone.createElement("<p>Caption:</p>");
+                file._captionBox = Dropzone.createElement("<textarea class='caption' id='"+file.fileName+"' type='text' name='caption' class='dropzone_caption'>"+caption+"</textarea>");
+                file.previewElement.appendChild(file._captionLabel);
+                file.previewElement.appendChild(file._captionBox);*/
+            });
+            myDropzone.on("removedfile", function(file) {
+                if(typeof(file.id)!="undefined")
+                {
+                    $.ajax({
+                        type: "post",
+                        url: "{{ route('improvements.delfiles') }}",
+                        data: {'fileid': file.id, 'improvement': {{$improvement->id}}, "_token": "{{ csrf_token() }}"},
+                        dataType: 'json',              // let's set the expected response format
+                        success: function(data){
+                            alert(data);
+                        },
+                    });
+                }
+            });
+        },
+
+
     }
 </script>
 <div class="modal fade text-left" id="modalError" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">

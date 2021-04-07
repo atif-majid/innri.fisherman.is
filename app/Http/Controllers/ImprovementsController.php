@@ -763,12 +763,15 @@ class ImprovementsController extends Controller
             'nImpId' => 'required'
         ]);*/
         $nImpId = $request->nImpId;
+
+
         if(is_numeric($nImpId) && $nImpId>0 && $request->has('file'))
         {
             $nCurrentEmployeeID = Auth::user()->getempid();
             $file = $request->file('file');
             $destination = 'uploads/improvements/'.$nImpId."/";
             $strFileName = $file->getClientOriginalName();
+            $strType = $file->getMimeType();
             /*if (!file_exists(public_path($destination))) {
                 $file->move($destination, $strFileName);
             }
@@ -800,7 +803,8 @@ class ImprovementsController extends Controller
                 'improvements_id'=>$nImpId,
                 'file_name'=>$strFileName,
                 'file_creation_date' => date("Y-m-d H:i:s"),
-                'file_created_by' => $nCurrentEmployeeID
+                'file_created_by' => $nCurrentEmployeeID,
+                'file_type'=>$strType
             );
             Improvementphotos::create($arrPicRecord);
         }
@@ -813,5 +817,62 @@ class ImprovementsController extends Controller
             $request->session()->flash('success', 'Improvement record added successfully.');
         }
 
+    }
+
+    function getfiles(Request $request)
+    {
+        /*$ds = DIRECTORY_SEPARATOR;
+        $nImprovementID = $request->id;
+        $result  = array();
+        $destination = 'uploads/improvements/'.$nImprovementID."/";
+        $files = scandir($destination);                 //1
+        if ( false!==$files ) {
+            foreach ( $files as $file ) {
+                if ( '.'!=$file && '..'!=$file) {       //2
+                    $obj['name'] = $file;
+                    $obj['size'] = filesize($destination.$ds.$file);
+                    $obj['id'] = filesize($destination.$ds.$file);
+                    $result[] = $obj;
+                }
+            }
+        }*/
+        $result  = array();
+        $nImprovementID = $request->id;
+        $photos = Improvementphotos::where('improvements_id', $nImprovementID)->get();
+        $destination = 'uploads/improvements/'.$nImprovementID."/";
+        foreach($photos as $thisphoto)
+        {
+            $obj['name'] = $thisphoto->file_name;
+            $obj['size'] = filesize($destination.$thisphoto->file_name);
+            $obj['id'] = $thisphoto->id;
+            $obj['type'] = $thisphoto->file_type;
+            $result[] = $obj;
+        }
+
+        header('Content-type: text/json');              //3
+        header('Content-type: application/json');
+        echo json_encode($result);
+    }
+
+    function delfiles(Request $request)
+    {
+        $nFileId = $request->fileid;
+        $nImprovementID = $request->improvement;
+
+        $File = Improvementphotos::where('improvements_id', $nImprovementID)
+                ->where('id', $nFileId)
+                ->get();
+        $destination = 'uploads/improvements/'.$nImprovementID."/";
+        if($File)
+        {
+            $strFileName = $File[0]->file_name;
+            if(File::exists($destination.$strFileName))
+            {
+                File::delete($destination.$strFileName);
+                Improvementphotos::where('improvements_id', $nImprovementID)
+                    ->where('id', $nFileId)
+                    ->delete();
+            }
+        }
     }
 }

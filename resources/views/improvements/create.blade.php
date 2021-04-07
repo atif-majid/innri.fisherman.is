@@ -553,12 +553,37 @@
     var myDropzone;
     Dropzone.options.dpzRemoveThumb = {
         paramName: "file", // The name that will be used to transfer the file
-        acceptedFiles: "image/*",
+        acceptedFiles: "image/*,application/pdf,.doc,.docx,.xls,.xlsx,.csv,.tsv,.ppt,.pptx,.pages,.odt,.rtf",
+        accept: function(file, done) {
+            //var thumbnail = $('.dropzone .dz-preview.dz-file-preview .dz-image:last');
+            var thumbnail = $(file.previewElement).find('.dz-details img');
+            switch (file.type) {
+                case 'application/pdf':
+                    thumbnail.attr('src', '/uploads/fileicons/pdf.png');
+                    thumbnail.css('display', 'inline');
+                    break;
+                case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+                    thumbnail.attr('src', '/uploads/fileicons/doc.png');
+                    thumbnail.css('display', 'inline');
+                    break;
+                case 'application/msword':
+                    thumbnail.attr('src', '/uploads/fileicons/doc.png');
+                    thumbnail.css('display', 'inline');
+                    break;
+                case 'text/csv':
+                    thumbnail.attr('src', '/uploads/fileicons/csv.png');
+                    thumbnail.css('display', 'inline');
+                    break;
+            }
+
+            done();
+        },
         maxFilesize: 10, // MB
         addRemoveLinks: true,
         dictRemoveFile: " Trash",
         autoProcessQueue: false,
         parallelUploads:20,
+        dictRemoveFileConfirmation: "Do you want to remove this?",
         init: function (e) {
             var myDropzone = this;
             $('#btnAllSubmit').on("click", function() {

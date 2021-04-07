@@ -109,6 +109,8 @@ Route::post('/recipes/uploadpicture', ['as'=>'recipes.uploadpicture', 'uses'=>'A
 
 Route::resource('improvements', ImprovementsController::class, ['middleware' => 'auth']);
 Route::get('improvements/process/{id}', ['as'=>'improvements.process', 'uses'=>'App\Http\Controllers\ImprovementsController@process'])->middleware('auth');;
+Route::get('improvements/getfiles/{id}', ['as'=>'improvements.getfiles', 'uses'=>'App\Http\Controllers\ImprovementsController@getfiles'])->middleware('auth');
+Route::post('/improvements/delfiles', ['as'=>'improvements.delfiles', 'uses'=>'App\Http\Controllers\ImprovementsController@delfiles']);
 Route::post('/improvements/updateprocess', ['as'=>'improvements.updateprocess', 'uses'=>'App\Http\Controllers\ImprovementsController@updateprocess']);
 Route::post('/improvements/updatecomment', ['as'=>'improvements.updatecomment', 'uses'=>'App\Http\Controllers\ImprovementsController@updatecomment']);
 Route::post('/improvements/updateimpstatus', ['as'=>'improvements.updateimpstatus', 'uses'=>'App\Http\Controllers\ImprovementsController@updateimpstatus']);

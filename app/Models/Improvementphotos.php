@@ -14,6 +14,7 @@ class Improvementphotos extends Model
         'improvements_id',
         'file_name',
         'file_creation_date',
-        'file_created_by'
+        'file_created_by',
+        'file_type'
     ];
 }
