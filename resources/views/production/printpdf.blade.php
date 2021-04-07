@@ -24,10 +24,12 @@
                     <td class="users-view-latest-activity"><strong>Order Number:</strong></td>
                     <td class="users-view-latest-activity">{{ $production->order_number }}</td>
                 </tr>
-                <tr>
+                @php
+                /*<tr>
                     <td class="users-view-latest-activity"><strong>Quantity Estimate:</strong></td>
                     <td class="users-view-latest-activity">{{ $production->quantity_estimate }} &nbsp;{{ $production->quantity_estimate_unit }}</td>
-                </tr>
+                </tr>*/
+                @endphp
                 <tr>
                     <td class="users-view-latest-activity" colspan="2"><strong>Instructions</strong></td>
                 </tr>
@@ -159,8 +161,14 @@
                     <tr>
                         <td class="users-view-latest-activity" colspan="2"><strong>Recipe: @if($recipe->product_number!=""){{ $recipe->product_number }} - @endif {{ $recipe->title }}</strong></td>
                     </tr>
-                    <tr>
+                    @php
+                    /*<tr>
                         <td class="users-view-latest-activity" colspan="2"><b>Total Production: </b>{{ $recipe->amount }}&nbsp;{{ $recipe->unit }}</td>
+                    </tr>*/
+                    @endphp
+                    <tr>
+                        <td class="users-view-latest-activity"><strong>Quantity Estimate:</strong></td>
+                        <td class="users-view-latest-activity">{{ $production->quantity_estimate }} &nbsp;{{ $production->quantity_estimate_unit }}</td>
                     </tr>
                     <tr>
                         <td class="users-view-latest-activity"><strong>Lot Number:</strong></td>

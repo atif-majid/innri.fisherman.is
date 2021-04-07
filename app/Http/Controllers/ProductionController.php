@@ -150,6 +150,7 @@ class ProductionController extends Controller
      */
     public function store(Request $request)
     {
+
         //
         /*$request->validate([
             'product_number' => 'required',
@@ -327,8 +328,14 @@ class ProductionController extends Controller
     public function edit(Production $production)
     {
         //
+        $nProductionID = $production->id;
         $recipes = Recipes::all();
-        return view('production.edit', compact('production', 'recipes'));
+        $Instructions = Instructions::where('production_id', $nProductionID)->get();
+        $RawMaterials = Rawmaterials::where('production_id', $nProductionID)->get();
+        $Packaging = Packaging::where('production_id', $nProductionID)->get();
+        $Shipment = Shipment::where('production_id', $nProductionID)->get();
+        return view('production.edit', compact('production', 'recipes', 'Instructions',
+            'RawMaterials', 'Packaging', 'Shipment'));
     }
 
     /**
@@ -342,23 +349,235 @@ class ProductionController extends Controller
     {
         //
         //
-        $request->validate([
-            'product_number' => 'required',
-            'lot_number' => 'required',
-            'product_name' => 'required',
-            'instructions' => 'required',
-            'products_available_arriving' => 'required',
-            'packing_package_size' => 'required',
-            'production_total' => 'required',
-            'delivery_storage' => 'required',
-            'delivery_storage_quantity' => 'required',
-            'pallet_number' => 'required',
-            'recipe_id' => 'required',
-            'production_date' => 'required',
-            'production_unit' => 'required'
-        ]);
 
-        $production->update($request->all());
+
+        $nProductionID = $production->id;
+        $request->validate(
+            [
+                'recipe_id' => 'required',
+            ],
+            [
+                'recipe_id.required' => 'Please chose a recipe.'
+            ]
+        );
+        $nEmpID = Auth::user()->getempid();
+        $arrProduction = array(
+            'recipe_id'=>$request->recipe_id,
+            'product_number'=>$request->product_number,
+            'lot_number'=>$request->lot_number,
+            'order_number'=>$request->order_number,
+            'quantity_estimate'=>$request->quantity_estimate,
+            'quantity_estimate_unit'=>$request->quantity_estimate_unit,
+            'quantity_scaled'=>$request->quantity_scaled,
+            'quantity_scaled_unit'=>$request->quantity_scaled_unit,
+            'emp_id'=>$nEmpID
+        );
+        $production->update($arrProduction);
+
+        $arrInstructions = $_POST['Instructions'];
+        foreach ($arrInstructions as $thisInstruction) {
+            if(!empty($thisInstruction['instruction_date']))
+            {
+                $arrInsertInstruction = array(
+                    'instruction_date'=>$thisInstruction['instruction_date'],
+                    'chk_make'=>'no',
+                    'chk_freeze'=>'no',
+                    'chk_pack'=>'no',
+                    'chk_send'=>'no',
+                    'create_date_time'=>date('Y-m-d H:i:s'),
+                    'emp_id'=>$nEmpID,
+                    'production_id'=>$nProductionID
+                );
+                if(isset($thisInstruction['chk_make']))
+                {
+                    $arrInsertInstruction['chk_make'] = 'yes';
+                }
+                if(isset($thisInstruction['chk_freeze']))
+                {
+                    $arrInsertInstruction['chk_freeze'] = 'yes';
+                }
+                if(isset($thisInstruction['chk_pack']))
+                {
+                    $arrInsertInstruction['chk_pack'] = 'yes';
+                }
+                if(isset($thisInstruction['chk_send']))
+                {
+                    $arrInsertInstruction['chk_send'] = 'yes';
+                }
+                if(isset($thisInstruction['nInstructionID']) && $thisInstruction['nInstructionID']>0)
+                {
+                    unset($arrInsertInstruction['create_date_time']);
+                    unset($arrInsertInstruction['production_id']);
+                    Instructions::find($thisInstruction['nInstructionID'])->update($arrInsertInstruction);
+                }
+                else
+                {
+                    Instructions::create($arrInsertInstruction);
+                }
+            }
+        }
+
+        $arrRawMaterials = $_POST['rawmaterials'];
+        foreach ($arrRawMaterials as $thisMaterial)
+        {
+            if(!empty($thisMaterial['material_name']))
+            {
+                $arrInsertMaterial = array(
+                    'material_name'=>$thisMaterial['material_name'],
+                    'material_quantity'=>$thisMaterial['material_quantity'],
+                    'material_unit'=>$thisMaterial['material_unit'],
+                    'material_lot_nr'=>$thisMaterial['material_lot_nr'],
+                    'create_date_time'=>date("Y-m-d H:i:s"),
+                    'emp_id'=>$nEmpID,
+                    'production_id'=>$nProductionID
+                );
+                if(isset($thisMaterial['nMaterialID']) && $thisMaterial['nMaterialID']>0)
+                {
+                    unset($arrInsertMaterial['create_date_time']);
+                    unset($arrInsertMaterial['production_id']);
+                    Rawmaterials::find($thisMaterial['nMaterialID'])->update($arrInsertMaterial);
+                }
+                else
+                {
+                    Rawmaterials::create($arrInsertMaterial);
+                }
+            }
+
+        }
+
+        $arrPackaging = $_POST['packaging'];
+        foreach ($arrPackaging as $thisPackaging)
+        {
+            if(!empty($thisPackaging['packing_type']))
+            {
+                $arrInsertPackaging = array(
+                    'packing_type'=>$thisPackaging['packing_type'],
+                    'package_size'=>0,
+                    'packing_unit'=>'',
+                    'package_quantity'=>0,
+                    'package_total'=>0,
+                    'create_date_time'=>date("Y-m-d H:i:s"),
+                    'emp_id'=>$nEmpID,
+                    'production_id'=>$nProductionID
+                );
+                if($thisPackaging['package_size']>0)
+                {
+                    $arrInsertPackaging['package_size'] = $thisPackaging['package_size'];
+                }
+                if(!empty($thisPackaging['packing_unit']))
+                {
+                    $arrInsertPackaging['packing_unit'] = $thisPackaging['packing_unit'];
+                }
+                if($thisPackaging['package_quantity']>0)
+                {
+                    $arrInsertPackaging['package_quantity'] = $thisPackaging['package_quantity'];
+                }
+                if($thisPackaging['package_total']>0)
+                {
+                    $arrInsertPackaging['package_total'] = $thisPackaging['package_total'];
+                }
+                if(isset($thisPackaging['nPackagingID']) && $thisPackaging['nPackagingID']>0)
+                {
+                    unset($arrInsertPackaging['create_date_time']);
+                    unset($arrInsertPackaging['production_id']);
+                    Packaging::find($thisPackaging['nPackagingID'])->update($arrInsertPackaging);
+                }
+                else
+                {
+                    Packaging::create($arrInsertPackaging);
+                }
+
+            }
+
+        }
+
+
+
+        $arrShipment = $_POST['shipment'];
+        foreach($arrShipment as $thisShipment)
+        {
+            if(!empty($thisShipment['shipment_quantity']))
+            {
+                $arrInsertShipment = array(
+                    'shipment_quantity'=>$thisShipment['shipment_quantity'],
+                    'shipment_unit'=>$thisShipment['shipment_unit'],
+                    'delivery_storage'=>$thisShipment['delivery_storage'],
+                    'storage_pallet'=>$thisShipment['storage_pallet'],
+                    'create_date_time'=>date("y-m-d H:i:s"),
+                    'emp_id'=>$nEmpID,
+                    'production_id'=>$nProductionID
+                );
+                if(isset($thisShipment['nShipmentID']) && $thisShipment['nShipmentID']>0)
+                {
+                    unset($arrInsertShipment['create_date_time']);
+                    unset($arrInsertShipment['production_id']);
+                    Shipment::find($thisShipment['nShipmentID'])->update($arrInsertShipment);
+                }
+                else
+                {
+                    Shipment::create($arrInsertShipment);
+                }
+            }
+
+
+        }
+
+        $deletedInstructions = $request->deletedInstructions;
+        $deletedRawMaterials = $request->deletedRawMaterials;
+        $deletedPackaging = $request->deletedPackaging;
+        $deletedShipment = $request->deletedShipment;
+
+        if(trim($deletedInstructions)!="")
+        {
+            $arrDeletedInstructions = explode(",", $deletedInstructions);
+            for($i=0; $i<count($arrDeletedInstructions); $i++)
+            {
+                $nDelThisInstruction = $arrDeletedInstructions[$i];
+                if(is_numeric($nDelThisInstruction) && $nDelThisInstruction>0)
+                {
+                    Instructions::where('id', $nDelThisInstruction)->delete();
+                }
+            }
+        }
+
+        if(trim($deletedRawMaterials) !="")
+        {
+            $arrDeletedRawMaterial = explode(",", $deletedRawMaterials);
+            for($i=0; $i<count($arrDeletedRawMaterial); $i++)
+            {
+                $nDelThisRawMaterial = $arrDeletedRawMaterial[$i];
+                if(is_numeric($nDelThisRawMaterial) && $nDelThisRawMaterial>0)
+                {
+                    Rawmaterials::where('id', $nDelThisRawMaterial)->delete();
+                }
+            }
+        }
+
+        if(trim($deletedPackaging) !="")
+        {
+            $arrDeletedPackaging = explode(",", $deletedPackaging);
+            for($i=0; $i<count($arrDeletedPackaging); $i++)
+            {
+                $nDelThisPackaging = $arrDeletedPackaging[$i];
+                if(is_numeric($nDelThisPackaging) && $nDelThisPackaging>0)
+                {
+                    Packaging::where('id', $nDelThisPackaging)->delete();
+                }
+            }
+        }
+
+        if(trim($deletedShipment) !="")
+        {
+            $arrDeletedShipment = explode(",", $deletedShipment);
+            for($i=0; $i<count($arrDeletedShipment); $i++)
+            {
+                $nDelThisShipment = $arrDeletedShipment[$i];
+                if(is_numeric($nDelThisShipment) && $nDelThisShipment>0)
+                {
+                    Shipment::where('id', $nDelThisShipment)->delete();
+                }
+            }
+        }
 
         return redirect()->route('production.index')
             ->with('success','Production record updated successfully.');
@@ -409,6 +628,10 @@ class ProductionController extends Controller
     private function doCalculation($nRecipe, $nQuantity, $nUnit)
     {
         $recipe = Recipes::find($nRecipe);
+        if(empty($recipe->amount) || empty($recipe->unit))
+        {
+            return null;
+        }
         $nRecipeQuantity = $recipe->amount;
         $nRecipeUnit = $recipe->unit;
         $nMultiplier = 0;
@@ -460,12 +683,12 @@ class ProductionController extends Controller
                 if($nUnit!="kg")
                 {
                     $nQuantity = $nQuantity / $arrConversion["$nUnit"];
-                    $nUnit = "kg";
+                    //$nUnit = "kg";
                 }
                 if($nRecipeUnit!="kg")
                 {
                     $nRecipeQuantity = $nRecipeQuantity / $arrConversion["$nRecipeUnit"];
-                    $nRecipeUnit = "kg";
+                    //$nRecipeUnit = "kg";
                 }
                 //$nMultiplier = round($nQuantity/$nRecipeQuantity, 2);
             }
@@ -477,7 +700,8 @@ class ProductionController extends Controller
 
         if($bCalculate)
         {
-            $nMultiplier = round($nQuantity/$nRecipeQuantity, 2);
+            //$nMultiplier = round($nQuantity/$nRecipeQuantity, 2);
+            $nMultiplier = $nQuantity/$nRecipeQuantity;
             $Ingredients = Ingredients::where('recipe_id',$nRecipe)->get();
             foreach ($Ingredients as $thisIngredient)
             {
@@ -491,7 +715,37 @@ class ProductionController extends Controller
                 //echo $strIngredientAmount." - ".$nMultiplier."<br />";
                 $FinalAount = $strIngredientAmount * $nMultiplier;
                 //$arrOutPut[] = $strIngredientTitle." : ".$FinalAount." ".$strIngredientUnit;
-                $arrOutPut[] = array("name"=>$strIngredientTitle, "amount"=>$FinalAount, "unit"=>$strIngredientUnit);
+                if($strIngredientUnit!==$nUnit)
+                {
+                    if(in_array($nUnit, $arrSameUnits['weight']))
+                    {
+                        if($nUnit=='grams')
+                        {
+
+                            if(in_array($strIngredientUnit, $arrSameUnits['weight']))
+                            {
+                                $FinalAount = $FinalAount * 1000;
+                                $strIngredientUnit = 'grams';
+                            }
+                            else{
+                                if($strIngredientUnit=='liter')
+                                {
+                                    $FinalAount = $FinalAount * 1000;
+                                }
+                                else if($strIngredientUnit=='deciliter')
+                                {
+                                    $FinalAount = $FinalAount * 100;
+                                }
+                                else if($strIngredientUnit=='centiliter')
+                                {
+                                    $FinalAount = $FinalAount * 10;
+                                }
+                                $strIngredientUnit = 'milliliter';
+                            }
+                        }
+                    }
+                }
+                $arrOutPut[] = array("name"=>$strIngredientTitle, "amount"=>round($FinalAount, 2), "unit"=>$strIngredientUnit);
             }
         }
         return $arrOutPut;
@@ -504,7 +758,7 @@ class ProductionController extends Controller
         $nQuantity = $request->nQuantity;
         $nUnit = $request->nUnit;
         $arrOutPut = $this->doCalculation($nRecipe, $nQuantity, $nUnit);
-        if(count($arrOutPut)>0)
+        if(is_array($arrOutPut) && count($arrOutPut)>0)
         {
             //for($i=0; $i<count($arrOutPut); $i++)
             foreach($arrOutPut as $thisIngredient)
@@ -537,7 +791,11 @@ class ProductionController extends Controller
             $arrCalculatedIngredietns = array();
             if($nRecipeID>0 && $production->quantity_estimate>0)
             {
-                $arrCalculatedIngredietns = $this->doCalculation($nRecipeID, $production->quantity_estimate, $production->quantity_estimate_unit);
+                $arrTempCalculation = $this->doCalculation($nRecipeID, $production->quantity_estimate, $production->quantity_estimate_unit);
+                if(is_array($arrTempCalculation) && count($arrTempCalculation)>0)
+                {
+                    $arrCalculatedIngredietns = $arrTempCalculation;
+                }
             }
 
             /*return view('production.printpdf', compact('production', 'Instructions', 'RawMetirals',

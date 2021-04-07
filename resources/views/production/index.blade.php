@@ -148,7 +148,7 @@
                                                         <a href="{{ route('production.show', $production->id) }}" class="invoice-action-view">
                                                             <i class="bx bx-show-alt"></i>
                                                         </a>
-                                                        <a href="#"><i class="bx bx-edit-alt"></i></a>&nbsp;
+                                                        <a href="{{ route('production.edit', $production->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp;
                                                         @csrf
                                                         @method('DELETE')
                                                         <a href="{{ route('production.destroy', $production->id) }}" onclick="event.preventDefault();

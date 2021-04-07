@@ -44,8 +44,9 @@
 
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
-    <!-- END: Custom CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
+    <!-- END: Custom CSS-->
 </head>
 <!-- END: Head-->
 
@@ -107,7 +108,7 @@
                                             <div class="row">
                                                 <div class="form-group col-sm">
                                                     <label>Recipe</label>
-                                                    <select class="form-control" id="recipe_id" name="recipe_id">
+                                                    <select class="form-control js-example-basic-single" id="recipe_id" name="recipe_id">
                                                         <option value="" selected></option>
                                                         @foreach ($recipes as $recipe)
                                                             <option value="{{ $recipe->id }}">@if($recipe->product_number!=""){{ $recipe->product_number }} - @endif {{$recipe->title}}</option>
@@ -354,7 +355,8 @@
                                                                     <option value="Box 800 g">Box 800 g</option>
                                                                     <option value="Blue bag">Blue bag</option>
                                                                     <option value="MV">MV</option>
-                                                                    <option value="Fisherman box 10 kg">Fisherman box 10 kg</option>
+                                                                    <option value="Box 8 kg">Box 8 kg</option>
+                                                                    <option value="Box 10 kg">Box 10 kg</option>
                                                                     <option value="Smartbox">Smartbox</option>
                                                                 </select>
                                                             </fieldset>
@@ -610,6 +612,7 @@
 <script src="../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js?time=<?php echo time();?>"></script>
 <script src="../app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
 <script src="../app-assets/js/scripts/forms/form-repeater.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     $('body').on('keyup',"#package_size", function(){
         var nRowIndex = $(this).closest("div.repeaterpackage").index();
@@ -710,6 +713,9 @@
         $('#product_number').val((productnumber[nSelIndex]));
         $('#quantity_estimate_unit').val(nUnit[nSelIndex]);
         $('#quantity_scaled_unit').val(nUnit[nSelIndex]);
+    });
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
     });
 </script>
 <div class="modal fade text-left" id="modalCalculation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
