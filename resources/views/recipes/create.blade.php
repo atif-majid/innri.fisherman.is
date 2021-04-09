@@ -36,7 +36,6 @@
 
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- END: Custom CSS-->
 
 </head>
@@ -180,7 +179,7 @@
                                     </h4>
                                 </div>
                                 <div class="card-content">
-                                    <div class="card-body repeater-default-select2">
+                                    <div class="card-body repeater-default">
                                         <div data-repeater-list="Ingredients">
                                             @if (old('Ingredients'))
                                                 @for( $i =0; $i < count(old('Ingredients')); $i++)
@@ -197,7 +196,7 @@
                                                                 </div>
                                                                 <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px; margin-left: 10px; margin-right: 50px;">
                                                                     <label for="unit">Supplier</label>
-                                                                    <select name="supplier" id="supplier" class="form-control js-example-basic-single" style="width: 170px;">
+                                                                    <select name="supplier" id="supplier" class="form-control" style="width: 170px;">
                                                                         <option value="" selected></option>
                                                                         @foreach($Suppliers as $Supplier)
                                                                             <option value="{{$Supplier->value}}" @if(old('Ingredients')[$i]['supplier'] == $Supplier->value) ? selected : null @endif>{{$Supplier->value}}</option>
@@ -247,7 +246,7 @@
                                                             </div>
                                                             <div class="col-md-2 col-sm-12 form-group"  style="max-width: 125px; margin-left: 10px; margin-right: 50px;">
                                                                 <label for="unit">Supplier</label>
-                                                                <select name="supplier" id="supplier" class="form-control js-example-basic-single" style="width: 150px;">
+                                                                <select name="supplier" id="supplier" class="form-control" style="width: 150px;">
                                                                     <option value="" selected></option>
                                                                     @foreach($Suppliers as $Supplier)
                                                                         <option value="{{$Supplier->value}}">{{$Supplier->value}}</option>
@@ -484,8 +483,6 @@
 <script src="../app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
 <script src="../app-assets/js/scripts/forms/form-repeater.js"></script>
 <script src="../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js?time=<?php echo time();?>"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Page JS-->
@@ -562,9 +559,6 @@
             });
         }
     }
-    $(document).ready(function() {
-        $('.js-example-basic-single').select2();
-    });
 </script>
 <div class="modal fade text-left" id="modalError" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
