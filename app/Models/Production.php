@@ -20,7 +20,11 @@ class Production extends Model
         'quantity_scaled',
         'quantity_scaled_unit',
         'create_date_time',
-        'emp_id'
+        'emp_id',
+        'completed',
+        'production_site',
+        'production_date',
+        'complete_date_time'
     ];
 
 }

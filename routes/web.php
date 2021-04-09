@@ -102,6 +102,7 @@ Route::resource('production', ProductionController::class, ['middleware' => 'aut
 Route::get('/testmail', [ProductionController::class, 'testmail'])->name('testmail');
 Route::post('production/calculate', ['as'=>'production.calculate', 'uses'=>'App\Http\Controllers\ProductionController@calculate']);
 Route::get('production/getpdf/{id}', ['as'=>'production.getpdf', 'uses'=>'App\Http\Controllers\ProductionController@getpdf']);
+Route::post('/production/updateprodstatus', ['as'=>'production.updateprodstatus', 'uses'=>'App\Http\Controllers\ProductionController@updateprodstatus']);
 
 Route::resource('recipes', RecipesController::class, ['middleware' => 'auth']);
 Route::get('recipes/getpdf/{id}', ['as'=>'recipes.getpdf', 'uses'=>'App\Http\Controllers\RecipesController@getpdf']);

@@ -12,6 +12,7 @@ use App\Models\Recipephotos;
 use App\Models\Shipment;
 use App\Models\Recipes;
 use App\Models\Ingredients;
+use App\Models\Sitesettings;
 use App\Models\Steps;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -95,6 +96,44 @@ class ProductionController extends Controller
                 $nProductionID = $thisInstruction->production_id;
                 if(!array_key_exists($nProductionID, $Instructions))
                 {
+                    if($thisInstruction->chk_make=='yes')
+                    {
+                        $Instructions["$nProductionID"] = "M";
+                    }
+                    if($thisInstruction->chk_pack=='yes')
+                    {
+                        $Instructions["$nProductionID"] = "P";
+                    }
+                    if($thisInstruction->chk_freeze=='yes')
+                    {
+                        $Instructions["$nProductionID"] = "F";
+                    }
+                    if($thisInstruction->chk_send=='yes')
+                    {
+                        $Instructions["$nProductionID"] = "S";
+                    }
+                }
+                else
+                {
+                    if($thisInstruction->chk_make=='yes')
+                    {
+                        $Instructions["$nProductionID"] = $Instructions["$nProductionID"].", M";
+                    }
+                    if($thisInstruction->chk_pack=='yes')
+                    {
+                        $Instructions["$nProductionID"] = $Instructions["$nProductionID"].", P";
+                    }
+                    if($thisInstruction->chk_freeze=='yes')
+                    {
+                        $Instructions["$nProductionID"] = $Instructions["$nProductionID"].", F";
+                    }
+                    if($thisInstruction->chk_send=='yes')
+                    {
+                        $Instructions["$nProductionID"] = $Instructions["$nProductionID"].", S";
+                    }
+                }
+                /*if(!array_key_exists($nProductionID, $Instructions))
+                {
                     $Instructions["$nProductionID"] = array("Make"=>"", "Pack"=>"", "Freeze"=>"", "Send"=>"");
                 }
                 if($thisInstruction->chk_make=='yes')
@@ -112,7 +151,7 @@ class ProductionController extends Controller
                 if($thisInstruction->chk_send=='yes')
                 {
                     $Instructions["$nProductionID"]["Send"] = $thisInstruction->instruction_date;
-                }
+                }*/
             }
 
             $Rawmaterials = array();
@@ -124,7 +163,8 @@ class ProductionController extends Controller
                     "material_quantity"=>$thisMaterial->material_quantity, "material_unit"=>$thisMaterial->material_unit,
                     "material_lot_nr"=>$thisMaterial->material_lot_nr);
             }
-            return view('production.index',compact('productions', 'Instructions', 'Rawmaterials'))
+            $sitesettings = Sitesettings::all();
+            return view('production.index',compact('productions', 'Instructions', 'Rawmaterials', 'sitesettings'))
                 ->with('i', (request()->input('page', 1) - 1) * 5);
         }
 
@@ -139,7 +179,8 @@ class ProductionController extends Controller
     {
         //
         $recipes = Recipes::all();
-        return view('production.create',compact('recipes'));
+        $sitesettings = Sitesettings::all();
+        return view('production.create',compact('recipes', 'sitesettings'));
     }
 
     /**
@@ -188,6 +229,14 @@ class ProductionController extends Controller
             'create_date_time'=>date("Y-m-d H:i:s"),
             'emp_id'=>$nEmpID
         );
+        if(!empty($request->production_date))
+        {
+            $arrProduction['production_date'] = $request->production_date;
+        }
+        if(!empty($request->strProductionLocation))
+        {
+            $arrProduction['production_site'] = $request->strProductionLocation;
+        }
 
 
         $objProduction = Production::create($arrProduction);
@@ -195,10 +244,10 @@ class ProductionController extends Controller
 
         $arrInstructions = $_POST['Instructions'];
         foreach ($arrInstructions as $thisInstruction) {
-            if(!empty($thisInstruction['instruction_date']))
-            {
+            /*if(!empty($thisInstruction['instruction_date']))
+            {*/
                 $arrInsertInstruction = array(
-                    'instruction_date'=>$thisInstruction['instruction_date'],
+                    /*'instruction_date'=>$thisInstruction['instruction_date'],*/
                     'chk_make'=>'no',
                     'chk_freeze'=>'no',
                     'chk_pack'=>'no',
@@ -224,7 +273,7 @@ class ProductionController extends Controller
                     $arrInsertInstruction['chk_send'] = 'yes';
                 }
                 Instructions::create($arrInsertInstruction);
-            }
+            //}
         }
 
         $arrRawMaterials = $_POST['rawmaterials'];
@@ -334,8 +383,9 @@ class ProductionController extends Controller
         $RawMaterials = Rawmaterials::where('production_id', $nProductionID)->get();
         $Packaging = Packaging::where('production_id', $nProductionID)->get();
         $Shipment = Shipment::where('production_id', $nProductionID)->get();
+        $sitesettings = Sitesettings::all();
         return view('production.edit', compact('production', 'recipes', 'Instructions',
-            'RawMaterials', 'Packaging', 'Shipment'));
+            'RawMaterials', 'Packaging', 'Shipment', 'sitesettings'));
     }
 
     /**
@@ -349,8 +399,6 @@ class ProductionController extends Controller
     {
         //
         //
-
-
         $nProductionID = $production->id;
         $request->validate(
             [
@@ -372,14 +420,22 @@ class ProductionController extends Controller
             'quantity_scaled_unit'=>$request->quantity_scaled_unit,
             'emp_id'=>$nEmpID
         );
+        if(!empty($request->production_date))
+        {
+            $arrProduction['production_date'] = $request->production_date;
+        }
+        if(!empty($request->strProductionLocation))
+        {
+            $arrProduction['production_site'] = $request->strProductionLocation;
+        }
         $production->update($arrProduction);
 
         $arrInstructions = $_POST['Instructions'];
         foreach ($arrInstructions as $thisInstruction) {
-            if(!empty($thisInstruction['instruction_date']))
-            {
+            /*if(!empty($thisInstruction['instruction_date']))
+            {*/
                 $arrInsertInstruction = array(
-                    'instruction_date'=>$thisInstruction['instruction_date'],
+                    //'instruction_date'=>$thisInstruction['instruction_date'],
                     'chk_make'=>'no',
                     'chk_freeze'=>'no',
                     'chk_pack'=>'no',
@@ -414,7 +470,7 @@ class ProductionController extends Controller
                 {
                     Instructions::create($arrInsertInstruction);
                 }
-            }
+            //}
         }
 
         $arrRawMaterials = $_POST['rawmaterials'];
@@ -807,6 +863,20 @@ class ProductionController extends Controller
         else
         {
             return Redirect::back()->withErrors(['This production is not found.']);
+        }
+    }
+
+    public function updateprodstatus(Request $request)
+    {
+        $strNewStatus = $request->strNewStatus;
+        $nID = $request->nID;
+        if(is_numeric($nID) && $nID>0)
+        {
+            $arrUpdate = array(
+                'complete_date_time'=>date("Y-m-d H:i:s"),
+                'completed'=>$strNewStatus
+            );
+            Production::where('id', $nID)->update($arrUpdate);
         }
     }
 }

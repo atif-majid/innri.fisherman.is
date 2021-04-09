@@ -107,6 +107,32 @@
                                         <div class="form col-md-12">
                                             <div class="row">
                                                 <div class="form-group col-sm">
+                                                    <label>Production Date</label>
+                                                    <fieldset class="position-relative has-icon-left">
+                                                        <input type="text" class="form-control format-picker" placeholder="Select Date" id="production_date" name="production_date" value="{{date("Y-m-d")}}">
+                                                        <div class="form-control-position">
+                                                            <i class='bx bx-calendar'></i>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                                <div class="form-group col-sm">
+                                                    <label>Production Site</label>
+                                                    <select class="form-control" name="strProductionLocation">
+                                                        <option selected=""></option>
+                                                        @foreach($sitesettings as $thissetting)
+                                                            @if($thissetting->field=='ProductionSite')
+                                                                <option value="{{ $thissetting->value }}" @if("Framleiðslueldhús"==$thissetting->value) selected @endif>{{ $thissetting->value }}</option>
+                                                            @endif
+                                                        @endforeach
+                                                        @php
+                                                            /*<option value="Framleiðslueldhús">Framleiðslueldhús</option>
+                                                            <option value="Reykhús">Reykhús</option>*/
+                                                        @endphp
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-sm">
                                                     <label>Recipe</label>
                                                     <select class="form-control js-example-basic-single" id="recipe_id" name="recipe_id">
                                                         <option value="" selected></option>
@@ -210,7 +236,8 @@
                                             <div data-repeater-item>
                                                 <div class="row justify-content-between">
                                                     <div class="input-group">
-                                                        <div class="col-sm-4 form-group">
+                                                        @php
+                                                        /*<div class="col-sm-4 form-group">
                                                             <label>Date</label>
                                                             <fieldset class="position-relative has-icon-left">
                                                                 <input type="text" class="form-control format-picker" placeholder="Select Date" id="instruction_date" name="instruction_date">
@@ -218,7 +245,8 @@
                                                                     <i class='bx bx-calendar'></i>
                                                                 </div>
                                                             </fieldset>
-                                                        </div>
+                                                        </div>*/
+                                                        @endphp
                                                         <div class="col-sm form-group" style="padding-top: 40px;">
                                                             <label class="custom-control custom-checkbox checkbox-input">
                                                                 <input type="checkbox" name="chk_make" class="checkbox-input custom-control-input" value="yes">

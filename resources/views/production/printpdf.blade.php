@@ -9,6 +9,14 @@
             <table class="table table-borderless" colspan="12">
                 <tbody>
                 <tr>
+                    <td class="users-view-latest-activity"><strong>Production Date:</strong></td>
+                    <td class="users-view-latest-activity">{{ $production->production_date }}</td>
+                </tr>
+                <tr>
+                    <td class="users-view-latest-activity"><strong>Production Site:</strong></td>
+                    <td class="users-view-latest-activity">{{ $production->production_site }}</td>
+                </tr>
+                <tr>
                     <td class="users-view-latest-activity"><strong>Recipe:</strong></td>
                     <td class="users-view-latest-activity">{{ $recipe->title }}</td>
                 </tr>
@@ -37,7 +45,7 @@
                     <td colspan="2">
                         <table>
                             <tr>
-                                <td class="users-view-latest-activity"><strong>Date</strong></td>
+                                @php /*<td class="users-view-latest-activity"><strong>Date</strong></td>*/ @endphp
                                 <td class="users-view-latest-activity"><strong>Make</strong></td>
                                 <td class="users-view-latest-activity"><strong>Freeze</strong></td>
                                 <td class="users-view-latest-activity"><strong>Pack</strong></td>
@@ -45,7 +53,7 @@
                             </tr>
                             @foreach($Instructions as $thisInstruction)
                                 <tr>
-                                    <td class="users-view-latest-activity">{{ $thisInstruction->instruction_date }}</td>
+                                    @php /*<td class="users-view-latest-activity">{{ $thisInstruction->instruction_date }}</td>*/ @endphp
                                     <td class="users-view-latest-activity">
                                         @if($thisInstruction->chk_make=='yes')
                                             <input type="checkbox" checked disabled>

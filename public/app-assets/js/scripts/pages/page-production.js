@@ -20,10 +20,10 @@ $(document).ready(function () {
             'columnDefs': [
                 {
                     "orderable": false,
-                    "targets": [1]
+                    "targets": [1, 2]
                 },
                 {
-                    "targets": [ 0 ],
+                    "targets": [ 0, 10, 11],
                     "visible": false
                 }]
         });
@@ -51,7 +51,45 @@ $(document).ready(function () {
                 //tr.addClass('shown');
             }
         });
+        $( '#prod-status').on( 'change', function () {
+            var selStatus = $(this).val();
+            usersTable
+                .columns( 10 )
+                .search( selStatus )
+                .draw();
+        });
+        $( '#strProductionLocation').on( 'change', function () {
+            var selProductionSite = $(this).val();
+            usersTable
+                .columns( 11 )
+                .search( selProductionSite )
+                .draw();
+        });
+        $(document).ready(function(){
+            var selStatus = $( '#prod-status').val();
+            var selProductionSite = $( '#strProductionLocation').val();
+            usersTable
+                .columns( 10,11 )
+                .search( selStatus )
+                .draw();
+        });
+
+        $(document).ready(function(){
+            $('#min, #max').on('change', function () {
+                //alert('changed');
+                var min = $('#min').val();
+                var max = $('#max').val();
+                //var date = new Date( data[11] );
+
+                usersTable
+                    .columns( 12 )
+                    .search( min, max )
+                    .draw();
+            });
+        });
     };
+
+
     // on click selected users data from table(page named page-users-list)
     // to store into local storage to get rendered on second page named page-users-view
     $(document).on("click", "#users-list-datatable tr", function () {

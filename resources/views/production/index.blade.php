@@ -84,9 +84,18 @@
                     <form onsubmit="return false">
                         <div class="row border rounded py-2 mb-2">
                             <div class="col-12 col-sm-6 col-lg-3">
-                                <label for="users-list-verified">Date</label>
+                                <label for="users-list-verified">Production Date From</label>
                                 <fieldset class="form-group position-relative has-icon-left" >
-                                    <input type="text" class="form-control format-picker" id="users-list-verified">
+                                    <input type="text" class="form-control format-picker" id="min">
+                                    <div class="form-control-position">
+                                        <i class='bx bx-calendar'></i>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <label for="users-list-verified">Production Date To</label>
+                                <fieldset class="form-group position-relative has-icon-left" >
+                                    <input type="text" class="form-control format-picker" id="max">
                                     <div class="form-control-position">
                                         <i class='bx bx-calendar'></i>
                                     </div>
@@ -102,6 +111,27 @@
                                 <label for="users-list-status">Lot nr.</label>
                                 <fieldset class="form-group">
                                     <input type="text" class="form-control" id="users-list-status">
+                                </fieldset>
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <label for="users-list-status">Status</label>
+                                <fieldset class="form-group">
+                                    <select class="form-control" id="prod-status">
+                                        <option value="">All</option>
+                                        <option value="In Progress" selected>In Progress</option>
+                                        <option value="Completed">Completed</option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <label for="users-list-status">Production Location</label>
+                                <fieldset class="form-group">
+                                    <select class="form-control" id="strProductionLocation">
+                                        <option value="">Any</option>
+                                        <option value="Dreifingarmiðstöð">Dreifingarmiðstöð</option>
+                                        <option value="Framleiðslueldhús">Framleiðslueldhús</option>
+                                        <option value="Reykhús">Reykhús</option>
+                                    </select>
                                 </fieldset>
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center">
@@ -129,14 +159,23 @@
                                             <tr>
                                                 <th>id</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Options</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Status</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Product NR.</th>
                                                 <th style="text-align: left; padding-left: 1rem;">LOT NR.</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Product</th>
-                                                <th style="text-align: left; padding-left: 1rem;">Make</th>
-                                                <th style="text-align: left; padding-left: 1rem;">Pack</th>
-                                                <th style="text-align: left; padding-left: 1rem;">Freeze</th>
-                                                <th style="text-align: left; padding-left: 1rem;">Send</th>
+                                                @php
+                                                    /*<th style="text-align: left; padding-left: 1rem;">Make</th>
+                                                    <th style="text-align: left; padding-left: 1rem;">Pack</th>
+                                                    <th style="text-align: left; padding-left: 1rem;">Freeze</th>
+                                                    <th style="text-align: left; padding-left: 1rem;">Send</th>*/
+                                                @endphp
+                                                <th style="text-align: left; padding-left: 1rem;">Instructions</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Quantity (Estimate)</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Raw Material</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Sum</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Status</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Production Site</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Production Date</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -156,14 +195,31 @@
                                                         <a href="{{ route('production.getpdf', $production->id) }}"><i class="bx bxs-file-pdf"></i></a>
                                                     </form>
                                                 </td>
+                                                <td style="padding: 0.5rem 1.15rem">
+                                                    <select id="selProduction" name="selProduction" class="form-control selProduction">
+                                                        <option value="no" @if('no'== $production->completed) selected @endif>In Progress</option>
+                                                        <option value="yes" @if('yes'== $production->completed) selected @endif>Completed</option>
+                                                    </select>
+                                                    <input type="hidden" id="nID" name="nID" value="{{$production->id}}" class="productionid" />
+                                                </td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->product_number }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->lot_number }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $production->title }}</td>
-                                                <td style="padding: 0.5rem 1.15rem">@if(array_key_exists($production->id, $Instructions)){{ $Instructions["$production->id"]["Make"] }}@endif</td>
-                                                <td style="padding: 0.5rem 1.15rem">@if(array_key_exists($production->id, $Instructions)){{ $Instructions["$production->id"]["Pack"] }}@endif</td>
-                                                <td style="padding: 0.5rem 1.15rem">@if(array_key_exists($production->id, $Instructions)){{ $Instructions["$production->id"]["Freeze"] }}@endif</td>
-                                                <td style="padding: 0.5rem 1.15rem">@if(array_key_exists($production->id, $Instructions)){{ $Instructions["$production->id"]["Send"] }}@endif</td>
+                                                @php
+                                                    /*<td style="padding: 0.5rem 1.15rem">@if(array_key_exists($production->id, $Instructions)){{ $Instructions["$production->id"]["Make"] }}@endif</td>
+                                                    <td style="padding: 0.5rem 1.15rem">@if(array_key_exists($production->id, $Instructions)){{ $Instructions["$production->id"]["Pack"] }}@endif</td>
+                                                    <td style="padding: 0.5rem 1.15rem">@if(array_key_exists($production->id, $Instructions)){{ $Instructions["$production->id"]["Freeze"] }}@endif</td>
+                                                    <td style="padding: 0.5rem 1.15rem">@if(array_key_exists($production->id, $Instructions)){{ $Instructions["$production->id"]["Send"] }}@endif</td>*/
+                                                @endphp<td style="padding: 0.5rem 1.15rem">
+                                                    @if(array_key_exists($production->id, $Instructions)){{ $Instructions["$production->id"] }}@endif
+                                                </td>
                                                 <td style="padding: 0.5rem 1.15rem">
+                                                    {{$production->quantity_estimate}}&nbsp;{{$production->quantity_estimate_unit}}
+                                                </td>
+                                                <td style="padding: 0.5rem 1.15rem">
+                                                    @php
+                                                      $nSumMaterials = 0;
+                                                    @endphp
                                                     @if(array_key_exists($production->id, $Rawmaterials))
                                                         @php
                                                             $strMaterials = '<div class="table-responsive border" style="padding: 1.15rem 2rem">';
@@ -192,13 +248,32 @@
                                                                 $strMaterials .= $thisRawMateria['material_lot_nr'];
                                                                 $strMaterials .= '</div>';
                                                                 $strMaterials .= '</div>';
+                                                                $nSumMaterials = $nSumMaterials + (int)$thisRawMateria['material_quantity'];
                                                             @endphp
-                                                            <i class="bx bx-plus" onclick="showmaterials('{{$strMaterials}}');" style="cursor: pointer;"></i>
+                                                        @endforeach
+                                                        @foreach($Rawmaterials["$production->id"] as $i=>$thisRawMateria)
                                                             @if($i==0)
-                                                                &nbsp;{{$thisRawMateria["material_name"]}}
+                                                                <i class="bx bx-plus" onclick="showmaterials('{{$strMaterials}}');" style="cursor: pointer;"></i>
+                                                                {{$thisRawMateria["material_name"]}}
                                                             @endif
                                                         @endforeach
                                                     @endif
+                                                </td>
+                                                <td style="padding: 0.5rem 1.15rem">
+                                                    {{$nSumMaterials}}
+                                                </td>
+                                                <td style="padding: 0.5rem 1.15rem">
+                                                    @if($production->completed=='yes')
+                                                        Completed
+                                                    @else
+                                                        In Progress
+                                                    @endif
+                                                </td>
+                                                <td style="padding: 0.5rem 1.15rem">
+                                                    {{$production->production_site}}
+                                                </td>
+                                                <td style="padding: 0.5rem 1.15rem">
+                                                    {{$production->production_date}}
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -400,6 +475,22 @@
         $('.modal-body').html(strMaterials);
         $('#modalRawMaterial').modal('show');
     }
+    $(document).ready(function(){
+        $('select.selProduction').on('change', function() {
+            var strNewStatus = $(this).val();
+            var nID = $(this).next('.productionid').val();
+            $(this).attr('disaled', true);
+            $.ajax({
+                method: "POST",
+                url: "{{ route('production.updateprodstatus') }}",
+                data: { "_token": "{{ csrf_token() }}", strNewStatus: strNewStatus, nID: nID }
+            })
+            .done(function( msg ) {
+                $(this).attr('disabled', false);
+                //alert('The status for this task has been changed!');
+            });
+        });
+    });
 </script>
 <div class="modal fade text-left" id="modalRawMaterial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
