@@ -537,10 +537,12 @@
                                                                         if(!empty($thisPackage->package_total))
                                                                             $nDispTotal = $thisPackage->package_total;
                                                                         else
+                                                                        {
                                                                             if(is_numeric($thisPackage->package_size) && $thisPackage->package_size>0 && is_numeric($thisPackage->package_quantity) && $thisPackage->package_quantity>0)
                                                                             {
                                                                                 $nDispTotal = $thisPackage->package_size * $thisPackage->package_quantity;
                                                                             }
+                                                                        }
                                                                     @endphp
                                                                     <input type="text" class="form-control" placeholder="Total" id="package_total" name="package_total" value="{{ $nDispTotal }}">
                                                                 </fieldset>
