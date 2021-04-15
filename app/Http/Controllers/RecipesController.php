@@ -308,8 +308,8 @@ class RecipesController extends Controller
         }
         $nRecipeId = $request->nRecipeId;
 
-        $deletedingredients = $_POST['deletedingredients'];
-        $deletedsteps = $_POST['deletedsteps'];
+        $deletedingredients = $request->deletedingredients;
+        $deletedsteps = $request->deletedsteps;
 
         $arrUpdatedIngredients = array();
         $arrUpdatedSteps = array();
@@ -446,8 +446,11 @@ class RecipesController extends Controller
         }
 
 
-        return redirect()->route('recipes.index')
-            ->with('success','Recipe updated successfully.');
+        /*return redirect()->route('recipes.index')
+            ->with('success','Recipe updated successfully.');*/
+        $request->session()->flash('success', 'Sales opportunity updated successfully.');
+
+        return "{\"msg\":\"success\"}";
     }
 
     /**
@@ -523,16 +526,22 @@ class RecipesController extends Controller
             $file = $request->file('file');
             $destination = 'uploads/recipes/'.$nRecipeID;
             $strFileName = $file->getClientOriginalName();
+            $strType = $file->getMimeType();
             $file->move($destination, $strFileName);
             $arrPicRecord = array(
                 'recipe_id'=>$nRecipeID,
                 'file_name'=>$strFileName,
                 'file_creation_date' => date("Y-m-d H:i:s"),
-                'file_created_by' => Auth::user()->getempid()
+                'file_created_by' => Auth::user()->getempid(),
+                'file_type'=>$strType
             );
             Recipephotos::create($arrPicRecord);
         }
         if($request->has('pgProcess') && $request->pgProcess>0)
+        {
+            $request->session()->flash('success', 'Recipe updated successfully.');
+        }
+        else if($request->has('pgEdit') && $request->pgEdit>0)
         {
             $request->session()->flash('success', 'Recipe updated successfully.');
         }
@@ -541,5 +550,62 @@ class RecipesController extends Controller
             $request->session()->flash('success', 'Recipe added successfully.');
         }
 
+    }
+
+    function getfiles(Request $request)
+    {
+        /*$ds = DIRECTORY_SEPARATOR;
+        $nImprovementID = $request->id;
+        $result  = array();
+        $destination = 'uploads/improvements/'.$nImprovementID."/";
+        $files = scandir($destination);                 //1
+        if ( false!==$files ) {
+            foreach ( $files as $file ) {
+                if ( '.'!=$file && '..'!=$file) {       //2
+                    $obj['name'] = $file;
+                    $obj['size'] = filesize($destination.$ds.$file);
+                    $obj['id'] = filesize($destination.$ds.$file);
+                    $result[] = $obj;
+                }
+            }
+        }*/
+        $result  = array();
+        $nRecipeID = $request->id;
+        $photos = Recipephotos::where('recipe_id', $nRecipeID)->get();
+        $destination = 'uploads/recipes/'.$nRecipeID."/";
+        foreach($photos as $thisphoto)
+        {
+            $obj['name'] = $thisphoto->file_name;
+            $obj['size'] = filesize($destination.$thisphoto->file_name);
+            $obj['id'] = $thisphoto->id;
+            $obj['type'] = $thisphoto->file_type;
+            $result[] = $obj;
+        }
+
+        header('Content-type: text/json');              //3
+        header('Content-type: application/json');
+        echo json_encode($result);
+    }
+
+    function delfiles(Request $request)
+    {
+        $nFileId = $request->fileid;
+        $nRecipeID = $request->recipe;
+
+        $File = Recipephotos::where('recipe_id', $nRecipeID)
+            ->where('id', $nFileId)
+            ->get();
+        $destination = 'uploads/recipes/'.$nRecipeID."/";
+        if($File)
+        {
+            $strFileName = $File[0]->file_name;
+            if(File::exists($destination.$strFileName))
+            {
+                File::delete($destination.$strFileName);
+                Recipephotos::where('recipe_id', $nRecipeID)
+                    ->where('id', $nFileId)
+                    ->delete();
+            }
+        }
     }
 }

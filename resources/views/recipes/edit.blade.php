@@ -17,6 +17,7 @@
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/vendors.min.css">
     <link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/pickers/pickadate/pickadate.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/file-uploaders/dropzone.min.css?time=<?php echo time();?>">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -30,6 +31,7 @@
 
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="../../app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/plugins/file-uploaders/dropzone.css">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
@@ -81,7 +83,7 @@
                     <div class="alert alert-danger mb-2">{{ $error }}</div>
                 @endforeach
             @endif
-            <form class="form-horizontal" enctype='multipart/form-data' novalidate method="post" action="{{ route('recipes.update', $recipe->id) }}">
+            <form id="frmEditRecipe" class="form-horizontal" novalidate method="post" action="{{ route('recipes.update', $recipe->id) }}">
             @csrf
             @method('PUT')
             <!-- // Basic multiple Column Form section start -->
@@ -446,50 +448,29 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Photos</h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body repeater-default">
-                                        <div data-repeater-list="Photos">
-                                            <div data-repeater-item>
-                                                <div class="row justify-content-between">
-                                                    <div class="input-group">
-                                                        <div class="col-sm-4 form-group">
-                                                            <label>Photo</label>
-                                                            <fieldset class="position-relative">
-                                                                <input type="file" class="form-control" placeholder="Upload File" id="file_photo" name="file_photo">
-                                                            </fieldset>
-                                                        </div>
-                                                        <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
-                                                            <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
-                                                                Delete
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col p-0">
-                                                <button class="btn btn-primary" data-repeater-create type="button"><i class="bx bx-plus" style="color: #FFFFFF;"></i>
-                                                    Add
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                    <!--/ form default repeater -->
+                </section>
+            </form>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Photos</h4>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body">
+                                <form action="{{ route('recipes.uploadpicture') }}" class="dropzone dropzone-area" id="dpz-remove-thumb" style="margin-left: 20px;margin-right:20px !important;">
+                                    <div class="dz-message" style="height: 200px !important;">Drop Files Here To Upload</div>
+                                    <input type="hidden" id="nRecipeID" name="nRecipeID" value="{{ $recipe->id }}">
+                                    <input type="hidden" id="pgEdit" name="pgEdit" value="{{ $recipe->id }}">
+                                </form>
                             </div>
                         </div>
                     </div>
-                    <!--/ form default repeater -->
-                </section>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+                </div>
+            </div>
+
+            <button type="button" id="btnAllSubmit" class="btn btn-primary">Submit</button>
         </div>
     </div>
 </div>
@@ -579,6 +560,7 @@
 <script src="../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
 <script src="../../app-assets/vendors/js/pickers/pickadate/picker.js"></script>
 <script src="../../app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
+<script src="../../app-assets/vendors/js/extensions/dropzone.min.js"></script>
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
@@ -625,9 +607,170 @@
             $('#deletedsteps').val(currDelSteps);
         }
     }
+    var myDropzone;
+    Dropzone.options.dpzRemoveThumb = {
+        paramName: "file", // The name that will be used to transfer the file
+        acceptedFiles: "image/*,application/pdf,.doc,.docx,.xls,.xlsx,.csv,.tsv,.ppt,.pptx,.pages,.odt,.rtf",
+        accept: function(file, done) {
+            //var thumbnail = $('.dropzone .dz-preview.dz-file-preview .dz-image:last');
+            var thumbnail = $(file.previewElement).find('.dz-details img');
+            switch (file.type) {
+                case 'application/pdf':
+                    thumbnail.attr('src', '/uploads/fileicons/pdf.png');
+                    thumbnail.css('display', 'inline');
+                    break;
+                case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+                    thumbnail.attr('src', '/uploads/fileicons/doc.png');
+                    thumbnail.css('display', 'inline');
+                    break;
+                case 'application/msword':
+                    thumbnail.attr('src', '/uploads/fileicons/doc.png');
+                    thumbnail.css('display', 'inline');
+                    break;
+                case 'text/csv':
+                    thumbnail.attr('src', '/uploads/fileicons/csv.png');
+                    thumbnail.css('display', 'inline');
+                    break;
+            }
 
+            done();
+        },
+        maxFilesize: 10, // MB
+        addRemoveLinks: true,
+        dictRemoveFile: " Trash",
+        autoProcessQueue: false,
+        parallelUploads:20,
+        init: function (e) {
+            var myDropzone = this;
+            $.getJSON('{{ route('recipes.getfiles', $recipe->id) }}', function(data) {
+                $.each(data, function(index, val) {
+                    var mockFile = { id: val.id, name: val.name, size: val.size };
+                    myDropzone.options.addedfile.call(myDropzone, mockFile);
+                    myDropzone.options.thumbnail.call(myDropzone, mockFile, "/uploads/recipes/{{$recipe->id}}/" + val.name);
+
+                    var thumbnail = $(mockFile.previewElement).find('.dz-details img');
+                    switch (val.type) {
+                        case 'application/pdf':
+                            thumbnail.attr('src', '/uploads/fileicons/pdf.png');
+                            thumbnail.css('display', 'inline');
+                            break;
+                        case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+                            thumbnail.attr('src', '/uploads/fileicons/doc.png');
+                            thumbnail.css('display', 'inline');
+                            break;
+                        case 'application/msword':
+                            thumbnail.attr('src', '/uploads/fileicons/doc.png');
+                            thumbnail.css('display', 'inline');
+                            break;
+                    }
+                });
+            });
+            $('#btnAllSubmit').on("click", function() {
+                $('.modal-body').html('');
+                var nFiles = myDropzone.files.length;
+                var arrFormData = $('#frmEditRecipe').serialize();
+                $.ajax({
+                    type: "put",
+                    url: "{{ route('recipes.update', $recipe->id) }}",
+                    data: arrFormData,
+                    dataType: 'json',              // let's set the expected response format
+                    success: function(data){
+                        var nFiles = myDropzone.files.length;
+                        if(nFiles==0)
+                        {
+                            window.location.href = "{{route('recipes.index')}}";
+                        }
+                        else
+                        {
+                            myDropzone.processQueue();
+                        }
+                    },
+                    error: function (err) {
+                        if (err.status == 422) { // when status code is 422, it's a validation issue
+                            //console.log(err.responseJSON);
+                            // you can loop through the errors object and show it to the user
+                            /*console.warn(err.responseJSON.errors);*/
+                            // display errors on each form field
+                            var errDisplay = ''
+                            $.each(err.responseJSON.errors, function (i, error) {
+                                errDisplay = errDisplay + '<div class="alert alert-danger mb-2">'+error[0]+'</div>';
+                                $('.modal-body').html(errDisplay);
+                                $('#modalError').modal('show');
+                            });
+                        }
+                        else
+                        {
+                            if(nFiles==0)
+                            {
+                                window.location.href = "{{route('recipes.index')}}";
+                            }
+                            else
+                            {
+                                myDropzone.processQueue();
+                            }
+                        }
+                    }
+                });
+            });
+            myDropzone.on("sending", function(file, xhr, data) {
+
+                // First param is the variable name used server side
+                // Second param is the value, you can add what you what
+                // Here I added an input value
+                data.append("_token", "{{ csrf_token() }}");
+            });
+            myDropzone.on("complete", function (file) {
+                if (myDropzone.getUploadingFiles().length === 0 && myDropzone.getQueuedFiles().length === 0) {
+                    //location.reload();
+                    window.location.href = "{{route('recipes.index')}}";
+                    //console.log(file);
+                }
+            });
+            myDropzone.on("removedfile", function(file) {
+                if(typeof(file.id)!="undefined")
+                {
+                    $.ajax({
+                        type: "post",
+                        url: "{{ route('recipes.delfiles') }}",
+                        data: {'fileid': file.id, 'recipe': {{$recipe->id}}, "_token": "{{ csrf_token() }}"},
+                        dataType: 'json',              // let's set the expected response format
+                        success: function(data){
+                            alert(data);
+                        },
+                    });
+                }
+            });
+            /*myDropzone.on("error", function (file, message) {
+                if (myDropzone.getUploadingFiles().length === 0 && myDropzone.getQueuedFiles().length === 0) {
+                    //location.reload();
+                    //window.location.href = "{{route('recipes.index')}}";
+                    console.log(message.Message);
+                }
+            });*/
+        }
+    }
 </script>
+<div class="modal fade text-left" id="modalError" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel33">Notice </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="bx bx-x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-secondary" data-dismiss="modal">
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Close</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <!-- END: Body-->
 

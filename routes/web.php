@@ -107,6 +107,8 @@ Route::post('/production/updateprodstatus', ['as'=>'production.updateprodstatus'
 Route::resource('recipes', RecipesController::class, ['middleware' => 'auth']);
 Route::get('recipes/getpdf/{id}', ['as'=>'recipes.getpdf', 'uses'=>'App\Http\Controllers\RecipesController@getpdf']);
 Route::post('/recipes/uploadpicture', ['as'=>'recipes.uploadpicture', 'uses'=>'App\Http\Controllers\RecipesController@uploadpicture']);
+Route::get('recipes/getfiles/{id}', ['as'=>'recipes.getfiles', 'uses'=>'App\Http\Controllers\RecipesController@getfiles'])->middleware('auth');
+Route::post('/recipes/delfiles', ['as'=>'recipes.delfiles', 'uses'=>'App\Http\Controllers\RecipesController@delfiles']);
 
 Route::resource('improvements', ImprovementsController::class, ['middleware' => 'auth']);
 Route::get('improvements/process/{id}', ['as'=>'improvements.process', 'uses'=>'App\Http\Controllers\ImprovementsController@process'])->middleware('auth');;
@@ -124,7 +126,7 @@ Route::get('sitesettings/onboardingtasks', ['as'=>'sitesettings.onboardingtasks'
 Route::resource('sitesettings', SitesettingsController::class, ['middleware' => 'auth']);
 
 Route::resource('salesopportunity', SalesopportunityController::class, ['middleware' => 'auth']);
-Route::post('/salesopportunity/uploadpicture', ['as'=>'salesopportunity.uploadpicture', 'uses'=>'App\Http\Controllers\SalesopportunityController@uploadpicture']);
+Route::post('/salesopportunity/uploadpictur e', ['as'=>'salesopportunity.uploadpicture', 'uses'=>'App\Http\Controllers\SalesopportunityController@uploadpicture']);
 Route::post('/salesopportunity/updatepost', ['as'=>'salesopportunity.updatepost', 'uses'=>'App\Http\Controllers\SalesopportunityController@updatepost']);
 Route::get('salesopportunity/process/{id}', ['as'=>'salesopportunity.process', 'uses'=>'App\Http\Controllers\SalesopportunityController@process'])->middleware('auth');
 Route::post('/salesopportunity/updateprocess', ['as'=>'salesopportunity.updateprocess', 'uses'=>'App\Http\Controllers\SalesopportunityController@updateprocess']);

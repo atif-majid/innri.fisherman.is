@@ -54,7 +54,9 @@
                 </table>
             </td>
         </tr>
-
+        @php
+            $nImgCount = 0;
+        @endphp
         @if(count($RecipePhoto)>0)
             <tr>
                 <td colspan="2">
@@ -71,14 +73,21 @@
                                             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
                                                 <ol class="carousel-indicators">
                                                     @foreach($RecipePhoto as $k=>$thisPhoto)
-                                                        <li data-target="#carousel-example-generic" data-slide-to="{{$k}}" @if($k==0) class="active" @endif></li>
+                                                        @if(strpos($thisPhoto->file_type, 'image')===0)
+                                                            <li data-target="#carousel-example-generic" data-slide-to="{{$k}}" @if($k==0) class="active" @endif></li>
+                                                            @php
+                                                                $nImgCount = $nImgCount + 1;
+                                                            @endphp
+                                                        @endif
                                                     @endforeach
                                                 </ol>
                                                 <div class="carousel-inner" role="listbox">
                                                     @foreach($RecipePhoto as $k=>$thisPhoto)
-                                                        <div class="carousel-item @if($k==0) active @endif" style="text-align:center; width:100%;">
-                                                            <img style="max-height: 400px !important; max-width: 500px;" src="https://innri.fisherman.is/uploads/recipes/{{$recipe->id}}/{{$thisPhoto->file_name}}">
-                                                        </div>
+                                                        @if(strpos($thisPhoto->file_type, 'image')===0)
+                                                            <div class="carousel-item @if($k==0) active @endif" style="text-align:center; width:100%;">
+                                                                <img style="max-height: 400px !important; max-width: 500px;" src="/uploads/recipes/{{$recipe->id}}/{{$thisPhoto->file_name}}">
+                                                            </div>
+                                                        @endif
                                                     @endforeach
                                                 </div>
                                                 <a class="carousel-control-prev" href="#carousel-example-generic" role="button" data-slide="prev" style="display:flex !important;">
@@ -103,6 +112,23 @@
                             <!-- Basic Carousel with Caption End -->
                         </div>
                     </section>
+                </td>
+            </tr>
+        @endif
+        @if(count($RecipePhoto)>0 && count($RecipePhoto)>$nImgCount)
+            <tr>
+                <td colspan="2">
+                    <table class="table table-borderless" colspan="12">
+                        @foreach($RecipePhoto as $k=>$thisPhoto)
+                            @if(strpos($thisPhoto->file_type, 'image')!==0)
+                                <tr>
+                                    <td>
+                                        <a href="/uploads/recipes/{{$recipe->id}}/{{$thisPhoto->file_name}}" target="_blank">{{$thisPhoto->file_name}}</a>
+                                    </td>
+                                </tr>
+                            @endif
+                        @endforeach
+                    </table>
                 </td>
             </tr>
         @endif
