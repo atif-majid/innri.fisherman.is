@@ -38,6 +38,8 @@
 
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../app-assets/easyzoom/css/pygments.css" />
+    <link rel="stylesheet" href="../../app-assets/easyzoom/css/easyzoom.css" />
     <!-- END: Custom CSS-->
     <style>
         .carousel-control-next,
@@ -48,6 +50,15 @@
         .row{
             padding: 1.15rem 2rem;
         }
+        /*.imgzoom:hover{
+            border: 5px solid #f4f4f4;
+            transform: scale(2.8);
+            -webkit-transition-duration: 1s;
+            -moz-transition-duration: 1s;
+            -o-transition-duration: 1s;
+            transition-duration: 1s;
+            z-index: 3;
+        }*/
     </style>
 
 </head>
@@ -217,7 +228,7 @@
                                             @foreach($ImprovementPhotos as $k=>$thisPhoto)
                                                 @if(strpos($thisPhoto->file_type, 'image')===0)
                                                     <div class="carousel-item @if($k==0) active @endif" style="text-align:center; width:100%;">
-                                                        <img style="max-width: 500px !important; max-height: 400px !important;" src="/uploads/improvements/{{$improvement->id}}/{{$thisPhoto->file_name}}" data-toggle="modal" data-target="#modalpicture">
+                                                        <img style="max-width: 500px !important; max-height: 400px !important;" src="/uploads/improvements/{{$improvement->id}}/{{$thisPhoto->file_name}}" data-toggle="modal" data-target="#modalpicture" class="imgzoom">
                                                     </div>
                                                 @endif
                                             @endforeach
@@ -743,8 +754,21 @@
     </div>
 </div>
 
-<div class="modal fade text-left" id="modalpicture" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+<script src="../../app-assets/easyzoom/dist/easyzoom.js"></script>
+<script>
+    $(document).ready(function(){
+        var $easyzoom = $('.easyzoom').easyZoom();
+        var easyzoomAPI = $easyzoom.data("easyZoom");
+        $('.imgzoom').on('click', function(){
+            $('#zoomsrc').attr('href', $(this).attr('src'));
+            $('#zoomview').attr('src', $(this).attr('src'));
+            easyzoomAPI.swap(standardSrc = $(this).attr('src'), zoomHref = $(this).attr('src'));
+            //$('#zoomview').css("transform", "scale(2.8)");
+        });
+    });
+</script>
+<div class="modal fade text-left " id="modalpicture" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel33">Photos </h4>
@@ -753,35 +777,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel" data-interval="false">
-                    <ol class="carousel-indicators">
-                        @foreach($ImprovementPhotos as $k=>$thisPhoto)
-                            <li data-target="#carousel-example-generic1" data-slide-to="{{$k}}" @if($k==0) class="active" @endif></li>
-                        @endforeach
-                    </ol>
-                    <div class="carousel-inner" role="listbox">
-                        @foreach($ImprovementPhotos as $k=>$thisPhoto)
-                            <div class="carousel-item @if($k==0) active @endif" style="text-align:center; width:100%;">
-                                <img style="max-width: 1500px !important; max-height: 800px !important;" src="/uploads/improvements/{{$improvement->id}}/{{$thisPhoto->file_name}}">
-                            </div>
-                        @endforeach
-                    </div>
-                    <a class="carousel-control-prev" href="#carousel-example-generic1" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
+                <div class="easyzoom easyzoom--overlay">
+                    <a href="#" id="zoomsrc">
+                        <img src="/media/test/sm_IMG_20130403_084209_183.jpg" width="600" id="zoomview" />
                     </a>
-                    <a class="carousel-control-next" href="#carousel-example-generic1" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                    @php
-                        /*<ol class="carousel-indicators">
-                        @foreach($ImprovementPhotos as $k=>$thisPhoto)
-                        <li data-target="#carousel-thumb" data-slide-to="{{$k}}" @if($k==0) class="active" @endif> <img class="d-block w-100" src="https://innri.fisherman.is/uploads/improvements/{{$improvement->id}}/{{$thisPhoto->file_name}}"
-                                                                                                 class="img-fluid"></li>
-                        @endforeach
-                    </ol>*/
-                    @endphp
                 </div>
             </div>
             <div class="modal-footer">
