@@ -65,6 +65,24 @@
                                 <div class="dropdown-header px-1 py-75 d-flex justify-content-between" style="background-color: #525253 !important;"><span class="notification-title">{{$strDispMsg}}</span><!--<span class="text-bold-400 cursor-pointer">Mark all as read</span>--></div>
                             </li>
                             <li class="scrollable-container media-list">
+                                @if(count($header_templates)>0)
+                                    @foreach($header_templates as $template)
+                                        <a class="d-flex justify-content-between" href="{{ route('templates.review', $template->id) }}">
+                                            <div class="media d-flex align-items-center">
+                                                <div class="media-left pr-0">
+                                                    <div class="avatar bg-primary bg-lighten-5 mr-1 m-0 p-25"><span class="avatar-content text-primary font-medium-2">TMP</span></div>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">
+                                                        <span class="text-bold-500">
+                                                            {{ $template->template_title }} ({{ $template->template_version }})
+                                                        </span>
+                                                    </h6><small class="notification-text">{{$template->submit_date}}</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    @endforeach
+                                @endif
                                 @if(count($header_Improvements)>0)
                                     @foreach($header_Improvements as $improvement)
                                         <a class="d-flex justify-content-between" href="{{ route('improvements.process', $improvement->id) }}">

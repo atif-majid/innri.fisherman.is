@@ -11,6 +11,7 @@ use App\Http\Controllers\SalesopportunityController;
 use App\Http\Controllers\DeptrightsController;
 use App\Http\Controllers\EmprightsController;
 use App\Http\Controllers\ReceptionsurveillanceController;
+use App\Http\Controllers\TemplatesController;
 
 
 /*
@@ -138,3 +139,9 @@ Route::resource('emprights', EmprightsController::class, ['middleware' => 'auth'
 
 
 Route::resource('receptionsurveillance', ReceptionsurveillanceController::class, ['middleware' => 'auth']);
+
+Route::resource('templates', TemplatesController::class, ['middleware' => 'auth']);
+Route::get('templates/fill/{id}', ['as'=>'templates.fill', 'uses'=>'App\Http\Controllers\TemplatesController@fill'])->middleware('auth');;
+Route::get('templates/review/{id}', ['as'=>'templates.review', 'uses'=>'App\Http\Controllers\TemplatesController@review'])->middleware('auth');;
+Route::post('/templates/fillsubmit', ['as'=>'templates.fillsubmit', 'uses'=>'App\Http\Controllers\TemplatesController@fillsubmit']);
+Route::post('/templates/reviewsubmit', ['as'=>'templates.reviewsubmit', 'uses'=>'App\Http\Controllers\TemplatesController@reviewsubmit']);

@@ -38,7 +38,7 @@
                     </li>
                     <li><a href="#"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Grid">Certificate and permits</span></a>
                     </li>
-                    <li><a href="#"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Typography">Templates</span></a>
+                    <li @if($controllerName=='TemplatesController') class="active" @endif><a href="{{ route('templates.index') }}"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Typography">Templates</span></a>
                     </li>
                     <li @if($controllerName=='ImprovementsController') class="active" @endif><a href="{{ route('improvements.index') }}"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Text Utilities">Improvements</span></a>
                     </li>
@@ -96,6 +96,7 @@
                     </ul>
                 </li>
             @endif
+
         </ul>
     </div>
 </div>
