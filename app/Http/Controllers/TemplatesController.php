@@ -121,6 +121,10 @@ class TemplatesController extends Controller
             'supervisor'=>$request->nSupervisor,
             'version'=>$nVersion
         );
+        if(!empty($request->strInstructions))
+        {
+            $arrInsert['strInstructions'] = $request->strInstructions;
+        }
         $nTemplate = Templates::create($arrInsert);
         $nID = $nTemplate->id;
         $arrItems = $request->AMEs;
@@ -220,10 +224,12 @@ class TemplatesController extends Controller
         $strOrigTitle = $objTemplate->title;
         $strOrigCheckBox = $objTemplate->with_checkboxes;
         $nOrigSupervisor = $objTemplate->supervisor;
+        $strOrigInstructions = $objTemplate->instruction;
         $nOrigVersion = $objTemplate->version;
         $objTemplate->title = $strTitle;
         $objTemplate->with_checkboxes = $strWithCheckbox;
         $objTemplate->supervisor = $request->nSupervisor;
+        $objTemplate->instruction = $request->strInstructions;
         $bVersionUpdate = false;
         if($strOrigTitle!=$strTitle)
         {
@@ -261,9 +267,23 @@ class TemplatesController extends Controller
             }
             $bVersionUpdate = true;
         }
-        if($bVersionUpdate)
+        if($strOrigInstructions!=$request->strInstructions)
+        {
+            if(trim($strOrigInstructions)=="")
+            {
+                $arrChanges[] = "Instructions added [Without a checklist]";
+            }
+            else
+            {
+                $arrChanges[] = "Instructions changed from [".$strOrigInstructions."] to [".$request->strInstructions."]";
+            }
+
+            $bVersionUpdate = true;
+        }
+        if($bVersionUpdate || count($arrChanges)>0)
         {
             $objTemplate->version = $nOrigVersion+1;
+            $objTemplate->updated_on = date("Y-m-d H:i:s");
         }
         $objTemplate->save();
         foreach($arrChanges as $change)
@@ -319,8 +339,18 @@ class TemplatesController extends Controller
             'submit_date'=>date("Y-m-d H:i:s"),
             'supervisor'=>$Template->supervisor,
             'user_id'=>Auth::user()->getempid(),
-            'with_checkboxes'=>$request->strWithCheckbox
+            'with_checkboxes'=>$request->strWithCheckbox,
+            'instruction'=>$Template->instruction,
+            'template_created_on'=>$Template->created_on
         );
+        if(!empty($request->strComments))
+        {
+            $arrTemplateData['comments'] = $request->strComments;
+        }
+        if(!empty($Template->updated_on))
+        {
+            $arrTemplateData['template_created_on'] = $Template->updated_on;
+        }
         if(trim($request->strProductionLocation)!="")
         {
             $arrTemplateData['production_site'] = $request->strProductionLocation;

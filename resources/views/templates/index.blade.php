@@ -149,6 +149,8 @@
                                                 <th>id</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Options</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Template</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Version</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Created On</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -170,6 +172,14 @@
                                                         <a href="{{ route('templates.fill', $template->id) }}"><i class="bx bxs-file-plus"></i></a>
                                                     </td>
                                                     <td style="padding: 0.5rem 1.15rem">{{ $template->title }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem">{{ $template->version }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem">
+                                                        @if(!empty($template->updated_on))
+                                                            {{ $template->updated_on }}
+                                                        @else
+                                                            {{ $template->created_on }}
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

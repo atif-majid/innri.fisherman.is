@@ -106,7 +106,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">{{ $thistemplate->title }} - Version {{ $thistemplate->version }}</h4>
+                                    <h4 class="card-title">{{ $thistemplate->title }} - Version {{ $thistemplate->version }} <small>(Created on  @if(empty($thistemplate->updated_on)) {{ $thistemplate->created_on }} @else {{ $thistemplate->updated_on }} @endif)</small></h4>
                                     <input type="hidden" id="strTempTitle" name="strTempTitle" value="{{ $thistemplate->title }}"/>
                                     <input type="hidden" id="nTemplate" name="nTemplate" value="{{ $thistemplate->id }}">
                                     <input type="hidden" id="nVersion" name="nVersion" value="{{ $thistemplate->version }}">
@@ -155,6 +155,24 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Instructions</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                {{ $thistemplate->instruction }}
                                             </div>
                                         </div>
                                     </div>
@@ -251,6 +269,24 @@
                                             @endforeach
                                             </tbody>
                                         </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Comments</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <textarea name="strComments" class="form-control" <?php /*data-validation-required-message="Name is requried"*/?> placeholder="Comments" rows="4">{{old('strComments')}}</textarea>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

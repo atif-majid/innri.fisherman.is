@@ -21,6 +21,9 @@ class Templatesubmit extends Model
         'production_site',
         'reviewed',
         'reviewed_datetime',
-        'with_checkboxes'
+        'with_checkboxes',
+        'instruction',
+        'comments',
+        'template_created_on'
     ];
 }

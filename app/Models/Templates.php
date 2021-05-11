@@ -17,6 +17,8 @@ class Templates extends Model
         'created_by',
         'with_checkboxes',
         'supervisor',
-        'version'
+        'version',
+        'instruction',
+        'updated_on'
     ];
 }

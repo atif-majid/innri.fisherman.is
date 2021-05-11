@@ -139,6 +139,14 @@
                                                         </fieldset>
                                                     </div>
                                                 </div>
+                                                <div class="row">
+                                                    <div class="form-group col-sm">
+                                                        <label>Instructions</label>
+                                                        <div class="controls">
+                                                            <textarea name="strInstructions" class="form-control" <?php /*data-validation-required-message="Name is requried"*/?> placeholder="Instructions" rows="4">{{ $template->instruction }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

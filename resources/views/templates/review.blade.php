@@ -106,7 +106,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">{{ $thisTemplateSubmission->template_title }} - Version {{ $thisTemplateSubmission->template_version }}</h4>
+                                    <h4 class="card-title">{{ $thisTemplateSubmission->template_title }} - Version {{ $thisTemplateSubmission->template_version }} <small>(Created on  {{ $thisTemplateSubmission->template_created_on }})</small></h4>
                                     <input type="hidden" id="strTempTitle" name="strTempTitle" value="{{ $thisTemplateSubmission->template_title }}"/>
                                     <input type="hidden" id="nTemplate" name="nTemplate" value="{{ $thisTemplateSubmission->id }}">
                                     <input type="hidden" id="nVersion" name="nVersion" value="{{ $thisTemplateSubmission->template_title }}">
@@ -144,6 +144,42 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Instructions</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                {{ $thisTemplateSubmission->instruction }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Comments</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                {{ $thisTemplateSubmission->comments }}
                                             </div>
                                         </div>
                                     </div>
