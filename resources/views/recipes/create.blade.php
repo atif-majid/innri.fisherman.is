@@ -557,13 +557,13 @@
                                 $('.modal-body').html(errDisplay);
                                 $('#modalError').modal('show');
                             });
-                            $('#btnAllSubmit').attr('disabled', 'false');
+                            $('#btnAllSubmit').attr('disabled', false);
                         }
                         else{
                             errDisplay = '<div class="alert alert-danger mb-2">An error occured. The developer has been notified. Please try again later!</div>';
                             $('.modal-body').html(errDisplay);
                             $('#modalError').modal('show');
-                            $('#btnAllSubmit').attr('disabled', 'false');
+                            $('#btnAllSubmit').attr('disabled', false);
                         }
                     }
                 });
