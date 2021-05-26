@@ -27,7 +27,7 @@ $(document).ready(function () {
                     "targets": [8]
                 },
                 {
-                    "targets": [ 0 ],
+                    "targets": [ 0, 9 ],
                     "visible": false
                 }],
             "order": [[ 2, "asc" ]]
@@ -54,6 +54,22 @@ $(document).ready(function () {
                 });
                 //tr.addClass('shown');
             }
+        });
+
+        $( '#employee-status').on( 'change', function () {
+            var empStatus = $(this).val();
+            usersTable
+                .columns( 9 )
+                .search( empStatus )
+                .draw();
+        });
+
+        $(document).ready(function(){
+            var selStatus = $( '#employee-status').val();
+            usersTable
+                .columns( 9 )
+                .search( selStatus )
+                .draw();
         });
     };
     // on click selected users data from table(page named page-users-list)

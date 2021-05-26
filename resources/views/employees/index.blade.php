@@ -121,6 +121,16 @@
                                     </select>
                                 </fieldset>
                             </div>
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <label for="employee-status">Status</label>
+                                <fieldset class="form-group">
+                                    <select class="form-control" id="employee-status">
+                                        <option value="">All</option>
+                                        <option value="current" selected>Current</option>
+                                        <option value="former">Former</option>
+                                    </select>
+                                </fieldset>
+                            </div>
                             <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center">
                                 <button type="reset" class="btn btn-primary btn-block glow users-list-clear mb-0">Clear</button>
                             </div>
@@ -152,6 +162,7 @@
                                                 <th style="text-align: left; padding-left: 1rem;">Direct Phone</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Mobile phone</th>
                                                 <th style="text-align: left; padding-left: 1rem;">EMail address</th>
+                                                <td style="text-align: left; padding-left: 1rem;">Status</td>
                                                 <td style="text-align: left; padding-left: 1rem;">Status</td>
                                             </tr>
                                         </thead>
@@ -185,6 +196,13 @@
                                                             <input type="checkbox" class="custom-control-input chkStatus" id="customSwitchcolor{{ $employee->id }}" value="{{ $employee->id }}" @if($employee->status=='active') checked @endif>
                                                             <label class="custom-control-label" for="customSwitchcolor{{ $employee->id }}"></label>
                                                         </div>
+                                                    </td>
+                                                    <td style="padding: 0.5rem 1.15rem; vertical-align: center;">
+                                                        @if($employee->status=='active')
+                                                            current
+                                                        @else
+                                                            former
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach
