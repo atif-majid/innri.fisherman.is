@@ -166,17 +166,17 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Lot. Number (Producer)</label>
+                                                    <label>Lot. Number (Supplier)</label>
                                                     <div class="controls">
-                                                        <input type="text" name="strLotNrProducer" value="{{ old('strLotNrProducer') }}" class="form-control" data-validation-required-message="Producer Lot Number is required" placeholder="Lot Number Producer">
+                                                        <input type="text" name="strLotNrProducer" value="{{ old('strLotNrProducer') }}" class="form-control" data-validation-required-message="Producer Lot Number is required" placeholder="Lot Number Supplier">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Framleóandi</label>
+                                                    <label>Supplier</label>
                                                     <div class="controls">
-                                                        <input type="text" name="strFramleoandi" value="{{ old('strFramleoandi') }}" class="form-control" data-validation-required-message="Framleóandi is required" placeholder="Framleóandi">
+                                                        <input type="text" name="strFramleoandi" value="{{ old('strFramleoandi') }}" class="form-control" data-validation-required-message="Supplier is required" placeholder="Supplier">
                                                     </div>
                                                 </div>
                                             </div>
