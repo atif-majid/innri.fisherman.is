@@ -24,10 +24,9 @@ class TemplatesController extends Controller
             $strFullRoute = request()->route()->getActionName();
             $strAcionName = substr($strFullRoute, strpos($strFullRoute, "@")+1);
             $arrAllowedPages = array(
-                "View"=>array('index', "fill", "submitfill"),
-                "Edit"=>array("index", "fill", "submitfill"),
-                "Admin"=>array("index", "create", "store", "show", "edit", "updatepost", "uploadpicture", "process","destroy",
-                    "fill", "submitfill"),
+                "View"=>array('index', "fill", "fillsubmit"),
+                "Edit"=>array("index", "fill", "fillsubmit", 'review', 'reviewsubmit'),
+                "Admin"=>array("index", "create", "store", "review", "reviewsubmit", "fill", "fillsubmit", "show", "edit", "destroy"),
                 "No Access"=>array("none")
             );
 
