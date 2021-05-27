@@ -12,6 +12,7 @@ $(document).ready(function () {
     // variable declaration
     var usersTable;
     var usersDataArray = [];
+    var minDate, maxDate;
     // datatable initialization
     if ($("#users-list-datatable").length > 0) {
         usersTable = $("#users-list-datatable").DataTable({
@@ -75,18 +76,52 @@ $(document).ready(function () {
         });
 
         $(document).ready(function(){
+            minDate = new Date($('#min').val());
+            maxDate = new Date($('#max').val());
+            //maxDate = new Date(maxDate.setDate(maxDate.getDate() + 1));
+            var table = $('#users-list-datatable').DataTable();
+            table.draw();
             $('#min, #max').on('change', function () {
                 //alert('changed');
-                var min = $('#min').val();
+                /*var min = $('#min').val();
                 var max = $('#max').val();
-                //var date = new Date( data[11] );
+                var date = new Date( data[12] );
 
                 usersTable
                     .columns( 12 )
                     .search( min, max )
-                    .draw();
+                    .draw();*/
+                minDate = new Date($('#min').val());
+                maxDate = new Date($('#max').val());
+                var table = $('#users-list-datatable').DataTable();
+                table.draw();
             });
         });
+
+
+        $.fn.dataTable.ext.search.push(
+            function( settings, data, dataIndex ) {
+                var min = minDate;
+                var max = maxDate;
+                var date = new Date( data[12] +" 05:00:00");
+                //alert(min);
+                //alert(max);
+                //alert(date);
+
+                if (
+                    ( min === null && max === null ) ||
+                    ( min === null && date <= max ) ||
+                    ( min <= date   && max === null ) ||
+                    ( min <= date   && date <= max )
+                ) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+
+            }
+        );
     };
 
 

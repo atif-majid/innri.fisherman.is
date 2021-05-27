@@ -86,7 +86,7 @@
                             <div class="col-12 col-sm-6 col-lg-3">
                                 <label for="users-list-verified">Production Date From</label>
                                 <fieldset class="form-group position-relative has-icon-left" >
-                                    <input type="text" class="form-control format-picker" id="min">
+                                    <input type="text" class="form-control format-picker" id="min" value="@php echo date("Y-m-d"); @endphp">
                                     <div class="form-control-position">
                                         <i class='bx bx-calendar'></i>
                                     </div>
@@ -95,7 +95,7 @@
                             <div class="col-12 col-sm-6 col-lg-3">
                                 <label for="users-list-verified">Production Date To</label>
                                 <fieldset class="form-group position-relative has-icon-left" >
-                                    <input type="text" class="form-control format-picker" id="max">
+                                    <input type="text" class="form-control format-picker" id="max" value="@php echo date("Y-m-d"); @endphp">
                                     <div class="form-control-position">
                                         <i class='bx bx-calendar'></i>
                                     </div>
