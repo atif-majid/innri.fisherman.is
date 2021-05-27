@@ -242,10 +242,12 @@ class ProductionController extends Controller
         $objProduction = Production::create($arrProduction);
         $nProductionID = $objProduction->id;
 
-        $arrInstructions = $_POST['Instructions'];
-        foreach ($arrInstructions as $thisInstruction) {
-            /*if(!empty($thisInstruction['instruction_date']))
-            {*/
+        if(isset($_POST['Instructions']))
+        {
+            $arrInstructions = $_POST['Instructions'];
+            foreach ($arrInstructions as $thisInstruction) {
+                /*if(!empty($thisInstruction['instruction_date']))
+                {*/
                 $arrInsertInstruction = array(
                     /*'instruction_date'=>$thisInstruction['instruction_date'],*/
                     'chk_make'=>'no',
@@ -273,8 +275,10 @@ class ProductionController extends Controller
                     $arrInsertInstruction['chk_send'] = 'yes';
                 }
                 Instructions::create($arrInsertInstruction);
-            //}
+                //}
+            }
         }
+
 
         $arrRawMaterials = $_POST['rawmaterials'];
         foreach ($arrRawMaterials as $thisMaterial)
@@ -430,10 +434,12 @@ class ProductionController extends Controller
         }
         $production->update($arrProduction);
 
-        $arrInstructions = $_POST['Instructions'];
-        foreach ($arrInstructions as $thisInstruction) {
-            /*if(!empty($thisInstruction['instruction_date']))
-            {*/
+        if(isset($_POST['Instructions']))
+        {
+            $arrInstructions = $_POST['Instructions'];
+            foreach ($arrInstructions as $thisInstruction) {
+                /*if(!empty($thisInstruction['instruction_date']))
+                {*/
                 $arrInsertInstruction = array(
                     //'instruction_date'=>$thisInstruction['instruction_date'],
                     'chk_make'=>'no',
@@ -470,8 +476,10 @@ class ProductionController extends Controller
                 {
                     Instructions::create($arrInsertInstruction);
                 }
-            //}
+                //}
+            }
         }
+
 
         $arrRawMaterials = $_POST['rawmaterials'];
         foreach ($arrRawMaterials as $thisMaterial)
