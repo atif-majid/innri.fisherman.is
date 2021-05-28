@@ -75,12 +75,16 @@ class LoginController extends Controller
                     $subject = 'Login from a new device';
                     $formEmail = 'innri@fisherman.is';
                     $formName = "Innri Fisherman";
-                    Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
-                        $message->from($formEmail, $formName);
-                        $message->to($to);
-                        $message->subject($subject);
-                        $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
-                    });
+                    if($_SERVER['SERVER_NAME']!=='127.0.0.1')
+                    {
+                        Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
+                            $message->from($formEmail, $formName);
+                            $message->to($to);
+                            $message->subject($subject);
+                            $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
+                        });
+                    }
+
                 }
                 return $this->sendLoginResponse($request);
             } else {
