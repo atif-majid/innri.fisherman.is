@@ -28,12 +28,12 @@ $(document).ready(function () {
                     "visible": false
                 },
                 {
-                    "targets": [ 6, 7 ],
+                    "targets": [ 8 ],
                     "visible": false
                 },
                 {
                     "targets": [ 4 ],
-                    "orderData": [ 7 ]
+                    "orderData": [ 8 ]
                 }
             ],
 
@@ -92,6 +92,13 @@ $(document).ready(function () {
             usersTable
                 .columns( 5 )
                 .search( strResponsible )
+                .draw();
+        });
+        $( '#sop-priority').on( 'change', function () {
+            var strPriority = $(this).val();
+            usersTable
+                .columns( 7 )
+                .search( strPriority )
                 .draw();
         });
 

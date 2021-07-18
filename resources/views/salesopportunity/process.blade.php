@@ -116,6 +116,11 @@
                                                         @endif
                                                     </td>
                                                 @endif
+                                                <td class="users-view-latest-activity"><strong>Priority:</strong></td>
+                                                <td class="users-view-latest-activity">
+                                                    {{$SaleOp->sop_priority}}
+
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td class="users-view-latest-activity" colspan="6"><strong>Description</strong></td>

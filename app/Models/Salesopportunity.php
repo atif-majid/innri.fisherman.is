@@ -21,6 +21,7 @@ class Salesopportunity extends Model
         'created_by',
         'creation_time',
         'status',
-        'business_potential'
+        'business_potential',
+        'sop_priority'
     ];
 }

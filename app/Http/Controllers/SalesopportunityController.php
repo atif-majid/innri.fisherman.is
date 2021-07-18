@@ -116,7 +116,8 @@ class SalesopportunityController extends Controller
             'strEmail' => 'sometimes',
             'strDescription' => 'sometimes',
             'nAssignedTo' => 'sometimes',
-            'strResponse' => 'sometimes'
+            'strResponse' => 'sometimes',
+            'strPriority' => 'sometimes'
         ],
             [
                 'strWhoNotified.required' => 'Name of notifying person is required',
@@ -124,7 +125,8 @@ class SalesopportunityController extends Controller
                 'strEmail.required' => 'Email address is required',
                 'strDescription.required' => 'Complain description is required',
                 'nAssignedTo.required' => 'Please select who will work on this improvement?',
-                'strResponse.required' => 'Response is required'
+                'strResponse.required' => 'Response is required',
+                'strPriority.required' => 'Priority is required'
             ]
         );
 
@@ -153,6 +155,11 @@ class SalesopportunityController extends Controller
         if(isset($request->nBusiness) && $request->nBusiness>0)
         {
             $arrSalesOpportunity['business_potential'] = $request->nBusiness;
+        }
+
+        if(isset($request->strPriority) && $request->strPriority!='')
+        {
+            $arrSalesOpportunity['sop_priority'] = $request->strPriority;
         }
 
         $SalesOp = Salesopportunity::create($arrSalesOpportunity);
@@ -302,6 +309,10 @@ class SalesopportunityController extends Controller
         if(isset($request->nBusiness) && $request->nBusiness>0)
         {
             $arrSalesOp['business_potential'] = $request->nBusiness;
+        }
+        if(isset($request->strPriority) && $request->strPriority!='')
+        {
+            $arrSalesOp['sop_priority'] = $request->strPriority;
         }
         Salesopportunity::find($nSalesOpID)->update($arrSalesOp);
 

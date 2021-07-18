@@ -191,6 +191,7 @@
                                             <th style="text-align: left; padding-left: 1rem;">Business Potential</th>
                                             <th style="text-align: left; padding-left: 1rem;">Responsible</th>
                                             <th style="text-align: left; padding-left: 1rem;">Status</th>
+                                            <th style="text-align: left; padding-left: 1rem;">Priority</th>
                                             <th style="text-align: left; padding-left: 1rem;">B-OP</th>
                                         </tr>
                                         </thead>
@@ -232,6 +233,9 @@
                                                 <td style="padding: 0.5rem 1.15rem">{{ $Saleop->name }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">
                                                     {{$Saleop->status}}
+                                                </td>
+                                                <td style="padding: 0.5rem 1.15rem">
+                                                    {{$Saleop->sop_priority}}
                                                 </td>
                                                 <td style="padding: 0.5rem 1.15rem">
                                                     {{$Saleop->business_potential}}

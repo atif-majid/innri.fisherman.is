@@ -141,6 +141,15 @@
                                                             </select>
                                                         </div>
                                                     </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label>Priority</label>
+                                                        <div class="controls">
+                                                            <select class="form-control" id="strPriority" name="strPriority">
+                                                                <option value="Normal" @if(old('strPriority')=='Normal') selected @endif>Normal</option>
+                                                                <option value="Priority" @if(old('strPriority')=='Priority') selected @endif>Priority</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="form-group col-sm">
