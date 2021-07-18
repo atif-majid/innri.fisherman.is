@@ -87,6 +87,14 @@ $(document).ready(function () {
                 .draw();
         });
 
+        $( '#sop-responsible').on( 'change', function () {
+            var strResponsible = $(this).val();
+            usersTable
+                .columns( 5 )
+                .search( strResponsible )
+                .draw();
+        });
+
         $(document).ready(function(){
             $( '#imp-status').val("In Progress");
             var selStatus = $( '#imp-status').val();

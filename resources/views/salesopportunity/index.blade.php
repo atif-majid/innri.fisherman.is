@@ -127,6 +127,27 @@
                                     </select>
                                 </fieldset>
                             </div>
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <label for="users-list-status">Priority</label>
+                                <fieldset class="form-group">
+                                    <select class="form-control" id="sop-priority">
+                                        <option value="">All</option>
+                                        <option value="Normal">Normal</option>
+                                        <option value="Priority">Priority</option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <label for="users-list-status">Responsible</label>
+                                <fieldset class="form-group">
+                                    <select class="form-control" id="sop-responsible">
+                                        <option value="">All</option>
+                                        @foreach ($employees as $employee)
+                                            <option value="{{ $employee->name }}">{{ $employee->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </fieldset>
+                            </div>
                             <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center">
                                 <button id="btnFilter" type="reset" class="btn btn-primary btn-block glow users-list-clear mb-0">Clear</button>
                             </div>

@@ -80,11 +80,12 @@ class SalesopportunityController extends Controller
         }
         else
         {
+            $employees = Employees::all();
             $SaleOps = DB::table('sales_opportunity')
             ->leftJoin('employees', 'assigned_to', '=', 'employees.id')
             ->select('sales_opportunity.*','employees.name')
             ->get();
-            return view('salesopportunity.index', compact('SaleOps'));
+            return view('salesopportunity.index', compact('SaleOps', 'employees'));
         }
     }
 
