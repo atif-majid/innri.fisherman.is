@@ -32,6 +32,12 @@
             <td class="users-view-latest-activity"><strong>Freeze</strong></td>
             <td class="users-view-latest-activity"><strong>Pack</strong></td>
             <td class="users-view-latest-activity"><strong>Send</strong></td>
+            <td class="users-view-latest-activity"><strong>Clean</strong></td>
+            <td class="users-view-latest-activity"><strong>Cut</strong></td>
+            <td class="users-view-latest-activity"><strong>Salt</strong></td>
+            <td class="users-view-latest-activity"><strong>Smoke</strong></td>
+            <td class="users-view-latest-activity"><strong>Bone cleaning</strong></td>
+            <td class="users-view-latest-activity"><strong>Sliced</strong></td>
         </tr>
         @foreach($Instructions as $thisInstruction)
             <tr>
@@ -57,7 +63,7 @@
                                 <label class="custom-control-label" for="customCheck3"></label>
                             @else
                                 <input type="checkbox" class="custom-control-input" name="customCheck" disabled id="customCheck4">
-                                <label class="custom-control-label" for="customCheck4">Inactive - disabled</label>
+                                <label class="custom-control-label" for="customCheck4"></label>
                             @endif
                         </div>
                     </fieldset>
@@ -70,7 +76,7 @@
                                 <label class="custom-control-label" for="customCheck3"></label>
                             @else
                                 <input type="checkbox" class="custom-control-input" name="customCheck" disabled id="customCheck4">
-                                <label class="custom-control-label" for="customCheck4">Inactive - disabled</label>
+                                <label class="custom-control-label" for="customCheck4"></label>
                             @endif
                         </div>
                     </fieldset>
@@ -83,7 +89,86 @@
                                 <label class="custom-control-label" for="customCheck3"></label>
                             @else
                                 <input type="checkbox" class="custom-control-input" name="customCheck" disabled id="customCheck4">
-                                <label class="custom-control-label" for="customCheck4">Inactive - disabled</label>
+                                <label class="custom-control-label" for="customCheck4"></label>
+                            @endif
+                        </div>
+                    </fieldset>
+                </td>
+
+                <td class="users-view-latest-activity">
+                    <fieldset>
+                        <div class="custom-control custom-checkbox">
+                            @if($thisInstruction->chk_clean=='yes')
+                                <input type="checkbox" class="custom-control-input" checked name="customCheck" id="customCheck3" disabled>
+                                <label class="custom-control-label" for="customCheck3"></label>
+                            @else
+                                <input type="checkbox" class="custom-control-input" name="customCheck" disabled id="customCheck4">
+                                <label class="custom-control-label" for="customCheck4"></label>
+                            @endif
+                        </div>
+                    </fieldset>
+                </td>
+                <td class="users-view-latest-activity">
+                    <fieldset>
+                        <div class="custom-control custom-checkbox">
+                            @if($thisInstruction->chk_cut=='yes')
+                                <input type="checkbox" class="custom-control-input" checked name="customCheck" id="customCheck3" disabled>
+                                <label class="custom-control-label" for="customCheck3"></label>
+                            @else
+                                <input type="checkbox" class="custom-control-input" name="customCheck" disabled id="customCheck4">
+                                <label class="custom-control-label" for="customCheck4"></label>
+                            @endif
+                        </div>
+                    </fieldset>
+                </td>
+                <td class="users-view-latest-activity">
+                    <fieldset>
+                        <div class="custom-control custom-checkbox">
+                            @if($thisInstruction->chk_salt=='yes')
+                                <input type="checkbox" class="custom-control-input" checked name="customCheck" id="customCheck3" disabled>
+                                <label class="custom-control-label" for="customCheck3"></label>
+                            @else
+                                <input type="checkbox" class="custom-control-input" name="customCheck" disabled id="customCheck4">
+                                <label class="custom-control-label" for="customCheck4"></label>
+                            @endif
+                        </div>
+                    </fieldset>
+                </td>
+                <td class="users-view-latest-activity">
+                    <fieldset>
+                        <div class="custom-control custom-checkbox">
+                            @if($thisInstruction->chk_smoke=='yes')
+                                <input type="checkbox" class="custom-control-input" checked name="customCheck" id="customCheck3" disabled>
+                                <label class="custom-control-label" for="customCheck3"></label>
+                            @else
+                                <input type="checkbox" class="custom-control-input" name="customCheck" disabled id="customCheck4">
+                                <label class="custom-control-label" for="customCheck4"></label>
+                            @endif
+                        </div>
+                    </fieldset>
+                </td>
+                <td class="users-view-latest-activity">
+                    <fieldset>
+                        <div class="custom-control custom-checkbox">
+                            @if($thisInstruction->chk_bone_cleaning=='yes')
+                                <input type="checkbox" class="custom-control-input" checked name="customCheck" id="customCheck3" disabled>
+                                <label class="custom-control-label" for="customCheck3"></label>
+                            @else
+                                <input type="checkbox" class="custom-control-input" name="customCheck" disabled id="customCheck4">
+                                <label class="custom-control-label" for="customCheck4"></label>
+                            @endif
+                        </div>
+                    </fieldset>
+                </td>
+                <td class="users-view-latest-activity">
+                    <fieldset>
+                        <div class="custom-control custom-checkbox">
+                            @if($thisInstruction->chk_sliced=='yes')
+                                <input type="checkbox" class="custom-control-input" checked name="customCheck" id="customCheck3" disabled>
+                                <label class="custom-control-label" for="customCheck3"></label>
+                            @else
+                                <input type="checkbox" class="custom-control-input" name="customCheck" disabled id="customCheck4">
+                                <label class="custom-control-label" for="customCheck4"></label>
                             @endif
                         </div>
                     </fieldset>

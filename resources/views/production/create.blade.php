@@ -109,7 +109,7 @@
                                                 <div class="form-group col-sm">
                                                     <label>Production Date</label>
                                                     <fieldset class="position-relative has-icon-left">
-                                                        <input type="text" class="form-control format-picker" placeholder="Select Date" id="production_date" name="production_date" value="{{date("Y-m-d")}}">
+                                                        <input type="text" class="form-control format-picker" placeholder="Select Date" id="production_date" name="production_date" value="{{ old('production_date') ? old('production_date') : date("Y-m-d")}}">
                                                         <div class="form-control-position">
                                                             <i class='bx bx-calendar'></i>
                                                         </div>
@@ -118,10 +118,10 @@
                                                 <div class="form-group col-sm">
                                                     <label>Production Site</label>
                                                     <select class="form-control" name="strProductionLocation">
-                                                        <option selected=""></option>
+                                                        <option selected="" selected></option>
                                                         @foreach($sitesettings as $thissetting)
                                                             @if($thissetting->field=='ProductionSite')
-                                                                <option value="{{ $thissetting->value }}" @if("Framleiðslueldhús"==$thissetting->value) selected @endif>{{ $thissetting->value }}</option>
+                                                                <option value="{{ $thissetting->value }}" @if(old('strProductionLocation') && old('strProductionLocation')==$thissetting->value) selected @endif>{{ $thissetting->value }}</option>
                                                             @endif
                                                         @endforeach
                                                         @php
@@ -137,7 +137,7 @@
                                                     <select class="form-control js-example-basic-single" id="recipe_id" name="recipe_id">
                                                         <option value="" selected></option>
                                                         @foreach ($recipes as $recipe)
-                                                            <option value="{{ $recipe->id }}">@if($recipe->product_number!=""){{ $recipe->product_number }} - @endif {{$recipe->title}}</option>
+                                                            <option value="{{ $recipe->id }}" @if(old('recipe_id') && old('recipe_id')==$recipe->id) selected @endif>@if($recipe->product_number!=""){{ $recipe->product_number }} - @endif {{$recipe->title}}</option>
                                                         @endforeach
                                                         <!--<option value="">Select an Option</option>
                                                         <option value="F">Cured Salmon "Gravlax "</option>
@@ -151,19 +151,19 @@
                                                 <div class="form-group col-sm">
                                                     <label>Product nr.</label>
                                                     <div class="controls">
-                                                        <input type="text" name="product_number" id="product_number" class="form-control" @php /*data-validation-required-message="Product nr. is required"*/ @endphp placeholder="Product nr.">
+                                                        <input type="text" value="{{ old('product_number') }}" name="product_number" id="product_number" class="form-control" @php /*data-validation-required-message="Product nr. is required"*/ @endphp placeholder="Product nr.">
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-sm">
                                                     <label>LOT nr.</label>
                                                     <div class="controls">
-                                                        <input type="text" name="lot_number" class="form-control" @php /*data-validation-required-message="LOT nr. is required"*/ @endphp placeholder="LOT nr.">
+                                                        <input type="text" value="{{ old('lot_number') }}" name="lot_number" class="form-control" @php /*data-validation-required-message="LOT nr. is required"*/ @endphp placeholder="LOT nr.">
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-sm">
                                                     <label>Order nr.</label>
                                                     <div class="controls">
-                                                        <input type="text" name="order_number" class="form-control" @php /*data-validation-required-message="Order nr. is required"*/ @endphp placeholder="Order nr.">
+                                                        <input type="text" value="{{ old('order_number') }}" name="order_number" class="form-control" @php /*data-validation-required-message="Order nr. is required"*/ @endphp placeholder="Order nr.">
                                                     </div>
                                                 </div>
                                             </div>
@@ -171,7 +171,7 @@
                                                 <div class="form-group col-sm">
                                                     <label>Quantity (Estimate)</label>
                                                     <div class="controls">
-                                                        <input type="text" name="quantity_estimate" id="quantity_estimate" class="form-control" @php /*data-validation-required-message="Quantity estimate is required"*/ @endphp placeholder="Quantity Estimate">
+                                                        <input type="text" value="{{ old('quantity_estimate') }}" name="quantity_estimate" id="quantity_estimate" class="form-control" @php /*data-validation-required-message="Quantity estimate is required"*/ @endphp placeholder="Quantity Estimate">
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-sm">
@@ -194,7 +194,7 @@
                                                 <div class="form-group col-sm">
                                                     <label>Quantity Scaled</label>
                                                     <div class="controls">
-                                                        <input type="text" name="quantity_scaled" class="form-control" @php /*data-validation-required-message="Quantity Scaled is required"*/ @endphp placeholder="Quantity Scaled">
+                                                        <input type="text" value="{{ old('quantity_scaled') }}"  name="quantity_scaled" class="form-control" @php /*data-validation-required-message="Quantity Scaled is required"*/ @endphp placeholder="Quantity Scaled">
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-sm">
@@ -269,6 +269,42 @@
                                                             <label class="custom-control custom-checkbox checkbox-input" style="vertical-align: bottom">
                                                                 <input type="checkbox" name="chk_send" class="checkbox-input custom-control-input" value="yes">
                                                                 <span class="custom-control-label" for="chk_send" style="padding-top: 3px !important;"> Send</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-sm form-group" style="padding-top: 40px;">
+                                                            <label class="custom-control custom-checkbox checkbox-input">
+                                                                <input type="checkbox" name="chk_clean" class="checkbox-input custom-control-input" value="yes">
+                                                                <span class="custom-control-label" for="chk_clean" style="padding-top: 3px !important;"> Clean</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-sm form-group" style="padding-top: 40px;">
+                                                            <label class="custom-control custom-checkbox checkbox-input">
+                                                                <input type="checkbox" name="chk_cut" class="checkbox-input custom-control-input" value="yes">
+                                                                <span class="custom-control-label" for="chk_cut" style="padding-top: 3px !important;"> Cut</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-sm form-group" style="padding-top: 40px;">
+                                                            <label class="custom-control custom-checkbox checkbox-input">
+                                                                <input type="checkbox" name="chk_salt" class="checkbox-input custom-control-input" value="yes">
+                                                                <span class="custom-control-label" for="chk_salt" style="padding-top: 3px !important;"> Salt</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-sm form-group" style="padding-top: 40px;">
+                                                            <label class="custom-control custom-checkbox checkbox-input" style="vertical-align: bottom">
+                                                                <input type="checkbox" name="chk_smoke" class="checkbox-input custom-control-input" value="yes">
+                                                                <span class="custom-control-label" for="chk_smoke" style="padding-top: 3px !important;"> Smoke</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-sm form-group" style="padding-top: 40px;">
+                                                            <label class="custom-control custom-checkbox checkbox-input" style="vertical-align: bottom">
+                                                                <input type="checkbox" name="chk_bone_cleaning" class="checkbox-input custom-control-input" value="yes">
+                                                                <span class="custom-control-label" for="chk_bone_cleaning" style="padding-top: 3px !important;"> Bone cleaning</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-sm form-group" style="padding-top: 40px;">
+                                                            <label class="custom-control custom-checkbox checkbox-input" style="vertical-align: bottom">
+                                                                <input type="checkbox" name="chk_sliced" class="checkbox-input custom-control-input" value="yes">
+                                                                <span class="custom-control-label" for="chk_sliced" style="padding-top: 3px !important;"> Sliced</span>
                                                             </label>
                                                         </div>
                                                         <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
@@ -386,6 +422,11 @@
                                                                     <option value="Box 8 kg">Box 8 kg</option>
                                                                     <option value="Box 10 kg">Box 10 kg</option>
                                                                     <option value="Smartbox">Smartbox</option>
+                                                                    <option value="100gr Envelope">100gr Envelope</option>
+                                                                    <option value="250gr Envelope">250gr Envelope</option>
+                                                                    <option value="300gr Envelope">300gr Envelope</option>
+                                                                    <option value="250gr skinpack">250gr Skinpack</option>
+                                                                    <option value="300gr skinpack">300gr Skinpack</option>
                                                                 </select>
                                                             </fieldset>
                                                         </div>

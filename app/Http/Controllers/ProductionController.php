@@ -211,9 +211,15 @@ class ProductionController extends Controller
         $request->validate(
             [
                 'recipe_id' => 'required',
+                'strProductionLocation' => 'required',
+                'quantity_estimate' => 'required',
+                'quantity_estimate_unit' => 'required'
             ],
             [
-                'recipe_id.required' => 'Please chose a recipe.'
+                'recipe_id.required' => 'Please chose a recipe.',
+                'strProductionLocation.required' => 'Please chose production location',
+                'quantity_estimate.required' => 'Please provide estimated quantity',
+                'quantity_estimate_unit.required' => 'Please provude unit for estimated quantity'
             ]
         );
         $nEmpID = Auth::user()->getempid();
@@ -254,6 +260,12 @@ class ProductionController extends Controller
                     'chk_freeze'=>'no',
                     'chk_pack'=>'no',
                     'chk_send'=>'no',
+                    'chk_clean'=>'no',
+                    'chk_cut'=>'no',
+                    'chk_salt'=>'no',
+                    'chk_smoke'=>'no',
+                    'chk_bone_cleaning'=>'no',
+                    'chk_sliced'=>'no',
                     'create_date_time'=>date('Y-m-d H:i:s'),
                     'emp_id'=>$nEmpID,
                     'production_id'=>$nProductionID
@@ -273,6 +285,30 @@ class ProductionController extends Controller
                 if(isset($thisInstruction['chk_send']))
                 {
                     $arrInsertInstruction['chk_send'] = 'yes';
+                }
+                if(isset($thisInstruction['chk_clean']))
+                {
+                    $arrInsertInstruction['chk_clean'] = 'yes';
+                }
+                if(isset($thisInstruction['chk_cut']))
+                {
+                    $arrInsertInstruction['chk_cut'] = 'yes';
+                }
+                if(isset($thisInstruction['chk_salt']))
+                {
+                    $arrInsertInstruction['chk_salt'] = 'yes';
+                }
+                if(isset($thisInstruction['chk_smoke']))
+                {
+                    $arrInsertInstruction['chk_smoke'] = 'yes';
+                }
+                if(isset($thisInstruction['chk_bone_cleaning']))
+                {
+                    $arrInsertInstruction['chk_bone_cleaning'] = 'yes';
+                }
+                if(isset($thisInstruction['chk_sliced']))
+                {
+                    $arrInsertInstruction['chk_sliced'] = 'yes';
                 }
                 Instructions::create($arrInsertInstruction);
                 //}
@@ -446,6 +482,12 @@ class ProductionController extends Controller
                     'chk_freeze'=>'no',
                     'chk_pack'=>'no',
                     'chk_send'=>'no',
+                    'chk_clean'=>'no',
+                    'chk_cut'=>'no',
+                    'chk_salt'=>'no',
+                    'chk_smoke'=>'no',
+                    'chk_bone_cleaning'=>'no',
+                    'chk_sliced'=>'no',
                     'create_date_time'=>date('Y-m-d H:i:s'),
                     'emp_id'=>$nEmpID,
                     'production_id'=>$nProductionID
@@ -465,6 +507,30 @@ class ProductionController extends Controller
                 if(isset($thisInstruction['chk_send']))
                 {
                     $arrInsertInstruction['chk_send'] = 'yes';
+                }
+                if(isset($thisInstruction['chk_clean']))
+                {
+                    $arrInsertInstruction['chk_clean'] = 'yes';
+                }
+                if(isset($thisInstruction['chk_cut']))
+                {
+                    $arrInsertInstruction['chk_cut'] = 'yes';
+                }
+                if(isset($thisInstruction['chk_salt']))
+                {
+                    $arrInsertInstruction['chk_salt'] = 'yes';
+                }
+                if(isset($thisInstruction['chk_smoke']))
+                {
+                    $arrInsertInstruction['chk_smoke'] = 'yes';
+                }
+                if(isset($thisInstruction['chk_bone_cleaning']))
+                {
+                    $arrInsertInstruction['chk_bone_cleaning'] = 'yes';
+                }
+                if(isset($thisInstruction['chk_sliced']))
+                {
+                    $arrInsertInstruction['chk_sliced'] = 'yes';
                 }
                 if(isset($thisInstruction['nInstructionID']) && $thisInstruction['nInstructionID']>0)
                 {

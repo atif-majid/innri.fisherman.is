@@ -50,6 +50,11 @@
                                 <td class="users-view-latest-activity"><strong>Freeze</strong></td>
                                 <td class="users-view-latest-activity"><strong>Pack</strong></td>
                                 <td class="users-view-latest-activity"><strong>Send</strong></td>
+                                <td class="users-view-latest-activity"><strong>Clean</strong></td>
+                                <td class="users-view-latest-activity"><strong>Cut</strong></td>
+                                <td class="users-view-latest-activity"><strong>Salt</strong></td>
+                                <td class="users-view-latest-activity"><strong>Smoke</strong></td>
+                                <td class="users-view-latest-activity"><strong>Bone cleaning</strong></td>
                             </tr>
                             @foreach($Instructions as $thisInstruction)
                                 <tr>
@@ -77,6 +82,41 @@
                                     </td>
                                     <td class="users-view-latest-activity">
                                         @if($thisInstruction->chk_send=='yes')
+                                            <input type="checkbox" checked disabled>
+                                        @else
+                                            <input type="checkbox" disabled>
+                                        @endif
+                                    </td>
+                                    <td class="users-view-latest-activity">
+                                        @if($thisInstruction->chk_clean=='yes')
+                                            <input type="checkbox" checked disabled>
+                                        @else
+                                            <input type="checkbox" disabled>
+                                        @endif
+                                    </td>
+                                    <td class="users-view-latest-activity">
+                                        @if($thisInstruction->chk_cut=='yes')
+                                            <input type="checkbox" checked disabled>
+                                        @else
+                                            <input type="checkbox" disabled>
+                                        @endif
+                                    </td>
+                                    <td class="users-view-latest-activity">
+                                        @if($thisInstruction->chk_salt=='yes')
+                                            <input type="checkbox" checked disabled>
+                                        @else
+                                            <input type="checkbox" disabled>
+                                        @endif
+                                    </td>
+                                    <td class="users-view-latest-activity">
+                                        @if($thisInstruction->chk_smoke=='yes')
+                                            <input type="checkbox" checked disabled>
+                                        @else
+                                            <input type="checkbox" disabled>
+                                        @endif
+                                    </td>
+                                    <td class="users-view-latest-activity">
+                                        @if($thisInstruction->chk_bone_cleaning=='yes')
                                             <input type="checkbox" checked disabled>
                                         @else
                                             <input type="checkbox" disabled>

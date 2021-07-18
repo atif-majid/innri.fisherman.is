@@ -17,6 +17,12 @@ class Instructions extends Model
         'chk_freeze',
         'chk_pack',
         'chk_send',
+        'chk_clean',
+        'chk_cut',
+        'chk_salt',
+        'chk_smoke',
+        'chk_bone_cleaning',
+        'chk_sliced',
         'create_date_time',
         'emp_id',
         'production_id'

@@ -259,6 +259,7 @@
                                                                 <label class="custom-control custom-checkbox checkbox-input">
                                                                     <input type="checkbox" name="chk_make" class="checkbox-input custom-control-input" value="yes" @if($thisInstruction->chk_make=='yes') checked @endif>
                                                                     <span class="custom-control-label" for="chk_make" style="padding-top: 3px !important;"> Make</span>
+                                                                    <input type="hidden" id="nInstructionID" name="nInstructionID" value="{{ $thisInstruction->id }}">
                                                                 </label>
                                                             </div>
                                                             <div class="col-sm form-group" style="padding-top: 40px;">
@@ -277,6 +278,42 @@
                                                                 <label class="custom-control custom-checkbox checkbox-input" style="vertical-align: bottom">
                                                                     <input type="checkbox" name="chk_send" class="checkbox-input custom-control-input" value="yes" @if($thisInstruction->chk_send=='yes') checked @endif>
                                                                     <span class="custom-control-label" for="chk_send" style="padding-top: 3px !important;"> Send</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm form-group" style="padding-top: 40px;">
+                                                                <label class="custom-control custom-checkbox checkbox-input" style="vertical-align: bottom">
+                                                                    <input type="checkbox" name="chk_clean" class="checkbox-input custom-control-input" value="yes" @if($thisInstruction->chk_clean=='yes') checked @endif>
+                                                                    <span class="custom-control-label" for="chk_clean" style="padding-top: 3px !important;"> Clean</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm form-group" style="padding-top: 40px;">
+                                                                <label class="custom-control custom-checkbox checkbox-input" style="vertical-align: bottom">
+                                                                    <input type="checkbox" name="chk_cut" class="checkbox-input custom-control-input" value="yes" @if($thisInstruction->chk_cut=='yes') checked @endif>
+                                                                    <span class="custom-control-label" for="chk_cut" style="padding-top: 3px !important;"> Cut</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm form-group" style="padding-top: 40px;">
+                                                                <label class="custom-control custom-checkbox checkbox-input" style="vertical-align: bottom">
+                                                                    <input type="checkbox" name="chk_salt" class="checkbox-input custom-control-input" value="yes" @if($thisInstruction->chk_salt=='yes') checked @endif>
+                                                                    <span class="custom-control-label" for="chk_salt" style="padding-top: 3px !important;"> Salt</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm form-group" style="padding-top: 40px;">
+                                                                <label class="custom-control custom-checkbox checkbox-input" style="vertical-align: bottom">
+                                                                    <input type="checkbox" name="chk_smoke" class="checkbox-input custom-control-input" value="yes" @if($thisInstruction->chk_smoke=='yes') checked @endif>
+                                                                    <span class="custom-control-label" for="chk_smoke" style="padding-top: 3px !important;"> Smoke</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm form-group" style="padding-top: 40px;">
+                                                                <label class="custom-control custom-checkbox checkbox-input" style="vertical-align: bottom">
+                                                                    <input type="checkbox" name="chk_bone_cleaning" class="checkbox-input custom-control-input" value="yes" @if($thisInstruction->chk_bone_cleaning=='yes') checked @endif>
+                                                                    <span class="custom-control-label" for="chk_bone_cleaning" style="padding-top: 3px !important;"> Bone cleaning</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm form-group" style="padding-top: 40px;">
+                                                                <label class="custom-control custom-checkbox checkbox-input" style="vertical-align: bottom">
+                                                                    <input type="checkbox" name="chk_sliced" class="checkbox-input custom-control-input" value="yes"  @if($thisInstruction->chk_sliced=='yes') checked @endif>
+                                                                    <span class="custom-control-label" for="chk_sliced" style="padding-top: 3px !important;"> Sliced</span>
                                                                 </label>
                                                             </div>
                                                             <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
@@ -325,6 +362,42 @@
                                                             <label class="custom-control custom-checkbox checkbox-input" style="vertical-align: bottom">
                                                                 <input type="checkbox" name="chk_send" class="checkbox-input custom-control-input" value="yes">
                                                                 <span class="custom-control-label" for="chk_send" style="padding-top: 3px !important;"> Send</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-sm form-group" style="padding-top: 40px;">
+                                                            <label class="custom-control custom-checkbox checkbox-input" style="vertical-align: bottom">
+                                                                <input type="checkbox" name="chk_clean" class="checkbox-input custom-control-input" value="yes">
+                                                                <span class="custom-control-label" for="chk_clean" style="padding-top: 3px !important;"> Clean</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-sm form-group" style="padding-top: 40px;">
+                                                            <label class="custom-control custom-checkbox checkbox-input" style="vertical-align: bottom">
+                                                                <input type="checkbox" name="chk_cut" class="checkbox-input custom-control-input" value="yes">
+                                                                <span class="custom-control-label" for="chk_cut" style="padding-top: 3px !important;"> Cut</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-sm form-group" style="padding-top: 40px;">
+                                                            <label class="custom-control custom-checkbox checkbox-input" style="vertical-align: bottom">
+                                                                <input type="checkbox" name="chk_salt" class="checkbox-input custom-control-input" value="yes">
+                                                                <span class="custom-control-label" for="chk_salt" style="padding-top: 3px !important;"> Salt</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-sm form-group" style="padding-top: 40px;">
+                                                            <label class="custom-control custom-checkbox checkbox-input" style="vertical-align: bottom">
+                                                                <input type="checkbox" name="chk_smoke" class="checkbox-input custom-control-input" value="yes">
+                                                                <span class="custom-control-label" for="chk_smoke" style="padding-top: 3px !important;"> Smoke</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-sm form-group" style="padding-top: 40px;">
+                                                            <label class="custom-control custom-checkbox checkbox-input" style="vertical-align: bottom">
+                                                                <input type="checkbox" name="chk_bone_cleaning" class="checkbox-input custom-control-input" value="yes">
+                                                                <span class="custom-control-label" for="chk_bone_cleaning" style="padding-top: 3px !important;"> Bone cleaning</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-sm form-group" style="padding-top: 40px;">
+                                                            <label class="custom-control custom-checkbox checkbox-input" style="vertical-align: bottom">
+                                                                <input type="checkbox" name="chk_sliced" class="checkbox-input custom-control-input" value="yes">
+                                                                <span class="custom-control-label" for="chk_sliced" style="padding-top: 3px !important;"> Sliced</span>
                                                             </label>
                                                         </div>
                                                         <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
@@ -495,6 +568,11 @@
                                                                         <option value="Box 8 kg" @if($thisPackage->packing_type=="Box 8 kg") selected @endif>Box 8 kg</option>
                                                                         <option value="Box 10 kg" @if($thisPackage->packing_type=="Box 10 kg") selected @endif>Box 10 kg</option>
                                                                         <option value="Smartbox" @if($thisPackage->packing_type=="Smartbox") selected @endif>Smartbox</option>
+                                                                        <option value="100gr Envelope" @if($thisPackage->packing_type=="100gr Envelope") selected @endif>100gr Envelope</option>
+                                                                        <option value="250gr Envelope" @if($thisPackage->packing_type=="250gr Envelope") selected @endif>250gr Envelope</option>
+                                                                        <option value="300gr Envelope" @if($thisPackage->packing_type=="300gr Envelope") selected @endif>300gr Envelope</option>
+                                                                        <option value="250gr skinpack" @if($thisPackage->packing_type=="250gr skinpack") selected @endif>250gr Skinpack</option>
+                                                                        <option value="300gr skinpack" @if($thisPackage->packing_type=="300gr skinpack") selected @endif>300gr Skinpack</option>
                                                                     </select>
                                                                     <input type="hidden" id="nPackagingID" name="nPackagingID" value="{{ $thisPackage->id }}">
                                                                 </fieldset>
@@ -574,6 +652,11 @@
                                                                     <option value="Box 8 kg">Box 8 kg</option>
                                                                     <option value="Box 10 kg">Box 10 kg</option>
                                                                     <option value="Smartbox">Smartbox</option>
+                                                                    <option value="100gr Envelope">100gr Envelope</option>
+                                                                    <option value="250gr Envelope">250gr Envelope</option>
+                                                                    <option value="300gr Envelope">300gr Envelope</option>
+                                                                    <option value="250gr skinpack">250gr Skinpack</option>
+                                                                    <option value="300gr skinpack">300gr Skinpack</option>
                                                                 </select>
                                                             </fieldset>
                                                         </div>
