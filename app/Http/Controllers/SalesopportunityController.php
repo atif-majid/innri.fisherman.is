@@ -306,6 +306,7 @@ class SalesopportunityController extends Controller
         $arrSalesOp['description'] = $request->strDescription;
         $arrSalesOp['assigned_to'] = $request->nAssignedTo;
         $arrSalesOp['response'] = $request->strResponse;
+        $arrSalesOp['status'] = $request->strStatus;
         if(isset($request->nBusiness) && $request->nBusiness>0)
         {
             $arrSalesOp['business_potential'] = $request->nBusiness;

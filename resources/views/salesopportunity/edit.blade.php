@@ -151,6 +151,19 @@
                                                             </select>
                                                         </div>
                                                     </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label>Status</label>
+                                                        <div class="controls">
+                                                            <select class="form-control" id="strStatus" name="strStatus">
+                                                                <option value="New opportunity" @if($salesopportunity->status=='New opportunity') selected @endif>New opportunity</option>
+                                                                <option value="Offer sent" @if($salesopportunity->status=='Offer sent') selected @endif>Offer sent</option>
+                                                                <option value="Closed – Sale!" @if($salesopportunity->status=='Closed – Sale!') selected @endif>Closed – Sale!</option>
+                                                                <option value="Closed – No sale" @if($salesopportunity->status=='Closed – No sale') selected @endif>Closed – No sale</option>
+                                                                <option value="In Progress" @if($salesopportunity->status=='In Progress') selected @endif>In Progress</option>
+                                                                <option value="Completed" @if($salesopportunity->status=='Completed') selected @endif>Completed</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="form-group col-sm">

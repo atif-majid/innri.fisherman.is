@@ -122,6 +122,10 @@
                                 <fieldset class="form-group">
                                     <select class="form-control" id="imp-status">
                                         <option value="">All</option>
+                                        <option value="New opportunity">New opportunity</option>
+                                        <option value="Offer sent">Offer sent</option>
+                                        <option value="Closed – Sale!">Closed – Sale!</option>
+                                        <option value="Closed – No sale">Closed – No sale</option>
                                         <option value="In Progress">In Progress</option>
                                         <option value="Completed">Completed</option>
                                     </select>

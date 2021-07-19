@@ -103,7 +103,7 @@ $(document).ready(function () {
         });
 
         $(document).ready(function(){
-            $( '#imp-status').val("In Progress");
+            $( '#imp-status').val("New opportunity");
             var selStatus = $( '#imp-status').val();
             usersTable
                 .columns( 6 )
