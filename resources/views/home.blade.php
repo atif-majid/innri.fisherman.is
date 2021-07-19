@@ -117,7 +117,7 @@
             <li class=" navigation-header"><span>Quality Control</span>
             </li>
             <li class=" nav-item"><a href="#"><!--<i class="menu-livicon" data-icon="retweet"></i>--><span class="menu-title" data-i18n="Content">Consistency Claims</span></a>
-            <li class=" nav-item"><a href="#"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Grid">Certificat and Permits</span></a>
+            <li class=" nav-item"><a href="#"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Grid">Certificate and Permits</span></a>
             </li>
             <li class=" nav-item"><a href="{{ route('templates.index') }}"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Typography">Templates</span></a>
             </li>
