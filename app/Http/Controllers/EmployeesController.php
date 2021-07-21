@@ -13,8 +13,23 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 
+
 class EmployeesController extends Controller
 {
+    protected $arrPages = array(
+        "recipes" => "Recipes",
+        "today_production" => "Today's Production",
+        "reception_surveillance" => "Reception Surveillance",
+        "consistency_claims" => "Consistency Claims",
+        "certificate_permits" => "Certificate and permits",
+        "templates" => "Templates",
+        "improvements" => "Improvements",
+        "education_news" => "Education & News",
+        "marketing_sales" => "Marketing and Sales",
+        "employees_directory" => "Employees Directory",
+        "site_settings" => "Site Settings"
+    );
+
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
@@ -121,12 +136,23 @@ class EmployeesController extends Controller
             'id_number' => 'required'
         ]);
 
-        Employees::create($request->all());
+        $objEmp = Employees::create($request->all());
+        $nEmpID = $objEmp->id;
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make('fisherman123'),
         ]);
+
+        foreach ($this->arrPages as $key=>$val)
+        {
+            $arrInsert = array(
+                'emp_id'=>$nEmpID,
+                'routename'=>$key,
+                'rights'=>"No Access"
+            );
+            Employeerights::create($arrInsert);
+        }
 
         return redirect()->route('employees.index')
             ->with('success','Employee added successfully.');
