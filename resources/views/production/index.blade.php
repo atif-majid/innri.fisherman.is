@@ -163,16 +163,7 @@
                                                 <th style="text-align: left; padding-left: 1rem;">Product NR.</th>
                                                 <th style="text-align: left; padding-left: 1rem;">LOT NR.</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Product</th>
-                                                @php
-                                                    /*<th style="text-align: left; padding-left: 1rem;">Make</th>
-                                                    <th style="text-align: left; padding-left: 1rem;">Pack</th>
-                                                    <th style="text-align: left; padding-left: 1rem;">Freeze</th>
-                                                    <th style="text-align: left; padding-left: 1rem;">Send</th>*/
-                                                @endphp
-                                                <th style="text-align: left; padding-left: 1rem;">Instructions</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Quantity (Estimate)</th>
-                                                <th style="text-align: left; padding-left: 1rem;">Raw Material</th>
-                                                <th style="text-align: left; padding-left: 1rem;">Sum</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Status</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Production Site</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Production Date</th>
@@ -209,14 +200,15 @@
                                                     /*<td style="padding: 0.5rem 1.15rem">@if(array_key_exists($production->id, $Instructions)){{ $Instructions["$production->id"]["Make"] }}@endif</td>
                                                     <td style="padding: 0.5rem 1.15rem">@if(array_key_exists($production->id, $Instructions)){{ $Instructions["$production->id"]["Pack"] }}@endif</td>
                                                     <td style="padding: 0.5rem 1.15rem">@if(array_key_exists($production->id, $Instructions)){{ $Instructions["$production->id"]["Freeze"] }}@endif</td>
-                                                    <td style="padding: 0.5rem 1.15rem">@if(array_key_exists($production->id, $Instructions)){{ $Instructions["$production->id"]["Send"] }}@endif</td>*/
-                                                @endphp<td style="padding: 0.5rem 1.15rem">
+                                                    <td style="padding: 0.5rem 1.15rem">@if(array_key_exists($production->id, $Instructions)){{ $Instructions["$production->id"]["Send"] }}@endif</td><td style="padding: 0.5rem 1.15rem">
                                                     @if(array_key_exists($production->id, $Instructions)){{ $Instructions["$production->id"] }}@endif
-                                                </td>
+                                                </td>*/
+                                                @endphp
                                                 <td style="padding: 0.5rem 1.15rem">
                                                     {{$production->quantity_estimate}}&nbsp;{{$production->quantity_estimate_unit}}
                                                 </td>
-                                                <td style="padding: 0.5rem 1.15rem">
+                                                <?php
+                                                /*<td style="padding: 0.5rem 1.15rem">
                                                     @php
                                                       $nSumMaterials = 0;
                                                     @endphp
@@ -261,7 +253,8 @@
                                                 </td>
                                                 <td style="padding: 0.5rem 1.15rem">
                                                     {{$nSumMaterials}}
-                                                </td>
+                                                </td>*/
+                                                ?>
                                                 <td style="padding: 0.5rem 1.15rem">
                                                     @if($production->completed=='yes')
                                                         Completed

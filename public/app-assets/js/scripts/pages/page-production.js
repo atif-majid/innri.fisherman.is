@@ -24,7 +24,7 @@ $(document).ready(function () {
                     "targets": [1, 2]
                 },
                 {
-                    "targets": [ 0, 10, 11],
+                    "targets": [ 0, 7, 8],
                     "visible": false
                 }]
         });
@@ -55,14 +55,14 @@ $(document).ready(function () {
         $( '#prod-status').on( 'change', function () {
             var selStatus = $(this).val();
             usersTable
-                .columns( 10 )
+                .columns( 7 )
                 .search( selStatus )
                 .draw();
         });
         $( '#strProductionLocation').on( 'change', function () {
             var selProductionSite = $(this).val();
             usersTable
-                .columns( 11 )
+                .columns( 8 )
                 .search( selProductionSite )
                 .draw();
         });
@@ -70,7 +70,7 @@ $(document).ready(function () {
             var selStatus = $( '#prod-status').val();
             var selProductionSite = $( '#strProductionLocation').val();
             usersTable
-                .columns( 10,11 )
+                .columns( 7,8 )
                 .search( selStatus )
                 .draw();
         });
@@ -111,7 +111,7 @@ $(document).ready(function () {
                 if(typeof(minDate)!='undefined' && typeof(maxDate)!='undefined')
                 {
                     //var date = new Date( data[12] +" 05:00:00");
-                    var date = new Date( data[12]);
+                    var date = new Date( data[9]);
                     //console.log(minDate, maxDate, dataIndex,counter);
 
                     //console.log(min, max, date);

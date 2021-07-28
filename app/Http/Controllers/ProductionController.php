@@ -89,7 +89,7 @@ class ProductionController extends Controller
                 ->select('production.*','recipes.title')
                 ->get();
 
-            $Instructions = array();
+            /*$Instructions = array();
             $allInstructions = Instructions::all();
             foreach($allInstructions as $thisInstruction)
             {
@@ -131,7 +131,7 @@ class ProductionController extends Controller
                     {
                         $Instructions["$nProductionID"] = $Instructions["$nProductionID"].", S";
                     }
-                }
+                }*/
                 /*if(!array_key_exists($nProductionID, $Instructions))
                 {
                     $Instructions["$nProductionID"] = array("Make"=>"", "Pack"=>"", "Freeze"=>"", "Send"=>"");
@@ -151,10 +151,10 @@ class ProductionController extends Controller
                 if($thisInstruction->chk_send=='yes')
                 {
                     $Instructions["$nProductionID"]["Send"] = $thisInstruction->instruction_date;
-                }*/
-            }
+                }
+            }*/
 
-            $Rawmaterials = array();
+            /*$Rawmaterials = array();
             $allRawMaterials = Rawmaterials::all();
             foreach ($allRawMaterials as $thisMaterial)
             {
@@ -162,9 +162,9 @@ class ProductionController extends Controller
                 $Rawmaterials["$nProductionID"][] = array("material_name"=>$thisMaterial->material_name,
                     "material_quantity"=>$thisMaterial->material_quantity, "material_unit"=>$thisMaterial->material_unit,
                     "material_lot_nr"=>$thisMaterial->material_lot_nr);
-            }
+            }*/
             $sitesettings = Sitesettings::all();
-            return view('production.index',compact('productions', 'Instructions', 'Rawmaterials', 'sitesettings'))
+            return view('production.index',compact('productions',  'sitesettings'))
                 ->with('i', (request()->input('page', 1) - 1) * 5);
         }
 
@@ -248,140 +248,6 @@ class ProductionController extends Controller
         $objProduction = Production::create($arrProduction);
         $nProductionID = $objProduction->id;
 
-        if(isset($_POST['Instructions']))
-        {
-            $arrInstructions = $_POST['Instructions'];
-            foreach ($arrInstructions as $thisInstruction) {
-                /*if(!empty($thisInstruction['instruction_date']))
-                {*/
-                $arrInsertInstruction = array(
-                    /*'instruction_date'=>$thisInstruction['instruction_date'],*/
-                    'chk_make'=>'no',
-                    'chk_freeze'=>'no',
-                    'chk_pack'=>'no',
-                    'chk_send'=>'no',
-                    'chk_clean'=>'no',
-                    'chk_cut'=>'no',
-                    'chk_salt'=>'no',
-                    'chk_smoke'=>'no',
-                    'chk_bone_cleaning'=>'no',
-                    'chk_sliced'=>'no',
-                    'create_date_time'=>date('Y-m-d H:i:s'),
-                    'emp_id'=>$nEmpID,
-                    'production_id'=>$nProductionID
-                );
-                if(isset($thisInstruction['chk_make']))
-                {
-                    $arrInsertInstruction['chk_make'] = 'yes';
-                }
-                if(isset($thisInstruction['chk_freeze']))
-                {
-                    $arrInsertInstruction['chk_freeze'] = 'yes';
-                }
-                if(isset($thisInstruction['chk_pack']))
-                {
-                    $arrInsertInstruction['chk_pack'] = 'yes';
-                }
-                if(isset($thisInstruction['chk_send']))
-                {
-                    $arrInsertInstruction['chk_send'] = 'yes';
-                }
-                if(isset($thisInstruction['chk_clean']))
-                {
-                    $arrInsertInstruction['chk_clean'] = 'yes';
-                }
-                if(isset($thisInstruction['chk_cut']))
-                {
-                    $arrInsertInstruction['chk_cut'] = 'yes';
-                }
-                if(isset($thisInstruction['chk_salt']))
-                {
-                    $arrInsertInstruction['chk_salt'] = 'yes';
-                }
-                if(isset($thisInstruction['chk_smoke']))
-                {
-                    $arrInsertInstruction['chk_smoke'] = 'yes';
-                }
-                if(isset($thisInstruction['chk_bone_cleaning']))
-                {
-                    $arrInsertInstruction['chk_bone_cleaning'] = 'yes';
-                }
-                if(isset($thisInstruction['chk_sliced']))
-                {
-                    $arrInsertInstruction['chk_sliced'] = 'yes';
-                }
-                Instructions::create($arrInsertInstruction);
-                //}
-            }
-        }
-
-
-        $arrRawMaterials = $_POST['rawmaterials'];
-        foreach ($arrRawMaterials as $thisMaterial)
-        {
-            $arrInsertMaterial = array(
-                'material_name'=>$thisMaterial['material_name'],
-                'material_quantity'=>$thisMaterial['material_quantity'],
-                'material_unit'=>$thisMaterial['material_unit'],
-                'material_lot_nr'=>$thisMaterial['material_lot_nr'],
-                'create_date_time'=>date("Y-m-d H:i:s"),
-                'emp_id'=>$nEmpID,
-                'production_id'=>$nProductionID
-            );
-            Rawmaterials::create($arrInsertMaterial);
-        }
-
-        $arrPackaging = $_POST['packaging'];
-        foreach ($arrPackaging as $thisPackaging)
-        {
-            if(!empty($thisPackaging['packing_type']))
-            {
-                $arrInsertPackaging = array(
-                    'packing_type'=>$thisPackaging['packing_type'],
-                    'package_size'=>0,
-                    'packing_unit'=>'',
-                    'package_quantity'=>0,
-                    'package_total'=>0,
-                    'create_date_time'=>date("Y-m-d H:i:s"),
-                    'emp_id'=>$nEmpID,
-                    'production_id'=>$nProductionID
-                );
-                if($thisPackaging['package_size']>0)
-                {
-                    $arrInsertPackaging['package_size'] = $thisPackaging['package_size'];
-                }
-                if(!empty($thisPackaging['packing_unit']))
-                {
-                    $arrInsertPackaging['packing_unit'] = $thisPackaging['packing_unit'];
-                }
-                if($thisPackaging['package_quantity']>0)
-                {
-                    $arrInsertPackaging['package_quantity'] = $thisPackaging['package_quantity'];
-                }
-                if($thisPackaging['package_total']>0)
-                {
-                    $arrInsertPackaging['package_total'] = $thisPackaging['package_total'];
-                }
-                Packaging::create($arrInsertPackaging);
-            }
-
-        }
-
-        $arrShipment = $_POST['shipment'];
-        foreach($arrShipment as $thisShipment)
-        {
-            $arrInsertShipment = array(
-                'shipment_quantity'=>$thisShipment['shipment_quantity'],
-                'shipment_unit'=>$thisShipment['shipment_unit'],
-                'delivery_storage'=>$thisShipment['delivery_storage'],
-                'storage_pallet'=>$thisShipment['storage_pallet'],
-                'create_date_time'=>date("y-m-d H:i:s"),
-                'emp_id'=>$nEmpID,
-                'production_id'=>$nProductionID
-            );
-            Shipment::create($arrInsertShipment);
-        }
-
         return redirect()->route('production.index')
             ->with('success','Production record added successfully.');
     }
@@ -398,14 +264,14 @@ class ProductionController extends Controller
         $nProductionID = $production->id;
         $nRecipeID = $production->recipe_id;
         $Recipe = Recipes::find($nRecipeID);
-        $Instructions = Instructions::where('production_id', $nProductionID)->get();
-        $RawMetirals = Rawmaterials::where('production_id', $nProductionID)->get();
-        $Packagings = Packaging::where('production_id', $nProductionID)->get();
-        $Shipments = Shipment::where('production_id', $nProductionID)->get();
+        //$Instructions = Instructions::where('production_id', $nProductionID)->get();
+        //$RawMetirals = Rawmaterials::where('production_id', $nProductionID)->get();
+        //$Packagings = Packaging::where('production_id', $nProductionID)->get();
+        //$Shipments = Shipment::where('production_id', $nProductionID)->get();
         $nEmpID = $production->emp_id;
         $Employee = Employees::find($nEmpID);
         return view('production.show', compact('production', 'Recipe',
-            'Instructions', 'RawMetirals', 'Packagings', 'Shipments', 'Employee'));
+             'Employee'));
     }
 
     /**
@@ -419,13 +285,12 @@ class ProductionController extends Controller
         //
         $nProductionID = $production->id;
         $recipes = Recipes::all();
-        $Instructions = Instructions::where('production_id', $nProductionID)->get();
-        $RawMaterials = Rawmaterials::where('production_id', $nProductionID)->get();
-        $Packaging = Packaging::where('production_id', $nProductionID)->get();
-        $Shipment = Shipment::where('production_id', $nProductionID)->get();
+        //$Instructions = Instructions::where('production_id', $nProductionID)->get();
+        //$RawMaterials = Rawmaterials::where('production_id', $nProductionID)->get();
+        //$Packaging = Packaging::where('production_id', $nProductionID)->get();
+        //$Shipment = Shipment::where('production_id', $nProductionID)->get();
         $sitesettings = Sitesettings::all();
-        return view('production.edit', compact('production', 'recipes', 'Instructions',
-            'RawMaterials', 'Packaging', 'Shipment', 'sitesettings'));
+        return view('production.edit', compact('production', 'recipes',  'sitesettings'));
     }
 
     /**
@@ -470,244 +335,6 @@ class ProductionController extends Controller
         }
         $production->update($arrProduction);
 
-        if(isset($_POST['Instructions']))
-        {
-            $arrInstructions = $_POST['Instructions'];
-            foreach ($arrInstructions as $thisInstruction) {
-                /*if(!empty($thisInstruction['instruction_date']))
-                {*/
-                $arrInsertInstruction = array(
-                    //'instruction_date'=>$thisInstruction['instruction_date'],
-                    'chk_make'=>'no',
-                    'chk_freeze'=>'no',
-                    'chk_pack'=>'no',
-                    'chk_send'=>'no',
-                    'chk_clean'=>'no',
-                    'chk_cut'=>'no',
-                    'chk_salt'=>'no',
-                    'chk_smoke'=>'no',
-                    'chk_bone_cleaning'=>'no',
-                    'chk_sliced'=>'no',
-                    'create_date_time'=>date('Y-m-d H:i:s'),
-                    'emp_id'=>$nEmpID,
-                    'production_id'=>$nProductionID
-                );
-                if(isset($thisInstruction['chk_make']))
-                {
-                    $arrInsertInstruction['chk_make'] = 'yes';
-                }
-                if(isset($thisInstruction['chk_freeze']))
-                {
-                    $arrInsertInstruction['chk_freeze'] = 'yes';
-                }
-                if(isset($thisInstruction['chk_pack']))
-                {
-                    $arrInsertInstruction['chk_pack'] = 'yes';
-                }
-                if(isset($thisInstruction['chk_send']))
-                {
-                    $arrInsertInstruction['chk_send'] = 'yes';
-                }
-                if(isset($thisInstruction['chk_clean']))
-                {
-                    $arrInsertInstruction['chk_clean'] = 'yes';
-                }
-                if(isset($thisInstruction['chk_cut']))
-                {
-                    $arrInsertInstruction['chk_cut'] = 'yes';
-                }
-                if(isset($thisInstruction['chk_salt']))
-                {
-                    $arrInsertInstruction['chk_salt'] = 'yes';
-                }
-                if(isset($thisInstruction['chk_smoke']))
-                {
-                    $arrInsertInstruction['chk_smoke'] = 'yes';
-                }
-                if(isset($thisInstruction['chk_bone_cleaning']))
-                {
-                    $arrInsertInstruction['chk_bone_cleaning'] = 'yes';
-                }
-                if(isset($thisInstruction['chk_sliced']))
-                {
-                    $arrInsertInstruction['chk_sliced'] = 'yes';
-                }
-                if(isset($thisInstruction['nInstructionID']) && $thisInstruction['nInstructionID']>0)
-                {
-                    unset($arrInsertInstruction['create_date_time']);
-                    unset($arrInsertInstruction['production_id']);
-                    Instructions::find($thisInstruction['nInstructionID'])->update($arrInsertInstruction);
-                }
-                else
-                {
-                    Instructions::create($arrInsertInstruction);
-                }
-                //}
-            }
-        }
-
-
-        $arrRawMaterials = $_POST['rawmaterials'];
-        foreach ($arrRawMaterials as $thisMaterial)
-        {
-            if(!empty($thisMaterial['material_name']))
-            {
-                $arrInsertMaterial = array(
-                    'material_name'=>$thisMaterial['material_name'],
-                    'material_quantity'=>$thisMaterial['material_quantity'],
-                    'material_unit'=>$thisMaterial['material_unit'],
-                    'material_lot_nr'=>$thisMaterial['material_lot_nr'],
-                    'create_date_time'=>date("Y-m-d H:i:s"),
-                    'emp_id'=>$nEmpID,
-                    'production_id'=>$nProductionID
-                );
-                if(isset($thisMaterial['nMaterialID']) && $thisMaterial['nMaterialID']>0)
-                {
-                    unset($arrInsertMaterial['create_date_time']);
-                    unset($arrInsertMaterial['production_id']);
-                    Rawmaterials::find($thisMaterial['nMaterialID'])->update($arrInsertMaterial);
-                }
-                else
-                {
-                    Rawmaterials::create($arrInsertMaterial);
-                }
-            }
-
-        }
-
-        $arrPackaging = $_POST['packaging'];
-        foreach ($arrPackaging as $thisPackaging)
-        {
-            if(!empty($thisPackaging['packing_type']))
-            {
-                $arrInsertPackaging = array(
-                    'packing_type'=>$thisPackaging['packing_type'],
-                    'package_size'=>0,
-                    'packing_unit'=>'',
-                    'package_quantity'=>0,
-                    'package_total'=>0,
-                    'create_date_time'=>date("Y-m-d H:i:s"),
-                    'emp_id'=>$nEmpID,
-                    'production_id'=>$nProductionID
-                );
-                if($thisPackaging['package_size']>0)
-                {
-                    $arrInsertPackaging['package_size'] = $thisPackaging['package_size'];
-                }
-                if(!empty($thisPackaging['packing_unit']))
-                {
-                    $arrInsertPackaging['packing_unit'] = $thisPackaging['packing_unit'];
-                }
-                if($thisPackaging['package_quantity']>0)
-                {
-                    $arrInsertPackaging['package_quantity'] = $thisPackaging['package_quantity'];
-                }
-                if($thisPackaging['package_total']>0)
-                {
-                    $arrInsertPackaging['package_total'] = $thisPackaging['package_total'];
-                }
-                if(isset($thisPackaging['nPackagingID']) && $thisPackaging['nPackagingID']>0)
-                {
-                    unset($arrInsertPackaging['create_date_time']);
-                    unset($arrInsertPackaging['production_id']);
-                    Packaging::find($thisPackaging['nPackagingID'])->update($arrInsertPackaging);
-                }
-                else
-                {
-                    Packaging::create($arrInsertPackaging);
-                }
-
-            }
-
-        }
-
-
-
-        $arrShipment = $_POST['shipment'];
-        foreach($arrShipment as $thisShipment)
-        {
-            if(!empty($thisShipment['shipment_quantity']))
-            {
-                $arrInsertShipment = array(
-                    'shipment_quantity'=>$thisShipment['shipment_quantity'],
-                    'shipment_unit'=>$thisShipment['shipment_unit'],
-                    'delivery_storage'=>$thisShipment['delivery_storage'],
-                    'storage_pallet'=>$thisShipment['storage_pallet'],
-                    'create_date_time'=>date("y-m-d H:i:s"),
-                    'emp_id'=>$nEmpID,
-                    'production_id'=>$nProductionID
-                );
-                if(isset($thisShipment['nShipmentID']) && $thisShipment['nShipmentID']>0)
-                {
-                    unset($arrInsertShipment['create_date_time']);
-                    unset($arrInsertShipment['production_id']);
-                    Shipment::find($thisShipment['nShipmentID'])->update($arrInsertShipment);
-                }
-                else
-                {
-                    Shipment::create($arrInsertShipment);
-                }
-            }
-
-
-        }
-
-        $deletedInstructions = $request->deletedInstructions;
-        $deletedRawMaterials = $request->deletedRawMaterials;
-        $deletedPackaging = $request->deletedPackaging;
-        $deletedShipment = $request->deletedShipment;
-
-        if(trim($deletedInstructions)!="")
-        {
-            $arrDeletedInstructions = explode(",", $deletedInstructions);
-            for($i=0; $i<count($arrDeletedInstructions); $i++)
-            {
-                $nDelThisInstruction = $arrDeletedInstructions[$i];
-                if(is_numeric($nDelThisInstruction) && $nDelThisInstruction>0)
-                {
-                    Instructions::where('id', $nDelThisInstruction)->delete();
-                }
-            }
-        }
-
-        if(trim($deletedRawMaterials) !="")
-        {
-            $arrDeletedRawMaterial = explode(",", $deletedRawMaterials);
-            for($i=0; $i<count($arrDeletedRawMaterial); $i++)
-            {
-                $nDelThisRawMaterial = $arrDeletedRawMaterial[$i];
-                if(is_numeric($nDelThisRawMaterial) && $nDelThisRawMaterial>0)
-                {
-                    Rawmaterials::where('id', $nDelThisRawMaterial)->delete();
-                }
-            }
-        }
-
-        if(trim($deletedPackaging) !="")
-        {
-            $arrDeletedPackaging = explode(",", $deletedPackaging);
-            for($i=0; $i<count($arrDeletedPackaging); $i++)
-            {
-                $nDelThisPackaging = $arrDeletedPackaging[$i];
-                if(is_numeric($nDelThisPackaging) && $nDelThisPackaging>0)
-                {
-                    Packaging::where('id', $nDelThisPackaging)->delete();
-                }
-            }
-        }
-
-        if(trim($deletedShipment) !="")
-        {
-            $arrDeletedShipment = explode(",", $deletedShipment);
-            for($i=0; $i<count($arrDeletedShipment); $i++)
-            {
-                $nDelThisShipment = $arrDeletedShipment[$i];
-                if(is_numeric($nDelThisShipment) && $nDelThisShipment>0)
-                {
-                    Shipment::where('id', $nDelThisShipment)->delete();
-                }
-            }
-        }
 
         return redirect()->route('production.index')
             ->with('success','Production record updated successfully.');
@@ -725,10 +352,10 @@ class ProductionController extends Controller
         $nProductionID = $production->id;
         //Ingredients::where('recipe_id',$nRecipeID)->delete();
         $production->delete();
-        Instructions::where('production_id', $nProductionID)->delete();
-        Rawmaterials::where('production_id', $nProductionID)->delete();
-        Packaging::where('production_id', $nProductionID)->delete();
-        Shipment::where('production_id', $nProductionID)->delete();
+        //Instructions::where('production_id', $nProductionID)->delete();
+        //Rawmaterials::where('production_id', $nProductionID)->delete();
+        //Packaging::where('production_id', $nProductionID)->delete();
+        //Shipment::where('production_id', $nProductionID)->delete();
 
         return redirect()->route('production.index')
             ->with('success','Production record deleted successfully.');
@@ -909,10 +536,10 @@ class ProductionController extends Controller
         {
             $nRecipeID = $production->recipe_id;
             $recipe = Recipes::find($nRecipeID);
-            $Instructions = Instructions::where('production_id', $nProductionID)->get();
-            $RawMetirals = Rawmaterials::where('production_id', $nProductionID)->get();
-            $Packagings = Packaging::where('production_id', $nProductionID)->get();
-            $Shipments = Shipment::where('production_id', $nProductionID)->get();
+            //$Instructions = Instructions::where('production_id', $nProductionID)->get();
+            //$RawMetirals = Rawmaterials::where('production_id', $nProductionID)->get();
+            //$Packagings = Packaging::where('production_id', $nProductionID)->get();
+            //$Shipments = Shipment::where('production_id', $nProductionID)->get();
 
             $Ingredients = Ingredients::where('recipe_id', $nRecipeID)->get();
             $Steps = Steps::where('recipe_id', $nRecipeID)->get();
@@ -930,8 +557,8 @@ class ProductionController extends Controller
 
             /*return view('production.printpdf', compact('production', 'Instructions', 'RawMetirals',
                'Packagings',  'Shipments', 'recipe', 'Ingredients', 'Steps', 'RecipePhoto', 'arrCalculatedIngredietns'));*/
-            $pdf = PDF::loadView('production.printpdf', compact('production', 'Instructions', 'RawMetirals',
-                'Packagings',  'Shipments', 'recipe', 'Ingredients', 'Steps', 'RecipePhoto', 'arrCalculatedIngredietns'));
+            $pdf = PDF::loadView('production.printpdf', compact('production', 'recipe',
+                'Ingredients', 'Steps', 'RecipePhoto', 'arrCalculatedIngredietns'));
             return $pdf->download($recipe->title.' (Production)'.'.pdf');
         }
         else
