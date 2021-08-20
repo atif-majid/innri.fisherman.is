@@ -423,7 +423,7 @@ class RecipesController extends Controller
             }
         }
 
-        if($request->file('Photos'))
+        /*if($request->file('Photos'))
         {
             $arrPhotos = $request->file('Photos');
             {
@@ -443,14 +443,14 @@ class RecipesController extends Controller
                     Recipephotos::create($arrPicRecord);
                 }
             }
-        }
+        }*/
 
 
-        /*return redirect()->route('recipes.index')
-            ->with('success','Recipe updated successfully.');*/
-        $request->session()->flash('success', 'Sales opportunity updated successfully.');
+        return redirect()->route('recipes.index')
+            ->with('success','Recipe updated successfully.');
+        /*$request->session()->flash('success', 'Sales opportunity updated successfully.');
 
-        return "{\"msg\":\"success\"}";
+        return "{\"msg\":\"success\"}";*/
     }
 
     /**

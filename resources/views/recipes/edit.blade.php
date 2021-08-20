@@ -125,7 +125,7 @@
                                                     <label>Recipe Created</label>
                                                     <div class="controls">
                                                         <fieldset class="position-relative has-icon-left">
-                                                            <input type="text" class="form-control format-picker" placeholder="Select Date" id="created_date" name="created_date" value="@if (old('created_date')) {{ old('created_date') }} @else {{ $recipe->created_date }} @endif">
+                                                            <input type="text" class="form-control format-picker" placeholder="Select Date" id="created_date" name="created_date" value="{{ $recipe->created_date }}">
                                                             <div class="form-control-position">
                                                                 <i class='bx bx-calendar'></i>
                                                             </div>
@@ -668,13 +668,24 @@
             $('#btnAllSubmit').on("click", function() {
                 $('.modal-body').html('');
                 var nFiles = myDropzone.files.length;
-                var arrFormData = $('#frmEditRecipe').serialize();
+                if(nFiles==0)
+                {
+                    //window.location.href = "{{route('recipes.index')}}";
+                    $('#frmEditRecipe').submit();
+                }
+                else
+                {
+                    myDropzone.processQueue();
+                }
+                /*var arrFormData = $('#frmEditRecipe').serialize();
                 $.ajax({
-                    type: "put",
+                    type: "post",
                     url: "{{ route('recipes.update', $recipe->id) }}",
                     data: arrFormData,
-                    dataType: 'json',              // let's set the expected response format
+                    //dataType: 'json',              // let's set the expected response format
                     success: function(data){
+                        console.log(data);
+                        return false;
                         var nFiles = myDropzone.files.length;
                         if(nFiles==0)
                         {
@@ -686,10 +697,11 @@
                         }
                     },
                     error: function (err) {
+                        console.log(err);
+                        return false;
                         if (err.status == 422) { // when status code is 422, it's a validation issue
                             //console.log(err.responseJSON);
                             // you can loop through the errors object and show it to the user
-                            /*console.warn(err.responseJSON.errors);*/
                             // display errors on each form field
                             var errDisplay = ''
                             $.each(err.responseJSON.errors, function (i, error) {
@@ -710,7 +722,7 @@
                             }
                         }
                     }
-                });
+                });*/
             });
             myDropzone.on("sending", function(file, xhr, data) {
 
@@ -722,8 +734,9 @@
             myDropzone.on("complete", function (file) {
                 if (myDropzone.getUploadingFiles().length === 0 && myDropzone.getQueuedFiles().length === 0) {
                     //location.reload();
-                    window.location.href = "{{route('recipes.index')}}";
+                    //window.location.href = "{{route('recipes.index')}}";
                     //console.log(file);
+                    $('#frmEditRecipe').submit();
                 }
             });
             myDropzone.on("removedfile", function(file) {
