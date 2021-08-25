@@ -469,7 +469,8 @@
         $('#modalRawMaterial').modal('show');
     }
     $(document).ready(function(){
-        $('select.selProduction').on('change', function() {
+        //$('.selProduction').change( function() {
+        $(document).on('change','.selProduction',function(){
             var strNewStatus = $(this).val();
             var nID = $(this).next('.productionid').val();
             $(this).attr('disaled', true);
