@@ -121,6 +121,8 @@
             </li>
             <li class=" nav-item"><a href="{{ route('templates.index') }}"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Typography">Templates</span></a>
             </li>
+            <li class=" nav-item"><a href="{{ route('reports.index') }}"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Typography">Reports</span></a>
+            </li>
             <li class=" nav-item"><a href="{{ route('improvements.index') }}"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Text Utilities">Improvements</span></a>
             </li>
             <li class=" nav-item"><a href="#"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Syntax Highlighter">Maintenance Plan</span></a>

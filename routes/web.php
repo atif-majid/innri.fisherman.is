@@ -12,6 +12,7 @@ use App\Http\Controllers\DeptrightsController;
 use App\Http\Controllers\EmprightsController;
 use App\Http\Controllers\ReceptionsurveillanceController;
 use App\Http\Controllers\TemplatesController;
+use App\Http\Controllers\ReportsController;
 
 
 /*
@@ -145,3 +146,6 @@ Route::get('templates/fill/{id}', ['as'=>'templates.fill', 'uses'=>'App\Http\Con
 Route::get('templates/review/{id}', ['as'=>'templates.review', 'uses'=>'App\Http\Controllers\TemplatesController@review'])->middleware('auth');;
 Route::post('/templates/fillsubmit', ['as'=>'templates.fillsubmit', 'uses'=>'App\Http\Controllers\TemplatesController@fillsubmit']);
 Route::post('/templates/reviewsubmit', ['as'=>'templates.reviewsubmit', 'uses'=>'App\Http\Controllers\TemplatesController@reviewsubmit']);
+
+Route::resource('reports', ReportsController::class, ['middleware' => 'auth']);
+Route::get('/reports/{id}', [ReportsController::class, 'show']);
