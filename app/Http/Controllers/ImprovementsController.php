@@ -190,7 +190,7 @@ class ImprovementsController extends Controller
                 'production_location' => $request->strProductionLocation,
                 'supplier' => $request->strSupplier,
                 'selling_location' => $request->strWhereSold,
-                'purchase_date' => $request->strDateOfPurchase,
+                'purchase_date' => date("Y-m-d", strtotime($request->strDateOfPurchase)),
                 'lot_nr' => $request->strLotNr,
                 'description' => $request->strDescription,
                 'response_improvements' => $request->strResponse,
@@ -211,7 +211,7 @@ class ImprovementsController extends Controller
             if($request->strDueDate!="")
             {
                 $strDueDate = $request->strDueDate;
-                $arrImpmrovement['due_date'] = $strDueDate;
+                $arrImpmrovement['due_date'] = date("Y-m-d", strtotime($strDueDate));
             }
 
 
@@ -579,7 +579,7 @@ class ImprovementsController extends Controller
     {
         $strResponse = $request->strResponse;
         $nAssignedTo = $request->nAssignedTo;
-        $strDueDate = $request->strDueDate;
+        $strDueDate = date("Y-m-d", strtotime($request->strDueDate));
         $nID = $request->id;
 
         if(isset($request->nAssignedTo) && is_numeric($request->nAssignedTo) && $request->nAssignedTo>0)
@@ -635,7 +635,7 @@ class ImprovementsController extends Controller
 
             $newAssignee = Employees::find($nAssignedTo);
             $strNewAssigneeName = $newAssignee->name;
-            $strCommentNewAssignee = 'Assigned to '.$strNewAssigneeName.' by '.$strCurrentEmployeeName.'. Due date: '.$strDueDate;
+            $strCommentNewAssignee = 'Assigned to '.$strNewAssigneeName.' by '.$strCurrentEmployeeName.'. Due date: '.$request->strDueDate;
             $arrComments = array(
                 'improvements_id'=>$nID,
                 'comment'=>$strCommentNewAssignee,

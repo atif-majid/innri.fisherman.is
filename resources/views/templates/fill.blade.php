@@ -106,7 +106,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">{{ $thistemplate->title }} - Version {{ $thistemplate->version }} <small>(Created on  @if(empty($thistemplate->updated_on)) {{ $thistemplate->created_on }} @else {{ $thistemplate->updated_on }} @endif)</small></h4>
+                                    <h4 class="card-title">{{ $thistemplate->title }} - Version {{ $thistemplate->version }} <small>(Created on  @if(empty($thistemplate->updated_on)) {{ date("d-m-Y H:i:s", strtotime($thistemplate->created_on)) }} @else {{ date("d-m-Y H:i:s", strtotime($thistemplate->updated_on)) }} @endif)</small></h4>
                                     <input type="hidden" id="strTempTitle" name="strTempTitle" value="{{ $thistemplate->title }}"/>
                                     <input type="hidden" id="nTemplate" name="nTemplate" value="{{ $thistemplate->id }}">
                                     <input type="hidden" id="nVersion" name="nVersion" value="{{ $thistemplate->version }}">
@@ -120,7 +120,7 @@
                                                     <div class="form-group col-sm">
                                                         <label>Date</label>
                                                         <div class="controls">
-                                                            {{ date("Y-m-d") }}
+                                                            {{ date("d-m-Y") }}
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-sm">

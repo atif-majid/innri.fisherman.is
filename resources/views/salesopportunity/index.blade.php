@@ -221,7 +221,7 @@
                                                     </form>*/ @endphp
                                                 </td>
                                                 @php /*<td style="padding: 0.5rem 1.15rem; white-space:nowrap;">{!! str_replace(" ", "<br>", $Saleop->creation_time) !!} </td>*/ @endphp
-                                                <td style="padding: 0.5rem 1.15rem; white-space:nowrap;">{{ $Saleop->creation_time }} </td>
+                                                <td style="padding: 0.5rem 1.15rem; white-space:nowrap;" data-sort="{{strtotime($Saleop->creation_time)}}">{{ date("d-m-Y H:i:s", strtotime($Saleop->creation_time)) }} </td>
                                                 <td style="padding: 0.5rem 1.15rem">{{ $Saleop->who_notified }}</td>
                                                 <td style="padding: 0.5rem 1.15rem">
                                                     @if($Saleop->business_potential==1)

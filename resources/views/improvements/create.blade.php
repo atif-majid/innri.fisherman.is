@@ -478,12 +478,14 @@
     $(document).ready(function(){
         $('.pickadate-limits').pickadate({
             //format: 'mmmm, d, yyyy'
-            format: 'yyyy-mm-dd',
+            //format: 'yyyy-mm-dd',
+            format: 'dd-mm-yyyy',
             max: '0'
         });
         $('.pickadate-all').pickadate({
             //format: 'mmmm, d, yyyy'
-            format: 'yyyy-mm-dd',
+            //format: 'yyyy-mm-dd',
+            format: 'dd-mm-yyyy',
         });
     });
 </script>

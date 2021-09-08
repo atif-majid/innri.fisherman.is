@@ -267,7 +267,7 @@
                                                     <div class="form-group col-sm">
                                                         <label>When was it bought?</label>
                                                         <fieldset class="position-relative has-icon-left">
-                                                            <input type="text" class="form-control pickadate-limits" placeholder="Select Date" id="purchase_date" name="strDateOfPurchase" value="{{ $improvement->purchase_date }}">
+                                                            <input type="text" class="form-control pickadate-limits" placeholder="Select Date" id="purchase_date" name="strDateOfPurchase" value="{{ date("d-m-y", strtotime($improvement->purchase_date)) }}">
                                                             <div class="form-control-position">
                                                                 <i class='bx bx-calendar'></i>
                                                             </div>
@@ -304,7 +304,7 @@
                                                     <div class="form-group col-sm">
                                                         <label>Due Date</label>
                                                         <fieldset class="position-relative has-icon-left">
-                                                            <input type="text" class="form-control pickadate-all" placeholder="Select Date" id="purchase_date" name="strDueDate" value="{{$improvement->due_date}}">
+                                                            <input type="text" class="form-control pickadate-all" placeholder="Select Date" id="purchase_date" name="strDueDate" value="{{ date("d-m-y", strtotime($improvement->due_date))}}">
                                                             <div class="form-control-position">
                                                                 <i class='bx bx-calendar'></i>
                                                             </div>
@@ -492,12 +492,14 @@
     $(document).ready(function(){
         $('.pickadate-limits').pickadate({
             //format: 'mmmm, d, yyyy'
-            format: 'yyyy-mm-dd',
+            //format: 'yyyy-mm-dd',
+            format: 'dd-mm-yyyy',
             max: '0'
         });
         $('.pickadate-all').pickadate({
             //format: 'mmmm, d, yyyy'
-            format: 'yyyy-mm-dd',
+            //format: 'yyyy-mm-dd',
+            format: 'dd-mm-yyyy',
         });
     });
 </script>

@@ -10,7 +10,7 @@
                 <tbody>
                 <tr>
                     <td class="users-view-latest-activity"><strong>Production Date:</strong></td>
-                    <td class="users-view-latest-activity">{{ $production->production_date }}</td>
+                    <td class="users-view-latest-activity">{{ date("d-m-Y", strtotime($production->production_date)) }}</td>
                 </tr>
                 <tr>
                     <td class="users-view-latest-activity"><strong>Production Site:</strong></td>
@@ -22,7 +22,7 @@
                 </tr>
                 <tr>
                     <td class="users-view-latest-activity"><strong>Date:</strong></td>
-                    <td class="users-view-latest-activity">{{ $production->create_date_time }}</td>
+                    <td class="users-view-latest-activity">{{ date("d-m-Y H:i:s", strtotime($production->create_date_time)) }}</td>
                 </tr>
                 <tr>
                     <td class="users-view-latest-activity"><strong>Product Number:</strong></td>
@@ -64,7 +64,7 @@
                         <td class="users-view-latest-activity">{{ $production->lot_number }}</td>
                     </tr>
                     <tr>
-                        <td class="users-view-latest-activity" colspan="2" style="text-align: right">{{ $production->create_date_time }}</td>
+                        <td class="users-view-latest-activity" colspan="2" style="text-align: right">{{ date("d-m-Y H:i:s", strtotime($production->create_date_time)) }}</td>
                     </tr>
                     <tr>
                         <td class="users-view-latest-activity" colspan="2"><b>Ingredients</b></td>

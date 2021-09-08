@@ -248,7 +248,7 @@
                                                         @endif
                                                     </td>
                                                     <td class="py-1">
-                                                        {{$improvement->due_date}}
+                                                        {{date("d-m-Y", strtotime($improvement->due_date))}}
                                                     </td>
                                                     <td class="py-1">
                                                         Improvement
@@ -303,7 +303,7 @@
                                                         {{$task->task}}
                                                     </td>
                                                     <td class="py-1">
-                                                        {{$task->due_date}}
+                                                        {{date("d-m-Y", strtotime($task->due_date))}}
                                                     </td>
                                                     <td class="py-1">
                                                         @if(strpos($task->field, 'quit')>0)

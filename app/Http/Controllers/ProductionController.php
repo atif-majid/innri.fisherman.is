@@ -237,7 +237,7 @@ class ProductionController extends Controller
         );
         if(!empty($request->production_date))
         {
-            $arrProduction['production_date'] = $request->production_date;
+            $arrProduction['production_date'] = date("Y-m-d", strtotime($request->production_date));
         }
         if(!empty($request->strProductionLocation))
         {
@@ -327,7 +327,7 @@ class ProductionController extends Controller
         );
         if(!empty($request->production_date))
         {
-            $arrProduction['production_date'] = $request->production_date;
+            $arrProduction['production_date'] = date("Y-m-d", strtotime($request->production_date));
         }
         if(!empty($request->strProductionLocation))
         {

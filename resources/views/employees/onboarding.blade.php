@@ -164,7 +164,7 @@
                                                                         <div class="col-sm-2 form-group">
                                                                             <label>Due Date</label>
                                                                             <fieldset class="position-relative has-icon-left">
-                                                                                <input type="text" class="form-control format-picker" placeholder="Select Date" id="purchase_date" name="strDueDate" value="{{ $arrPreset["$taskKey"]->due_date }}">
+                                                                                <input type="text" class="form-control format-picker" placeholder="Select Date" id="purchase_date" name="strDueDate" value="{{ date("d-m-Y", strtotime($arrPreset["$taskKey"]->due_date)) }}">
                                                                                 <div class="form-control-position">
                                                                                     <i class='bx bx-calendar'></i>
                                                                                 </div>

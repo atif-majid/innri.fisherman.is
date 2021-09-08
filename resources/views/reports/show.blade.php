@@ -11,7 +11,7 @@
             <td class="users-view-latest-activity"><strong>Submitted By:</strong></td>
             <td class="users-view-latest-activity" colspan="2">{{ $templatesubmit->employeename }}</td>
             <td class="users-view-latest-activity"><strong>Submitted On:</strong></td>
-            <td class="users-view-latest-activity" colspan="2">{{ $templatesubmit->submit_date }}</td>
+            <td class="users-view-latest-activity" colspan="2">{{ date("d-m-Y H:i:s", strtotime($templatesubmit->submit_date)) }}</td>
         </tr>
         <tr>
             <td class="users-view-latest-activity" colspan="4"><strong>Template:</strong></td>

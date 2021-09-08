@@ -156,7 +156,7 @@
                                                             <a href="#" class="list-group-item list-group-item-action" onclick="return false;" id="{{$thisComment->id}}">
                                                                 <div class="d-flex w-100 justify-content-between">
                                                                     <h5 class="mb-1">Posted by {{ $thisComment->name }}</h5>
-                                                                    <small>{{ $thisComment->comment_add_date }} </small>
+                                                                    <small>{{ date("d-m-Y H:i:s", strtotime($thisComment->comment_add_date)) }} </small>
                                                                 </div>
                                                                 <p class="mb-1">
                                                                     {!! trim(nl2br($thisComment->comment)) !!}
@@ -414,7 +414,8 @@
     $(document).ready(function(){
         $('.pickadate-limits').pickadate({
             //format: 'mmmm, d, yyyy'
-            format: 'yyyy-mm-dd',
+            //format: 'yyyy-mm-dd',
+            format: 'dd-mm-yyyy',
         });
 
         $('.comment').click(function(event){

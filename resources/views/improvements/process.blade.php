@@ -135,7 +135,7 @@
                                         <div class="col-12 col-md-2"><strong>Registered By:</strong></div>
                                         <div class="col-12 col-md-2">{{ $improvement->name }}</div>
                                         <div class="col-12 col-md-2"><strong>Registered At:</strong></div>
-                                        <div class="col-12 col-md-2">{{ $improvement->complain_creation_date }}</div>
+                                        <div class="col-12 col-md-2">{{ date("d-m-Y H:i:s", strtotime($improvement->complain_creation_date)) }}</div>
                                         <div class="col-12 col-md-2"></div>
                                         <div class="col-12 col-md-2"></div>
                                     </div>
@@ -172,7 +172,7 @@
                                                 <a href="#" class="list-group-item list-group-item-action" onclick="return false;">
                                                     <div class="d-flex w-100 justify-content-between">
                                                         <h5 class="mb-1">Posted by {{ $improvement->name }}</h5>
-                                                        <small>{{ $improvement->complain_creation_date }}</small>
+                                                        <small>{{ date("d-m-Y H:i:s", strtotime($improvement->complain_creation_date)) }}</small>
                                                     </div>
                                                     <p class="mb-1">
                                                         {{ $improvement->response_improvements }}
@@ -190,7 +190,7 @@
                                                 <a href="#" class="list-group-item list-group-item-action" onclick="return false;" id="{{$thisComment->id}}">
                                                     <div class="d-flex w-100 justify-content-between">
                                                         <h5 class="mb-1">Posted by {{ $thisComment->name }}</h5>
-                                                        <small>{{ $thisComment->comment_add_date }} </small>
+                                                        <small>{{ date("d-m-Y H:i:s", strtotime($thisComment->comment_add_date)) }} </small>
                                                     </div>
                                                     <p class="mb-1">
                                                         {!! trim(nl2br($thisComment->comment)) !!}
@@ -480,7 +480,8 @@
     $(document).ready(function(){
         $('.pickadate-limits').pickadate({
             //format: 'mmmm, d, yyyy'
-            format: 'yyyy-mm-dd',
+            //format: 'yyyy-mm-dd',
+            format: 'dd-mm-YYYY',
         });
 
         $('.comment').click(function(event){

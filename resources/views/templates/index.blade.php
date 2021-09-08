@@ -173,11 +173,11 @@
                                                     </td>
                                                     <td style="padding: 0.5rem 1.15rem">{{ $template->title }}</td>
                                                     <td style="padding: 0.5rem 1.15rem">{{ $template->version }}</td>
-                                                    <td style="padding: 0.5rem 1.15rem">
+                                                    <td style="padding: 0.5rem 1.15rem" data-sort="@if(!empty($template->updated_on)){{ strtotime($template->updated_on) }}@else{{ strtotime($template->created_on) }}@endif">
                                                         @if(!empty($template->updated_on))
-                                                            {{ $template->updated_on }}
+                                                            {{ date("d-m-Y H:i:s", strtotime($template->updated_on)) }}
                                                         @else
-                                                            {{ $template->created_on }}
+                                                            {{ date("d-m-Y H:i:s", strtotime($template->created_on)) }}
                                                         @endif
                                                     </td>
                                                 </tr>

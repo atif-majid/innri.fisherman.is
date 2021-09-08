@@ -76,8 +76,13 @@ $(document).ready(function () {
         });
 
         $(document).ready(function(){
-            minDate = new Date($('#min').val());
-            maxDate = new Date($('#max').val());
+            var strMinDate = $('#min').val();
+            var strMaxDate = $('#max').val();
+            var MinDateParts = strMinDate.split("-");
+            var MaxDateParts = strMaxDate.split("-");
+
+            minDate = new Date(MinDateParts[2]+"-"+MinDateParts[1]+"-"+MinDateParts[0]);
+            maxDate = new Date(MaxDateParts[2]+"-"+MaxDateParts[1]+"-"+MaxDateParts[0]);
             console.log(minDate, maxDate);
             //maxDate = new Date(maxDate.setDate(maxDate.getDate() + 1));
             var table = $('#users-list-datatable').DataTable();
@@ -92,8 +97,13 @@ $(document).ready(function () {
                 //    .columns( 12 )
                 //    .search( min, max )
                 //    .draw();
-                minDate = new Date($('#min').val());
-                maxDate = new Date($('#max').val());
+                var strMinDate = $('#min').val();
+                var strMaxDate = $('#max').val();
+                var MinDateParts = strMinDate.split("-");
+                var MaxDateParts = strMaxDate.split("-");
+
+                minDate = new Date(MinDateParts[2]+"-"+MinDateParts[1]+"-"+MinDateParts[0]);
+                maxDate = new Date(MaxDateParts[2]+"-"+MaxDateParts[1]+"-"+MaxDateParts[0]);
                 //console.log(minDate, maxDate);
                 var table = $('#users-list-datatable').DataTable();
                 table.draw();
@@ -111,7 +121,10 @@ $(document).ready(function () {
                 if(typeof(minDate)!='undefined' && typeof(maxDate)!='undefined')
                 {
                     //var date = new Date( data[12] +" 05:00:00");
-                    var date = new Date( data[9]);
+                    var datesearch = data[9];
+                    var DateParts = datesearch.split("-");
+
+                    var date = new Date( DateParts[2]+"-"+DateParts[1]+"-"+DateParts[0]);
                     //console.log(minDate, maxDate, dataIndex,counter);
 
                     //console.log(min, max, date);

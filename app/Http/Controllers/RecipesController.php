@@ -139,7 +139,7 @@ class RecipesController extends Controller
             }
             if(trim($request->created_date)!="")
             {
-                $arrRecipe['created_date'] = $request->created_date;
+                $arrRecipe['created_date'] = date("Y-m-d", strtotime($request->created_date));
             }
             if(trim($request->nRecipeQuantity)!="")
             {
@@ -296,7 +296,7 @@ class RecipesController extends Controller
         }
         if(trim($request->created_date)!="")
         {
-            $arrRecipe['created_date'] = $request->created_date;
+            $arrRecipe['created_date'] = date("Y-m-d", strtotime($request->created_date));
         }
         if(trim($request->nRecipeQuantity)!="")
         {

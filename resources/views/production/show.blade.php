@@ -5,7 +5,7 @@
             <td class="users-view-latest-activity"><strong>Recipe:</strong></td>
             <td class="users-view-latest-activity" colspan="2">{{ $Recipe->title }}</td>
             <td class="users-view-latest-activity"><strong>Date:</strong></td>
-            <td class="users-view-latest-activity" colspan="2">{{ $production->create_date_time }}</td>
+            <td class="users-view-latest-activity" colspan="2">{{ date("d-m-Y", strtotime($production->production_date)) }}</td>
         </tr>
         <tr>
             <td class="users-view-latest-activity"><strong>Product Number:</strong></td>

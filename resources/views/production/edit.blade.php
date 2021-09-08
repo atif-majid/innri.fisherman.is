@@ -110,7 +110,7 @@
                                                 <div class="form-group col-sm">
                                                     <label>Production Date</label>
                                                     <fieldset class="position-relative has-icon-left">
-                                                        <input type="text" class="form-control format-picker" placeholder="Select Date" id="production_date" name="production_date" value="{{$production->production_date}}">
+                                                        <input type="text" class="form-control format-picker" placeholder="Select Date" id="production_date" name="production_date" value="{{date("d-m-Y", strtotime($production->production_date))}}">
                                                         <div class="form-control-position">
                                                             <i class='bx bx-calendar'></i>
                                                         </div>

@@ -340,7 +340,7 @@ class EmployeesController extends Controller
                     'assigned_datetime'=>date("Y-m-d H:i:s"),
                     'responsible_person'=>$task['nAssignedTo'],
                     'status'=>$task['strStatus'],
-                    'due_date'=>$task['strDueDate']
+                    'due_date'=>date("Y-m-d", strtotime($task['strDueDate']))
                 );
                 if(isset($task['nTaskID']) && $task['nTaskID']>0)
                 {

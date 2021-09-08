@@ -203,7 +203,7 @@
                                                                  if(confirm('Are you sure to delete?')){document.getElementById('form-del').submit();}"><i class="bx bxs-trash-alt"></i></a>
                                                             </form>*/ @endphp
                                                         </td>
-                                                        <td style="padding: 0.5rem 1.15rem; white-space:nowrap;">{!! str_replace(" ", "<br>", $Improvement->complain_creation_date) !!} </td>
+                                                        <td style="padding: 0.5rem 1.15rem; white-space:nowrap;" data-sort="{{strtotime($Improvement->complain_creation_date)}}">{!! str_replace(" ", "<br>", date("d-m-Y H:i:s", strtotime($Improvement->complain_creation_date))) !!} </td>
                                                         <td style="padding: 0.5rem 1.15rem">{{ $Improvement->complainer }}</td>
                                                         <td style="padding: 0.5rem 1.15rem">{{ $Improvement->selling_location }}</td>
                                                         <td style="padding: 0.5rem 1.15rem;  white-space:nowrap;">{{ $Improvement->purchase_date }}</td>

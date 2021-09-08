@@ -69,7 +69,7 @@
                                 <div class="col-12 col-sm-6 col-lg-3">
                                     <label for="users-list-verified">Date From</label>
                                     <fieldset class="form-group position-relative has-icon-left" >
-                                        <input type="text" class="form-control format-picker" id="min" value="@php echo date("Y-m-d"); @endphp">
+                                        <input type="text" class="form-control format-picker" id="min" value="@php echo date("d-m-Y"); @endphp">
                                         <div class="form-control-position">
                                             <i class='bx bx-calendar'></i>
                                         </div>
@@ -78,7 +78,7 @@
                                 <div class="col-12 col-sm-6 col-lg-3">
                                     <label for="users-list-verified">Date To</label>
                                     <fieldset class="form-group position-relative has-icon-left" >
-                                        <input type="text" class="form-control format-picker" id="max" value="@php echo date("Y-m-d"); @endphp">
+                                        <input type="text" class="form-control format-picker" id="max" value="@php echo date("d-m-Y"); @endphp">
                                         <div class="form-control-position">
                                             <i class='bx bx-calendar'></i>
                                         </div>
@@ -175,7 +175,7 @@
                                                     <td style="padding: 0.5rem">{{ $template->template_version }}</td>
                                                     <td style="padding: 0.5rem">{{ $template->employeename }}</td>
                                                     <td style="padding: 0.5rem">
-                                                        {{ $template->submit_date }}
+                                                        {{ date("d-m-Y H:i:s", strtotime($template->submit_date)) }}
                                                     </td>
                                                     <td style="padding: 0.5rem">{{ $template->supervisor }}</td>
                                                 </tr>
@@ -299,7 +299,7 @@
 
 <!-- BEGIN: Page JS-->
 <script src="app-assets/js/scripts/pages/page-templatesubmitted.js?time=<?php echo time();?>"></script>
-<script src="app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js"></script>
+<script src="app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js?time=<?php echo time();?>"></script>
 
 <!-- END: Page JS-->
 

@@ -77,7 +77,7 @@
                                                         <span class="text-bold-500">
                                                             {{ $template->template_title }} ({{ $template->template_version }})
                                                         </span>
-                                                    </h6><small class="notification-text">{{$template->submit_date}}</small>
+                                                    </h6><small class="notification-text">{{date("d-m-Y", strtotime($template->submit_date))}}</small>
                                                 </div>
                                             </div>
                                         </a>
@@ -99,7 +99,7 @@
                                                                 {{$improvement->description}}
                                                             @endif
                                                         </span>
-                                                    </h6><small class="notification-text">{{$improvement->due_date}}</small>
+                                                    </h6><small class="notification-text">{{date("d-m-Y", strtotime($improvement->due_date))}}</small>
                                                 </div>
                                             </div>
                                         </a>
@@ -139,7 +139,7 @@
                                                 <span class="text-bold-500">
                                                     {{$task->task}}
                                                 </span>
-                                                    </h6><small class="notification-text">{{$task->due_date}}</small>
+                                                    </h6><small class="notification-text">{{date("d-m-Y", strtotime($task->due_date))}}</small>
                                                 </div>
                                             </div>
                                         </a>

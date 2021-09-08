@@ -125,7 +125,7 @@
                                                     <label>Recipe Created</label>
                                                     <div class="controls">
                                                         <fieldset class="position-relative has-icon-left">
-                                                            <input type="text" class="form-control format-picker" placeholder="Select Date" id="created_date" name="created_date" value="{{ $recipe->created_date }}">
+                                                            <input type="text" class="form-control format-picker" placeholder="Select Date" id="created_date" name="created_date" value="{{ date("d-m-Y", strtotime($recipe->created_date)) }}">
                                                             <div class="form-control-position">
                                                                 <i class='bx bx-calendar'></i>
                                                             </div>

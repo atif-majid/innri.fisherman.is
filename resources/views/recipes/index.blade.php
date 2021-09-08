@@ -184,7 +184,7 @@ EOT;*/
 
                                                 </td>
                                                 <td style="padding: 0.5rem 1.15rem; width: 60%">@if($recipe->product_number!=""){{ $recipe->product_number }} - @endif {{ $recipe->title }}</td>
-                                                <td style="padding: 0.5rem 1.15rem; width: 30%;">{{ $recipe->created_date }}</td>
+                                                <td style="padding: 0.5rem 1.15rem; width: 30%;" data-sort="{{ strtotime($recipe->created_date) }}">{{ date("d-m-Y", strtotime($recipe->created_date)) }}</td>
                                                 <td>
                                                     {{ $recipe->title }}
                                                 </td><td>

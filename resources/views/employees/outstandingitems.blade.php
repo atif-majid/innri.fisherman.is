@@ -126,12 +126,12 @@
                                             </td>
                                             <td>
                                                 @if(array_key_exists("Issue", $val))
-                                                    {{ $val["Issue"] }}
+                                                    {{ date("d-m-Y", strtotime($val["Issue"])) }}
                                                 @endif
                                             </td>
                                             <td>
                                                 @if(array_key_exists("Return", $val))
-                                                    {{ $val["Return"] }}
+                                                    {{ date("d-m-Y", strtotime($val["Return"])) }}
                                                 @endif
                                             </td>
                                         </tr>
@@ -165,12 +165,12 @@
                                             </td>
                                             <td>
                                                 @if(array_key_exists("Issue", $val))
-                                                    {{ $val["Issue"] }}
+                                                    {{ date("d-m-Y", strtotime($val["Issue"])) }}
                                                 @endif
                                             </td>
                                             <td>
                                                 @if(array_key_exists("Return", $val))
-                                                    {{ $val["Return"] }}
+                                                    {{ date("d-m-Y", strtotime($val["Return"])) }}
                                                 @endif
                                             </td>
                                         </tr>
@@ -206,12 +206,12 @@
                                             </td>
                                             <td>
                                                 @if(array_key_exists("Issue", $val))
-                                                    {{ $val["Issue"] }}
+                                                    {{ date("d-m-Y", strtotime($val["Issue"])) }}
                                                 @endif
                                             </td>
                                             <td>
                                                 @if(array_key_exists("Return", $val))
-                                                    {{ $val["Return"] }}
+                                                    {{ date("d-m-Y", strtotime($val["Return"])) }}
                                                 @endif
                                             </td>
                                         </tr>
@@ -245,12 +245,12 @@
                                             </td>
                                             <td>
                                                 @if(array_key_exists("Issue", $val))
-                                                    {{ $val["Issue"] }}
+                                                    {{ date("d-m-Y", strtotime($val["Issue"])) }}
                                                 @endif
                                             </td>
                                             <td>
                                                 @if(array_key_exists("Return", $val))
-                                                    {{ $val["Return"] }}
+                                                    {{ date("d-m-Y", strtotime($val["Return"])) }}
                                                 @endif
                                             </td>
                                         </tr>

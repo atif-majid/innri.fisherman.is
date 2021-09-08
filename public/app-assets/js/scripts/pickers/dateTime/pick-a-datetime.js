@@ -17,13 +17,15 @@
   $('.pickadate').pickadate();
     $('body').on('focus',".format-picker", function(){
         $(this).pickadate({
-            format: 'yyyy-mm-dd'
+            /*format: 'yyyy-mm-dd'*/
+            format: 'dd-mm-yyyy'
         });
     });
   // Format Date Picker
   $('.format-picker').pickadate({
       //format: 'mmmm, d, yyyy'
-      format: 'yyyy-mm-dd'
+      //format: 'yyyy-mm-dd'
+      format: 'dd-mm-yyyy'
   });
 
   // Date limits
