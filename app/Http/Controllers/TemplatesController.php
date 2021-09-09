@@ -305,9 +305,20 @@ class TemplatesController extends Controller
      * @param  \App\Models\Templates  $templates
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Templates $templates)
+    public function destroy(Templates $template)
     {
-        //
+        $nTemplateID = $template->id;
+        $template->delete();
+        $change = "Template deleted";
+        $arrLog = array(
+            'template_id'=>$nTemplateID,
+            'changelog'=>$change,
+            'change_time'=>date("Y-m-d H:i:s"),
+            'changed_by'=>Auth::user()->getempid()
+        );
+        Templatelog::create($arrLog);
+        return redirect()->route('templates.index')
+            ->with('success','Template deleted successfully.');
     }
 
     public function fill(Request $request)

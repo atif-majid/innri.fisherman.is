@@ -157,7 +157,7 @@
                                             @foreach ($templates as $template)
                                                 <tr>
                                                     <td>{{ $template->id }}</td>
-                                                    <td style="white-space: nowrap;padding: 0.5rem 1.15rem;">
+                                                    <td style="white-space: nowrap;padding: 0.5rem 0.5rem;">
                                                         @php
                                                         /*<form id="form-del" action="{{ route('templates.destroy',$template->id) }}" method="POST" onsubmit="return false;">
                                                             <a href="{{ route('templates.edit', $template->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp;
@@ -167,9 +167,15 @@
                                                          if(confirm('Are you sure to delete?')){document.getElementById('form-del').submit();}"><i class="bx bxs-trash-alt"></i></a>
                                                         </form>*/
                                                         @endphp
-                                                        <a href="{{ route('templates.edit', $template->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp;
-                                                        <a href="#"><i class="bx bxs-trash-alt"></i></a>
-                                                        <a href="{{ route('templates.fill', $template->id) }}"><i class="bx bxs-file-plus"></i></a>
+                                                        <form id="form-del" action="{{ route('templates.destroy',$template->id) }}" method="POST" onsubmit="return false;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <a href="{{ route('templates.edit', $template->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp;
+                                                            <a href="{{ route('templates.destroy', $template->id) }}" onclick="event.preventDefault();
+                                                         if(confirm('Are you sure to delete?')){document.getElementById('form-del').submit();}"><i class="bx bxs-trash-alt"></i></a>
+                                                            <a href="{{ route('templates.fill', $template->id) }}"><i class="bx bxs-file-plus"></i></a>
+                                                        </form>
+
                                                     </td>
                                                     <td style="padding: 0.5rem 1.15rem">{{ $template->title }}</td>
                                                     <td style="padding: 0.5rem 1.15rem">{{ $template->version }}</td>
