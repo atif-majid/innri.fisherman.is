@@ -148,6 +148,8 @@
             </li>*/ @endphp
             <li class=" nav-item"><a href="/uploads/brandguide/Fisherman-Brandbook-2021.pdf" download target="_blank"><!--<i class="menu-livicon" data-icon="question-alt"></i>--><span class="menu-title" data-i18n="FAQ">Brand Guide 2021</span></a>
             </li>
+            <li class=" nav-item"><a href="/uploads/catalogue/Fisherman-shop_collection-sept2021.pdf" download target="_blank"><!--<i class="menu-livicon" data-icon="question-alt"></i>--><span class="menu-title" data-i18n="FAQ">Catalogue</span></a>
+            </li>
             <li class=" navigation-header"><span>Employees</span>
             </li>
             <li class=" nav-item"><a href="{{ route('employees.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Empoloyee Directory</span></a>

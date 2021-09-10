@@ -66,6 +66,8 @@
                     </li>*/ @endphp
                     <li><a href="/uploads/brandguide/Fisherman-Brandbook-2021.pdf" download target="_blank"><!--<i class="menu-livicon" data-icon="question-alt"></i>--><span class="menu-title" data-i18n="FAQ">Brand Guide 2021</span></a>
                     </li>
+                    <li><a href="/uploads/catalogue/Fisherman-shop_collection-sept2021.pdf" download target="_blank"><!--<i class="menu-livicon" data-icon="question-alt"></i>--><span class="menu-title" data-i18n="FAQ">Catalogue</span></a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item"><a href="#"><span class="menu-title">Employees</span></a>
