@@ -19,6 +19,7 @@ class Templates extends Model
         'supervisor',
         'version',
         'instruction',
-        'updated_on'
+        'updated_on',
+        'status'
     ];
 }

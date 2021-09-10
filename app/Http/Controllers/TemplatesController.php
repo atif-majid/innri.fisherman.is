@@ -79,7 +79,8 @@ class TemplatesController extends Controller
         }
         else
         {
-            $templates = Templates::all();
+            //$templates = Templates::all();
+            $templates = Templates::where('status', 'active')->get();
             return view('templates.index', compact('templates'));
         }
     }
@@ -308,7 +309,9 @@ class TemplatesController extends Controller
     public function destroy(Templates $template)
     {
         $nTemplateID = $template->id;
-        $template->delete();
+        /*$template->delete();*/
+        $arrUpdate = array('status'=>"inactive");
+        Templates::find($nTemplateID)->update($arrUpdate);
         $change = "Template deleted";
         $arrLog = array(
             'template_id'=>$nTemplateID,
