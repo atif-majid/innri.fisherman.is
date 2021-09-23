@@ -17,6 +17,7 @@
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/vendors.min.css">
     <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/pickers/pickadate/pickadate.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/file-uploaders/dropzone.min.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -94,7 +95,74 @@
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-12">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Type of Fish</label>
+                                                    <div class="controls">
+                                                        <select name="supplier" id="supplier" class="form-control">
+                                                            <option value="" selected></option>
+                                                            <option value="">Type 1</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Quantity</label>
+                                                    <div class="controls">
+                                                        <input type="text" name="strTegund" value="{{ old('strTegund') }}" class="form-control" data-validation-required-message="Tegund is required" placeholder="Quantity">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Units</label>
+                                                    <div class="controls">
+                                                        <select name="tegundUnit" id="tegundUnit" class="form-control">
+                                                            <option value="" selected></option>
+                                                            <option value="kg" @if(old('tegundUnit') == 'kg') ? selected : null @endif>kg</option>
+                                                            <option value="grams" @if(old('tegundUnit') == 'grams') ? selected : null @endif>grams</option>
+                                                            <?php
+                                                            /*<option value="">------------</option>
+                                                            <option value="liter" @if(old('tegundUnit') == 'liter') ? selected : null @endif>liter</option>
+                                                            <option value="deciliter" @if(old('tegundUnit') == 'deciliter') ? selected : null @endif>deciliter</option>
+                                                            <option value="centiliter" @if(old('tegundUnit') == 'centiliter') ? selected : null @endif>centiliter</option>
+                                                            <option value="milliliter" @if(old('tegundUnit')== 'milliliter') ? selected : null @endif>milliliter</option>
+                                                            <option value="">------------</option>
+                                                            <option value="pieces" @if(old('tegundUnit') == 'pieces') ? selected : null @endif>pieces</option>*/?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Sort</label>
+                                                    <div class="controls">
+                                                        <input type="text" name="strWhere" value="{{ old('strWhere') }}" class="form-control"  placeholder="Where?">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Cases</label>
+                                                    <div class="controls">
+                                                        <input type="text" name="strTegund" value="{{ old('strTegund') }}" class="form-control" data-validation-required-message="Cases is required" placeholder="Insert number">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Pallets</label>
+                                                    <div class="controls">
+                                                        <input type="text" name="strTegund" value="{{ old('strTegund') }}" class="form-control" data-validation-required-message="Pallets is required" placeholder="Insert number">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Lot Nr.</label>
                                                     <div class="controls">
@@ -104,44 +172,40 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Tegund</label>
-                                                    <div class="controls">
-                                                        <input type="text" name="strTegund" value="{{ old('strTegund') }}" class="form-control" data-validation-required-message="Tegund is required" placeholder="Tegund">
-                                                    </div>
-                                                </div>
+                                            <div class="col-md-4">
+                                                &nbsp;
                                             </div>
-                                            <div class="col-md-3">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label>Quantity</label>
+                                                    <label>Supplier</label>
                                                     <div class="controls">
-                                                        <input type="text" name="strTegund" value="{{ old('strTegund') }}" class="form-control" data-validation-required-message="Tegund is required" placeholder="Tegund">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label>Units</label>
-                                                    <div class="controls">
-                                                        <select name="tegundUnit" id="tegundUnit" class="form-control">
+                                                        <select name="supplier" id="supplier" class="form-control">
                                                             <option value="" selected></option>
-                                                            <option value="kg" @if(old('tegundUnit') == 'kg') ? selected : null @endif>kg</option>
-                                                            <option value="grams" @if(old('tegundUnit') == 'grams') ? selected : null @endif>grams</option>
-                                                            <option value="">------------</option>
-                                                            <option value="liter" @if(old('tegundUnit') == 'liter') ? selected : null @endif>liter</option>
-                                                            <option value="deciliter" @if(old('tegundUnit') == 'deciliter') ? selected : null @endif>deciliter</option>
-                                                            <option value="centiliter" @if(old('tegundUnit') == 'centiliter') ? selected : null @endif>centiliter</option>
-                                                            <option value="milliliter" @if(old('tegundUnit')== 'milliliter') ? selected : null @endif>milliliter</option>
-                                                            <option value="">------------</option>
-                                                            <option value="pieces" @if(old('tegundUnit') == 'pieces') ? selected : null @endif>pieces</option>
+                                                            @foreach($Suppliers as $Supplier)
+                                                                <option value="{{$Supplier->value}}">{{$Supplier->value}}</option>
+                                                            @endforeach
                                                         </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Lot. Number (Supplier)</label>
+                                                    <div class="controls">
+                                                        <input type="text" name="strLotNrProducer" value="{{ old('strLotNrProducer') }}" class="form-control" data-validation-required-message="Producer Lot Number is required" placeholder="Lot Number Supplier">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
+                                                &nbsp;
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Fish Received</label>
                                                     <div class="controls">
@@ -149,7 +213,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Received By</label>
                                                     <div class="controls">
@@ -162,35 +226,20 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label>Lot. Number (Supplier)</label>
+                                                    <label>Production Site</label>
                                                     <div class="controls">
-                                                        <input type="text" name="strLotNrProducer" value="{{ old('strLotNrProducer') }}" class="form-control" data-validation-required-message="Producer Lot Number is required" placeholder="Lot Number Supplier">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Supplier</label>
-                                                    <div class="controls">
-                                                        <input type="text" name="strFramleoandi" value="{{ old('strFramleoandi') }}" class="form-control" data-validation-required-message="Supplier is required" placeholder="Supplier">
+                                                        <select name="supplier" id="supplier" class="form-control">
+                                                            <option value="" selected></option>
+                                                            <option value="">Site 1</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Temperature on reception</label>
-                                                    <div class="controls">
-                                                        <input type="text" name="strRecepTemp" value="{{ old('strRecepTemp') }}" class="form-control" data-validation-required-message="Temperature on reception is required" placeholder="Temperature on reception">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Assessment</label>
                                                     <div class="controls">
@@ -198,37 +247,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Fish Processed</label>
-                                                    <div class="controls">
-                                                        <fieldset class="position-relative has-icon-left">
-                                                            <input type="text" class="form-control format-picker" placeholder="Select Date" id="created_date" name="fish_processed_date">
-                                                            <div class="form-control-position">
-                                                                <i class='bx bx-calendar'></i>
-                                                            </div>
-                                                        </fieldset>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Fish Frozen</label>
-                                                    <div class="controls">
-                                                        <fieldset class="position-relative has-icon-left">
-                                                            <input type="text" class="form-control format-picker" placeholder="Select Date" id="created_date" name="fish_frozen_date">
-                                                            <div class="form-control-position">
-                                                                <i class='bx bx-calendar'></i>
-                                                            </div>
-                                                        </fieldset>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>ASC/MSC</label>
                                                     <div class="controls">
@@ -238,15 +257,15 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label>Fish Sent</label>
+                                                    <label>Temperature on reception</label>
                                                     <div class="controls">
-                                                        <input type="text" name="strFishSent" value="{{ old('strFishSent') }}" class="form-control" placeholder="Fish Sent">
+                                                        <input type="text" name="strRecepTemp" value="{{ old('strRecepTemp') }}" class="form-control" data-validation-required-message="Temperature on reception is required" placeholder="Temperature on reception">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>SwabSure</label>
                                                     <div class="controls">
@@ -256,32 +275,11 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label>Total Products</label>
+                                                    <label>Comments</label>
                                                     <div class="controls">
-                                                        <input type="text" name="strTotalProducts" value="{{ old('strTotalProducts') }}" class="form-control" placeholder="Total Products">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Where</label>
-                                                    <div class="controls">
-                                                        <input type="text" name="strWhere" value="{{ old('strWhere') }}" class="form-control"  placeholder="Where?">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>With whome</label>
-                                                    <div class="controls">
-                                                        <input type="text" name="strWithWhome" value="{{ old('strWithWhome') }}" class="form-control"  placeholder="With whome?">
+                                                        <textarea name="strDescription" class="form-control" <?php /*data-validation-required-message="Name is requried"*/?> placeholder="Description" rows="4">{{old('strDescription')}}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -293,8 +291,25 @@
                     </div>
                 </section>
                 <!-- // Basic multiple Column Form section end -->
-                <button type="button" class="btn btn-primary">Submit</button>
+
             </form>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Attachments</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <form action="#" class="dropzone dropzone-area" id="dpz-remove-thumb" style="margin-left: 20px;margin-right:20px !important;">
+                                        <div class="dz-message" style="height: 200px !important;">Drop Files Here To Upload</div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary">Submit</button>
         </div>
     </div>
 </div>
@@ -387,6 +402,7 @@
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
+<script src="../app-assets/vendors/js/extensions/dropzone.min.js"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
@@ -404,7 +420,103 @@
 
 <!-- BEGIN: Page JS-->
 <!-- END: Page JS-->
+<script>
+    var myDropzone;
+    Dropzone.options.dpzRemoveThumb = {
+        paramName: "file", // The name that will be used to transfer the file
+        acceptedFiles: "image/*,application/pdf,.doc,.docx,.xls,.xlsx,.csv,.tsv,.ppt,.pptx,.pages,.odt,.rtf",
+        accept: function(file, done) {
+            //var thumbnail = $('.dropzone .dz-preview.dz-file-preview .dz-image:last');
+            var thumbnail = $(file.previewElement).find('.dz-details img');
+            switch (file.type) {
+                case 'application/pdf':
+                    thumbnail.attr('src', '/uploads/fileicons/pdf.png');
+                    thumbnail.css('display', 'inline');
+                    break;
+                case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+                    thumbnail.attr('src', '/uploads/fileicons/doc.png');
+                    thumbnail.css('display', 'inline');
+                    break;
+                case 'application/msword':
+                    thumbnail.attr('src', '/uploads/fileicons/doc.png');
+                    thumbnail.css('display', 'inline');
+                    break;
+                case 'text/csv':
+                    thumbnail.attr('src', '/uploads/fileicons/csv.png');
+                    thumbnail.css('display', 'inline');
+                    break;
+            }
 
+            done();
+        },
+        maxFilesize: 10, // MB
+        addRemoveLinks: true,
+        dictRemoveFile: " Trash",
+        autoProcessQueue: false,
+        parallelUploads:20,
+        init: function (e) {
+            var myDropzone = this;
+            $('#btnAllSubmit').on("click", function() {
+                /*$('#btnAllSubmit').attr('disabled', 'true');
+                $('.modal-body').html('');
+                var nFiles = myDropzone.files.length;
+                var arrFormData = $('#frmNewRecipe').serialize();
+                $.ajax({
+                    type: "post",
+                    url: "{{ route('recipes.store') }}",
+                    data: arrFormData,
+                    dataType: 'json',              // let's set the expected response format
+                    success: function(data){
+                        $('#nRecipeID').val(data);
+                        var nFiles = myDropzone.files.length;
+                        if(nFiles==0)
+                        {
+                            window.location.href = "{{route('recipes.index')}}";
+                        }
+                        else
+                        {
+                            myDropzone.processQueue();
+                        }
+                    },
+                    error: function (err) {
+                        if (err.status == 422) { // when status code is 422, it's a validation issue
+                            //console.log(err.responseJSON);
+                            // you can loop through the errors object and show it to the user
+
+                            // display errors on each form field
+                            var errDisplay = ''
+                            $.each(err.responseJSON.errors, function (i, error) {
+                                errDisplay = errDisplay + '<div class="alert alert-danger mb-2">'+error[0]+'</div>';
+                                $('.modal-body').html(errDisplay);
+                                $('#modalError').modal('show');
+                            });
+                            $('#btnAllSubmit').attr('disabled', false);
+                        }
+                        else{
+                            errDisplay = '<div class="alert alert-danger mb-2">An error occured. The developer has been notified. Please try again later!</div>';
+                            $('.modal-body').html(errDisplay);
+                            $('#modalError').modal('show');
+                            $('#btnAllSubmit').attr('disabled', false);
+                        }
+                    }
+                });*/
+            });
+            myDropzone.on("sending", function(file, xhr, data) {
+
+                // First param is the variable name used server side
+                // Second param is the value, you can add what you what
+                // Here I added an input value
+                data.append("_token", "{{ csrf_token() }}");
+            });
+            myDropzone.on("complete", function (file) {
+                if (myDropzone.getUploadingFiles().length === 0 && myDropzone.getQueuedFiles().length === 0) {
+                    //location.reload();
+                    //window.location.href = "{{route('recipes.index')}}";
+                }
+            });
+        }
+    }
+</script>
 </body>
 <!-- END: Body-->
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employees;
 use App\Models\Receptionsurveillance;
+use App\Models\Sitesettings;
 use Illuminate\Http\Request;
 
 class ReceptionsurveillanceController extends Controller
@@ -27,7 +28,8 @@ class ReceptionsurveillanceController extends Controller
     {
         //
         $employees = Employees::all();
-        return view('receptionsurveillance.create', compact('employees'));
+        $Suppliers = Sitesettings::where('field', 'SupplierName')->orderBy('value')->get();
+        return view('receptionsurveillance.create', compact('employees', 'Suppliers'));
     }
 
     /**
