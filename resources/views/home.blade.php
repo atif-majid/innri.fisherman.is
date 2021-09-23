@@ -112,7 +112,7 @@
             <li class=" navigation-header"><span>Quality Control</span>
             </li>
             <li class=" nav-item"><a href="#"><!--<i class="menu-livicon" data-icon="retweet"></i>--><span class="menu-title" data-i18n="Content">Consistency Claims</span></a>
-            <li class=" nav-item"><a href="#"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Grid">Certificate and Permits</span></a>
+            <li class=" nav-item"><a href="#"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Grid">Certificates and Permits</span></a>
             </li>
             <li class=" nav-item"><a href="{{ route('templates.index') }}"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Typography">Templates</span></a>
             </li>
@@ -124,7 +124,7 @@
             </li>
             <li class=" nav-item">
                 @if($nCurrUserID==9 || $nCurrUserID==40 || $nCurrUserID==36)
-                    <a href="{{ route('receptionsurveillance.create') }}"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Raw materials</span></a>
+                    <a href="{{ route('receptionsurveillance.create') }}"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Raw Materials</span></a>
                 @else
                     <a href="#"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Raw materials</span></a>
                 @endif

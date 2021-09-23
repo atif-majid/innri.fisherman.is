@@ -30,7 +30,7 @@
                 <ul class="menu-content">
                     <li><a href="#"><!--<i class="menu-livicon" data-icon="retweet"></i>--><span class="menu-title" data-i18n="Content">Consistency Claims</span></a>
                     </li>
-                    <li><a href="#"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Grid">Certificate and permits</span></a>
+                    <li><a href="#"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Grid">Certificates and Permits</span></a>
                     </li>
                     <li @if($controllerName=='TemplatesController') class="active" @endif><a href="{{ route('templates.index') }}"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Typography">Templates</span></a>
                     </li>
@@ -43,7 +43,7 @@
                     @if($nCurrUserID==9 || $nCurrUserID==40 || $nCurrUserID==36)
                         <li @if($controllerName=='ReceptionsurveillanceController') class="active" @endif><a href="{{ route('receptionsurveillance.create') }}"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Raw materials</span></a></li>
                     @else
-                        <li><a href="#"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Raw materials</span></a></li>
+                        <li><a href="#"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Raw Materials</span></a></li>
                     @endif
                 </ul>
             </li>
