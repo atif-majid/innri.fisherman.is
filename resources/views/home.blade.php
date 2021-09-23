@@ -90,12 +90,7 @@
             </li>
             <li class=" nav-item"><a href="{{ route('production.index') }}"><!--<i class="menu-livicon" data-icon="check-alt"></i>--><span class="menu-title" data-i18n="Todo">Today's Production</span></a>
             </li>
-            @if($nCurrUserID==9 || $nCurrUserID==40 || $nCurrUserID==36)
-                <li class=" nav-item"><a href="{{ route('receptionsurveillance.create') }}"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Reception Surveillance</span></a>
-            @else
-                <li class=" nav-item"><a href="#"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Reception Surveillance</span></a>
-            @endif
-            </li>
+
             <!--<li class=" nav-item"><a href="app-calendar.html"><i class="menu-livicon" data-icon="calendar"></i><span class="menu-title" data-i18n="Calendar">Calendar</span></a>
             </li>
             <li class=" nav-item"><a href="app-kanban.html"><i class="menu-livicon" data-icon="grid"></i><span class="menu-title" data-i18n="Kanban">Kanban</span></a>
@@ -126,6 +121,13 @@
             <li class=" nav-item"><a href="{{ route('improvements.index') }}"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Text Utilities">Improvements</span></a>
             </li>
             <li class=" nav-item"><a href="#"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Syntax Highlighter">Maintenance Plan</span></a>
+            </li>
+            <li class=" nav-item">
+                @if($nCurrUserID==9 || $nCurrUserID==40 || $nCurrUserID==36)
+                    <a href="{{ route('receptionsurveillance.create') }}"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Raw materials</span></a>
+                @else
+                    <a href="#"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Raw materials</span></a>
+                @endif
             </li>
                     <!--<li><a href="content-helper-classes.html"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Helper Classes">Helper Classes</span></a>
                     </li>

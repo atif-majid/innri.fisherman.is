@@ -24,12 +24,6 @@
                     </li>
                     <li @if($controllerName=='ProductionController') class="active" @endif><a href="{{ route('production.index') }}"><!--<i class="menu-livicon" data-icon="check-alt"></i>--><span class="menu-title" data-i18n="Todo">Today's Production</span></a>
                     </li>
-                    @if($nCurrUserID==9 || $nCurrUserID==40 || $nCurrUserID==36)
-                        <li @if($controllerName=='ReceptionsurveillanceController') class="active" @endif><a href="{{ route('receptionsurveillance.create') }}"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Reception Surveillance</span></a>
-                    @else
-                        <li><a href="#"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Reception Surveillance</span></a>
-                    @endif
-                    </li>
                 </ul>
             </li>
             <li class="nav-item"><a href="#"><span class="menu-title">Quality Control</span></a>
@@ -46,6 +40,11 @@
                     </li>
                     <li><a href="#"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Syntax Highlighter">Maintenance Plan</span></a>
                     </li>
+                    @if($nCurrUserID==9 || $nCurrUserID==40 || $nCurrUserID==36)
+                        <li @if($controllerName=='ReceptionsurveillanceController') class="active" @endif><a href="{{ route('receptionsurveillance.create') }}"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Raw materials</span></a></li>
+                    @else
+                        <li><a href="#"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Raw materials</span></a></li>
+                    @endif
                 </ul>
             </li>
             <li class="nav-item"><a href="#"><span class="menu-title">Education &amp; News</span></a>
