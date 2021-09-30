@@ -209,7 +209,12 @@
                                                 <div class="form-group">
                                                     <label>Fish Received</label>
                                                     <div class="controls">
-                                                        <input type="text" name="strRdceived" value="{{ old('strRdceived') }}" class="form-control" data-validation-required-message="Fish Received is required" placeholder="Fish Received">
+                                                        <fieldset class="position-relative has-icon-left">
+                                                            <input type="text" name="strRdceived" value="@php echo date("d-m-Y");@endphp" class="form-control format-picker picker__input picker__input--active" data-validation-required-message="Fish Received date is required" placeholder="Fish Received">
+                                                            <div class="form-control-position">
+                                                                <i class='bx bx-calendar'></i>
+                                                            </div>
+                                                        </fieldset>
                                                     </div>
                                                 </div>
                                             </div>
