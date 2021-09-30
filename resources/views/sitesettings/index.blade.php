@@ -358,6 +358,72 @@
                         <!-- /phone repeater -->
                     </div>
                 </section>
+                <section id="form-control-repeater2">
+                    <div class="row">
+                        <!-- file repeater  -->
+                        <div class="col-xl-6 col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Type of Fish</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12 form-group list-of-fishtypes">
+                                                <div data-repeater-list="Fishtypes">
+                                                    @foreach($sitesettings as $thissetting)
+                                                        @if($thissetting->field=='FishType')
+                                                            <div data-repeater-item>
+                                                                <div class="row mb-2">
+                                                                    <div class="form-group col-sm">
+                                                                        <label>Fish Type</label>
+                                                                        <fieldset class="position-relative">
+                                                                            <input type="text" id="strFishType" name="strFishType" value="{{ $thissetting->value }}">
+                                                                            <input type="hidden" id="nID" name="nID" value="{{ $thissetting->id }}">
+                                                                        </fieldset>
+                                                                    </div>
+                                                                    <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
+                                                                        <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button" onclick="deletesettings({{ $thissetting->id }})"> <i class="bx bx-x"></i>
+                                                                            Delete
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                    @endforeach
+                                                    <div data-repeater-item>
+                                                        <div class="row mb-2">
+                                                            <div class="form-group col-sm">
+                                                                <label>Fish Type</label>
+                                                                <fieldset class="position-relative">
+                                                                    <input type="text" id="strFishType" name="strFishType">
+                                                                </fieldset>
+                                                            </div>
+                                                            <div class="col-md-2 col-sm-12 form-group d-flex align-items-center pt-2">
+                                                                <button class="btn btn-danger text-nowrap px-1" data-repeater-delete type="button"> <i class="bx bx-x"></i>
+                                                                    Delete
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col form-group p-0">
+                                                    <button class="btn btn-primary" data-repeater-create type="button">
+                                                        <i class="bx bx-plus"></i>Add
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /file repeater -->
+                        <!-- phone repeater -->
+
+                        <!-- /phone repeater -->
+                    </div>
+                </section>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             <!-- Input Validation end -->
