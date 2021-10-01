@@ -13,6 +13,7 @@ use App\Http\Controllers\EmprightsController;
 use App\Http\Controllers\ReceptionsurveillanceController;
 use App\Http\Controllers\TemplatesController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\RawmaterialController;
 
 
 /*
@@ -149,3 +150,6 @@ Route::post('/templates/reviewsubmit', ['as'=>'templates.reviewsubmit', 'uses'=>
 
 Route::resource('reports', ReportsController::class, ['middleware' => 'auth']);
 Route::get('/reports/{id}', [ReportsController::class, 'show']);
+
+
+Route::resource('rawmaterial', RawmaterialController::class, ['middleware' => 'auth']);
