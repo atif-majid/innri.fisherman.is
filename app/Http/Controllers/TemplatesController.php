@@ -39,6 +39,10 @@ class TemplatesController extends Controller
             if(!$objRights->isEmpty())
             {
                 $strRight = $objRights[0]->rights;
+                if(trim($strRight)=="")
+                {
+                    $strRight = "No Access";
+                }
                 $arrRightPages = $arrAllowedPages["$strRight"];
                 if($strRight=='Admin')
                 {

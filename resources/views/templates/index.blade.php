@@ -167,12 +167,12 @@
                                                          if(confirm('Are you sure to delete?')){document.getElementById('form-del').submit();}"><i class="bx bxs-trash-alt"></i></a>
                                                         </form>*/
                                                         @endphp
-                                                        <form id="form-del" action="{{ route('templates.destroy',$template->id) }}" method="POST" onsubmit="return false;">
+                                                        <form id="form-del-{{$template->id}}" action="{{ route('templates.destroy',$template->id) }}" method="POST" onsubmit="return false;">
                                                             @csrf
                                                             @method('DELETE')
                                                             <a href="{{ route('templates.edit', $template->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp;
                                                             <a href="{{ route('templates.destroy', $template->id) }}" onclick="event.preventDefault();
-                                                         if(confirm('Are you sure to delete?')){document.getElementById('form-del').submit();}"><i class="bx bxs-trash-alt"></i></a>
+                                                         if(confirm('Are you sure to delete?')){document.getElementById('form-del-{{$template->id}}').submit();}"><i class="bx bxs-trash-alt"></i></a>
                                                             <a href="{{ route('templates.fill', $template->id) }}"><i class="bx bxs-file-plus"></i></a>
                                                         </form>
 

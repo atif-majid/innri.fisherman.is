@@ -14,6 +14,7 @@ class EmprightsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     protected $arrPages = array(
         "recipes" => "Recipes",
         "today_production" => "Today's Production",
