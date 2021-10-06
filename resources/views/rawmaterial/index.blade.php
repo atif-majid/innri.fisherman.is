@@ -79,7 +79,7 @@
                     </div>
 
                 </div>
-                <div class="users-list-filter px-1">
+                <!--<div class="users-list-filter px-1">
                     <form onsubmit="return false">
                         <div class="row border rounded py-2 mb-2">
                             <div class="col-12 col-sm-6 col-lg-3">
@@ -88,7 +88,7 @@
                                     <input  type="text" class="form-control" id="users-list-role">
                                 </fieldset>
                             </div>
-                            <!--<div class="col-12 col-sm-6 col-lg-3">
+                            <div class="col-12 col-sm-6 col-lg-3">
                                 <label for="users-list-verified">Date</label>
                                 <fieldset class="form-group position-relative has-icon-left" >
                                     <input type="text" class="form-control format-picker" id="users-list-verified">
@@ -102,13 +102,13 @@
                                 <fieldset class="form-group">
                                     <input type="text" class="form-control" id="users-list-status">
                                 </fieldset>
-                            </div>-->
+                            </div>
                             <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center">
                                 <button type="reset" class="btn btn-primary btn-block glow users-list-clear mb-0">Clear</button>
                             </div>
                         </div>
                     </form>
-                </div>
+                </div>-->
                 @if ($message = Session::get('success'))
                     <div class="alert alert-info mb-2">
                         {{ $message }}
@@ -128,14 +128,41 @@
                                         <tr>
                                             <th>id</th>
                                             <th style="text-align: left; padding-left: 1rem; width: 10%">Options</th>
-                                            <th style="text-align: left; padding-left: 1rem; width: 65%">Recipe</th>
-                                            <th style="text-align: left; padding-left: 1rem; width: 25%">Date Created</th>
-                                            <td style="text-align: left; padding-left: 1rem; width: 10%">Title</td>
-                                            <td style="text-align: left; padding-left: 1rem; width: 10%">Product Number</td>
+                                            <th style="text-align: left; padding-left: 1rem;">Fish Type</th>
+                                            <th style="text-align: left; padding-left: 1rem;">Lot Nr.</th>
+                                            <th style="text-align: left; padding-left: 1rem;">Received</th>
+                                            <th style="text-align: left; padding-left: 1rem;">Supplier</th>
                                         </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach($RawFish as $thisFish)
+                                                <tr>
+                                                    <td style="padding: 0.5rem 1.15rem;">{{ $thisFish->id }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem; white-space: nowrap; width: 10%">
+                                                        <div class="divData" style="display: none; visibility: hidden;">{{ $thisFish->id }}</div>
+                                                        <form id="form-del-{{$thisFish->id}}" action="{{ route('rawmaterial.destroy',$thisFish->id) }}" method="POST">
+                                                            <a href="#" class="invoice-action-view">
+                                                                <i class="bx bx-show-alt"></i>
+                                                            </a>&nbsp;
+                                                            <a href="{{ route('rawmaterial.edit', $thisFish->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp
 
+                                                        <!--<a href="{{ route('rawmaterial.edit', $thisFish->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp;-->
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <a href="{{ route('rawmaterial.destroy',$thisFish->id) }}" onclick="event.preventDefault();
+                                                                if(confirm('Are you sure to delete?')){document.getElementById('form-del-{{$thisFish->id}}').submit();}"><i class="bx bxs-trash-alt"></i></a>
+                                                        &nbsp;</form>
+
+                                                    </td>
+                                                    <td style="padding: 0.5rem 1.15rem;">{{ $thisFish->fish_type }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem;">{{ $thisFish->lot_nr }}</td>
+                                                    <td style="padding: 0.5rem 1.15rem;" data-sort="{{ strtotime($thisFish->fish_received) }}">{{ date("d-m-Y", strtotime($thisFish->fish_received)) }}</td>
+                                                    <td>
+                                                        {{ $thisFish->supplier }}
+                                                    </td>
+
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -250,7 +277,7 @@
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
-<script src="app-assets/js/scripts/pages/page-recipes.js?time=<?php echo time();?>"></script>
+<script src="app-assets/js/scripts/pages/page-rawmaterial.js?time=<?php echo time();?>"></script>
 <!-- END: Page JS-->
 
 </body>

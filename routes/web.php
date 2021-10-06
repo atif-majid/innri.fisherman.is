@@ -153,3 +153,6 @@ Route::get('/reports/{id}', [ReportsController::class, 'show']);
 
 
 Route::resource('rawmaterial', RawmaterialController::class, ['middleware' => 'auth']);
+Route::post('/rawmaterial/uploadfile', ['as'=>'rawmaterial.uploadfile', 'uses'=>'App\Http\Controllers\RawmaterialController@uploadfile']);
+Route::get('rawmaterial/getfiles/{id}', ['as'=>'rawmaterial.getfiles', 'uses'=>'App\Http\Controllers\RawmaterialController@getfiles'])->middleware('auth');
+Route::post('/rawmaterial/delfiles', ['as'=>'rawmaterial.delfiles', 'uses'=>'App\Http\Controllers\RawmaterialController@delfiles']);

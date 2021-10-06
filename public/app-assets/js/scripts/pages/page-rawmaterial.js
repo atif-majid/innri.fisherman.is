@@ -23,7 +23,7 @@ $(document).ready(function () {
                     "targets": [1]
                 },
                 {
-                    "targets": [ 0 , 4, 5],
+                    "targets": [ 0 ],
                     "visible": false
                 }],
             "order": [[5, "asc"], [ 4, "asc" ]]

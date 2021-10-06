@@ -9,32 +9,32 @@
     <meta name="description" content="Frest admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Frest admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Innri - Add New Raw Fish</title>
-    <link rel="apple-touch-icon" href="../app-assets/images/ico/apple-icon-120.png">
-    <link rel="shortcut icon" type="image/x-icon" href="../app-assets/images/ico/favicon.ico">
+    <title>Innri - Edit Raw Fish</title>
+    <link rel="apple-touch-icon" href="../../app-assets/images/ico/apple-icon-120.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/vendors.min.css">
-    <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/pickers/pickadate/pickadate.css">
-    <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/file-uploaders/dropzone.min.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/pickers/pickadate/pickadate.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/file-uploaders/dropzone.min.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/bootstrap.css?time=<?php echo time();?>">
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/bootstrap-extended.css?time=<?php echo time();?>">
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/colors.css?time=<?php echo time();?>">
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/components.css?time=<?php echo time();?>">
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/themes/dark-layout.css">
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/themes/semi-dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/bootstrap.css?time=<?php echo time();?>">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/bootstrap-extended.css?time=<?php echo time();?>">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/colors.css?time=<?php echo time();?>">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/components.css?time=<?php echo time();?>">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/themes/dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/themes/semi-dark-layout.css">
     <!-- END: Theme CSS-->
 
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="../app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/core/menu/menu-types/vertical-menu.css">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/style.css">
     <!-- END: Custom CSS-->
 
 </head>
@@ -82,9 +82,28 @@
                     <div class="alert alert-danger mb-2">{{ $error }}</div>
                 @endforeach
             @endif
-            <form id="frmRawmaterial" class="form-horizontal"  novalidate method="post" action="{{ route('rawmaterial.store')}}">
+            <form id="frmRawmaterial" class="form-horizontal"  novalidate method="post" action="{{ route('rawmaterial.update', $rawfish->id) }}">
             @csrf
+            @method('PUT')
             <!-- // Basic multiple Column Form section start -->
+                <section id="global-settings" class="card">
+                    @php
+                        /*<div class="card-header">
+                            <h4 class="card-title">Files</h4>
+                        </div>*/
+                    @endphp
+                    <div class="card-body">
+                        <div class="card-text">
+                            <p>Please add attachments that concern this lot number such as:</p>
+                            <ul>
+                                <li>Purchase order</li>
+                                <li>Delivery ticket from the supplier</li>
+                                <li>Invoice from the supplier</li>
+                                <li>Photo of packaging (especially if something looks wrong)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
                 <section id="multiple-column-form">
                     <div class="row match-height">
                         <div class="col-12">
@@ -102,7 +121,7 @@
                                                         <select name="strFishType" id="strFishType" class="form-control">
                                                             <option value="" selected></option>
                                                             @foreach($FishTypes as $FishType)
-                                                                <option value="{{$FishType->value}}">{{$FishType->value}}</option>
+                                                                <option value="{{$FishType->value}}" @if($FishType->value==$rawfish->fish_type) selected @endif>{{$FishType->value}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -112,7 +131,7 @@
                                                 <div class="form-group">
                                                     <label>Quantity</label>
                                                     <div class="controls">
-                                                        <input type="text" name="nQuantity" value="{{ old('nQuantity') }}" class="form-control" data-validation-required-message="Tegund is required" placeholder="Quantity">
+                                                        <input type="text" name="nQuantity" value="{{ $rawfish->quantity }}" class="form-control" data-validation-required-message="Tegund is required" placeholder="Quantity">
                                                     </div>
                                                 </div>
                                             </div>
@@ -122,8 +141,8 @@
                                                     <div class="controls">
                                                         <select name="strQuantityUnit" id="strQuantityUnit" class="form-control">
                                                             <option value="" selected></option>
-                                                            <option value="kg" @if(old('strQuantityUnit') == 'kg') ? selected : null @endif>kg</option>
-                                                            <option value="grams" @if(old('strQuantityUnit') == 'grams') ? selected : null @endif>grams</option>
+                                                            <option value="kg" @if($rawfish->unit_quantity == 'kg') ? selected : null @endif>kg</option>
+                                                            <option value="grams" @if($rawfish->unit_quantity == 'grams') ? selected : null @endif>grams</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -134,7 +153,7 @@
                                                 <div class="form-group">
                                                     <label>Sort</label>
                                                     <div class="controls">
-                                                        <input type="text" name="strWhere" value="{{ old('strWhere') }}" class="form-control"  placeholder="Where?">
+                                                        <input type="text" name="strWhere" value="{{ $rawfish->sort }}" class="form-control"  placeholder="Where?">
                                                     </div>
                                                 </div>
                                             </div>
@@ -142,7 +161,7 @@
                                                 <div class="form-group">
                                                     <label>Cases</label>
                                                     <div class="controls">
-                                                        <input type="text" name="nCases" value="{{ old('nCases') }}" class="form-control" data-validation-required-message="Cases is required" placeholder="Insert number">
+                                                        <input type="text" name="nCases" value="{{ $rawfish->cases }}" class="form-control" data-validation-required-message="Cases is required" placeholder="Insert number">
                                                     </div>
                                                 </div>
                                             </div>
@@ -150,7 +169,7 @@
                                                 <div class="form-group">
                                                     <label>Pallets</label>
                                                     <div class="controls">
-                                                        <input type="text" name="nPallets" value="{{ old('nPallets') }}" class="form-control" data-validation-required-message="Pallets is required" placeholder="Insert number">
+                                                        <input type="text" name="nPallets" value="{{ $rawfish->pallets }}" class="form-control" data-validation-required-message="Pallets is required" placeholder="Insert number">
                                                     </div>
                                                 </div>
                                             </div>
@@ -160,7 +179,7 @@
                                                 <div class="form-group">
                                                     <label>Lot Nr.</label>
                                                     <div class="controls">
-                                                        <input type="text" name="strLotNr" class="form-control" value="{{ old('strLotNr') }}" placeholder="Lot Number">
+                                                        <input type="text" name="strLotNr" class="form-control" value="{{ $rawfish->lot_nr }}" placeholder="Lot Number">
                                                     </div>
                                                 </div>
                                             </div>
@@ -178,7 +197,7 @@
                                                         <select name="strSupplier" id="strSupplier" class="form-control">
                                                             <option value="" selected></option>
                                                             @foreach($Suppliers as $Supplier)
-                                                                <option value="{{$Supplier->value}}">{{$Supplier->value}}</option>
+                                                                <option value="{{$Supplier->value}}" @if($Supplier->value == $rawfish->supplier) selected @endif>{{$Supplier->value}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -188,7 +207,7 @@
                                                 <div class="form-group">
                                                     <label>Lot. Number (Supplier)</label>
                                                     <div class="controls">
-                                                        <input type="text" name="strLotNrProducer" value="{{ old('strLotNrProducer') }}" class="form-control" data-validation-required-message="Producer Lot Number is required" placeholder="Lot Number Supplier">
+                                                        <input type="text" name="strLotNrProducer" value="{{ $rawfish->lot_nr_supplier }}" class="form-control" data-validation-required-message="Producer Lot Number is required" placeholder="Lot Number Supplier">
                                                     </div>
                                                 </div>
                                             </div>
@@ -204,7 +223,7 @@
                                                     <label>Fish Received</label>
                                                     <div class="controls">
                                                         <fieldset class="position-relative has-icon-left">
-                                                            <input type="text" name="strFishRdceived" value="@php echo date("d-m-Y");@endphp" class="form-control format-picker picker__input picker__input--active" data-validation-required-message="Fish Received date is required" placeholder="Fish Received">
+                                                            <input type="text" name="strFishRdceived" value="{{ date("d-m-Y", strtotime($rawfish->fish_received)) }}" class="form-control format-picker picker__input picker__input--active" data-validation-required-message="Fish Received date is required" placeholder="Fish Received">
                                                             <div class="form-control-position">
                                                                 <i class='bx bx-calendar'></i>
                                                             </div>
@@ -219,7 +238,7 @@
                                                         <select name="strReceivedBy" id="strReceivedBy" class="form-control">
                                                             <option value="" selected></option>
                                                             @foreach($employees as $thisemp)
-                                                                <option value="{{ $thisemp->id }}">{{ $thisemp->name }}</option>
+                                                                <option value="{{ $thisemp->id }}" @if($thisemp->id==$rawfish->fish_received_by) selected @endif>{{ $thisemp->name }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -232,7 +251,7 @@
                                                         <select name="strProductionSite" id="strProductionSite" class="form-control">
                                                             <option value="" selected></option>
                                                             @foreach($ProductionSites as $ProductionSite)
-                                                                <option value="{{ $ProductionSite->value }}">{{ $ProductionSite->value }}</option>
+                                                                <option value="{{ $ProductionSite->value }}" @if($ProductionSite->value==$rawfish->production_site) selected @endif>{{ $ProductionSite->value }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -244,7 +263,7 @@
                                                 <div class="form-group">
                                                     <label>Assessment</label>
                                                     <div class="controls">
-                                                        <input type="text" name="strAssessment" value="{{ old('strAssessment') }}" class="form-control" data-validation-required-message="Assessment is required" placeholder="Assessment">
+                                                        <input type="text" name="strAssessment" value="{{ $rawfish->assessment }}" class="form-control" data-validation-required-message="Assessment is required" placeholder="Assessment">
                                                     </div>
                                                 </div>
                                             </div>
@@ -252,7 +271,7 @@
                                                 <div class="form-group">
                                                     <label>ASC/MSC</label>
                                                     <div class="controls">
-                                                        <input type="text" name="strASCMSC" value="{{ old('strASCMSC') }}" class="form-control" data-validation-required-message="ASC/MSC is required" placeholder="ASC/MSC">
+                                                        <input type="text" name="strASCMSC" value="{{ $rawfish->asc_msc }}" class="form-control" data-validation-required-message="ASC/MSC is required" placeholder="ASC/MSC">
                                                     </div>
                                                 </div>
                                             </div>
@@ -262,7 +281,7 @@
                                                 <div class="form-group">
                                                     <label>Temperature on reception</label>
                                                     <div class="controls">
-                                                        <input type="text" name="strRecepTemp" value="{{ old('strRecepTemp') }}" class="form-control" data-validation-required-message="Temperature on reception is required" placeholder="Temperature on reception">
+                                                        <input type="text" name="strRecepTemp" value="{{ str_replace(".", ",", $rawfish->temp_on_reception) }}" class="form-control" data-validation-required-message="Temperature on reception is required" placeholder="Temperature on reception">
                                                     </div>
                                                 </div>
                                             </div>
@@ -270,7 +289,7 @@
                                                 <div class="form-group">
                                                     <label>SwabSure</label>
                                                     <div class="controls">
-                                                        <input type="text" name="strSwabSure" value="{{ old('strSwabSure') }}" class="form-control"  placeholder="SwabSure">
+                                                        <input type="text" name="strSwabSure" value="{{ $rawfish->swabsure }}" class="form-control"  placeholder="SwabSure">
                                                     </div>
                                                 </div>
                                             </div>
@@ -280,7 +299,7 @@
                                                 <div class="form-group">
                                                     <label>Comments</label>
                                                     <div class="controls">
-                                                        <textarea name="strDescription" class="form-control" <?php /*data-validation-required-message="Name is requried"*/?> placeholder="Description" rows="4">{{old('strDescription')}}</textarea>
+                                                        <textarea name="strDescription" class="form-control" <?php /*data-validation-required-message="Name is requried"*/?> placeholder="Description" rows="4">{{$rawfish->comments}}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -304,7 +323,7 @@
                             <div class="card-body">
                                 <form action="{{ route('rawmaterial.uploadfile') }}" class="dropzone dropzone-area" id="dpz-remove-thumb" style="margin-left: 20px;margin-right:20px !important;">
                                     <div class="dz-message" style="height: 200px !important;">Drop Files Here To Upload</div>
-                                    <input type="hidden" id="nRawMaterial" name="nRawMaterial">
+                                    <input type="hidden" id="nRawMaterial" name="nRawMaterial" value="{{$rawfish->id}}">
                                 </form>
                             </div>
                         </div>
@@ -330,7 +349,7 @@
                 <div class="media m-75">
                     <a href="JavaScript:void(0);">
                         <div class="avatar mr-75">
-                            <img src="../app-assets/images/portrait/small/avatar-s-2.jpg" alt="avtar images" width="32" height="32">
+                            <img src="../../app-assets/images/portrait/small/avatar-s-2.jpg" alt="avtar images" width="32" height="32">
                             <span class="avatar-status-online"></span>
                         </div>
                     </a>
@@ -395,29 +414,29 @@
 
 
 <!-- BEGIN: Vendor JS-->
-<script src="../app-assets/vendors/js/vendors.min.js"></script>
-<script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
-<script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
-<script src="../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
-<script src="../app-assets/vendors/js/pickers/pickadate/picker.js"></script>
-<script src="../app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
+<script src="../../app-assets/vendors/js/vendors.min.js"></script>
+<script src="../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
+<script src="../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
+<script src="../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
+<script src="../../app-assets/vendors/js/pickers/pickadate/picker.js"></script>
+<script src="../../app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
-<script src="../app-assets/vendors/js/extensions/dropzone.min.js"></script>
+<script src="../../app-assets/vendors/js/extensions/dropzone.min.js"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
-<script src="../app-assets/js/scripts/configs/vertical-menu-light.js"></script>
-<script src="../app-assets/js/core/app-menu.js"></script>
-<script src="../app-assets/js/core/app.js"></script>
-<script src="../app-assets/js/scripts/components.js"></script>
-<script src="../app-assets/js/scripts/footer.js"></script>
+<script src="../../app-assets/js/scripts/configs/vertical-menu-light.js"></script>
+<script src="../../app-assets/js/core/app-menu.js"></script>
+<script src="../../app-assets/js/core/app.js"></script>
+<script src="../../app-assets/js/scripts/components.js"></script>
+<script src="../../app-assets/js/scripts/footer.js"></script>
 <!-- END: Theme JS-->
 <!-- BEGIN: Page Vendor JS-->
-<script src="../app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
-<script src="../app-assets/js/scripts/forms/form-repeater.js"></script>
-<script src="../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js?time=<?php echo time();?>"></script>
+<script src="../../app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
+<script src="../../app-assets/js/scripts/forms/form-repeater.js"></script>
+<script src="../../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js?time=<?php echo time();?>"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Page JS-->
@@ -458,50 +477,40 @@
         parallelUploads:20,
         init: function (e) {
             var myDropzone = this;
+            $.getJSON('{{ route('rawmaterial.getfiles', $rawfish->id) }}', function(data) {
+                $.each(data, function(index, val) {
+                    var mockFile = { id: val.id, name: val.name, size: val.size };
+                    myDropzone.options.addedfile.call(myDropzone, mockFile);
+                    myDropzone.options.thumbnail.call(myDropzone, mockFile, "/uploads/raw-material/{{$rawfish->id}}/" + val.name);
+
+                    var thumbnail = $(mockFile.previewElement).find('.dz-details img');
+                    switch (val.type) {
+                        case 'application/pdf':
+                            thumbnail.attr('src', '/uploads/fileicons/pdf.png');
+                            thumbnail.css('display', 'inline');
+                            break;
+                        case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+                            thumbnail.attr('src', '/uploads/fileicons/doc.png');
+                            thumbnail.css('display', 'inline');
+                            break;
+                        case 'application/msword':
+                            thumbnail.attr('src', '/uploads/fileicons/doc.png');
+                            thumbnail.css('display', 'inline');
+                            break;
+                    }
+                });
+            });
             $('#btnAllSubmit').on("click", function() {
                 $('#btnAllSubmit').attr('disabled', 'true');
                 $('.modal-body').html('');
                 var nFiles = myDropzone.files.length;
-                var arrFormData = $('#frmRawmaterial').serialize();
-                $.ajax({
-                    type: "post",
-                    url: "{{ route('rawmaterial.store') }}",
-                    data: arrFormData,
-                    dataType: 'json',              // let's set the expected response format
-                    success: function(data){
-                        $('#nRawMaterial').val(data);
-                        var nFiles = myDropzone.files.length;
-                        if(nFiles==0)
-                        {
-                            window.location.href = "{{route('rawmaterial.index')}}";
-                        }
-                        else
-                        {
-                            myDropzone.processQueue();
-                        }
-                    },
-                    error: function (err) {
-                        if (err.status == 422) { // when status code is 422, it's a validation issue
-                            //console.log(err.responseJSON);
-                            // you can loop through the errors object and show it to the user
-
-                            // display errors on each form field
-                            var errDisplay = ''
-                            $.each(err.responseJSON.errors, function (i, error) {
-                                errDisplay = errDisplay + '<div class="alert alert-danger mb-2">'+error[0]+'</div>';
-                                $('.modal-body').html(errDisplay);
-                                $('#modalError').modal('show');
-                            });
-                            $('#btnAllSubmit').attr('disabled', false);
-                        }
-                        else{
-                            errDisplay = '<div class="alert alert-danger mb-2">An error occured. The developer has been notified. Please try again later!</div>';
-                            $('.modal-body').html(errDisplay);
-                            $('#modalError').modal('show');
-                            $('#btnAllSubmit').attr('disabled', false);
-                        }
-                    }
-                });
+                if(nFiles==0)
+                {
+                    $('#frmRawmaterial').submit();
+                }
+                else{
+                    myDropzone.processQueue();
+                }
             });
             myDropzone.on("sending", function(file, xhr, data) {
 
@@ -510,10 +519,28 @@
                 // Here I added an input value
                 data.append("_token", "{{ csrf_token() }}");
             });
+            myDropzone.on("removedfile", function(file) {
+                if(typeof(file.id)!="undefined")
+                {
+                    $.ajax({
+                        type: "post",
+                        url: "{{ route('rawmaterial.delfiles') }}",
+                        data: {'fileid': file.id, 'rawfishid': {{$rawfish->id}}, "_token": "{{ csrf_token() }}"},
+                        dataType: 'json',              // let's set the expected response format
+                        success: function(data){
+                //            alert(data);
+                        },
+                        error: function(jqxhr, status, exception) {
+                            alert('Exception:', exception);
+                        }
+                    });
+                }
+            });
             myDropzone.on("complete", function (file) {
                 if (myDropzone.getUploadingFiles().length === 0 && myDropzone.getQueuedFiles().length === 0) {
                     //location.reload();
-                    window.location.href = "{{route('rawmaterial.index')}}";
+                    //window.location.href = "{{route('rawmaterial.index')}}";
+                    $('#frmRawmaterial').submit();
                 }
             });
         }

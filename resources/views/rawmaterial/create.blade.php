@@ -82,9 +82,27 @@
                     <div class="alert alert-danger mb-2">{{ $error }}</div>
                 @endforeach
             @endif
-            <form class="form-horizontal"  novalidate method="post" action="{#">
+            <form id="frmRawmaterial" class="form-horizontal"  novalidate method="post" action="{{ route('rawmaterial.store')}}">
             @csrf
             <!-- // Basic multiple Column Form section start -->
+                <section id="global-settings" class="card">
+                    @php
+                    /*<div class="card-header">
+                        <h4 class="card-title">Files</h4>
+                    </div>*/
+                    @endphp
+                    <div class="card-body">
+                        <div class="card-text">
+                            <p>Please add attachments that concern this lot number such as:</p>
+                            <ul>
+                                <li>Purchase order</li>
+                                <li>Delivery ticket from the supplier</li>
+                                <li>Invoice from the supplier</li>
+                                <li>Photo of packaging (especially if something looks wrong)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
                 <section id="multiple-column-form">
                     <div class="row match-height">
                         <div class="col-12">
@@ -99,9 +117,11 @@
                                                 <div class="form-group">
                                                     <label>Type of Fish</label>
                                                     <div class="controls">
-                                                        <select name="supplier" id="supplier" class="form-control">
+                                                        <select name="strFishType" id="strFishType" class="form-control">
                                                             <option value="" selected></option>
-                                                            <option value="">Type 1</option>
+                                                            @foreach($FishTypes as $FishType)
+                                                                <option value="{{$FishType->value}}">{{$FishType->value}}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
@@ -110,7 +130,7 @@
                                                 <div class="form-group">
                                                     <label>Quantity</label>
                                                     <div class="controls">
-                                                        <input type="text" name="strTegund" value="{{ old('strTegund') }}" class="form-control" data-validation-required-message="Tegund is required" placeholder="Quantity">
+                                                        <input type="text" name="nQuantity" value="{{ old('nQuantity') }}" class="form-control" data-validation-required-message="Tegund is required" placeholder="Quantity">
                                                     </div>
                                                 </div>
                                             </div>
@@ -118,18 +138,10 @@
                                                 <div class="form-group">
                                                     <label>Units</label>
                                                     <div class="controls">
-                                                        <select name="tegundUnit" id="tegundUnit" class="form-control">
+                                                        <select name="strQuantityUnit" id="strQuantityUnit" class="form-control">
                                                             <option value="" selected></option>
-                                                            <option value="kg" @if(old('tegundUnit') == 'kg') ? selected : null @endif>kg</option>
-                                                            <option value="grams" @if(old('tegundUnit') == 'grams') ? selected : null @endif>grams</option>
-                                                            <?php
-                                                            /*<option value="">------------</option>
-                                                            <option value="liter" @if(old('tegundUnit') == 'liter') ? selected : null @endif>liter</option>
-                                                            <option value="deciliter" @if(old('tegundUnit') == 'deciliter') ? selected : null @endif>deciliter</option>
-                                                            <option value="centiliter" @if(old('tegundUnit') == 'centiliter') ? selected : null @endif>centiliter</option>
-                                                            <option value="milliliter" @if(old('tegundUnit')== 'milliliter') ? selected : null @endif>milliliter</option>
-                                                            <option value="">------------</option>
-                                                            <option value="pieces" @if(old('tegundUnit') == 'pieces') ? selected : null @endif>pieces</option>*/?>
+                                                            <option value="kg" @if(old('strQuantityUnit') == 'kg') ? selected : null @endif>kg</option>
+                                                            <option value="grams" @if(old('strQuantityUnit') == 'grams') ? selected : null @endif>grams</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -148,7 +160,7 @@
                                                 <div class="form-group">
                                                     <label>Cases</label>
                                                     <div class="controls">
-                                                        <input type="text" name="strTegund" value="{{ old('strTegund') }}" class="form-control" data-validation-required-message="Cases is required" placeholder="Insert number">
+                                                        <input type="text" name="nCases" value="{{ old('nCases') }}" class="form-control" data-validation-required-message="Cases is required" placeholder="Insert number">
                                                     </div>
                                                 </div>
                                             </div>
@@ -156,7 +168,7 @@
                                                 <div class="form-group">
                                                     <label>Pallets</label>
                                                     <div class="controls">
-                                                        <input type="text" name="strTegund" value="{{ old('strTegund') }}" class="form-control" data-validation-required-message="Pallets is required" placeholder="Insert number">
+                                                        <input type="text" name="nPallets" value="{{ old('nPallets') }}" class="form-control" data-validation-required-message="Pallets is required" placeholder="Insert number">
                                                     </div>
                                                 </div>
                                             </div>
@@ -166,7 +178,7 @@
                                                 <div class="form-group">
                                                     <label>Lot Nr.</label>
                                                     <div class="controls">
-                                                        <input type="text" name="strLotNr" class="form-control" value="{{ old('strLotNr') }}" @php /*data-validation-required-message="Product Number is required"*/ @endphp placeholder="Lot Number">
+                                                        <input type="text" name="strLotNr" class="form-control" value="{{ old('strLotNr') }}" placeholder="Lot Number">
                                                     </div>
                                                 </div>
                                             </div>
@@ -181,7 +193,7 @@
                                                 <div class="form-group">
                                                     <label>Supplier</label>
                                                     <div class="controls">
-                                                        <select name="supplier" id="supplier" class="form-control">
+                                                        <select name="strSupplier" id="strSupplier" class="form-control">
                                                             <option value="" selected></option>
                                                             @foreach($Suppliers as $Supplier)
                                                                 <option value="{{$Supplier->value}}">{{$Supplier->value}}</option>
@@ -210,7 +222,7 @@
                                                     <label>Fish Received</label>
                                                     <div class="controls">
                                                         <fieldset class="position-relative has-icon-left">
-                                                            <input type="text" name="strRdceived" value="@php echo date("d-m-Y");@endphp" class="form-control format-picker picker__input picker__input--active" data-validation-required-message="Fish Received date is required" placeholder="Fish Received">
+                                                            <input type="text" name="strFishRdceived" value="@php echo date("d-m-Y");@endphp" class="form-control format-picker picker__input picker__input--active" data-validation-required-message="Fish Received date is required" placeholder="Fish Received">
                                                             <div class="form-control-position">
                                                                 <i class='bx bx-calendar'></i>
                                                             </div>
@@ -222,7 +234,7 @@
                                                 <div class="form-group">
                                                     <label>Received By</label>
                                                     <div class="controls">
-                                                        <select name="tegundUnit" id="tegundUnit" class="form-control">
+                                                        <select name="strReceivedBy" id="strReceivedBy" class="form-control">
                                                             <option value="" selected></option>
                                                             @foreach($employees as $thisemp)
                                                                 <option value="{{ $thisemp->id }}">{{ $thisemp->name }}</option>
@@ -235,9 +247,11 @@
                                                 <div class="form-group">
                                                     <label>Production Site</label>
                                                     <div class="controls">
-                                                        <select name="supplier" id="supplier" class="form-control">
+                                                        <select name="strProductionSite" id="strProductionSite" class="form-control">
                                                             <option value="" selected></option>
-                                                            <option value="">Site 1</option>
+                                                            @foreach($ProductionSites as $ProductionSite)
+                                                                <option value="{{ $ProductionSite->value }}">{{ $ProductionSite->value }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
@@ -306,15 +320,16 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <form action="#" class="dropzone dropzone-area" id="dpz-remove-thumb" style="margin-left: 20px;margin-right:20px !important;">
+                                <form action="{{ route('rawmaterial.uploadfile') }}" class="dropzone dropzone-area" id="dpz-remove-thumb" style="margin-left: 20px;margin-right:20px !important;">
                                     <div class="dz-message" style="height: 200px !important;">Drop Files Here To Upload</div>
+                                    <input type="hidden" id="nRawMaterial" name="nRawMaterial">
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary">Submit</button>
+            <button id="btnAllSubmit" type="button" class="btn btn-primary">Submit</button>
         </div>
     </div>
 </div>
@@ -462,21 +477,21 @@
         init: function (e) {
             var myDropzone = this;
             $('#btnAllSubmit').on("click", function() {
-                /*$('#btnAllSubmit').attr('disabled', 'true');
+                $('#btnAllSubmit').attr('disabled', 'true');
                 $('.modal-body').html('');
                 var nFiles = myDropzone.files.length;
-                var arrFormData = $('#frmNewRecipe').serialize();
+                var arrFormData = $('#frmRawmaterial').serialize();
                 $.ajax({
                     type: "post",
-                    url: "{{ route('recipes.store') }}",
+                    url: "{{ route('rawmaterial.store') }}",
                     data: arrFormData,
                     dataType: 'json',              // let's set the expected response format
                     success: function(data){
-                        $('#nRecipeID').val(data);
+                        $('#nRawMaterial').val(data);
                         var nFiles = myDropzone.files.length;
                         if(nFiles==0)
                         {
-                            window.location.href = "{{route('recipes.index')}}";
+                            window.location.href = "{{route('rawmaterial.index')}}";
                         }
                         else
                         {
@@ -504,7 +519,7 @@
                             $('#btnAllSubmit').attr('disabled', false);
                         }
                     }
-                });*/
+                });
             });
             myDropzone.on("sending", function(file, xhr, data) {
 
@@ -516,7 +531,7 @@
             myDropzone.on("complete", function (file) {
                 if (myDropzone.getUploadingFiles().length === 0 && myDropzone.getQueuedFiles().length === 0) {
                     //location.reload();
-                    //window.location.href = "{{route('recipes.index')}}";
+                    window.location.href = "{{route('rawmaterial.index')}}";
                 }
             });
         }
