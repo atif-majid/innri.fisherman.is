@@ -40,14 +40,8 @@
                     </li>
                     <li><a href="#"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Syntax Highlighter">Maintenance Plan</span></a>
                     </li>
-                    @if($nCurrUserID==9 || $nCurrUserID==40 || $nCurrUserID==36)
-                        <li @if($controllerName=='ReceptionsurveillanceController') class="active" @endif><a href="{{ route('receptionsurveillance.create') }}"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Raw materials Old</span></a></li>
-                    @endif
-                    @if($nCurrUserID==9 || $nCurrUserID==40 || $nCurrUserID==36)
-                        <li @if($controllerName=='RawmaterialController') class="active" @endif><a href="{{ route('rawmaterial.index') }}"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Raw materials</span></a></li>
-                    @else
-                        <li><a href="#"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Raw Materials</span></a></li>
-                    @endif
+                    <li @if($controllerName=='RawmaterialController') class="active" @endif><a href="{{ route('rawmaterial.index') }}"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Raw materials</span></a></li>
+
                 </ul>
             </li>
             <li class="nav-item"><a href="#"><span class="menu-title">Education &amp; News</span></a>

@@ -122,17 +122,10 @@
             </li>
             <li class=" nav-item"><a href="#"><!--<i class="bx bx-right-arrow-alt"></i>--><span class="menu-item" data-i18n="Syntax Highlighter">Maintenance Plan</span></a>
             </li>
+
             <li class=" nav-item">
-                @if($nCurrUserID==9 || $nCurrUserID==40 || $nCurrUserID==36)
-                    <a href="{{ route('receptionsurveillance.create') }}"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Raw Materials Old</span></a>
-                @endif
-            </li>
-            <li class=" nav-item">
-                @if($nCurrUserID==9 || $nCurrUserID==40 || $nCurrUserID==36)
-                    <a href="{{ route('rawmaterial.index') }}"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Raw Materials</span></a>
-                @else
-                    <a href="#"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Raw materials</span></a>
-                @endif
+                <a href="{{ route('rawmaterial.index') }}"><!--<i class="menu-livicon" data-icon="comments"></i>--><span class="menu-title" data-i18n="Chat">Raw Materials</span></a>
+
             </li>
                     <!--<li><a href="content-helper-classes.html"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Helper Classes">Helper Classes</span></a>
                     </li>
