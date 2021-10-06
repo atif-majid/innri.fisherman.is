@@ -73,7 +73,7 @@ class EmprightsController extends Controller
         //
         $arrPages = $this->arrPages;
         $Employees = $request->employees;
-        for($i=0; $i<count($Employees); $i++)
+        for($i=10; $i<count($Employees); $i++)
         {
             $nEmpID = $Employees[$i];
             foreach ($arrPages as $key=>$val)
@@ -84,7 +84,29 @@ class EmprightsController extends Controller
                     'routename'=>$key,
                     'rights'=>$request->$strKey
                 );
-                $strIDKey = $nEmpID."-".$key."-id";
+                $empRights = Employeerights::where('routename', $key)
+                    ->where('emp_id', $nEmpID)
+                    ->get();
+                if(count($empRights)>0)
+                {
+                    $nID = $empRights[0]->id;
+                    Employeerights::find($nID)->update($arrInsert);
+                }
+                else {
+                    Employeerights::create($arrInsert);
+                }
+                //echo $empRights[0]->id."<br />";
+                /*if($empRights)
+                {
+                    echo "update<br>";
+                    $nID = $empRights[0]->id;
+                    Employeerights::find($nID)->update($arrInsert);
+                }
+                else {
+                    echo "Insert<br>";
+                    Employeerights::create($arrInsert);
+                }*/
+                /*$strIDKey = $nEmpID."-".$key."-id";
                 if(array_key_exists($strIDKey, $request->all())) {
                     $nID = $request->all()["$strIDKey"];
                     Employeerights::find($nID)->update($arrInsert);
@@ -92,10 +114,11 @@ class EmprightsController extends Controller
                 else
                 {
                     Employeerights::create($arrInsert);
-                }
+                }*/
 
             }
         }
+        //exit;
         return redirect()->route('emprights.index')
             ->with('success','Department rights updated successfully.');
 
