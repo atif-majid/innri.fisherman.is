@@ -89,8 +89,10 @@
             @if($nCurrUserID==9 || $nCurrUserID==40)
                 <li class="nav-item"><a href="#"><span class="menu-title">Access Rights</span></a>
                     <ul class="menu-content">
-                        <li @if($controllerName=='DeptrightsController') class="active" @endif><a href="{{ route('deptrights.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Department Based</span></a>
-                        </li>
+                        <?php
+                        /*<li @if($controllerName=='DeptrightsController') class="active" @endif><a href="{{ route('deptrights.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Department Based</span></a>
+                        </li>*/
+                        ?>
                         <li @if($controllerName=='EmprightsController') class="active" @endif><a href="{{ route('emprights.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Employee Rights</span></a>
                         </li>
                     </ul>

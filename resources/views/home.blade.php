@@ -170,8 +170,10 @@
             @if($nCurrUserID==9 || $nCurrUserID==40)
                 <li class=" navigation-header"><span>Access Rights</span>
                 </li>
-                <li class=" nav-item"><a href="{{ route('deptrights.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Department Based</span></a>
-                </li>
+                <?php
+                /*<li class=" nav-item"><a href="{{ route('deptrights.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Department Based</span></a>
+                </li>*/
+                ?>
                 <li class=" nav-item"><a href="{{ route('emprights.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Employee Rights</span></a>
                 </li>
             @endif
