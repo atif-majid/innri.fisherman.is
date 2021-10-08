@@ -18,7 +18,7 @@ class EmprightsController extends Controller
     protected $arrPages = array(
         "recipes" => "Recipes",
         "today_production" => "Today's Production",
-        "reception_surveillance" => "Reception Surveillance",
+        "raw_materials" => "Raw materials",
         "consistency_claims" => "Consistency Claims",
         "certificate_permits" => "Certificate and permits",
         "templates" => "Templates",
@@ -41,6 +41,7 @@ class EmprightsController extends Controller
         }
         $Employees = Employees::where('status', 'active')
             //->where('id', '!=', 9)
+            ->orderBy('name')
             ->get();
         $empRightsFromDB = Employeerights::all();
         $empRights = array();
@@ -72,10 +73,11 @@ class EmprightsController extends Controller
     {
         //
         $arrPages = $this->arrPages;
-        $Employees = $request->employees;
-        for($i=10; $i<count($Employees); $i++)
+        //$Employees = $request->employees;
+        $Employees = Employees::where('status', 'active')->orderBy('name')->get();
+        foreach($Employees as $emp)
         {
-            $nEmpID = $Employees[$i];
+            $nEmpID = $emp->id;
             foreach ($arrPages as $key=>$val)
             {
                 $strKey = $nEmpID."-".$key;
@@ -95,30 +97,8 @@ class EmprightsController extends Controller
                 else {
                     Employeerights::create($arrInsert);
                 }
-                //echo $empRights[0]->id."<br />";
-                /*if($empRights)
-                {
-                    echo "update<br>";
-                    $nID = $empRights[0]->id;
-                    Employeerights::find($nID)->update($arrInsert);
-                }
-                else {
-                    echo "Insert<br>";
-                    Employeerights::create($arrInsert);
-                }*/
-                /*$strIDKey = $nEmpID."-".$key."-id";
-                if(array_key_exists($strIDKey, $request->all())) {
-                    $nID = $request->all()["$strIDKey"];
-                    Employeerights::find($nID)->update($arrInsert);
-                }
-                else
-                {
-                    Employeerights::create($arrInsert);
-                }*/
-
             }
         }
-        //exit;
         return redirect()->route('emprights.index')
             ->with('success','Department rights updated successfully.');
 
