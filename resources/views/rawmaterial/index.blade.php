@@ -141,9 +141,8 @@
                                                     <td style="padding: 0.5rem 1.15rem; white-space: nowrap; width: 10%">
                                                         <div class="divData" style="display: none; visibility: hidden;">{{ $thisFish->id }}</div>
                                                         <form id="form-del-{{$thisFish->id}}" action="{{ route('rawmaterial.destroy',$thisFish->id) }}" method="POST">
-                                                            <a href="#" class="invoice-action-view">
-                                                                <i class="bx bx-show-alt"></i>
-                                                            </a>&nbsp;
+                                                            <a href="{{ route('rawmaterial.show', $thisFish->id) }}"><i class="bx bx-show-alt"></i></a>&nbsp;
+                                                            &nbsp;
                                                             <a href="{{ route('rawmaterial.edit', $thisFish->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp
 
                                                         <!--<a href="{{ route('rawmaterial.edit', $thisFish->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp;-->
