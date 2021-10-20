@@ -29,7 +29,7 @@
                     <td class="users-view-latest-activity">{{ $production->product_number }}</td>
                 </tr>
                 <tr>
-                    <td class="users-view-latest-activity"><strong>Order Number:</strong></td>
+                    <td class="users-view-latest-activity"><strong>Disposal:</strong></td>
                     <td class="users-view-latest-activity">{{ $production->order_number }}</td>
                 </tr>
                 @php

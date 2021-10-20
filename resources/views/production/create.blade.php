@@ -161,7 +161,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-sm">
-                                                    <label>Order nr.</label>
+                                                    <label>Disposal</label>
                                                     <div class="controls">
                                                         <input type="text" value="{{ old('order_number') }}" name="order_number" class="form-control" @php /*data-validation-required-message="Order nr. is required"*/ @endphp placeholder="Order nr.">
                                                     </div>

@@ -164,7 +164,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-sm">
-                                                    <label>Order nr.</label>
+                                                    <label>Disposal</label>
                                                     <div class="controls">
                                                         <input type="text" name="order_number" class="form-control" value="{{ $production->order_number }}" placeholder="Order nr.">
                                                     </div>
