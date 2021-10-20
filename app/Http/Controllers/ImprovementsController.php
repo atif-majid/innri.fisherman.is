@@ -122,7 +122,7 @@ class ImprovementsController extends Controller
      */
     public function store(Request $request)
     {
-        try{
+        try {
             //
             /*$arrNotifications = $request->all('chkNotification')['chkNotification'];
             echo $arrNotifications[0];*/
@@ -130,7 +130,7 @@ class ImprovementsController extends Controller
                 'strWhoNotified' => 'required',
                 'strPhoneNumber' => 'sometimes',
                 'strEmail' => 'sometimes',
-                'strProduct'=> 'sometimes',
+                'strProduct' => 'sometimes',
                 'strProductionLocation' => 'sometimes',
                 'strSupplier' => 'sometimes',
                 'strWhereSold' => 'sometimes',
@@ -156,8 +156,7 @@ class ImprovementsController extends Controller
                 ]
             );
 
-            if(isset($request->nAssignedTo) && is_numeric($request->nAssignedTo) && $request->nAssignedTo>0)
-            {
+            if (isset($request->nAssignedTo) && is_numeric($request->nAssignedTo) && $request->nAssignedTo > 0) {
                 $rules['strDueDate'] = 'required|date';//your rule here
                 $request->validate([
                     'strDueDate' => 'required'
@@ -187,20 +186,24 @@ class ImprovementsController extends Controller
             $strSenderName = $objEmployeeSender->name;
 
             $arrImpmrovement = array(
-                'complainer'=> $request->strWhoNotified,
+                'complainer' => $request->strWhoNotified,
                 'phonenumber' => $request->strPhoneNumber,
                 'email' => $request->strEmail,
                 'product' => $request->strProduct,
                 'production_location' => $request->strProductionLocation,
                 'supplier' => $request->strSupplier,
                 'selling_location' => $request->strWhereSold,
-                'purchase_date' => date("Y-m-d", strtotime($request->strDateOfPurchase)),
                 'lot_nr' => $request->strLotNr,
                 'description' => $request->strDescription,
                 'response_improvements' => $request->strResponse,
                 'complain_creation_date' => date("Y-m-d H:i:s"),
                 'complain_created_by' => $nEmployeeID
             );
+            if (trim($request->strDateOfPurchase) != "")
+            {
+                $arrImpmrovement['purchase_date'] = date("Y-m-d", strtotime($request->strDateOfPurchase));
+            }
+
 
             $nAssignedTo = 0;
             if($request->nAssignedTo>0)
@@ -429,12 +432,12 @@ class ImprovementsController extends Controller
         }
         if(isset($request->strDateOfPurchase) && trim($request->strDateOfPurchase)!="")
         {
-            $arrImpmrovement['purchase_date'] = $request->strDateOfPurchase;
+            $arrImpmrovement['purchase_date'] = date("Y-m-d", strtotime($request->strDateOfPurchase));
         }
-        if(isset($request->strDateOfPurchase) && trim($request->strDateOfPurchase)!="")
+        /*if(isset($request->strDateOfPurchase) && trim($request->strDateOfPurchase)!="")
         {
             $arrImpmrovement['purchase_date'] = $request->strDateOfPurchase;
-        }
+        }*/
         if(isset($request->strLotNr) && trim($request->strLotNr)!="")
         {
             $arrImpmrovement['lot_nr'] = $request->strLotNr;
@@ -460,7 +463,7 @@ class ImprovementsController extends Controller
         if($request->strDueDate!="")
         {
             $strDueDate = $request->strDueDate;
-            $arrImpmrovement['due_date'] = $strDueDate;
+            $arrImpmrovement['due_date'] = date("Y-m-d", strtotime($strDueDate));
         }
         Improvements::find($nImprovementID)->update($arrImpmrovement);
 
@@ -583,7 +586,11 @@ class ImprovementsController extends Controller
     {
         $strResponse = $request->strResponse;
         $nAssignedTo = $request->nAssignedTo;
-        $strDueDate = date("Y-m-d", strtotime($request->strDueDate));
+        if(trim($request->strDueDate)!="")
+        {
+            $strDueDate = date("Y-m-d", strtotime($request->strDueDate));
+        }
+
         $nID = $request->id;
 
         if(isset($request->nAssignedTo) && is_numeric($request->nAssignedTo) && $request->nAssignedTo>0)
