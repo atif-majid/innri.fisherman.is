@@ -234,18 +234,29 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-12 col-md"><strong>Product</strong></div>
-                                        <div class="col-12 col-md"><strong>Product Nr.</strong></div>
-                                        <div class="col-12 col-md"><strong>Status</strong></div>
-                                        <div class="col-12 col-md"><strong>Production Date</strong></div>
+                                        <div class="col-12 col-md-1"><strong>Option</strong></div>
+                                        <div class="col-12 col-md-1"><strong>Lot Nr.</strong></div>
+                                        <div class="col-12 col-md-3"><strong>Product</strong></div>
+                                        <div class="col-12 col-md-1"><strong>Product Nr.</strong></div>
+                                        <div class="col-12 col-md-2"><strong>Status</strong></div>
+                                        <div class="col-12 col-md-2"><strong>Quantity</strong></div>
+                                        <div class="col-12 col-md-2"><strong>Production Date</strong></div>
                                     </div>
                                     @foreach($productions as $production)
                                         <div class="row">
-                                            <div class="col-12 col-md">{{$production->title}}</div>
-                                            <div class="col-12 col-md">{{$production->product_number}}</div>
-                                            <div class="col-12 col-md">@if('no'== $production->completed) In Progress @else Completed @endif</div>
-                                            <div class="col-12 col-md">{{date("d-m-Y", strtotime($production->production_date))}}</div>
+                                            <div class="col-12 col-md-1">
+                                                <a href="{{ route('production.show', $production->id) }}" class="invoice-action-view" id="{{$production->id}}">
+                                                    <i class="bx bx-show-alt"></i>
+                                                </a>
+                                            </div>
+                                            <div class="col-12 col-md-1">{{$production->lot_number}}</div>
+                                            <div class="col-12 col-md-3">{{$production->title}}</div>
+                                            <div class="col-12 col-md-1">{{$production->product_number}}</div>
+                                            <div class="col-12 col-md-2">@if('no'== $production->completed) In Progress @else Completed @endif</div>
+                                            <div class="col-12 col-md-2">@if(!empty($production->quantity_scaled)) {{$production->quantity_scaled}}&nbsp;{{$production->quantity_scaled_unit}} @endif</div>
+                                            <div class="col-12 col-md-2">{{date("d-m-Y", strtotime($production->production_date))}}</div>
                                         </div>
+                                        <div class="row prod-detail" style="display: none; visibility: hidden" id="div-prod-{{$production->id}}"></div>
                                     @endforeach
                                 </div>
                             </div>
@@ -342,6 +353,32 @@
             $('#zoomview').attr('src', $(this).attr('src'));
             easyzoomAPI.swap(standardSrc = $(this).attr('src'), zoomHref = $(this).attr('src'));
             //$('#zoomview').css("transform", "scale(2.8)");
+        });
+        var nDispID = 0;
+        $('.invoice-action-view').on('click', function(event){
+            event.preventDefault();
+            var href = $(this).attr('href')
+            var nID = $(this).attr('id');
+            if(nDispID==nID)
+            {
+                $('#div-prod-'+nID).css({display: "none"});
+                $('#div-prod-'+nID).css({visibility: "hidden"});
+                nDispID = 0;
+                return false;
+            }
+            nDispID = nID;
+            $(".prod-detail").each(function() {
+                $(this).css({display: "none"});
+                $(this).css({visibility: "hidden"});
+            });
+            $('#div-prod-'+nID).html('Loading ...<br>Please wait');
+            $('#div-prod-'+nID).css({display: "block"});
+            $('#div-prod-'+nID).css({visibility: "visible"});
+            $.get(href, function(data, status){
+                $('#div-prod-'+nID).html(data);
+                $('#div-prod-'+nID).css({display: "block"});
+                $('#div-prod-'+nID).css({visibility: "visible"});
+            });
         });
     });
 </script>
