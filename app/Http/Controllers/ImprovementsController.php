@@ -330,13 +330,13 @@ class ImprovementsController extends Controller
             $formEmail = 'innri@fisherman.is';
             $formName = "Innri Fisherman";
             $to = "atif.majid10@gmail.com";
-            /*Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
+            Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
                 $message->from($formEmail, $formName);
                 $message->to($to);
                 $message->subject($subject);
                 $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
-            });*/
-            echo $html;
+            });
+            //echo $html;
         }
 
 
