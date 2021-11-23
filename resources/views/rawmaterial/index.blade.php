@@ -25,6 +25,7 @@
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/pickers/pickadate/pickadate.css">
     <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/tables/datatable/datatables.min.css">
     <!-- END: Vendor CSS-->
 
@@ -79,28 +80,65 @@
                     </div>
 
                 </div>
-                <!--<div class="users-list-filter px-1">
+                <div class="users-list-filter px-1">
                     <form onsubmit="return false">
                         <div class="row border rounded py-2 mb-2">
                             <div class="col-12 col-sm-6 col-lg-3">
-                                <label for="users-list-role">Recipe</label>
-                                <fieldset class="form-group">
-                                    <input  type="text" class="form-control" id="users-list-role">
-                                </fieldset>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <label for="users-list-verified">Date</label>
+                                <label for="users-list-verified">Date From</label>
                                 <fieldset class="form-group position-relative has-icon-left" >
-                                    <input type="text" class="form-control format-picker" id="users-list-verified">
+                                    <input type="text" class="form-control format-picker" id="min" value="@php echo date("d-m-Y", strtotime('-7 days')); @endphp">
                                     <div class="form-control-position">
                                         <i class='bx bx-calendar'></i>
                                     </div>
                                 </fieldset>
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3">
+                                <label for="users-list-verified">Date To</label>
+                                <fieldset class="form-group position-relative has-icon-left" >
+                                    <input type="text" class="form-control format-picker" id="max" value="@php echo date("d-m-Y"); @endphp">
+                                    <div class="form-control-position">
+                                        <i class='bx bx-calendar'></i>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <label for="users-list-status">Fish Type</label>
+                                <fieldset class="form-group">
+                                    <select class="form-control" id="fish-type">
+                                        <option value="">All</option>
+                                        @foreach($FishTypes as $FishType)
+                                            <option value="{{$FishType->value}}">{{$FishType->value}}</option>
+                                        @endforeach
+                                    </select>
+                                </fieldset>
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <label for="users-list-status">Supplier</label>
+                                <fieldset class="form-group">
+                                    <select class="form-control" id="supplier">
+                                        <option value="">All</option>
+
+                                        @foreach($Suppliers as $Supplier)
+                                            <option value="{{$Supplier->value}}">{{$Supplier->value}}</option>
+                                        @endforeach
+                                    </select>
+                                </fieldset>
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-3">
                                 <label for="users-list-status">Lot nr.</label>
                                 <fieldset class="form-group">
-                                    <input type="text" class="form-control" id="users-list-status">
+                                    <input type="text" class="form-control" id="lot-nr">
+                                </fieldset>
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <label for="users-list-status">Location</label>
+                                <fieldset class="form-group">
+                                    <select class="form-control" id="production-location">
+                                        <option value="">All</option>
+                                        @foreach($ProductionSites as $ProductionSite)
+                                            <option value="{{ $ProductionSite->value }}">{{ $ProductionSite->value }}</option>
+                                        @endforeach
+                                    </select>
                                 </fieldset>
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center">
@@ -108,7 +146,7 @@
                             </div>
                         </div>
                     </form>
-                </div>-->
+                </div>
                 @if ($message = Session::get('success'))
                     <div class="alert alert-info mb-2">
                         {{ $message }}
@@ -132,6 +170,7 @@
                                             <th style="text-align: left; padding-left: 1rem;">Lot Nr.</th>
                                             <th style="text-align: left; padding-left: 1rem;">Received</th>
                                             <th style="text-align: left; padding-left: 1rem;">Supplier</th>
+                                            <th style="text-align: left; padding-left: 1rem;">Production Site</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -158,6 +197,9 @@
                                                     <td style="padding: 0.5rem 1.15rem;" data-sort="{{ strtotime($thisFish->fish_received) }}">{{ date("d-m-Y", strtotime($thisFish->fish_received)) }}</td>
                                                     <td>
                                                         {{ $thisFish->supplier }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $thisFish->production_site }}
                                                     </td>
 
                                                 </tr>
@@ -260,6 +302,8 @@
 <script src="app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
 <script src="app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
 <script src="app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
+<script src="app-assets/vendors/js/pickers/pickadate/picker.js"></script>
+<script src="app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
@@ -277,6 +321,7 @@
 
 <!-- BEGIN: Page JS-->
 <script src="app-assets/js/scripts/pages/page-rawmaterial.js?time=<?php echo time();?>"></script>
+<script src="app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js?<?php echo time();?>"></script>
 <!-- END: Page JS-->
 
 </body>

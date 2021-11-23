@@ -23,7 +23,7 @@ $(document).ready(function () {
                     "targets": [1]
                 },
                 {
-                    "targets": [ 0 ],
+                    "targets": [ 0, 6 ],
                     "visible": false
                 }],
             "order": [[5, "asc"], [ 4, "asc" ]]
@@ -52,6 +52,105 @@ $(document).ready(function () {
                 //tr.addClass('shown');
             }
         });
+        $( '#production-location').on( 'change', function () {
+            var selLocation = $(this).val();
+            usersTable
+                .columns( 6 )
+                .search( selLocation )
+                .draw();
+        })
+        $( '#fish-type').on( 'change', function () {
+            var selType = $(this).val();
+            usersTable
+                .columns( 2 )
+                .search( selType )
+                .draw();
+        });
+        $( '#supplier').on( 'change', function () {
+            var selSupplier = $(this).val();
+            usersTable
+                .columns( 5 )
+                .search( selSupplier )
+                .draw();
+        });
+        $( '#lot-nr').on( 'keyup', function () {
+            var selLotnr = $(this).val();
+            usersTable
+                .columns( 3 )
+                .search( selLotnr )
+                .draw();
+        });
+        $(document).ready(function(){
+            var strMinDate = $('#min').val();
+            var strMaxDate = $('#max').val();
+            var MinDateParts = strMinDate.split("-");
+            var MaxDateParts = strMaxDate.split("-");
+
+            minDate = new Date(MinDateParts[2]+"-"+MinDateParts[1]+"-"+MinDateParts[0]);
+            maxDate = new Date(MaxDateParts[2]+"-"+MaxDateParts[1]+"-"+MaxDateParts[0]);
+            console.log(minDate, maxDate);
+            //maxDate = new Date(maxDate.setDate(maxDate.getDate() + 1));
+            var table = $('#users-list-datatable').DataTable();
+            table.draw();
+            $('#min, #max').on('change', function () {
+                //alert('changed');
+                //var min = $('#min').val();
+                //var max = $('#max').val();
+                //var date = new Date( data[12] );
+
+                //usersTable
+                //    .columns( 12 )
+                //    .search( min, max )
+                //    .draw();
+                var strMinDate = $('#min').val();
+                var strMaxDate = $('#max').val();
+                var MinDateParts = strMinDate.split("-");
+                var MaxDateParts = strMaxDate.split("-");
+
+                minDate = new Date(MinDateParts[2]+"-"+MinDateParts[1]+"-"+MinDateParts[0]);
+                maxDate = new Date(MaxDateParts[2]+"-"+MaxDateParts[1]+"-"+MaxDateParts[0]);
+                //console.log(minDate, maxDate);
+                var table = $('#users-list-datatable').DataTable();
+                table.draw();
+            });
+        });
+
+
+        $.fn.dataTable.ext.search.push(
+            function( settings, data, dataIndex , rowData, counter) {
+                var min = minDate;
+                var max = maxDate;
+                //if(typeof(minDate))
+                //if(counter==1 || counter==198)
+                //    console.log(data);
+                if(typeof(minDate)!='undefined' && typeof(maxDate)!='undefined')
+                {
+                    //var date = new Date( data[12] +" 05:00:00");
+                    var datesearch = data[4];
+                    var DateParts = datesearch.split("-");
+
+                    var date = new Date( DateParts[2]+"-"+DateParts[1]+"-"+DateParts[0]);
+                    //console.log(minDate, maxDate, dataIndex,counter);
+
+                    //console.log(min, max, date);
+                    if (
+                        ( min === null && max === null ) ||
+                        ( min === null && date <= max ) ||
+                        ( min <= date   && max === null ) ||
+                        ( min <= date   && date <= max )
+                    ) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+                else {
+                    return true;
+                }
+
+            }
+        );
     };
 
     // on click selected users data from table(page named page-users-list)
