@@ -72,16 +72,17 @@ class RawmaterialController extends Controller
                 'strSupplier' => 'required',
                 'strProductionSite' => 'required',
                 'nQuantity' => 'nullable|numeric',
-                'strQuantityUnit' => 'required_with:nQuantity|nullable'
-
+                'strQuantityUnit' => 'required_with:nQuantity|nullable',
+                'nCases' => 'nullable|numeric'
             ],
                 [
                     'strFishType.required' => 'Please select type of fish',
                     'strLotNr.required' => 'Please provide lot nr.',
                     'strSupplier.required' => 'Please chose supplier',
                     'strProductionSite.required' => 'Please chose production site',
-                    'nQuantity.nullable' => 'Quantity must be numeric',
-                    'strQuantityUnit.required_with' => 'Quantity unit must be provided with quantity'
+                    'nQuantity.numeric' => 'Quantity must be numeric',
+                    'strQuantityUnit.required_with' => 'Quantity unit must be provided with quantity',
+                    'nCases.numeric' => 'Cases must be numeric'
                 ]
             );
 
