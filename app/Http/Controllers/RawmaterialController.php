@@ -33,7 +33,10 @@ class RawmaterialController extends Controller
         else
         {
             $RawFish = Rawfish::all();
-            return view('rawmaterial.index', compact('RawFish'))
+            $Suppliers = Sitesettings::where('field', 'SupplierName')->orderBy('value')->get();
+            $FishTypes = Sitesettings::where('field', 'FishType')->orderBy('value')->get();
+            $ProductionSites = Sitesettings::where('field', 'ProductionSite')->orderBy('value')->get();
+            return view('rawmaterial.index', compact('RawFish', 'Suppliers', 'FishTypes', 'ProductionSites'))
                 ;
         }
     }
@@ -69,7 +72,6 @@ class RawmaterialController extends Controller
                 'strSupplier' => 'required',
                 'strProductionSite' => 'required',
                 'nQuantity' => 'nullable|numeric',
-                'strQuantityUnit' => 'required_with:nQuantity|nullable',
                 'strQuantityUnit' => 'required_with:nQuantity|nullable'
 
             ],
