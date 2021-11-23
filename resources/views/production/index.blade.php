@@ -163,7 +163,7 @@
                                                 <th style="text-align: left; padding-left: 1rem;">Product NR.</th>
                                                 <th style="text-align: left; padding-left: 1rem;">LOT NR.</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Product</th>
-                                                <th style="text-align: left; padding-left: 1rem;">Quantity (Estimate)</th>
+                                                <th style="text-align: left; padding-left: 1rem;">Quantity</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Status</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Production Site</th>
                                                 <th style="text-align: left; padding-left: 1rem;">Production Date</th>
@@ -205,7 +205,9 @@
                                                 </td>*/
                                                 @endphp
                                                 <td style="padding: 0.5rem 1.15rem">
-                                                    {{$production->quantity_estimate}}&nbsp;{{$production->quantity_estimate_unit}}
+                                                    @if(trim($production->quantity_scaled)!="")
+                                                        {{$production->quantity_scaled}}&nbsp;{{$production->quantity_scaled_unit}}
+                                                    @endif
                                                 </td>
                                                 <?php
                                                 /*<td style="padding: 0.5rem 1.15rem">
