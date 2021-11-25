@@ -188,6 +188,8 @@
                                                             <option value="milliliter" @if(old('quantity_estimate_unit')== 'milliliter') ? selected : null @endif>milliliter</option>
                                                             <option value="">------------</option>
                                                             <option value="pieces" @if(old('quantity_estimate_unit') == 'pieces') ? selected : null @endif>pieces</option>
+                                                            <option value="">------------</option>
+                                                            <option value="wagon(s)" @if(old('quantity_estimate_unit') == 'wagon(s)') ? selected : null @endif>wagon(s)</option>
                                                         </select>
                                                     </fieldset>
                                                 </div>
@@ -211,6 +213,8 @@
                                                             <option value="milliliter" @if(old('quantity_scaled_unit')== 'milliliter') ? selected : null @endif>milliliter</option>
                                                             <option value="">------------</option>
                                                             <option value="pieces" @if(old('quantity_scaled_unit') == 'pieces') ? selected : null @endif>pieces</option>
+                                                            <option value="">------------</option>
+                                                            <option value="wagon(s)" @if(old('quantity_scaled_unit') == 'wagon(s)') ? selected : null @endif>wagon(s)</option>
                                                         </select>
                                                     </fieldset>
                                                 </div>
