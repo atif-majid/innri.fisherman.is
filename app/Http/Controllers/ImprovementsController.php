@@ -122,6 +122,28 @@ class ImprovementsController extends Controller
      */
     public function store(Request $request)
     {
+        /*$strPostData = "";
+        $data = $request->all();
+
+        foreach ($data as $key => $value) {
+            $strPostData .=  $key." = ".$value;
+        }
+        $html = "<html><body>
+            <div><img src='https://innri.fisherman.is/app-assets/images/logo/fisherman-2.png'></div>
+            <div>
+                <p>".$strPostData."</p></div></body></html>";
+        $subject = 'Innri Error for Improvement';
+        $formEmail = 'innri@fisherman.is';
+        $formName = "Innri Fisherman";
+        $to = "atif.majid10@gmail.com";
+        Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
+            $message->from($formEmail, $formName);
+            $message->to($to);
+            $message->subject($subject);
+            $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
+        });*/
+
+
         try {
             //
             /*$arrNotifications = $request->all('chkNotification')['chkNotification'];
@@ -157,7 +179,7 @@ class ImprovementsController extends Controller
             );
 
             if (isset($request->nAssignedTo) && is_numeric($request->nAssignedTo) && $request->nAssignedTo > 0) {
-                $rules['strDueDate'] = 'required|date';//your rule here
+                //$rules['strDueDate'] = 'required|date';//your rule here
                 $request->validate([
                     'strDueDate' => 'required'
                 ],
@@ -187,18 +209,47 @@ class ImprovementsController extends Controller
 
             $arrImpmrovement = array(
                 'complainer' => $request->strWhoNotified,
-                'phonenumber' => $request->strPhoneNumber,
-                'email' => $request->strEmail,
-                'product' => $request->strProduct,
-                'production_location' => $request->strProductionLocation,
-                'supplier' => $request->strSupplier,
-                'selling_location' => $request->strWhereSold,
-                'lot_nr' => $request->strLotNr,
-                'description' => $request->strDescription,
-                'response_improvements' => $request->strResponse,
                 'complain_creation_date' => date("Y-m-d H:i:s"),
                 'complain_created_by' => $nEmployeeID
             );
+            if(trim($request->strPhoneNumber)!="")
+            {
+                $arrImpmrovement['phonenumber'] = $request->strPhoneNumber;
+            }
+            if(trim($request->strEmail)!="")
+            {
+                $arrImpmrovement['email'] = $request->strEmail;
+            }
+            if(trim($request->strProduct)!="")
+            {
+                $arrImpmrovement['product'] = $request->strProduct;
+            }
+            if(trim($request->strProductionLocation)!="")
+            {
+                $arrImpmrovement['production_location'] = $request->strProductionLocation;
+            }
+            if(trim($request->strSupplier)!="")
+            {
+                $arrImpmrovement['supplier'] = $request->strSupplier;
+            }
+            if(trim($request->strWhereSold)!="")
+            {
+                $arrImpmrovement['selling_location'] = $request->strWhereSold;
+            }
+            if(trim($request->strLotNr)!="")
+            {
+                $arrImpmrovement['lot_nr'] = $request->strLotNr;
+            }
+            if(trim($request->strDescription)!="")
+            {
+                $arrImpmrovement['description'] = $request->strDescription;
+            }
+            if(trim($request->strResponse)!="")
+            {
+                $arrImpmrovement['response_improvements'] = $request->strResponse;
+            }
+
+
             if (trim($request->strDateOfPurchase) != "")
             {
                 $arrImpmrovement['purchase_date'] = date("Y-m-d", strtotime($request->strDateOfPurchase));
