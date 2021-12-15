@@ -122,26 +122,34 @@ class ImprovementsController extends Controller
      */
     public function store(Request $request)
     {
-        /*$strPostData = "";
-        $data = $request->all();
+        try
+        {
+            $strPostData = "";
+            $data = $request->all();
 
-        foreach ($data as $key => $value) {
-            $strPostData .=  $key." = ".$value;
-        }
-        $html = "<html><body>
+            foreach ($data as $key => $value) {
+                $strPostData .=  $key." = ".$value;
+            }
+            $html = "<html><body>
             <div><img src='https://innri.fisherman.is/app-assets/images/logo/fisherman-2.png'></div>
             <div>
                 <p>".$strPostData."</p></div></body></html>";
-        $subject = 'Innri Error for Improvement';
-        $formEmail = 'innri@fisherman.is';
-        $formName = "Innri Fisherman";
-        $to = "atif.majid10@gmail.com";
-        Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
-            $message->from($formEmail, $formName);
-            $message->to($to);
-            $message->subject($subject);
-            $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
-        });*/
+            $subject = 'Innri Error for Improvement';
+            $formEmail = 'innri@fisherman.is';
+            $formName = "Innri Fisherman";
+            $to = "atif.majid10@gmail.com";
+            Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
+                $message->from($formEmail, $formName);
+                $message->to($to);
+                $message->subject($subject);
+                $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
+            });
+        }
+        catch (Exception $e)
+        {
+            //Do nothing
+        }
+
 
 
         try {
@@ -365,7 +373,7 @@ class ImprovementsController extends Controller
             $request->session()->flash('success', 'Improvement record added successfully.');
             echo $nImprovementID;
         }
-        catch (\Exception $e)
+        catch (Exception $e)
         {
             $strPostData = "";
             $data = $request->all();
