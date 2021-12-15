@@ -192,7 +192,7 @@
                                                             <option value="">------------</option>
                                                             <option value="pieces" @if($production->quantity_estimate_unit == 'pieces') ? selected : null @endif>pieces</option>
                                                             <option value="">------------</option>
-                                                            <option value="wagon(s)" @if(production->quantity_estimate_unit == 'wagon(s)') ? selected : null @endif>wagon(s)</option>
+                                                            <option value="wagon(s)" @if($production->quantity_estimate_unit == 'wagon(s)') ? selected : null @endif>wagon(s)</option>
                                                         </select>
                                                     </fieldset>
                                                 </div>
@@ -217,7 +217,7 @@
                                                             <option value="">------------</option>
                                                             <option value="pieces" @if($production->quantity_scaled_unit == 'pieces') ? selected : null @endif>pieces</option>
                                                             <option value="">------------</option>
-                                                            <option value="wagon(s)" @if(production->quantity_scaled_unit == 'wagon(s)') ? selected : null @endif>wagon(s)</option>
+                                                            <option value="wagon(s)" @if($production->quantity_scaled_unit == 'wagon(s)') ? selected : null @endif>wagon(s)</option>
                                                         </select>
                                                     </fieldset>
                                                 </div>
