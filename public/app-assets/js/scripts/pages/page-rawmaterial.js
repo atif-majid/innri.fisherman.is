@@ -26,7 +26,7 @@ $(document).ready(function () {
                     "targets": [ 0, 6 ],
                     "visible": false
                 }],
-            "order": [[5, "asc"], [ 4, "asc" ]]
+            "order": [[ 3, "desc" ]]
         });
         $('#users-list-datatable tbody').on('click', '.invoice-action-view', function (event) {
             event.preventDefault();
