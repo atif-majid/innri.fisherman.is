@@ -104,7 +104,32 @@ class SitesettingsController extends Controller
         $arrSuppliers = $request->Suppliers;
         $arrSellingLocations = $request->SellingLocations;
         $arrFishTypes = $request->Fishtypes;
+        $arrWarehouse = $request->Warehouse;
         $arrUpdatedSettings = array();
+        if(is_array($arrWarehouse))
+        {
+            foreach ($arrWarehouse as $warehouse)
+            {
+                $strTitle = $warehouse['strWareHouse'];
+                if(isset($warehouse['nID']) && $warehouse['nID']>0)
+                {
+                    $nID = $warehouse['nID'];
+                    $arrUpdate = array(
+                        "value"=>$strTitle
+                    );
+                    Sitesettings::find($nID)->update($arrUpdate);
+                    $arrUpdatedSettings[] = $nID;
+                }
+                else if(trim($strTitle)!="")
+                {
+                    $arrInsert = array(
+                        "field"=>"WareHouse",
+                        "value"=>$strTitle
+                    );
+                    Sitesettings::create($arrInsert);
+                }
+            }
+        }
         if(is_array($arrFishTypes))
         {
             foreach ($arrFishTypes as $fishtype)

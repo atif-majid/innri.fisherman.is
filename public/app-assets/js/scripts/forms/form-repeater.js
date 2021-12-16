@@ -10,7 +10,7 @@
 
 $(document).ready(function () {
   // form repeater jquery
-  $('.file-repeater, .contact-repeater, .repeater-default, .type-of-notification, .production-site, .list-of-suppliers, .selling-locations, .list-of-fishtypes').repeater({
+  $('.file-repeater, .contact-repeater, .repeater-default, .type-of-notification, .production-site, .list-of-suppliers, .selling-locations, .list-of-fishtypes, .list-of-warehouse').repeater({
     show: function () {
       $(this).slideDown();
     },
