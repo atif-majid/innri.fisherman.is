@@ -24,7 +24,8 @@ class Production extends Model
         'completed',
         'production_site',
         'production_date',
-        'complete_date_time'
+        'complete_date_time',
+        'warehouse'
     ];
 
 }

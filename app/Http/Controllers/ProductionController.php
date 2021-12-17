@@ -239,6 +239,7 @@ class ProductionController extends Controller
             'create_date_time'=>date("Y-m-d H:i:s"),
             'emp_id'=>$nEmpID
         );
+
         if(!empty($request->production_date))
         {
             $arrProduction['production_date'] = date("Y-m-d", strtotime($request->production_date));
@@ -247,7 +248,10 @@ class ProductionController extends Controller
         {
             $arrProduction['production_site'] = $request->strProductionLocation;
         }
-
+        if(!empty($request->strWarehouse))
+        {
+            $arrProduction['warehouse'] = $request->strWarehouse;
+        }
 
         $objProduction = Production::create($arrProduction);
         $nProductionID = $objProduction->id;
@@ -308,6 +312,13 @@ class ProductionController extends Controller
     {
         //
         //
+        /*echo "<pre>";
+        print_r($_POST);
+        echo "</pre>";
+        echo "<pre>";
+        echo $request->strWarehouse;
+        echo "</pre>";
+        exit;*/
         $nProductionID = $production->id;
         $request->validate(
             [
@@ -337,6 +348,11 @@ class ProductionController extends Controller
         {
             $arrProduction['production_site'] = $request->strProductionLocation;
         }
+        if(trim($request->strWarehouse)!="")
+        {
+            $arrProduction['warehouse'] = $request->strWarehouse;
+        }
+
         $production->update($arrProduction);
 
 

@@ -23,6 +23,16 @@
             <td class="users-view-latest-activity"><strong>Added By:</strong></td>
             <td class="users-view-latest-activity">{{ $Employee->name }}</td>
         </tr>
+        <tr>
+            <td class="users-view-latest-activity"><strong>Warehouse:</strong></td>
+            <td class="users-view-latest-activity">{{ $production->warehouse }}</td>
+            @php
+            /*<td class="users-view-latest-activity"><strong>QUANTITY SCALED:</strong></td>
+            <td class="users-view-latest-activity">{{ $production->quantity_scaled }} &nbsp;{{ $production->quantity_scaled_unit }}</td>
+            <td class="users-view-latest-activity"><strong>Added By:</strong></td>
+            <td class="users-view-latest-activity">{{ $Employee->name }}</td>*/
+            @endphp
+        </tr>
 
         </tbody>
     </table>

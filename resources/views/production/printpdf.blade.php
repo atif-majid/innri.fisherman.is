@@ -32,6 +32,10 @@
                     <td class="users-view-latest-activity"><strong>Disposal:</strong></td>
                     <td class="users-view-latest-activity">{{ $production->order_number }}</td>
                 </tr>
+                <tr>
+                    <td class="users-view-latest-activity"><strong>Warehouse:</strong></td>
+                    <td class="users-view-latest-activity">{{ $production->warehouse }}</td>
+                </tr>
                 @php
                 /*<tr>
                     <td class="users-view-latest-activity"><strong>Quantity Estimate:</strong></td>

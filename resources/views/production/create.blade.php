@@ -224,6 +224,19 @@
                                                     <button type="button" class="btn btn-primary" id="btnCalculate">Calculate Ingredients</button>
                                                 </div>
                                             </div>
+                                            <div class="row">
+                                                <div class="form-group col-sm-3">
+                                                    <label>Warehouse</label>
+                                                    <select class="form-control" name="strWarehouse">
+                                                        <option selected="" selected></option>
+                                                        @foreach($sitesettings as $thissetting)
+                                                            @if($thissetting->field=='WareHouse')
+                                                                <option value="{{ $thissetting->value }}" @if(old('strWarehouse') && old('strWarehouse')==$thissetting->value) selected @endif>{{ $thissetting->value }}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
