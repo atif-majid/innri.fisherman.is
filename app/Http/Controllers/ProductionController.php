@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Employeerights;
 use App\Models\Production;
 use App\Models\Employees;
-use App\Models\Instructions;
-use App\Models\Packaging;
-use App\Models\Rawmaterials;
 use App\Models\Recipephotos;
 use App\Models\Shipment;
 use App\Models\Recipes;
@@ -93,80 +90,7 @@ class ProductionController extends Controller
                 ->select('production.*','recipes.title')
                 ->get();
 
-            /*$Instructions = array();
-            $allInstructions = Instructions::all();
-            foreach($allInstructions as $thisInstruction)
-            {
-                $nProductionID = $thisInstruction->production_id;
-                if(!array_key_exists($nProductionID, $Instructions))
-                {
-                    if($thisInstruction->chk_make=='yes')
-                    {
-                        $Instructions["$nProductionID"] = "M";
-                    }
-                    if($thisInstruction->chk_pack=='yes')
-                    {
-                        $Instructions["$nProductionID"] = "P";
-                    }
-                    if($thisInstruction->chk_freeze=='yes')
-                    {
-                        $Instructions["$nProductionID"] = "F";
-                    }
-                    if($thisInstruction->chk_send=='yes')
-                    {
-                        $Instructions["$nProductionID"] = "S";
-                    }
-                }
-                else
-                {
-                    if($thisInstruction->chk_make=='yes')
-                    {
-                        $Instructions["$nProductionID"] = $Instructions["$nProductionID"].", M";
-                    }
-                    if($thisInstruction->chk_pack=='yes')
-                    {
-                        $Instructions["$nProductionID"] = $Instructions["$nProductionID"].", P";
-                    }
-                    if($thisInstruction->chk_freeze=='yes')
-                    {
-                        $Instructions["$nProductionID"] = $Instructions["$nProductionID"].", F";
-                    }
-                    if($thisInstruction->chk_send=='yes')
-                    {
-                        $Instructions["$nProductionID"] = $Instructions["$nProductionID"].", S";
-                    }
-                }*/
-                /*if(!array_key_exists($nProductionID, $Instructions))
-                {
-                    $Instructions["$nProductionID"] = array("Make"=>"", "Pack"=>"", "Freeze"=>"", "Send"=>"");
-                }
-                if($thisInstruction->chk_make=='yes')
-                {
-                    $Instructions["$nProductionID"]["Make"] = $thisInstruction->instruction_date;
-                }
-                if($thisInstruction->chk_pack=='yes')
-                {
-                    $Instructions["$nProductionID"]["Pack"] = $thisInstruction->instruction_date;
-                }
-                if($thisInstruction->chk_freeze=='yes')
-                {
-                    $Instructions["$nProductionID"]["Freeze"] = $thisInstruction->instruction_date;
-                }
-                if($thisInstruction->chk_send=='yes')
-                {
-                    $Instructions["$nProductionID"]["Send"] = $thisInstruction->instruction_date;
-                }
-            }*/
 
-            /*$Rawmaterials = array();
-            $allRawMaterials = Rawmaterials::all();
-            foreach ($allRawMaterials as $thisMaterial)
-            {
-                $nProductionID = $thisMaterial->production_id;
-                $Rawmaterials["$nProductionID"][] = array("material_name"=>$thisMaterial->material_name,
-                    "material_quantity"=>$thisMaterial->material_quantity, "material_unit"=>$thisMaterial->material_unit,
-                    "material_lot_nr"=>$thisMaterial->material_lot_nr);
-            }*/
             $sitesettings = Sitesettings::all();
             return view('production.index',compact('productions',  'sitesettings'))
                 ->with('i', (request()->input('page', 1) - 1) * 5);
@@ -196,22 +120,6 @@ class ProductionController extends Controller
     public function store(Request $request)
     {
 
-        //
-        /*$request->validate([
-            'product_number' => 'required',
-            'lot_number' => 'required',
-            'product_name' => 'required',
-            'instructions' => 'required',
-            'products_available_arriving' => 'required',
-            'packing_package_size' => 'required',
-            'production_total' => 'required',
-            'delivery_storage' => 'required',
-            'delivery_storage_quantity' => 'required',
-            'pallet_number' => 'required',
-            'recipe_id' => 'required',
-            'production_date' => 'required',
-            'production_unit' => 'required'
-        ]);*/
         $request->validate(
             [
                 'recipe_id' => 'required',
@@ -272,10 +180,6 @@ class ProductionController extends Controller
         $nProductionID = $production->id;
         $nRecipeID = $production->recipe_id;
         $Recipe = Recipes::find($nRecipeID);
-        //$Instructions = Instructions::where('production_id', $nProductionID)->get();
-        //$RawMetirals = Rawmaterials::where('production_id', $nProductionID)->get();
-        //$Packagings = Packaging::where('production_id', $nProductionID)->get();
-        //$Shipments = Shipment::where('production_id', $nProductionID)->get();
         $nEmpID = $production->emp_id;
         $Employee = Employees::find($nEmpID);
         return view('production.show', compact('production', 'Recipe',
@@ -293,10 +197,6 @@ class ProductionController extends Controller
         //
         $nProductionID = $production->id;
         $recipes = Recipes::all();
-        //$Instructions = Instructions::where('production_id', $nProductionID)->get();
-        //$RawMaterials = Rawmaterials::where('production_id', $nProductionID)->get();
-        //$Packaging = Packaging::where('production_id', $nProductionID)->get();
-        //$Shipment = Shipment::where('production_id', $nProductionID)->get();
         $sitesettings = Sitesettings::all();
         return view('production.edit', compact('production', 'recipes',  'sitesettings'));
     }
@@ -310,15 +210,6 @@ class ProductionController extends Controller
      */
     public function update(Request $request, Production $production)
     {
-        //
-        //
-        /*echo "<pre>";
-        print_r($_POST);
-        echo "</pre>";
-        echo "<pre>";
-        echo $request->strWarehouse;
-        echo "</pre>";
-        exit;*/
         $nProductionID = $production->id;
         $request->validate(
             [
@@ -370,12 +261,7 @@ class ProductionController extends Controller
     {
         //
         $nProductionID = $production->id;
-        //Ingredients::where('recipe_id',$nRecipeID)->delete();
         $production->delete();
-        //Instructions::where('production_id', $nProductionID)->delete();
-        //Rawmaterials::where('production_id', $nProductionID)->delete();
-        //Packaging::where('production_id', $nProductionID)->delete();
-        //Shipment::where('production_id', $nProductionID)->delete();
 
         return redirect()->route('production.index')
             ->with('success','Production record deleted successfully.');
@@ -413,7 +299,6 @@ class ProductionController extends Controller
         $nRecipeUnit = $recipe->unit;
         $nMultiplier = 0;
         $arrSameUnits = array();
-        //'grams','kg','liter','pieces','deciliter','centiliter','milliliter'
         $arrSameUnits['weight'] = array("grams", "kg");
         $arrSameUnits['volume'] = array("deciliter", "centiliter", "milliliter", "liter");
         $arrSameUnits['pieces'] = array('pieces');
@@ -556,11 +441,7 @@ class ProductionController extends Controller
         {
             $nRecipeID = $production->recipe_id;
             $recipe = Recipes::find($nRecipeID);
-            //$Instructions = Instructions::where('production_id', $nProductionID)->get();
-            //$RawMetirals = Rawmaterials::where('production_id', $nProductionID)->get();
-            //$Packagings = Packaging::where('production_id', $nProductionID)->get();
-            //$Shipments = Shipment::where('production_id', $nProductionID)->get();
-
+            
             $Ingredients = Ingredients::where('recipe_id', $nRecipeID)->get();
             $Steps = Steps::where('recipe_id', $nRecipeID)->get();
             $RecipePhoto = Recipephotos::where('recipe_id', $nRecipeID)->get();
