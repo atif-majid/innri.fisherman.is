@@ -14,6 +14,7 @@ use App\Http\Controllers\ReceptionsurveillanceController;
 use App\Http\Controllers\TemplatesController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\RawmaterialController;
+use App\Http\Controllers\VisitorsController;
 
 
 /*
@@ -156,3 +157,5 @@ Route::resource('rawmaterial', RawmaterialController::class, ['middleware' => 'a
 Route::post('/rawmaterial/uploadfile', ['as'=>'rawmaterial.uploadfile', 'uses'=>'App\Http\Controllers\RawmaterialController@uploadfile']);
 Route::get('rawmaterial/getfiles/{id}', ['as'=>'rawmaterial.getfiles', 'uses'=>'App\Http\Controllers\RawmaterialController@getfiles'])->middleware('auth');
 Route::post('/rawmaterial/delfiles', ['as'=>'rawmaterial.delfiles', 'uses'=>'App\Http\Controllers\RawmaterialController@delfiles']);
+
+Route::resource('visitors', VisitorsController::class);
