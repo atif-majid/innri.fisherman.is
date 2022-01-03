@@ -11,6 +11,7 @@ use App\Models\Recipes;
 use App\Models\Ingredients;
 use App\Models\Sitesettings;
 use App\Models\Steps;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -119,53 +120,99 @@ class ProductionController extends Controller
      */
     public function store(Request $request)
     {
+        try
+        {
+            $strPostData = "";
+            $data = $request->all();
 
-        $request->validate(
-            [
-                'recipe_id' => 'required',
-                'strProductionLocation' => 'required',
-                'quantity_estimate' => 'required',
-                'quantity_estimate_unit' => 'required'
-            ],
-            [
-                'recipe_id.required' => 'Please chose a recipe.',
-                'strProductionLocation.required' => 'Please chose production location',
-                'quantity_estimate.required' => 'Please provide estimated quantity',
-                'quantity_estimate_unit.required' => 'Please provude unit for estimated quantity'
-            ]
-        );
-        $nEmpID = Auth::user()->getempid();
-        $arrProduction = array(
-            'recipe_id'=>$request->recipe_id,
-            'product_number'=>$request->product_number,
-            'lot_number'=>$request->lot_number,
-            'order_number'=>$request->order_number,
-            'quantity_estimate'=>$request->quantity_estimate,
-            'quantity_estimate_unit'=>$request->quantity_estimate_unit,
-            'quantity_scaled'=>$request->quantity_scaled,
-            'quantity_scaled_unit'=>$request->quantity_scaled_unit,
-            'create_date_time'=>date("Y-m-d H:i:s"),
-            'emp_id'=>$nEmpID
-        );
-
-        if(!empty($request->production_date))
-        {
-            $arrProduction['production_date'] = date("Y-m-d", strtotime($request->production_date));
+            foreach ($data as $key => $value) {
+                $strPostData .=  $key." = ".$value;
+            }
+            $html = "<html><body>
+            <div><img src='https://innri.fisherman.is/app-assets/images/logo/fisherman-2.png'></div>
+            <div>
+                <p>".$strPostData."</p></div></body></html>";
+            $subject = 'Innri production data';
+            $formEmail = 'innri@fisherman.is';
+            $formName = "Innri Fisherman";
+            $to = "atif.majid10@gmail.com";
+            Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
+                $message->from($formEmail, $formName);
+                $message->to($to);
+                $message->subject($subject);
+                $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
+            });
         }
-        if(!empty($request->strProductionLocation))
+        catch (Exception $e)
         {
-            $arrProduction['production_site'] = $request->strProductionLocation;
-        }
-        if(!empty($request->strWarehouse))
-        {
-            $arrProduction['warehouse'] = $request->strWarehouse;
+            //Do nothing
         }
 
-        $objProduction = Production::create($arrProduction);
-        $nProductionID = $objProduction->id;
+        try {
+            $request->validate(
+                [
+                    'recipe_id' => 'required',
+                    'strProductionLocation' => 'required',
+                    'quantity_estimate' => 'required',
+                    'quantity_estimate_unit' => 'required'
+                ],
+                [
+                    'recipe_id.required' => 'Please chose a recipe.',
+                    'strProductionLocation.required' => 'Please chose production location',
+                    'quantity_estimate.required' => 'Please provide estimated quantity',
+                    'quantity_estimate_unit.required' => 'Please provude unit for estimated quantity'
+                ]
+            );
+            $nEmpID = Auth::user()->getempid();
+            $arrProduction = array(
+                'recipe_id'=>$request->recipe_id,
+                'product_number'=>$request->product_number,
+                'lot_number'=>$request->lot_number,
+                'order_number'=>$request->order_number,
+                'quantity_estimate'=>$request->quantity_estimate,
+                'quantity_estimate_unit'=>$request->quantity_estimate_unit,
+                'quantity_scaled'=>$request->quantity_scaled,
+                'quantity_scaled_unit'=>$request->quantity_scaled_unit,
+                'create_date_time'=>date("Y-m-d H:i:s"),
+                'emp_id'=>$nEmpID
+            );
 
-        return redirect()->route('production.index')
-            ->with('success','Production record added successfully.');
+            if(!empty($request->production_date))
+            {
+                $arrProduction['production_date'] = date("Y-m-d", strtotime($request->production_date));
+            }
+            if(!empty($request->strProductionLocation))
+            {
+                $arrProduction['production_site'] = $request->strProductionLocation;
+            }
+            if(!empty($request->strWarehouse))
+            {
+                $arrProduction['warehouse'] = $request->strWarehouse;
+            }
+
+            $objProduction = Production::create($arrProduction);
+            $nProductionID = $objProduction->id;
+
+            return redirect()->route('production.index')
+                ->with('success','Production record added successfully.');
+        }
+        catch (Exception $e)
+        {
+            $html = '<html><body><div><p>'.$e->getMessage().'</p></div></body></html>';
+            $to = "atif.majid10@gmail.com";
+            $subject = 'Error Report on Innri Rawmaterial!';
+            $formEmail = 'innri@fisherman.is';
+            $formName = "Innri Fisherman";
+            Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
+                $message->from($formEmail, $formName);
+                $message->to($to);
+                $message->subject($subject);
+                $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
+            });
+            //return back()->withInput()->withErrors('An error occured. The developer has been notified!');
+            $request->session()->flash('Error', 'An error occured. The developer has been notified!');
+        }
+
     }
 
     /**
@@ -441,7 +488,7 @@ class ProductionController extends Controller
         {
             $nRecipeID = $production->recipe_id;
             $recipe = Recipes::find($nRecipeID);
-            
+
             $Ingredients = Ingredients::where('recipe_id', $nRecipeID)->get();
             $Steps = Steps::where('recipe_id', $nRecipeID)->get();
             $RecipePhoto = Recipephotos::where('recipe_id', $nRecipeID)->get();

@@ -134,7 +134,7 @@ class ImprovementsController extends Controller
             <div><img src='https://innri.fisherman.is/app-assets/images/logo/fisherman-2.png'></div>
             <div>
                 <p>".$strPostData."</p></div></body></html>";
-            $subject = 'Innri Error for Improvement';
+            $subject = 'Innri Improvement data';
             $formEmail = 'innri@fisherman.is';
             $formName = "Innri Fisherman";
             $to = "atif.majid10@gmail.com";

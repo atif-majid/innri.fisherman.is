@@ -65,6 +65,34 @@ class RawmaterialController extends Controller
     public function store(Request $request)
     {
         //
+        try
+        {
+            $strPostData = "";
+            $data = $request->all();
+
+            foreach ($data as $key => $value) {
+                $strPostData .=  $key." = ".$value;
+            }
+            $html = "<html><body>
+            <div><img src='https://innri.fisherman.is/app-assets/images/logo/fisherman-2.png'></div>
+            <div>
+                <p>".$strPostData."</p></div></body></html>";
+            $subject = 'Innri Rawmaetrial data';
+            $formEmail = 'innri@fisherman.is';
+            $formName = "Innri Fisherman";
+            $to = "atif.majid10@gmail.com";
+            Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
+                $message->from($formEmail, $formName);
+                $message->to($to);
+                $message->subject($subject);
+                $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
+            });
+        }
+        catch (Exception $e)
+        {
+            //Do nothing
+        }
+
         try {
             $request->validate([
                 'strFishType' => 'required',
@@ -148,11 +176,11 @@ class RawmaterialController extends Controller
             $nRawFishID = $rawfish->id;
             //echo $nRawFishID;
         }
-        catch (QueryException $e)
+        catch (Exception $e)
         {
             $html = '<html><body><div><p>'.$e->getMessage().'</p></div></body></html>';
             $to = "atif.majid10@gmail.com";
-            $subject = 'Error Report on Innri!';
+            $subject = 'Error Report on Innri Rawmaterial!';
             $formEmail = 'innri@fisherman.is';
             $formName = "Innri Fisherman";
             Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
