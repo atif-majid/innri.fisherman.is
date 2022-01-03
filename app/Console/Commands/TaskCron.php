@@ -48,7 +48,8 @@ class TaskCron extends Command
                 $strQty = $aProduction->quantity_scaled;
                 $strProductNumber = $aProduction->product_number;
                 $strLotNumber = $aProduction->lot_number;
-                $strOutPut .= $strProductNumber.";".$strDate.";;".$strWareHouse.";".$strQty.";".$strLotNumber."\r\n";
+                //$strOutPut .= $strProductNumber.";".$strDate.";;".$strWareHouse.";".$strQty.";".$strLotNumber."\r\n";
+                $strOutPut .= $strProductNumber.";;".$strQty.";;;".$strLotNumber.";\r\n";
             }
 
             $disk = Storage::disk('local');
