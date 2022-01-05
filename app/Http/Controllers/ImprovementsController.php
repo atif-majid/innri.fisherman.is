@@ -128,7 +128,7 @@ class ImprovementsController extends Controller
             $data = $request->all();
 
             foreach ($data as $key => $value) {
-                $strPostData .=  $key." = ".$value;
+                $strPostData .=  $key." = ".$value."&";
             }
             $html = "<html><body>
             <div><img src='https://innri.fisherman.is/app-assets/images/logo/fisherman-2.png'></div>
