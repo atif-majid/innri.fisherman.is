@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Templatesubmitfields;
 use App\Models\Employees;
 use App\Models\Templates;
+use App\Models\Visitors;
 
 class ReportsController extends Controller
 {
@@ -41,7 +42,8 @@ class ReportsController extends Controller
             $supervisors = Employees::whereIn('id', $arrSupervisors)->orderBy('name')->get();
             $employees = Employees::where('status', 'active')->orderBy('name')->get();
             $templates = Templates::orderBy('title')->get();
-            return view('reports.index', compact('templatesubmit', 'employees', 'supervisors', 'templates'));
+            $visitors = Visitors::all();
+            return view('reports.index', compact('templatesubmit', 'employees', 'supervisors', 'templates', 'visitors'));
         }
     }
 
@@ -67,5 +69,12 @@ class ReportsController extends Controller
 
         $templatesubmitfields = Templatesubmitfields::where('template_submit_id', $nSubmitID)->get();
         return view('reports.show', compact('templatesubmit', 'templatesubmitfields'));
+    }
+
+    public function showvisitor(int $nVisitorID)
+    {
+        $visitor = Visitors::where('id', $nVisitorID)->first();
+
+        return view('reports.showvisitor', compact('visitor'));
     }
 }

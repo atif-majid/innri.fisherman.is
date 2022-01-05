@@ -144,14 +144,15 @@ Route::resource('emprights', EmprightsController::class, ['middleware' => 'auth'
 Route::resource('receptionsurveillance', ReceptionsurveillanceController::class, ['middleware' => 'auth']);
 
 Route::resource('templates', TemplatesController::class, ['middleware' => 'auth']);
-Route::get('templates/fill/{id}', ['as'=>'templates.fill', 'uses'=>'App\Http\Controllers\TemplatesController@fill'])->middleware('auth');;
+Route::get('templates/fill/{id}', ['as'=>'templates.fill', 'uses'=>'App\Http\Controllers\TemplatesController@fill'])->middleware('auth');
 Route::get('templates/review/{id}', ['as'=>'templates.review', 'uses'=>'App\Http\Controllers\TemplatesController@review'])->middleware('auth');;
 Route::post('/templates/fillsubmit', ['as'=>'templates.fillsubmit', 'uses'=>'App\Http\Controllers\TemplatesController@fillsubmit']);
 Route::post('/templates/reviewsubmit', ['as'=>'templates.reviewsubmit', 'uses'=>'App\Http\Controllers\TemplatesController@reviewsubmit']);
 
 Route::resource('reports', ReportsController::class, ['middleware' => 'auth']);
 Route::get('/reports/{id}', [ReportsController::class, 'show']);
-
+//Route::get('/reports/showvisitor/{id}', [ReportsController::class, 'showvisitor']);
+Route::get('reports/showvisitor/{id}', ['as'=>'reports.showvisitor', 'uses'=>'App\Http\Controllers\ReportsController@showvisitor'])->middleware('auth');
 
 Route::resource('rawmaterial', RawmaterialController::class, ['middleware' => 'auth']);
 Route::post('/rawmaterial/uploadfile', ['as'=>'rawmaterial.uploadfile', 'uses'=>'App\Http\Controllers\RawmaterialController@uploadfile']);
