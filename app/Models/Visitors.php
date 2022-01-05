@@ -17,6 +17,7 @@ class Visitors extends Model
         'company',
         'purpose',
         'purpose_other',
-        'visit_date_time'
+        'visit_date_time',
+        'ip'
         ];
 }
