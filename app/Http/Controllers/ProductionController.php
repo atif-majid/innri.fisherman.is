@@ -124,10 +124,10 @@ class ProductionController extends Controller
         {
             $strPostData = "";
             $data = $request->all();
-
-            foreach ($data as $key => $value) {
+            $strPostData = $this->parse_data($data);
+            /*foreach ($data as $key => $value) {
                 $strPostData .=  $key." = ".$value."&";
-            }
+            }*/
             $html = "<html><body>
             <div><img src='https://innri.fisherman.is/app-assets/images/logo/fisherman-2.png'></div>
             <div>
@@ -527,5 +527,21 @@ class ProductionController extends Controller
             );
             Production::where('id', $nID)->update($arrUpdate);
         }
+    }
+
+    private function parse_data($arrData)
+    {
+        $strData = "";
+        foreach($arrData as $key=>$val)
+        {
+            if(is_array($val))
+            {
+                $strData .= $key."=array[".$this->parse_data($val)."]&";
+            }
+            else{
+                $strData .= $key ."=".$val."&";
+            }
+        }
+        return $strData;
     }
 }
