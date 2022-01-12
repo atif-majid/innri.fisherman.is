@@ -158,6 +158,15 @@
             </li>
             <li class=" nav-item"><a href="{{ route('employees.outstandingitems') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Outstanding items</span></a>
             </li>
+            @php
+                $files = App\Models\Catelogfiles::where('status', 'active')->orderBy('title','ASC')->get();
+            @endphp
+            <li class=" navigation-header"><span>Fisherman school</span>
+                @foreach($files as $thisfile)
+                <li class=" nav-item"><a href="/uploads/catalogs/{{$thisfile->filename}}" download target="_blank"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">{{ $thisfile->title }}</span></a>
+                </li>
+                @endforeach
+            </li>
             <li class=" navigation-header"><span>Site Settings</span>
             </li>
             <li class=" nav-item"><a href="{{ route('sitesettings.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Form Values</span></a>
@@ -166,7 +175,8 @@
             </li>
             <li class=" nav-item"><a href="{{ route('sitesettings.onboardingtasks') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Onboarding Tasks</span></a>
             </li>
-
+            <li class=" nav-item"><a href="{{ route('catelogfiles.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Files</span></a>
+            </li>
             @if($nCurrUserID==9 || $nCurrUserID==40)
                 <li class=" navigation-header"><span>Access Rights</span>
                 </li>

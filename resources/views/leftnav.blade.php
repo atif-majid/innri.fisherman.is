@@ -76,6 +76,17 @@
                     </li>
                 </ul>
             </li>
+            @php
+                $files = App\Models\Catelogfiles::where('status', 'active')->orderBy('title','ASC')->get();
+            @endphp
+            <li class="nav-item"><a href="#"><span class="menu-title">Fisherman school</span></a>
+                <ul class="menu-content">
+                    @foreach($files as $thisfile)
+                        <li><a href="/uploads/catalogs/{{$thisfile->filename}}" download target="_blank"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">{{ $thisfile->title }}</span></a>
+                        </li>
+                    @endforeach
+                </ul>
+            </li>
             <li class="nav-item"><a href="#"><span class="menu-title">Site Settings</span></a>
                 <ul class="menu-content">
                     <li @if($controllerName=='SitesettingsController' && $strAcionName=='index') class="active" @endif><a href="{{ route('sitesettings.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Form Values</span></a>
@@ -83,6 +94,8 @@
                     <li @if($controllerName=='SitesettingsController' && $strAcionName=='onboardingsections') class="active" @endif><a href="{{ route('sitesettings.onboardingsections') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Onboarding Categories</span></a>
                     </li>
                     <li @if($controllerName=='SitesettingsController' && $strAcionName=='onboardingtasks') class="active" @endif><a href="{{ route('sitesettings.onboardingtasks') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Onboarding Tasks</span></a>
+                    </li>
+                    <li @if($controllerName=='CatalogfilesController' && $strAcionName=='index') class="active" @endif><a href="{{ route('catelogfiles.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Files</span></a>
                     </li>
                 </ul>
             </li>

@@ -15,6 +15,7 @@ use App\Http\Controllers\TemplatesController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\RawmaterialController;
 use App\Http\Controllers\VisitorsController;
+use App\Http\Controllers\CatalogfilesController;
 
 
 /*
@@ -160,3 +161,7 @@ Route::get('rawmaterial/getfiles/{id}', ['as'=>'rawmaterial.getfiles', 'uses'=>'
 Route::post('/rawmaterial/delfiles', ['as'=>'rawmaterial.delfiles', 'uses'=>'App\Http\Controllers\RawmaterialController@delfiles']);
 
 Route::resource('visitors', VisitorsController::class);
+
+Route::get('/catelogfiles/getfiles', ['as'=>'catelogfiles.getfiles', 'uses'=>'App\Http\Controllers\CatalogfilesController@getfiles'])->middleware('auth');
+Route::resource('catelogfiles', CatalogfilesController::class);
+Route::post('/catelogfiles/delfiles', ['as'=>'catelogfiles.delfiles', 'uses'=>'App\Http\Controllers\CatalogfilesController@delfiles']);
