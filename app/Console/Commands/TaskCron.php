@@ -45,7 +45,7 @@ class TaskCron extends Command
             {
                 $strDate = date("d-m-Y", strtotime($aProduction->production_date));
                 $strWareHouse = $aProduction->warehouse;
-                $strQty = $aProduction->quantity_scaled;
+                $strQty = str_replace(".", ",", $aProduction->quantity_scaled);
                 $strProductNumber = $aProduction->product_number;
                 $strLotNumber = $aProduction->lot_number;
                 //$strOutPut .= $strProductNumber.";".$strDate.";;".$strWareHouse.";".$strQty.";".$strLotNumber."\r\n";
