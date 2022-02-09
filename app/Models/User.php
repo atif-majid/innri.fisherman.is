@@ -75,4 +75,16 @@ class User extends Authenticatable
         }
         return $nThisEmpID;
     }
+
+    public function getempdesignation()
+    {
+        $strEmail = $this->email;
+        $objCurrentEmployee = Employees::where('email',$strEmail)->first();
+        $nThisEmpDesignation = "Chef";
+        if($objCurrentEmployee)
+        {
+            $nThisEmpDesignation = $objCurrentEmployee->designation;
+        }
+        return $nThisEmpDesignation;
+    }
 }
