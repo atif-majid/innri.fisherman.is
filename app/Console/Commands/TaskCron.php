@@ -82,8 +82,7 @@ class TaskCron extends Command
         //Mail::to("atif.majid10@gmail.com")->send(new SendEmail);
         if($this->nRowCount>0)
         {
-            Mail::to("jon.arnar@fisherman.is")
-                ->bcc("atif.majid10@gmail.com")
+            Mail::to("invoice@fisherman.is")
                 ->send(new SendEmail($this->location));
         }
     }
