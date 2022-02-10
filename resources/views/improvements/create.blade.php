@@ -302,7 +302,7 @@
                                                         <div class="controls">
                                                             <!--<input type="text" name="strAssignedTo" id="strAssignedTo" value="" class="form-control" data-validation-required-message="Employee Name is requried" placeholder="Who will resolve this?">-->
                                                             <select class="form-control" id="nAssignedTo" name="nAssignedTo">
-                                                                <option value=""></option>
+                                                                <option value="0"></option>
                                                                 @foreach ($employees as $employee)
                                                                     <option value="{{ $employee->id }}" @if(old('nAssignedTo')==$employee->id) selected @endif>{{ $employee->name }}</option>
                                                                 @endforeach
@@ -589,7 +589,7 @@
         init: function (e) {
             var myDropzone = this;
             $('#btnAllSubmit').on("click", function() {
-                $('#btnAllSubmit').attr('disabled', 'true');
+                $('#btnAllSubmit').attr('disabled', true);
                 $('.modal-body').html('');
                 var nFiles = myDropzone.files.length;
                 var arrFormData = $('#frmNewImprovement').serialize();
@@ -622,13 +622,13 @@
                                 $('.modal-body').html(errDisplay);
                                 $('#modalError').modal('show');
                             });
-                            $('#btnAllSubmit').attr('disabled', 'false');
+                            $('#btnAllSubmit').attr('disabled', false);
                         }
                         else{
                             errDisplay = '<div class="alert alert-danger mb-2">An error occured. The developer has been notified. Please try again later!</div>';
                             $('.modal-body').html(errDisplay);
                             $('#modalError').modal('show');
-                            $('#btnAllSubmit').attr('disabled', 'false');
+                            $('#btnAllSubmit').attr('disabled', false);
                         }
                     }
                 });
