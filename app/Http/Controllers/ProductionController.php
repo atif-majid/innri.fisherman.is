@@ -24,6 +24,16 @@ class ProductionController extends Controller
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
+
+            $strStatus = Auth::user()->getempStatus();
+            if($strStatus=='inactive')
+            {
+                Auth::guard('web')->logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return redirect('/');
+            }
+
             $strFullRoute = request()->route()->getActionName();
             $strAcionName = substr($strFullRoute, strpos($strFullRoute, "@")+1);
             $arrAllowedPages = array(

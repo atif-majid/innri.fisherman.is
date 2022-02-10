@@ -13,6 +13,30 @@ use App\Models\Visitors;
 
 class ReportsController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //$this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $strStatus = Auth::user()->getempStatus();
+            if($strStatus=='inactive')
+            {
+                Auth::guard('web')->logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return redirect('/');
+            }
+            else
+            {
+                return $next($request);
+            }
+
+        });
+    }
     //
     public function index()
     {

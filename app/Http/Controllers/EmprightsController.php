@@ -6,6 +6,7 @@ use App\Models\Departmentrights;
 use App\Models\Employees;
 use App\Models\Employeerights;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmprightsController extends Controller
 {
@@ -28,6 +29,31 @@ class EmprightsController extends Controller
         "employees_directory" => "Employees Directory",
         "site_settings" => "Site Settings"
     );
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //$this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $strStatus = Auth::user()->getempStatus();
+            if($strStatus=='inactive')
+            {
+                Auth::guard('web')->logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return redirect('/');
+            }
+            else
+            {
+                return $next($request);
+            }
+
+        });
+    }
     public function index()
     {
         //

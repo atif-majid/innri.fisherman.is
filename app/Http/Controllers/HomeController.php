@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Improvements;
 use App\Models\Salesopportunity;
+use App\Models\Menu;
 
 class HomeController extends Controller
 {
@@ -17,7 +18,22 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $strStatus = Auth::user()->getempStatus();
+            if($strStatus=='inactive')
+            {
+                Auth::guard('web')->logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return redirect('/');
+            }
+            else
+            {
+                return $next($request);
+            }
+
+        });
     }
 
     /**
@@ -73,8 +89,35 @@ class HomeController extends Controller
                     ->where('assigned_to', $nEmployeeID)
                     ->get();
             }
+            $strEmpDesignation = Auth::user()->getempdesignation();
 
-            return view('home', compact('tasks', 'Improvements', 'Salesopportunities'));
+            $strToday = date("Y-m-d");
+            $nDayOfWeekToday = date("N", strtotime($strToday));
+            $nDaysToNextWeek = 7-$nDayOfWeekToday+1;
+            $strStartOfNextWeek = date("Y-m-d", strtotime($strToday." +".$nDaysToNextWeek." days"));
+            $strEndOfNextWeek = date("Y-m-d", strtotime($strStartOfNextWeek." +6 days"));
+            $arrMenuItems = array();
+            for($i=0; $i<7; $i++)
+            {
+                $strDate = date("Y-m-d", strtotime($strStartOfNextWeek." +$i days"));
+                $arrMenuItems["$strDate"] = array("main_course"=>"", 'vegetarian'=>"");
+            }
+            //echo $strStartOfNextWeek."<br>".$strEndOfNextWeek;
+            //exit;
+            //if($strEmpDesignation=="Chef")
+            //{
+            $allMenu = Menu::where('date', '>=', $strStartOfNextWeek)->where('date', '<=', $strEndOfNextWeek)->get();
+
+            foreach ($allMenu as $thisMenu)
+            {
+                $strDate = $thisMenu->date;
+                $strMainCourse = $thisMenu->main_course;
+                $strVegetarian = $thisMenu->vegetarian;
+                $arrMenuItems["$strDate"] = array("main_course"=>$strMainCourse, 'vegetarian'=>$strVegetarian);
+            }
+            //}
+
+            return view('home', compact('tasks', 'Improvements', 'Salesopportunities', 'strEmpDesignation', 'arrMenuItems'));
         }
     }
 }

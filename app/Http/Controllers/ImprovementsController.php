@@ -28,6 +28,14 @@ class ImprovementsController extends Controller
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
+            $strStatus = Auth::user()->getempStatus();
+            if($strStatus=='inactive')
+            {
+                Auth::guard('web')->logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return redirect('/');
+            }
             $strFullRoute = request()->route()->getActionName();
             $strAcionName = substr($strFullRoute, strpos($strFullRoute, "@")+1);
             $arrAllowedPages = array(
@@ -127,9 +135,6 @@ class ImprovementsController extends Controller
             $strPostData = "";
             $data = $request->all();
             $strPostData = $this->parse_data($data);
-            /*foreach ($data as $key => $value) {
-                $strPostData .=  $key." = ".$value."&";
-            }*/
             $html = "<html><body>
             <div><img src='https://innri.fisherman.is/app-assets/images/logo/fisherman-2.png'></div>
             <div>
@@ -144,6 +149,7 @@ class ImprovementsController extends Controller
                 $message->subject($subject);
                 $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
             });
+            //echo $html;
         }
         catch (Exception $e)
         {
@@ -152,23 +158,24 @@ class ImprovementsController extends Controller
 
 
 
-        try {
+        //try {
             //
             /*$arrNotifications = $request->all('chkNotification')['chkNotification'];
             echo $arrNotifications[0];*/
             $request->validate([
-                'strWhoNotified' => 'required',
+                'strWhoNotified' => 'bail|required',
                 'strPhoneNumber' => 'sometimes',
                 'strEmail' => 'sometimes',
                 'strProduct' => 'sometimes',
                 'strProductionLocation' => 'sometimes',
                 'strSupplier' => 'sometimes',
                 'strWhereSold' => 'sometimes',
-                'strDateOfPurchase' => 'sometimes',
+                'strDateOfPurchase' => 'bail|sometimes',
                 'strLotNr' => 'sometimes',
                 'strDescription' => 'sometimes',
-                'nAssignedTo' => 'sometimes',
-                'strResponse' => 'sometimes'
+                'nAssignedTo' => 'sometimes|integer',
+                'strResponse' => 'sometimes',
+                'strDueDate' => 'bail|required_if:nAssignedTo,gt:0'
             ],
                 [
                     'strWhoNotified.required' => 'Name of notifying person is required',
@@ -181,7 +188,7 @@ class ImprovementsController extends Controller
                     'strDateOfPurchase.required' => 'Please provide date of purchase',
                     'strLotNr.required' => 'Lot number is required',
                     'strDescription.required' => 'Complain description is required',
-                    'nAssignedTo.required' => 'Please select who will work on this improvement?',
+                    'nAssignedTo.sometimess' => 'Please select who will work on this improvement?',
                     'strResponse.required' => 'Response is required'
                 ]
             );
@@ -276,8 +283,8 @@ class ImprovementsController extends Controller
             $strDueDate = "";
             if($request->strDueDate!="")
             {
-                $strDueDate = $request->strDueDate;
-                $arrImpmrovement['due_date'] = date("Y-m-d", strtotime($strDueDate));
+                $strDueDate = date("Y-m-d", strtotime($request->strDueDate));
+                $arrImpmrovement['due_date'] = $strDueDate;
             }
 
 
@@ -349,14 +356,13 @@ class ImprovementsController extends Controller
                 /**
                  * Storing assignment logs done
                  */
-
                 $html = "<html><body>
-            <div><img src='https://innri.fisherman.is/app-assets/images/logo/fisherman-2.png'></div>
-            <div>
-                <p>
-                Hello $strReceiverName,<br><br>
-                $strSenderName has sent you this message with the below suggestion for improvement and put you in charge of resolving it:<br><br>
-                <a href='https://innri.fisherman.is/improvements/process/$nImprovementID'>https://innri.fisherman.is/improvements/process/$nImprovementID</a></p></div></body></html>";
+                <div><img src='https://innri.fisherman.is/app-assets/images/logo/fisherman-2.png'></div>
+                <div>
+                    <p>
+                    Hello $strReceiverName,<br><br>
+                    $strSenderName has sent you this message with the below suggestion for improvement and put you in charge of resolving it:<br><br>
+                    <a href='https://innri.fisherman.is/improvements/process/$nImprovementID'>https://innri.fisherman.is/improvements/process/$nImprovementID</a></p></div></body></html>";
                 $to = $objEmmployeeReceiver->email;
                 $subject = 'Improvement suggestion for Fisherman';
                 $formEmail = 'innri@fisherman.is';
@@ -368,35 +374,35 @@ class ImprovementsController extends Controller
                     $message->subject($subject);
                     $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
                 });
-
             }
             $request->session()->flash('success', 'Improvement record added successfully.');
             echo $nImprovementID;
-        }
+        /*}
         catch (Exception $e)
         {
-            $strPostData = "";
-            $data = $request->all();
+            //$strPostData = "";
+            //$data = $request->all();
 
-            foreach ($data as $key => $value) {
-                $strPostData .=  $key." = ".$value;
-            }
-            $html = "<html><body>
+
+
+                $html = "<html><body>
             <div><img src='https://innri.fisherman.is/app-assets/images/logo/fisherman-2.png'></div>
             <div>
                 <p>".$strPostData."<br><br>".$e->getMessage()."</p></div></body></html>";
-            $subject = 'Innri Error for Improvement';
-            $formEmail = 'innri@fisherman.is';
-            $formName = "Innri Fisherman";
-            $to = "atif.majid10@gmail.com";
-            Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
-                $message->from($formEmail, $formName);
-                $message->to($to);
-                $message->subject($subject);
-                $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
-            });
-            //echo $html;
-        }
+                $subject = 'Innri Error for Improvement';
+                $formEmail = 'innri@fisherman.is';
+                $formName = "Innri Fisherman";
+                $to = "atif.majid10@gmail.com";
+                Mail::send([], [], function($message) use($html, $to, $subject, $formEmail, $formName){
+                    $message->from($formEmail, $formName);
+                    $message->to($to);
+                    $message->subject($subject);
+                    $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
+                });
+           echo $html;
+
+
+        }*/
 
 
         /*return redirect()->route('improvements.index')

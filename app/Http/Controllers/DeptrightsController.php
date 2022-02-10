@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Departmentrights;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DeptrightsController extends Controller
 {
@@ -35,6 +36,32 @@ class DeptrightsController extends Controller
         "employees_directory" => "Employees Directory",
         "site_settings" => "Site Settings"
     );
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //$this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $strStatus = Auth::user()->getempStatus();
+            if($strStatus=='inactive')
+            {
+                Auth::guard('web')->logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return redirect('/');
+            }
+            else
+            {
+                return $next($request);
+            }
+
+        });
+    }
+
     public function index()
     {
         $arrDepartments = $this->arrDepartments;

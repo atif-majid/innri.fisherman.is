@@ -9,6 +9,30 @@ use Illuminate\Support\Facades\Auth;
 class CatalogfilesController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //$this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $strStatus = Auth::user()->getempStatus();
+            if($strStatus=='inactive')
+            {
+                Auth::guard('web')->logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return redirect('/');
+            }
+            else
+            {
+                return $next($request);
+            }
+
+        });
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

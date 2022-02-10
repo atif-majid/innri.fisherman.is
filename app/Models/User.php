@@ -87,4 +87,17 @@ class User extends Authenticatable
         }
         return $nThisEmpDesignation;
     }
+
+    public function getempStatus()
+    {
+        $strEmail = $this->email;
+        $objCurrentEmployee = Employees::where('email',$strEmail)->first();
+        $strStatus = "active";
+        if($objCurrentEmployee)
+        {
+            $strStatus = $objCurrentEmployee->status;
+        }
+
+        return $strStatus;
+    }
 }
