@@ -16,6 +16,7 @@ use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\RawmaterialController;
 use App\Http\Controllers\VisitorsController;
 use App\Http\Controllers\CatalogfilesController;
+use App\Http\Controllers\MenuController;
 
 
 /*
@@ -165,3 +166,6 @@ Route::resource('visitors', VisitorsController::class);
 Route::get('/catelogfiles/getfiles', ['as'=>'catelogfiles.getfiles', 'uses'=>'App\Http\Controllers\CatalogfilesController@getfiles'])->middleware('auth');
 Route::resource('catelogfiles', CatalogfilesController::class);
 Route::post('/catelogfiles/delfiles', ['as'=>'catelogfiles.delfiles', 'uses'=>'App\Http\Controllers\CatalogfilesController@delfiles']);
+
+Route::resource('menu', MenuController::class);
+Route::post('/menu/order', ['as'=>'menu.order', 'uses'=>'App\Http\Controllers\MenuController@order']);

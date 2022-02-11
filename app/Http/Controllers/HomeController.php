@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Foodorder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -97,6 +98,7 @@ class HomeController extends Controller
             $strStartOfNextWeek = date("Y-m-d", strtotime($strToday." +".$nDaysToNextWeek." days"));
             $strEndOfNextWeek = date("Y-m-d", strtotime($strStartOfNextWeek." +6 days"));
             $arrMenuItems = array();
+            $nMenuCount = 0;
             for($i=0; $i<7; $i++)
             {
                 $strDate = date("Y-m-d", strtotime($strStartOfNextWeek." +$i days"));
@@ -114,10 +116,39 @@ class HomeController extends Controller
                 $strMainCourse = $thisMenu->main_course;
                 $strVegetarian = $thisMenu->vegetarian;
                 $arrMenuItems["$strDate"] = array("main_course"=>$strMainCourse, 'vegetarian'=>$strVegetarian);
+                $nMenuCount++;
             }
             //}
+            $foodorders = Foodorder::where('fordate','>=', $strStartOfNextWeek)
+                ->where('fordate', '<=', $strEndOfNextWeek)->get();
+            $arrOrders = array();
+            foreach ($foodorders as $order)
+            {
+                $strOrderDate = $order->fordate;
+                $strItem = $order->item;
+                $arrOrders["$strOrderDate"] = $strItem;
+            }
+            if($strEmpDesignation=='Chef')
+            {
+                $arrOrders = array();
+                //$foodorders = Foodorder::where('fordate','=', date("Y-m-d"))->get();
+                $foodorders = DB::table('foodorder')
+                    ->leftJoin('employees', 'emp_id', '=', 'employees.id')
+                    ->select('foodorder.*', 'employees.name')
+                    ->where('foodorder.fordate', date("Y-m-d"))
+                    ->get();
+                foreach ($foodorders as $thisOrder)
+                {
+                    $strOrderDate = $thisOrder->fordate;
+                    $strItem = $thisOrder->item;
+                    $strEmployeeName = $thisOrder->name;
+                    $arrOrders[] = array("Name"=>$strEmployeeName, "Item"=>$strItem);
+                }
+            }
 
-            return view('home', compact('tasks', 'Improvements', 'Salesopportunities', 'strEmpDesignation', 'arrMenuItems'));
+
+
+            return view('home', compact('tasks', 'Improvements', 'Salesopportunities', 'strEmpDesignation', 'arrMenuItems', 'arrOrders', 'nMenuCount'));
         }
     }
 }
