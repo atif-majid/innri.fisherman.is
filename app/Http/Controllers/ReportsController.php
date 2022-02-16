@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\Menu;
 use App\Models\Templatesubmit;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -67,7 +70,11 @@ class ReportsController extends Controller
             $employees = Employees::where('status', 'active')->orderBy('name')->get();
             $templates = Templates::orderBy('title')->get();
             $visitors = Visitors::all();
-            return view('reports.index', compact('templatesubmit', 'employees', 'supervisors', 'templates', 'visitors'));
+            $strEmpDesignation = Auth::user()->getempdesignation();
+            $objChef = Employees::where('designation', 'Chef')->first();
+            $strChefName = $objChef->name;
+
+            return view('reports.index', compact('templatesubmit', 'employees', 'supervisors', 'templates', 'visitors', 'strEmpDesignation', 'strChefName'));
         }
     }
 
@@ -100,5 +107,25 @@ class ReportsController extends Controller
         $visitor = Visitors::where('id', $nVisitorID)->first();
 
         return view('reports.showvisitor', compact('visitor'));
+    }
+
+    public function showfoodorder($strDate)
+    {
+        //$foodorders = Foodorder::where('fordate', $strDate)->get();
+        $foodorders = DB::table('foodorder')
+            ->leftJoin('employees', 'emp_id', '=', 'employees.id')
+            ->select('foodorder.*', 'employees.name')
+            ->where('foodorder.fordate', $strDate)
+            ->get();
+        $menu = Menu::where('date', $strDate)->get();
+        $strDateDisplay = date("d-m-Y", strtotime($strDate));
+        $strMainCourse = "";
+        $strVegetarian = "";
+        foreach($menu as $thismenu)
+        {
+            $strMainCourse = $thismenu->main_course;
+            $strVegetarian = $thismenu->vegetarian;
+        }
+        return view('reports.showfoodorder', compact('foodorders', 'strMainCourse', 'strVegetarian', 'strDateDisplay'));
     }
 }
