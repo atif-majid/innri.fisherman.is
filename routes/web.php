@@ -169,4 +169,5 @@ Route::post('/catelogfiles/delfiles', ['as'=>'catelogfiles.delfiles', 'uses'=>'A
 
 Route::resource('menu', MenuController::class);
 Route::post('/menu/order', ['as'=>'menu.order', 'uses'=>'App\Http\Controllers\MenuController@order']);
+Route::post('/menu/getweeklymenu', ['as'=>'menu.getweeklymenu', 'uses'=>'App\Http\Controllers\MenuController@getweeklymenu']);
 Route::get('reports/showfoodorder/{date}', ['as'=>'reports.showfoodorder', 'uses'=>'App\Http\Controllers\ReportsController@showfoodorder'])->middleware('auth');

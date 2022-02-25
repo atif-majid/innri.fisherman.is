@@ -13,8 +13,8 @@ class Menu extends Model
 
     protected $fillable = [
         'date',
-        'main_course',
-        'vegetarian',
+        'fish_course',
+        'meat_course',
         'updated_by',
         'updated_on'
     ];

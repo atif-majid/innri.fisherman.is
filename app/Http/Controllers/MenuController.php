@@ -6,6 +6,8 @@ use App\Models\Menu;
 use App\Models\Foodorder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use DateTime;
+
 
 class MenuController extends Controller
 {
@@ -17,6 +19,11 @@ class MenuController extends Controller
     public function index()
     {
         //
+        /*$week_array = $this->getStartAndEndDate(52,2022);
+        echo "<pre>";
+        print_r($week_array);
+        echo "<pre>";*/
+        return view('menu.index');
     }
 
     /**
@@ -40,13 +47,13 @@ class MenuController extends Controller
         //
         $data = $request->all();
         $arrDate = $data['strDate'];
-        $arrMainCourse = $data['strMainMenu'];
-        $arrVegetarian = $data['strVegetarian'];
+        $arrFishCourse = $data['strFishCourse'];
+        $arrMeatCourse = $data['strMeatCourse'];
         for($i=0; $i<count($arrDate);$i++)
         {
             $strDate = $arrDate[$i];
-            $strMainCourse = $arrMainCourse[$i];
-            $strVegetarian = $arrVegetarian[$i];
+            $strFish = $arrFishCourse[$i];
+            $strMeat = $arrMeatCourse[$i];
 
             $record = Menu::where('date', $strDate)->get();
             $nRecord = $record->count();
@@ -55,13 +62,13 @@ class MenuController extends Controller
             $arrData['updated_on'] = date("Y-m-d H:i:s");
             $arrData['updated_on'] = date("Y-m-d H:i:s");
 
-            if(trim($strMainCourse)!="")
+            if(trim($strFish)!="")
             {
-                $arrData['main_course'] = $strMainCourse;
+                $arrData['fish_course'] = $strFish;
             }
-            if(trim($strVegetarian)!="")
+            if(trim($strMeat)!="")
             {
-                $arrData['vegetarian'] = $strVegetarian;
+                $arrData['meat_course'] = $strMeat;
             }
             if($nRecord==0)
             {
@@ -122,43 +129,75 @@ class MenuController extends Controller
 
     public function order(Request $request)
     {
-        $arrDate = $request->strDate;
-        $nOrderDay = 0;
         $arrPost = $request->all();
         $nEmpID = Auth::user()->getempid();
-        foreach ($arrDate as $thisDate) {
-            $variableName = $thisDate."_order";
-            if(isset($arrPost["$variableName"]))
+        $arrDate = $request->arrDate;
+        foreach ($arrDate as $thisDate)
+        {
+            $arrInsert = array(
+                'emp_id'=>$nEmpID,
+                'fordate'=>$thisDate,
+                'fish_course'=>$arrPost["nOrder_Fish_$thisDate"],
+                'meat_course'=>$arrPost["nOrder_Meat_$thisDate"],
+                'orderdate'=>date("Y-m-d H:i:s")
+            );
+            if(!empty($arrPost["strComment_$thisDate"]))
             {
-                //echo $variableName." - ".$arrPost["$variableName"]."<br>";
-                $record = Foodorder::where('fordate', $thisDate)
+                $arrInsert['comments'] = $arrPost["strComment_$thisDate"];
+            }
+            $record = Foodorder::where('fordate', $thisDate)
+                ->where('emp_id', $nEmpID)
+                ->get();
+            $nRecord = $record->count();
+            if($nRecord==0)
+            {
+                Foodorder::create($arrInsert);
+            }
+            else{
+                Foodorder::where('fordate', $thisDate)
                     ->where('emp_id', $nEmpID)
-                    ->get();
-                $nRecord = $record->count();
-
-                $arrInsert = array(
-                    'emp_id'=>$nEmpID,
-                    'fordate'=>$thisDate,
-                    'item'=>$arrPost["$variableName"],
-                    'orderdate'=>date("Y-m-d H:i:s"));
-                if($nRecord==0)
-                {
-                    Foodorder::create($arrInsert);
-                }
-                else{
-                    Foodorder::where('fordate', $thisDate)
-                        ->where('emp_id', $nEmpID)
-                        ->update($arrInsert);
-                }
-                $nOrderDay++;
+                    ->update($arrInsert);
             }
         }
-        if($nOrderDay==0)
+    }
+
+    public function getweeklymenu(Request $request)
+    {
+        $nWeek = $request->nWeek;
+        $nYear = date("Y");
+        $arrDates = $this->getStartAndEndDate($nWeek, $nYear);
+        $strStartDate = $arrDates['week_start'];
+        $strEndDate = $arrDates['week_end'];
+        $arrMenuItems = array();
+        $nMenuCount = 0;
+        for($i=0; $i<7; $i++)
         {
-            echo $nOrderDay;
+            $strDate = date("Y-m-d", strtotime($strStartDate." +$i days"));
+            $arrMenuItems["$strDate"] = array("fish_course"=>"", 'meat_course'=>"");
         }
-        else {
-            echo "Your order has been submitted";
+        //echo $strStartOfNextWeek."<br>".$strEndOfNextWeek;
+        //exit;
+        //if($strEmpDesignation=="Chef")
+        //{
+        $allMenu = Menu::where('date', '>=', $strStartDate)->where('date', '<=', $strEndDate)->get();
+
+        foreach ($allMenu as $thisMenu)
+        {
+            $strDate = $thisMenu->date;
+            $strMainCourse = $thisMenu->fish_course;
+            $strVegetarian = $thisMenu->meat_course;
+            $arrMenuItems["$strDate"] = array("fish_course"=>$strMainCourse, 'meat_course'=>$strVegetarian);
+            $nMenuCount++;
         }
+        return view('menu.getweeklymenu', compact('arrMenuItems'));
+    }
+
+    public static function getStartAndEndDate($week, $year) {
+        $dto = new DateTime();
+        $dto->setISODate($year, $week);
+        $ret['week_start'] = $dto->format('Y-m-d');
+        $dto->modify('+6 days');
+        $ret['week_end'] = $dto->format('Y-m-d');
+        return $ret;
     }
 }

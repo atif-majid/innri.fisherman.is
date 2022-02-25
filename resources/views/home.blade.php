@@ -27,6 +27,7 @@
     <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/vendors.min.css">
     <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/charts/apexcharts.css">
     <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/extensions/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/forms/spinner/jquery.bootstrap-touchspin.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -42,7 +43,7 @@
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/pages/dashboard-ecommerce.css">
     <!-- END: Page CSS-->
-
+    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/confirm/jquery-confirm.css">
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <!-- END: Custom CSS-->
@@ -75,7 +76,7 @@
                 <div class="row">
                     <!-- Greetings Content Starts -->
                     <div class="col-xl-4 col-md-6 col-12 dashboard-greetings">
-                        @if($strEmpDesignation!='Chef' && $nMenuCount>0)
+                        @if($nMenuCount>0)
                             <div class="row">
                                 <div class="col-xl-12 col-12">
                                     @endif
@@ -99,53 +100,72 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @if($strEmpDesignation!='Chef' && $nMenuCount>0)
+                                    @if($nMenuCount>0)
                                 </div>
                                 <div class="col-xl-12 col-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h3 class="greeting-text">Chose your Lunch for next week</h3>
+                                            <h3 class="greeting-text">Your lunch order for next week - Week {{ date("W")+1 }}</h3>
                                             <p class="mb-0">Please chose your lunch for next week</p>
                                         </div>
                                         <div class="card-content">
                                             <div class="card-body">
                                                 <form id="frmWeeklyOrder" class="form-horizontal"  novalidate method="post" action="">
                                                     @csrf
-                                                    <?php
-                                                    $strToday = date("Y-m-d");
-                                                    $nDayOfWeekToday = date("N", strtotime($strToday));
-                                                    $nDaysToNextWeek = 7-$nDayOfWeekToday+1;
-                                                    $strStartOfNextWeek = date("Y-m-d", strtotime($strToday." + ".$nDaysToNextWeek." days"));
-                                                    for($i=0; $i<7; $i++)
-                                                    {
-                                                    $strDate = date("Y-m-d", strtotime($strStartOfNextWeek." + ".$i." days"));
-                                                    ?>
-                                                    <div class="row">
-                                                        <div class="col-md-4"><strong>
-                                                            <?php
-                                                            echo date("l", strtotime($strStartOfNextWeek." + ".$i." days"))."<br>".date("d-m-Y", strtotime($strStartOfNextWeek." + ".$i." days"));
-                                                            ?>
-                                                            </strong></div>
-                                                        <div class="col-md-8">
-                                                            <div class="radio radio-primary radio-glow">
-                                                                <?php
-                                                                    $strThisDate = date("Y-m-d", strtotime($strStartOfNextWeek." + ".$i." days"));
-                                                                ?>
-                                                                <input type="hidden" name="strDate[]" value="<?php echo $strThisDate;?>" >
-                                                                <input type="radio" id="<?php echo $strThisDate;?>_main" name="<?php echo $strThisDate;?>_order" value="<?php echo $arrMenuItems["$strDate"]['main_course'];?>" <?php if(isset($arrOrders["$strDate"]) && $arrOrders["$strDate"]==$arrMenuItems["$strDate"]['main_course']) { ?> checked <?php } ?>>
-                                                                <label for="<?php echo $strThisDate;?>_main"><?php echo $arrMenuItems["$strDate"]['main_course'];?></label>
+                                                    @foreach($arrMenuItems as $key=>$val)
+                                                        @if(!empty($val['fish_course']) && !empty($val['meat_course']))
+                                                            <div class="row">
+                                                                <div class="col-lg-5 col-md-5 col-sm-6">
+                                                                    <strong>
+                                                                        {{date("l", strtotime($key))}}
+                                                                    </strong>
+                                                                </div>
+                                                                <div class="col-lg-7 col-md-7 col-sm-6">
+                                                                    <strong>
+                                                                        {{ date("d-m-Y", strtotime($key)) }}
+                                                                        <input type="hidden" name="arrDate[]" value="{{$key}}">
+                                                                    </strong>
+                                                                </div>
                                                             </div>
-                                                            <div class="radio radio-primary radio-glow">
-                                                                <input type="radio" id="<?php echo $strThisDate;?>_vegetarian" name="<?php echo $strThisDate;?>_order" value="<?php echo $arrMenuItems["$strDate"]['vegetarian'];?>" <?php if(isset($arrOrders["$strDate"]) && $arrOrders["$strDate"]==$arrMenuItems["$strDate"]['vegetarian']) { ?> checked <?php } ?>>
-                                                                <label for="<?php echo $strThisDate;?>_vegetarian"><?php echo $arrMenuItems["$strDate"]['vegetarian'];?></label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">&nbsp;</div>
-                                                    <?php
+                                                            <div class="row">&nbsp;</div>
+                                                            <div class="form-group row">
+                                                                <div class="col-lg-5 col-md-5 col-sm-6">
+                                                                    <div class="d-inline-flex align-items-center mb-1">
+                                                                        <div class="input-group input-group-sm">
+                                                                            <input type="number" class="touchspin" value="{{$arrOrders["$key"]['fish_course']}}" id="nOrder_Fish_{{$key}}" name="nOrder_Fish_{{$key}}" >
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-7 col-md-7 col-sm-6">
+                                                                    <label for="nOrder_Fish_{{$key}}">{{$val['fish_course']}}</label>
+                                                                </div>
 
-                                                    }
-                                                    ?>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <div class="col-lg-5 col-md-5 col-sm-6">
+                                                                    <div class="d-inline-flex align-items-center mb-1">
+                                                                        <div class="input-group input-group-sm">
+                                                                            <input type="number" class="touchspin" value="{{$arrOrders["$key"]['meat_course']}}" id="nOrder_Meat_{{$key}}" name="nOrder_Meat_{{$key}}">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-7 col-md-7 col-sm-6">
+                                                                    <label for="nOrder_Meat_{{$key}}">{{$val['meat_course']}}</label>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <fieldset class="form-group">
+                                                                        <textarea class="form-control" id="strComment_{{$key}}" name="strComment_{{$key}}" rows="3" placeholder="Your comment to the chef about allergies or other food related issues.">{{$arrOrders["$key"]['comment']}}</textarea>
+                                                                    </fieldset>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <hr>
+                                                            </div>
+                                                        @endif
+                                                    @endforeach
                                                     <button id="btnOrderSubmit" type="submit" class="btn btn-primary">Submit</button>
                                                 </form>
                                             </div>
@@ -283,103 +303,6 @@
                     </div>
                     <!-- Multi Radial Chart Starts -->
                 </div>
-                @if($strEmpDesignation=='Chef')
-                    <div class="row">
-                        <div class="col-xl-6 col-md-6 col-12 dashboard-greetings">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class="greeting-text">Next Week's Menu</h3>
-                                    <p class="mb-0">Please decide menu for next week!</p>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <form id="frmWeeklyMenu" class="form-horizontal"  novalidate method="post" action="">
-                                            @csrf
-                                            <div class="row">
-                                                <div class="col-md-2" style="text-align: center">
-                                                    <b>Day</b>
-                                                </div>
-                                                <div class="col-md-2" style="text-align: center">
-                                                    <b>Date</b>
-                                                </div>
-                                                <div class="col-md-4" style="text-align: center">
-                                                    <b>Main Course</b>
-                                                </div>
-                                                <div class="col-md-4" style="text-align: center">
-                                                    <b>Vegetarian</b>
-                                                </div>
-                                            </div>
-                                            <div class="row">&nbsp;</div>
-                                            <?php
-                                                $strToday = date("Y-m-d");
-                                                $nDayOfWeekToday = date("N", strtotime($strToday));
-                                                $nDaysToNextWeek = 7-$nDayOfWeekToday+1;
-                                                $strStartOfNextWeek = date("Y-m-d", strtotime($strToday." + ".$nDaysToNextWeek." days"));
-                                                for($i=0; $i<7; $i++)
-                                                {
-                                                    ?>
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            <?php
-                                                                echo date("l", strtotime($strStartOfNextWeek." + ".$i." days"));
-                                                            ?>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <?php
-                                                                echo date("d-m-Y", strtotime($strStartOfNextWeek." + ".$i." days"));
-                                                                $strDate = date("Y-m-d", strtotime($strStartOfNextWeek." + ".$i." days"));
-                                                            ?>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <input type="hidden" name="strDate[]" value="<?php echo date("Y-m-d", strtotime($strStartOfNextWeek." + ".$i." days"));?>" >
-                                                            <input type="text" name="strMainMenu[]" class="form-control" value="<?php echo $arrMenuItems["$strDate"]['main_course'];?>">
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <input type="text" name="strVegetarian[]" class="form-control" value="<?php echo $arrMenuItems["$strDate"]['vegetarian'];?>">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">&nbsp;</div>
-                                                    <?php
-
-                                                }
-                                            ?>
-                                            <button id="btnMenuSubmit" type="submit" class="btn btn-primary">Submit</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-md-6 col-12 dashboard-greetings">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class="greeting-text">Today's Orders</h3>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <b>Employee Name</b>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <b>Order Item</b>
-                                            </div>
-                                        </div>
-                                        @foreach($arrOrders as $thisOrder)
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    {{ $thisOrder['Name'] }}
-                                                </div>
-                                                <div class="col-md-6">
-                                                    {{ $thisOrder['Item'] }}
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endif
             </section>
             <!-- Dashboard Ecommerce ends -->
 
@@ -489,6 +412,14 @@
 <!-- BEGIN: Page JS-->
 <script src="app-assets/js/scripts/pages/dashboard-ecommerce.js"></script>
 <!-- END: Page JS-->
+<!-- BEGIN: Page Vendor JS-->
+<script src="app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js"></script>
+<!-- END: Page Vendor JS-->
+
+<!-- BEGIN: Page JS-->
+<script src="app-assets/js/scripts/forms/number-input.js"></script>
+<script src="app-assets/js/scripts/confirm/jquery-confirm.js"></script>
+<!-- END: Page JS-->
 <script>
     $(document).ready(function(){
         $('select.form-control').on('change', function() {
@@ -540,48 +471,6 @@
             }
         });
 
-        $('#btnMenuSubmit').on('click', function(event){
-            event.preventDefault();
-            $('#btnMenuSubmit').attr('disabled', true);
-            var arrFormData = $('#frmWeeklyMenu').serialize();
-            $.ajax({
-                type: "post",
-                url: "{{ route('menu.store') }}",
-                data: arrFormData,
-                dataType: 'json',              // let's set the expected response format
-                success: function(data){
-                    $('#btnMenuSubmit').attr('disabled', false);
-                    errDisplay = '<div class="alert alert-success mb-2">Menu has been updated</div>';
-                    $('.modal-body').html(errDisplay);
-                    $('#modalError').modal('show');
-                },
-                error: function (err) {
-                    if (err.status == 422) { // when status code is 422, it's a validation issue
-                        //console.log(err.responseJSON);
-                        // you can loop through the errors object and show it to the user
-                        /*console.warn(err.responseJSON.errors);*/
-                        // display errors on each form field
-                        var errDisplay = ''
-                        $.each(err.responseJSON.errors, function (i, error) {
-                            errDisplay = errDisplay + '<div class="alert alert-danger mb-2">'+error[0]+'</div>';
-                            $('.modal-body').html(errDisplay);
-                            $('#modalError').modal('show');
-                        });
-                        $('#btnMenuSubmit').attr('disabled', false);
-                    }
-                    else{
-                        if(err.status==200)
-                        {
-                            errDisplay = '<div class="alert alert-success mb-2">Menu has been updated</div>';
-                            $('.modal-body').html(errDisplay);
-                            $('#modalError').modal('show');
-                        }
-                        $('#btnMenuSubmit').attr('disabled', false);
-                    }
-                }
-            });
-        });
-
         $('#btnOrderSubmit').on('click', function(event){
             event.preventDefault();
             $('#btnOrderSubmit').attr('disabled', true);
@@ -593,12 +482,7 @@
                 dataType: 'json',              // let's set the expected response format
                 success: function(data){
                     $('#btnOrderSubmit').attr('disabled', false);
-                    errDisplay = '<div class="alert alert-success mb-2">'+data+'</div>';
-                    if(data==0)
-                    {
-                        errDisplay = '<div class="alert alert-danger mb-2">You have not selected any food!</div>';
-                    }
-
+                    errDisplay = '<div class="alert alert-success mb-2">Your food order has been saved</div>';
                     $('.modal-body').html(errDisplay);
                     $('#modalError').modal('show');
                 },
@@ -619,7 +503,7 @@
                     else{
                         if(err.status==200)
                         {
-                            errDisplay = '<div class="alert alert-success mb-2">Your food order has been registered</div>';
+                            errDisplay = '<div class="alert alert-success mb-2">Your food order has been saved</div>';
                             $('.modal-body').html(errDisplay);
                             $('#modalError').modal('show');
                         }
@@ -628,6 +512,8 @@
                 }
             });
         });
+
+
     });
 </script>
 @if($errors->any())

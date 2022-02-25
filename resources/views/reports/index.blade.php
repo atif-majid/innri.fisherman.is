@@ -214,53 +214,36 @@
                                                     <td style="padding: 0.5rem">&nbsp;</td>
                                                 </tr>
                                             @endforeach
-                                            <?php
-                                                $strStartDate = "2022-02-11";
-                                                $strToday = date("Y-m-d");
-                                                $nDayOfWeekToday = date("N", strtotime($strToday));
-                                                $nDaysToNextWeek = 7-$nDayOfWeekToday+1;
-                                                $strStartOfNextWeek = date("Y-m-d", strtotime($strToday." +".$nDaysToNextWeek." days"));
-                                                $strEndOfNextWeek = date("Y-m-d", strtotime($strStartOfNextWeek." +6 days"));
-                                                $strStartLoop = strtotime($strStartDate." 09:00:00");
-                                                $strEndLoop = strtotime($strEndOfNextWeek." 09:00:00");
-                                                for($i=$strStartLoop; $i<=$strEndLoop; $i+=86400)
-                                                {
-                                                    $dateonlyorder = date("Y-m-d", $i);
-                                                    $dateorder = date("Y-m-d H:i:s", $i);
-                                                    ?>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td style="white-space: nowrap;padding: 0.5rem 0.5rem;">
-                                                            @php
-                                                                /*<form id="form-del" action="{{ route('templates.destroy',$template->id) }}" method="POST" onsubmit="return false;">
-                                                                    <a href="{{ route('templates.edit', $template->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp;
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <a href="{{ route('templates.destroy', $template->id) }}" onclick="event.preventDefault();
-                                                                 if(confirm('Are you sure to delete?')){document.getElementById('form-del').submit();}"><i class="bx bxs-trash-alt"></i></a>
-                                                                </form>
+                                            @foreach($allFoodOrders as $foodorder)
+                                                <tr>
+                                                    <td></td>
+                                                    <td style="white-space: nowrap;padding: 0.5rem 0.5rem;">
+                                                        @php
+                                                            /*<form id="form-del" action="{{ route('templates.destroy',$template->id) }}" method="POST" onsubmit="return false;">
                                                                 <a href="{{ route('templates.edit', $template->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp;
-                                                                <a href="#"><i class="bx bxs-trash-alt"></i></a>
-                                                                <a href="{{ route('templates.fill', $template->id) }}"><i class="bx bxs-file-plus"></i></a>
-                                                                */
-                                                            @endphp
-                                                            <a href="{{ route('reports.showfoodorder', $dateonlyorder) }}" class="invoice-action-view">
-                                                                <i class="bx bx-show-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                        <td style="padding: 0.5rem">Food Orders</td>
-                                                        <td style="padding: 0.5rem">&nbsp;</td>
-                                                        <td style="padding: 0.5rem">{{ $strChefName }}</td>
-                                                        <td style="padding: 0.5rem">
-                                                            <?php
-                                                                echo date("d-m-Y H:i:s", $i);
-                                                            ?>
-                                                        </td>
-                                                        <td style="padding: 0.5rem">&nbsp;</td>
-                                                    </tr>
-                                                    <?php
-                                                }
-                                            ?>
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <a href="{{ route('templates.destroy', $template->id) }}" onclick="event.preventDefault();
+                                                             if(confirm('Are you sure to delete?')){document.getElementById('form-del').submit();}"><i class="bx bxs-trash-alt"></i></a>
+                                                            </form>
+                                                            <a href="{{ route('templates.edit', $template->id) }}"><i class="bx bx-edit-alt"></i></a>&nbsp;
+                                                            <a href="#"><i class="bx bxs-trash-alt"></i></a>
+                                                            <a href="{{ route('templates.fill', $template->id) }}"><i class="bx bxs-file-plus"></i></a>
+                                                            */
+                                                        @endphp
+                                                        <a href="{{ route('reports.showfoodorder', $foodorder->date) }}" class="invoice-action-view">
+                                                            <i class="bx bx-show-alt"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td style="padding: 0.5rem">Food Orders</td>
+                                                    <td style="padding: 0.5rem">&nbsp;</td>
+                                                    <td style="padding: 0.5rem">{{ $foodorder->name }}</td>
+                                                    <td style="padding: 0.5rem">
+                                                        {{date("d-m-Y H:i:s", strtotime($foodorder->date))}}
+                                                    </td>
+                                                    <td style="padding: 0.5rem">&nbsp;</td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

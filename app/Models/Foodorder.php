@@ -14,7 +14,9 @@ class Foodorder extends Model
     protected $fillable = [
         'emp_id',
         'fordate',
-        'item',
+        'fish_course',
+        'meat_course',
+        'comments',
         'orderdate'
     ];
 }

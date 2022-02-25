@@ -1,5 +1,6 @@
 @php
     $nCurrUserID = Auth::user()->getempid();
+    $nCurrUserDesignation = AUTH::user()->getempdesignation();
     $strFullRoute = request()->route()->getActionName();
     $strAcionName = substr($strFullRoute, strpos($strFullRoute, "@")+1);
     preg_match('/([a-z]*)@/i', request()->route()->getActionName(), $matches);
@@ -111,7 +112,18 @@
                     </ul>
                 </li>
             @endif
-
+            @if($nCurrUserDesignation=='Chef')
+                <li class="nav-item"><a href="#"><span class="menu-title">Food</span></a>
+                    <ul class="menu-content">
+                        <?php
+                        /*<li @if($controllerName=='DeptrightsController') class="active" @endif><a href="{{ route('deptrights.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Department Based</span></a>
+                        </li>*/
+                        ?>
+                        <li @if($controllerName=='MenuController') class="active" @endif><a href="{{ route('menu.index') }}"><!--<i class="menu-livicon" data-icon="globe"></i>--><span class="menu-title" data-i18n="Google Maps">Menu</span></a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
         </ul>
     </div>
 </div>

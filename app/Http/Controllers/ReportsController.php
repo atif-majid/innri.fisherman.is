@@ -71,10 +71,21 @@ class ReportsController extends Controller
             $templates = Templates::orderBy('title')->get();
             $visitors = Visitors::all();
             $strEmpDesignation = Auth::user()->getempdesignation();
-            $objChef = Employees::where('designation', 'Chef')->first();
-            $strChefName = $objChef->name;
+            /*$objChef = Employees::where('designation', 'Chef')->first();
+            $strChefName = $objChef->name;*/
 
-            return view('reports.index', compact('templatesubmit', 'employees', 'supervisors', 'templates', 'visitors', 'strEmpDesignation', 'strChefName'));
+            $nWeek = date("W");
+            $nYear = date("Y");
+            $arrNextWeek = MenuController::getStartAndEndDate($nWeek+1, $nYear);
+            $strNextWeekEndDate = $arrNextWeek['week_end'];
+            $allFoodOrders = DB::table('menu')
+                ->leftJoin('employees', 'updated_by', '=', 'employees.id')
+                ->select('menu.*','employees.name')
+                ->where('menu.date', '<=', $strNextWeekEndDate)
+                ->get();
+
+
+            return view('reports.index', compact('templatesubmit', 'employees', 'supervisors', 'templates', 'visitors', 'strEmpDesignation', 'allFoodOrders'));
         }
     }
 
@@ -119,13 +130,22 @@ class ReportsController extends Controller
             ->get();
         $menu = Menu::where('date', $strDate)->get();
         $strDateDisplay = date("d-m-Y", strtotime($strDate));
-        $strMainCourse = "";
-        $strVegetarian = "";
+        $strFishCourse = "";
+        $strMeatCourse = "";
         foreach($menu as $thismenu)
         {
-            $strMainCourse = $thismenu->main_course;
-            $strVegetarian = $thismenu->vegetarian;
+            $strFishCourse = $thismenu->fish_course;
+            $strMeatCourse = $thismenu->meat_course;
         }
-        return view('reports.showfoodorder', compact('foodorders', 'strMainCourse', 'strVegetarian', 'strDateDisplay'));
+
+        $nFishOrders = 0;
+        $nMeatOrders = 0;
+        foreach ($foodorders as $foodorder)
+        {
+            $nFishOrders += $foodorder->fish_course;
+            $nMeatOrders += $foodorder->meat_course;
+        }
+        return view('reports.showfoodorder', compact('foodorders', 'strFishCourse',
+            'strMeatCourse', 'strDateDisplay', 'nFishOrders', 'nMeatOrders'));
     }
 }

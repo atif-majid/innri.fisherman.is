@@ -102,50 +102,38 @@ class HomeController extends Controller
             for($i=0; $i<7; $i++)
             {
                 $strDate = date("Y-m-d", strtotime($strStartOfNextWeek." +$i days"));
-                $arrMenuItems["$strDate"] = array("main_course"=>"", 'vegetarian'=>"");
+                $arrMenuItems["$strDate"] = array("fish_course"=>"", 'meat_course'=>"");
+                $nZero = 0;
+                $arrOrders["$strDate"] = array('fish_course'=>$nZero, 'meat_course'=>$nZero, 'comment'=>'');
             }
             //echo $strStartOfNextWeek."<br>".$strEndOfNextWeek;
             //exit;
             //if($strEmpDesignation=="Chef")
             //{
             $allMenu = Menu::where('date', '>=', $strStartOfNextWeek)->where('date', '<=', $strEndOfNextWeek)->get();
-
             foreach ($allMenu as $thisMenu)
             {
                 $strDate = $thisMenu->date;
-                $strMainCourse = $thisMenu->main_course;
-                $strVegetarian = $thisMenu->vegetarian;
-                $arrMenuItems["$strDate"] = array("main_course"=>$strMainCourse, 'vegetarian'=>$strVegetarian);
+                $strFishCourse = $thisMenu->fish_course;
+                $strMeatCourse = $thisMenu->meat_course;
+                $arrMenuItems["$strDate"] = array("fish_course"=>$strFishCourse, 'meat_course'=>$strMeatCourse);
                 $nMenuCount++;
+
+
             }
             //}
             $foodorders = Foodorder::where('fordate','>=', $strStartOfNextWeek)
-                ->where('fordate', '<=', $strEndOfNextWeek)->get();
-            $arrOrders = array();
+                ->where('fordate', '<=', $strEndOfNextWeek)
+                ->where('emp_id', $nEmployeeID)
+                ->get();
+
             foreach ($foodorders as $order)
             {
                 $strOrderDate = $order->fordate;
-                $strItem = $order->item;
-                $arrOrders["$strOrderDate"] = $strItem;
+                $arrOrders["$strOrderDate"] = array('fish_course'=>$order->fish_course,
+                    'meat_course'=>$order->meat_course, 'comment'=>$order->comments);
             }
-            if($strEmpDesignation=='Chef')
-            {
-                $arrOrders = array();
-                //$foodorders = Foodorder::where('fordate','=', date("Y-m-d"))->get();
-                $foodorders = DB::table('foodorder')
-                    ->leftJoin('employees', 'emp_id', '=', 'employees.id')
-                    ->select('foodorder.*', 'employees.name')
-                    ->where('foodorder.fordate', date("Y-m-d"))
-                    ->get();
-                foreach ($foodorders as $thisOrder)
-                {
-                    $strOrderDate = $thisOrder->fordate;
-                    $strItem = $thisOrder->item;
-                    $strEmployeeName = $thisOrder->name;
-                    $arrOrders[] = array("Name"=>$strEmployeeName, "Item"=>$strItem);
-                }
-            }
-
+            //$nMenuCount = 0;
 
 
             return view('home', compact('tasks', 'Improvements', 'Salesopportunities', 'strEmpDesignation', 'arrMenuItems', 'arrOrders', 'nMenuCount'));
