@@ -277,6 +277,27 @@ class SitesettingsController extends Controller
                 }
             }
         }
+        if(isset($request->nSalaryCost) && $request->nSalaryCost>0)
+        {
+            //echo $request->nSalaryCost;
+            //exit;
+            $SalaryCost = Sitesettings::where('field', 'SalaryCost')->get();
+            if($SalaryCost->isEmpty())
+            {
+                $arrInsert = array(
+                    "field"=>"SalaryCost",
+                    "value"=>$request->nSalaryCost
+                );
+                Sitesettings::create($arrInsert);
+            }
+            else{
+                $arrUpdate = array(
+                    "value"=>$request->nSalaryCost
+                );
+                $nSiteSettingID = $SalaryCost[0]['id'];
+                Sitesettings::find($nSiteSettingID)->update($arrUpdate);
+            }
+        }
 
         return redirect()->route('sitesettings.index')
             ->with('success','Settings updated successfully.');

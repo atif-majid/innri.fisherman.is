@@ -481,6 +481,35 @@
                         <!-- /phone repeater -->
                     </div>
                 </section>
+                <section  class="input-validation">
+                    <div class="col-xl-6 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Salary Cost</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    @php
+                                        $nSalaryCost = 0;
+                                    @endphp
+                                    @foreach($sitesettings as $thissetting)
+                                        @if($thissetting->field=='SalaryCost')
+                                            @php
+                                                $nSalaryCost = $thissetting->value;
+                                            @endphp
+                                        @endif
+                                    @endforeach
+                                    <div class="form-group">
+                                        <label>Salary Cost Per Hour (ISK)</label>
+                                        <div class="controls">
+                                            <input type="test" name="nSalaryCost" class="form-control" placeholder="Salary Cost Per Hour (ISK)" value="{{$nSalaryCost}}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             <!-- Input Validation end -->
