@@ -199,6 +199,24 @@ class ProductionController extends Controller
             {
                 $arrProduction['warehouse'] = $request->strWarehouse;
             }
+            if(!empty($request->production_time))
+            {
+                $arrProduction['production_time'] = $request->production_time;
+            }
+            if(!empty($request->predicted_cost))
+            {
+                $arrProduction['predicted_cost'] = $request->predicted_cost;
+            }
+            if(!empty($request->actual_cost))
+            {
+                $arrProduction['actual_cost'] = $request->actual_cost;
+            }
+            $SalaryCost = Sitesettings::where('field', 'SalaryCost')->get();
+            if(!$SalaryCost->isEmpty())
+            {
+                //echo "<br>in if<br>";
+                $arrProduction['salary_cost_hour'] = $SalaryCost[0]->value;
+            }
 
             $objProduction = Production::create($arrProduction);
             $nProductionID = $objProduction->id;
@@ -239,8 +257,9 @@ class ProductionController extends Controller
         $Recipe = Recipes::find($nRecipeID);
         $nEmpID = $production->emp_id;
         $Employee = Employees::find($nEmpID);
+        $SalaryCost = Sitesettings::where('field', 'SalaryCost')->get();
         return view('production.show', compact('production', 'Recipe',
-             'Employee'));
+             'Employee', 'SalaryCost'));
     }
 
     /**
@@ -300,7 +319,23 @@ class ProductionController extends Controller
         {
             $arrProduction['warehouse'] = $request->strWarehouse;
         }
-
+        if(!empty($request->production_time))
+        {
+            $arrProduction['production_time'] = $request->production_time;
+        }
+        if(!empty($request->predicted_cost))
+        {
+            $arrProduction['predicted_cost'] = $request->predicted_cost;
+        }
+        if(!empty($request->actual_cost))
+        {
+            $arrProduction['actual_cost'] = $request->actual_cost;
+        }
+        /*$SalaryCost = Sitesettings::where('field', 'SalaryCost')->get();
+        if(!$SalaryCost->isEmpty())
+        {
+            $arrProduction['salary_cost_hour'] = $SalaryCost[0]->value;
+        }*/
         $production->update($arrProduction);
 
 
@@ -512,11 +547,11 @@ class ProductionController extends Controller
                     $arrCalculatedIngredietns = $arrTempCalculation;
                 }
             }
-
+            $SalaryCost = Sitesettings::where('field', 'SalaryCost')->get();
             /*return view('production.printpdf', compact('production', 'Instructions', 'RawMetirals',
                'Packagings',  'Shipments', 'recipe', 'Ingredients', 'Steps', 'RecipePhoto', 'arrCalculatedIngredietns'));*/
             $pdf = PDF::loadView('production.printpdf', compact('production', 'recipe',
-                'Ingredients', 'Steps', 'RecipePhoto', 'arrCalculatedIngredietns'));
+                'Ingredients', 'Steps', 'RecipePhoto', 'arrCalculatedIngredietns', 'SalaryCost'));
             return $pdf->download($recipe->title.' (Production)'.'.pdf');
         }
         else

@@ -236,6 +236,18 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
+                                                <div class="form-group col-sm-3">
+                                                    <label>Production Time (minutes)</label>
+                                                    <input type="number" value="{{ old('production_time') }}" name="production_time" id="production_time" class="form-control" placeholder="Production Time in Minutes">
+                                                </div>
+                                                <div class="form-group col-sm-3">
+                                                    <label>Predicted cost of goods (ISK)</label>
+                                                    <input type="number" value="{{ old('predicted_cost') }}" name="predicted_cost" id="predicted_cost" class="form-control" placeholder="Predicted cost of goods (ISK)">
+                                                </div>
+                                                <div class="form-group col-sm-3">
+                                                    <label>Actual cost of goods (ISK)</label>
+                                                    <input type="number" value="{{ old('actual_cost') }}" name="actual_cost" id="actual_cost" class="form-control" placeholder="Actual cost of goods (ISK)">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

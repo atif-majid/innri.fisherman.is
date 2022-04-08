@@ -267,8 +267,17 @@
                                                 <td style="padding: 0.5rem 1.15rem">
                                                     {{$production->production_site}}
                                                 </td>
-                                                <td style="padding: 0.5rem 1.15rem" data-sort="{{strtotime($production->production_date)}}">
-                                                    {{date("d-m-Y", strtotime($production->production_date))}}
+                                                @if(trim($production->production_date)!="")
+                                                    @php
+                                                        $strProductioDate = $production->production_date;
+                                                    @endphp
+                                                @else
+                                                    @php
+                                                        $strProductioDate = "2021-04-09";
+                                                    @endphp
+                                                @endif
+                                                <td style="padding: 0.5rem 1.15rem" data-sort="{{strtotime($strProductioDate)}}">
+                                                    {{date("d-m-Y", strtotime($strProductioDate))}}
                                                 </td>
                                             </tr>
                                         @endforeach

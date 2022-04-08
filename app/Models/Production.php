@@ -25,7 +25,11 @@ class Production extends Model
         'production_site',
         'production_date',
         'complete_date_time',
-        'warehouse'
+        'warehouse',
+        'production_time',
+        'predicted_cost',
+        'actual_cost',
+        'salary_cost_hour'
     ];
 
 }
