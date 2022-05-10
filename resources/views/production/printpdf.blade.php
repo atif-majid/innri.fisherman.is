@@ -79,7 +79,9 @@
                 <tr>
                     <td class="users-view-latest-activity"><strong>Production cost per unit ({{ $production->quantity_scaled_unit }}):</strong></td>
                     <td class="users-view-latest-activity">
-                        {{ round($nProductionCost/$production->quantity_scaled, 2) }} ISK
+                        @if($production->quantity_scaled>0)
+                            {{ round($nProductionCost/$production->quantity_scaled, 2) }} ISK
+                        @endif
                     </td>
                 </tr>
                 @php
