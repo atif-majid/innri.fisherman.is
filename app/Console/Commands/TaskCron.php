@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Mail\SendEmail;
 use App\Models\Production;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
@@ -36,7 +37,10 @@ class TaskCron extends Command
         parent::__construct();
         //$allProduction = Production::all();
         $strDateToday = date("Y-m-d");
-        $allProduction = Production::where('production_date', $strDateToday)->get();
+        $allProduction = Production::where('production_date', $strDateToday)
+            ->whereNotNull(DB::raw('cast(replace(quantity_scaled, ",", ".") as decimal(18,2))'))
+            ->where(DB::raw('cast(replace(quantity_scaled, ",", ".") as decimal(18,2))'),'>', 0)
+            ->get();
         $this->nRowCount = $allProduction->count();
         if($this->nRowCount>0)
         {
