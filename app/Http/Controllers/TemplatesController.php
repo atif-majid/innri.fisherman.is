@@ -197,6 +197,7 @@ class TemplatesController extends Controller
         $nTemplateID = $template->id;
         $arrChanges = array();
         $arrItems = $request->AMEs;
+        $deletedFields = $request->deletedFields;
         foreach($arrItems as $thisItem)
         {
             if(trim($thisItem['item_tite'])!="")
@@ -222,6 +223,21 @@ class TemplatesController extends Controller
                         Templatefields::create($arrInsertItem);
                         $arrChanges[] = "Field title added [".$thisItem['item_tite']."]";
                     }
+                }
+            }
+        }
+
+        if(trim($deletedFields)!="")
+        {
+            $arrDeletedFields = explode(",", $deletedFields);
+            for($i=0; $i<count($arrDeletedFields); $i++)
+            {
+                $nDelThisField = $arrDeletedFields[$i];
+                if(is_numeric($nDelThisField) && $nDelThisField>0)
+                {
+                    //Ingredients::find($nDelThisIngredient)->delete();
+                    Templatefields::where('id',$nDelThisField)->delete();
+
                 }
             }
         }
