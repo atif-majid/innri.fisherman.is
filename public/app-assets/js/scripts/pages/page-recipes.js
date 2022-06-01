@@ -23,7 +23,7 @@ $(document).ready(function () {
                     "targets": [1]
                 },
                 {
-                    "targets": [ 0 , 4, 5],
+                    "targets": [ 0 , 4, 5, 6],
                     "visible": false
                 }],
             "order": [[5, "asc"], [ 4, "asc" ]]
@@ -88,6 +88,13 @@ $(document).ready(function () {
     $("#users-list-verified").on("change", function () {
         var usersVerifiedSelect = $("#users-list-verified").val();
         usersTable.search(usersVerifiedSelect).draw();
+    });
+    $( '#strProductionLocation').on( 'change', function () {
+        var selProductionSite = $(this).val();
+        usersTable
+            .columns( 6 )
+            .search( selProductionSite )
+            .draw();
     });
     // page users list role filter
     $("#users-list-role").on("change", function () {

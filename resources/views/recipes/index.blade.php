@@ -88,6 +88,17 @@
                                     <input  type="text" class="form-control" id="users-list-role">
                                 </fieldset>
                             </div>
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <label for="users-list-status">Production Location</label>
+                                <fieldset class="form-group">
+                                    <select class="form-control" id="strProductionLocation">
+                                        <option value="">Any</option>
+                                        @foreach($productionSites as $thissite)
+                                            <option value="{{$thissite->value}}">{{$thissite->value}}</option>
+                                        @endforeach
+                                    </select>
+                                </fieldset>
+                            </div>
                             <!--<div class="col-12 col-sm-6 col-lg-3">
                                 <label for="users-list-verified">Date</label>
                                 <fieldset class="form-group position-relative has-icon-left" >
@@ -132,6 +143,7 @@
                                                 <th style="text-align: left; padding-left: 1rem; width: 25%">Date Created</th>
                                                 <td style="text-align: left; padding-left: 1rem; width: 10%">Title</td>
                                                 <td style="text-align: left; padding-left: 1rem; width: 10%">Product Number</td>
+                                                <td>Production Site</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -187,10 +199,13 @@ EOT;*/
                                                 <td style="padding: 0.5rem 1.15rem; width: 30%;" data-sort="{{ strtotime($recipe->created_date) }}">{{ date("d-m-Y", strtotime($recipe->created_date)) }}</td>
                                                 <td>
                                                     {{ $recipe->title }}
-                                                </td><td>
+                                                </td>
+                                                <td>
                                                     {{ $recipe->product_number }}
                                                 </td>
-
+                                                <td>
+                                                    {{ $recipe->production_site }}
+                                                </td>
                                             </tr>
                                         @endforeach
                                         <?php

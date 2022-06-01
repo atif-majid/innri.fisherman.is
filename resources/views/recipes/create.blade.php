@@ -161,6 +161,21 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="RecipeUnit">Production Site</label>
+                                                    <div class="controls">
+                                                        <select class="form-control" name="strProductionLocation">
+                                                            <option selected="" selected></option>
+                                                            @foreach($productionSites as $thissetting)
+                                                                <option value="{{ $thissetting->value }}">{{ $thissetting->value }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

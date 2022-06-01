@@ -95,7 +95,8 @@ class RecipesController extends Controller
         else
         {
             $recipes = Recipes::all();
-            return view('recipes.index',compact('recipes'))
+            $productionSites = Sitesettings::where('field', 'ProductionSite')->orderBy('value')->get();
+            return view('recipes.index',compact('recipes', 'productionSites'))
                 ->with('i', (request()->input('page', 1) - 1) * 5);
         }
 
@@ -110,7 +111,8 @@ class RecipesController extends Controller
     {
         //
         $Suppliers = Sitesettings::where('field', 'SupplierName')->orderBy('value')->get();
-        return view('recipes.create', compact('Suppliers'));
+        $productionSites = Sitesettings::where('field', 'ProductionSite')->orderBy('value')->get();
+        return view('recipes.create', compact('Suppliers', 'productionSites'));
     }
 
     /**
@@ -122,7 +124,7 @@ class RecipesController extends Controller
     public function store(Request $request)
     {
         //
-        try
+        /*try
         {
             $strPostData = "";
             $data = $request->all();
@@ -145,7 +147,7 @@ class RecipesController extends Controller
         catch (Exception $e)
         {
             //Do nothing
-        }
+        }*/
 
         try{
 
@@ -187,6 +189,10 @@ class RecipesController extends Controller
             if(trim($request->RecipeUnit)!="")
             {
                 $arrRecipe['unit'] = $request->RecipeUnit;
+            }
+            if(trim($request->strProductionLocation))
+            {
+                $arrRecipe['production_site'] = $request->strProductionLocation;
             }
             $recipe = Recipes::create($arrRecipe);
             $nRecipeID = $recipe->id;
@@ -299,7 +305,8 @@ class RecipesController extends Controller
         $Ingredients = Ingredients::where('recipe_id', $nRecipeID)->get();
         $Steps = Steps::where('recipe_id', $nRecipeID)->get();
         $Suppliers = Sitesettings::where('field', 'SupplierName')->orderBy('value')->get();
-        return view('recipes.edit', compact('recipe', 'Ingredients', 'Steps', 'Suppliers'));
+        $productionSites = Sitesettings::where('field', 'ProductionSite')->orderBy('value')->get();
+        return view('recipes.edit', compact('recipe', 'Ingredients', 'Steps', 'Suppliers', 'productionSites'));
     }
 
     /**
@@ -344,6 +351,10 @@ class RecipesController extends Controller
         if(trim($request->RecipeUnit)!="")
         {
             $arrRecipe['unit'] = $request->RecipeUnit;
+        }
+        if(trim($request->strProductionLocation))
+        {
+            $arrRecipe['production_site'] = $request->strProductionLocation;
         }
         $nRecipeId = $request->nRecipeId;
 

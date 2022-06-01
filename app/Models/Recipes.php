@@ -20,6 +20,7 @@ class Recipes extends Model
         'created_date',
         'created_by',
         'amount',
-        'unit'
+        'unit',
+        'production_site'
     ];
 }

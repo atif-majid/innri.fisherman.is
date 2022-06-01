@@ -33,6 +33,11 @@
                     <tr>
                         <td class="users-view-latest-activity" colspan="2"><b>Total Production: </b>{{ $recipe->amount }}&nbsp;{{ $recipe->unit }}</td>
                     </tr>
+                    @if(trim($recipe->production_site)!="")
+                        <tr>
+                            <td class="users-view-latest-activity" colspan="2"><b>Production Location: </b>{{ $recipe->production_site }}</td>
+                        </tr>
+                    @endif
                     <tr>
                         <td class="users-view-latest-activity" colspan="2"><b>Ingredients</b></td>
                     </tr>
