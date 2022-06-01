@@ -6,6 +6,7 @@
 /public/uploads/*.jpeg
 /storage/*.key
 /vendor
+/.idea/php.xml
 .env
 .env.backup
 .phpunit.result.cache
