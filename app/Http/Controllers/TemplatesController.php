@@ -357,18 +357,15 @@ class TemplatesController extends Controller
     {
         $nID = $request->id;
         $thistemplate = Templates::find($nID);
-        $strSupervisorName = "";
-        $nSupervisorID = $thistemplate->supervisor;
-        if($nSupervisorID>0)
-        {
-            $supervisorEmp = Employees::find($nSupervisorID);
-            $strSupervisorName = $supervisorEmp->name;
-        }
 
-
+        $productionEmployees = Employees::where('status', 'active')
+                            ->where('department', 'like', '%production%')
+                            ->orWhere('designation', 'CEO')
+                            ->orderBy('name')
+                            ->get();
         $templatefields = Templatefields::where("template_id", $nID)->get();
         $sitesettings = Sitesettings::all();
-        return view('templates.fill', compact('nID', 'thistemplate', 'templatefields', 'sitesettings', 'strSupervisorName'));
+        return view('templates.fill', compact('nID', 'thistemplate', 'templatefields', 'sitesettings', 'productionEmployees'));
     }
 
     public function fillsubmit(Request $request)
@@ -379,7 +376,7 @@ class TemplatesController extends Controller
             'template_title'=>$request->strTempTitle,
             'template_version'=>$request->nVersion,
             'submit_date'=>date("Y-m-d H:i:s"),
-            'supervisor'=>$Template->supervisor,
+            'supervisor'=>$request->nSupervisor,
             'user_id'=>Auth::user()->getempid(),
             'with_checkboxes'=>$request->strWithCheckbox,
             'instruction'=>$Template->instruction,

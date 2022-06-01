@@ -134,7 +134,12 @@
                                                     <div class="form-group col-sm">
                                                         <label>Supervisor</label>
                                                         <div class="controls">
-                                                            {{ $strSupervisorName }}
+                                                            <select class="form-control" name="nSupervisor">
+                                                                <option selected=""></option>
+                                                                @foreach($productionEmployees as $thisemployee)
+                                                                    <option value="{{ $thisemployee->id }}" @if($thisemployee->id==$thistemplate->supervisor) selected @endif>{{ $thisemployee->name }}</option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-sm">
