@@ -117,7 +117,13 @@ $(document).ready(function () {
     }
     // page users list clear filter
     $(".users-list-clear").on("click", function(){
+        console.log('clear');
         usersTable.search("").draw();
+        var selProductionSite = "";
+        usersTable
+            .columns( 6 )
+            .search( selProductionSite )
+            .draw();
     })
     // users music select
     if ($("#users-music-select2").length > 0) {
