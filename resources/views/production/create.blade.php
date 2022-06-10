@@ -237,16 +237,26 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-sm-3">
-                                                    <label>Production Time (minutes)</label>
-                                                    <input type="number" value="{{ old('production_time') }}" name="production_time" id="production_time" class="form-control" placeholder="Production Time in Minutes">
-                                                </div>
-                                                <div class="form-group col-sm-3">
                                                     <label>Predicted cost of goods (ISK)</label>
                                                     <input type="number" value="{{ old('predicted_cost') }}" name="predicted_cost" id="predicted_cost" class="form-control" placeholder="Predicted cost of goods (ISK)">
                                                 </div>
                                                 <div class="form-group col-sm-3">
                                                     <label>Actual cost of goods (ISK)</label>
                                                     <input type="number" value="{{ old('actual_cost') }}" name="actual_cost" id="actual_cost" class="form-control" placeholder="Actual cost of goods (ISK)">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-sm-3">
+                                                    <label>Production Time (minutes)</label>
+                                                    <input type="number" value="{{ old('production_time_emp') }}" name="production_time_emp" id="production_time_emp" class="form-control" placeholder="Production Time per employee in Minutes">
+                                                </div>
+                                                <div class="form-group col-sm-3">
+                                                    <label>Number of employees</label>
+                                                    <input type="number" value="{{ old('num_employees') }}" name="num_employees" id="num_employees" class="form-control" placeholder="Number of employees">
+                                                </div>
+                                                <div class="form-group col-sm-3">
+                                                    <label>Total Production Time (minutes)</label>
+                                                    <input type="number" value="{{ old('production_time') }}" name="production_time" id="production_time" class="form-control" placeholder="Production Time in Minutes" readonlys>
                                                 </div>
                                             </div>
                                         </div>
@@ -476,6 +486,22 @@
     $(document).ready(function() {
         $('.js-example-basic-single').select2();
     });
+    $('#production_time_emp').keyup(function(){
+        calculatetime();
+    });
+    $('#num_employees').keyup(function(){
+        calculatetime();
+    });
+    function calculatetime(){
+        var nProdTime = $('#production_time_emp').val();
+        var nEmp = $('#num_employees').val();
+        var nTotalTime = 0;
+        if(nProdTime>0 && nEmp>0)
+        {
+            nTotalTime = nProdTime * nEmp;
+        }
+        $('#production_time').val(nTotalTime);
+    }
 </script>
 <div class="modal fade text-left" id="modalCalculation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">

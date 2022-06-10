@@ -132,12 +132,8 @@ class ProductionController extends Controller
     {
         try
         {
-            $strPostData = "";
-            $data = $request->all();
+            /*$data = $request->all();
             $strPostData = $this->parse_data($data);
-            /*foreach ($data as $key => $value) {
-                $strPostData .=  $key." = ".$value."&";
-            }*/
             $html = "<html><body>
             <div><img src='https://innri.fisherman.is/app-assets/images/logo/fisherman-2.png'></div>
             <div>
@@ -151,7 +147,7 @@ class ProductionController extends Controller
                 $message->to($to);
                 $message->subject($subject);
                 $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
-            });
+            });*/
         }
         catch (Exception $e)
         {
@@ -210,6 +206,14 @@ class ProductionController extends Controller
             if(!empty($request->actual_cost))
             {
                 $arrProduction['actual_cost'] = $request->actual_cost;
+            }
+            if(!empty($request->production_time_emp))
+            {
+                $arrProduction['production_time_emp'] = $request->production_time_emp;
+            }
+            if(!empty($request->num_employees))
+            {
+                $arrProduction['num_employees'] = $request->num_employees;
             }
             $SalaryCost = Sitesettings::where('field', 'SalaryCost')->get();
             if(!$SalaryCost->isEmpty())
@@ -330,6 +334,14 @@ class ProductionController extends Controller
         if(!empty($request->actual_cost))
         {
             $arrProduction['actual_cost'] = $request->actual_cost;
+        }
+        if(!empty($request->production_time_emp))
+        {
+            $arrProduction['production_time_emp'] = $request->production_time_emp;
+        }
+        if(!empty($request->num_employees))
+        {
+            $arrProduction['num_employees'] = $request->num_employees;
         }
         /*$SalaryCost = Sitesettings::where('field', 'SalaryCost')->get();
         if(!$SalaryCost->isEmpty())

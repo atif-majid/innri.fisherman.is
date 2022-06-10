@@ -26,6 +26,8 @@ class Production extends Model
         'production_date',
         'complete_date_time',
         'warehouse',
+        'production_time_emp',
+        'num_employees',
         'production_time',
         'predicted_cost',
         'actual_cost',
