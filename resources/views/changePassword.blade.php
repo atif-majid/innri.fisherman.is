@@ -58,7 +58,10 @@
 
 
 <!-- BEGIN: Main Menu-->
-@include('leftnav');
+@if (!$bForce = Session::get('bForce'))
+    @include('leftnav');
+@endif
+
 <!-- END: Main Menu-->
 
 <!-- BEGIN: Content-->
