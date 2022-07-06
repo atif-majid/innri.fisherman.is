@@ -21,6 +21,12 @@
             <td class="users-view-latest-activity"><strong>Comments:</strong></td>
             <td class="users-view-latest-activity" colspan="5">{{ $templatesubmit->comments }}</td>
         </tr>
+        @if(trim($templatesubmit->supervisor_comment)!="")
+            <tr>
+                <td class="users-view-latest-activity"><strong>Supervisor's Comments:</strong></td>
+                <td class="users-view-latest-activity" colspan="5">{{ $templatesubmit->supervisor_comment }}</td>
+            </tr>
+        @endif
         <tr>
             <td class="users-view-latest-activity" colspan="6">
                 <table class="table table-borderless" colspan="12">

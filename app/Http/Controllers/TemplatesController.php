@@ -440,6 +440,14 @@ class TemplatesController extends Controller
             //'chk_supervisor_confirmed',
             //'supervisor_comment',
         }
+
+        if(isset($request->nParent) && $request->nParent>0)
+        {
+            $nParent = $request->nParent;
+            $arrUpdate = array();
+            $arrUpdate['nChild'] = $nSubmitID;
+            Templatesubmit::find($nParent)->update($arrUpdate);
+        }
         return redirect()->route('templates.index')
             ->with('success','Template submitted for today successfully.');
     }
@@ -467,6 +475,7 @@ class TemplatesController extends Controller
 
     public function reviewsubmit(Request $request)
     {
+
         $fields = $request->field;
         for($i=0; $i<count($fields); $i++)
         {
@@ -490,8 +499,44 @@ class TemplatesController extends Controller
         $arrUpdateSubmission = array();
         $arrUpdateSubmission['reviewed'] = 'yes';
         $arrUpdateSubmission['reviewed_datetime'] = date("Y-m-d H:i:s");
+        if(isset($request->strSupervisorComment) && trim($request->strSupervisorComment)!="")
+        {
+            $arrUpdateSubmission['supervisor_comment'] = $request->strSupervisorComment;
+        }
+        if(isset($request->chReturn) && trim($request->chReturn)=='yes')
+        {
+            $arrUpdateSubmission['status'] = 'returned';
+        }
+
         Templatesubmit::find($request->nTemplate)->update($arrUpdateSubmission);
         return redirect()->route('templates.index')
             ->with('success','Template submission reviewed successfully.');
+    }
+
+    public function refill($nSubmissionID, $nID)
+    {
+        $objSubmission = Templatesubmit::find($nSubmissionID);
+        $objSubmitValues = Templatesubmitfields::where('template_submit_id', $nSubmissionID)->get();
+        $arrSubmittedValues = array();
+        foreach($objSubmitValues as $thisVal)
+        {
+            $strTitle = $thisVal->field_title;
+            $arrSubmittedValues["$strTitle"] = array("chk_emp_confirm"=>$thisVal->chk_emp_confirm, "emp_value"=>$thisVal->emp_value,
+                "emp_comment"=>$thisVal->emp_comment, "chk_supervisor_confirmed"=>$thisVal->chk_supervisor_confirmed,
+                "supervisor_comment"=>$thisVal->supervisor_comment);
+        }
+
+
+        $thistemplate = Templates::find($nID);
+
+        $productionEmployees = Employees::where('status', 'active')
+            ->where('department', 'like', '%production%')
+            ->orWhere('designation', 'CEO')
+            ->orderBy('name')
+            ->get();
+        $templatefields = Templatefields::where("template_id", $nID)->get();
+        $sitesettings = Sitesettings::all();
+        return view('templates.refill', compact('nID', 'thistemplate', 'templatefields', 'sitesettings',
+            'productionEmployees', 'objSubmission', 'arrSubmittedValues'));
     }
 }

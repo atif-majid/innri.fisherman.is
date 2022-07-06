@@ -9,9 +9,9 @@
     <meta name="description" content="Frest admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Frest admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Templates - Review Submission</title>
-    <link rel="apple-touch-icon" href="../../app-assets/images/ico/apple-icon-120.png">
-    <!--<link rel="shortcut icon" type="image/x-icon" href="../../app-assets/images/ico/favicon.ico">-->
+    <title>Templates - Fill form</title>
+    <link rel="apple-touch-icon" href="../../../../app-assets/images/ico/apple-icon-120.png">
+    <!--<link rel="shortcut icon" type="image/x-icon" href="../../../../app-assets/images/ico/favicon.ico">-->
     <link rel="shortcut icon" type="image/x-icon" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_180x180.png?v=1595428268">
     <link rel="apple-touch-icon" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_180x180.png?v=1595428268"/>
     <link rel="apple-touch-icon" sizes="57x57" href="//cdn.shopify.com/s/files/1/0442/9496/3365/files/favicon-32x32_57x57.png?v=1595428268"/>
@@ -24,23 +24,23 @@
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/vendors.min.css">
-    <link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/pickers/pickadate/pickadate.css">
-    <link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/ui/prism.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/vendors/css/pickers/pickadate/pickadate.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/vendors/css/ui/prism.min.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="../../app-assets/css/bootstrap.css?time=<?php echo time();?>">
-    <link rel="stylesheet" type="text/css" href="../../app-assets/css/bootstrap-extended.css?time=<?php echo time();?>">
-    <link rel="stylesheet" type="text/css" href="../../app-assets/css/colors.css?time=<?php echo time();?>">
-    <link rel="stylesheet" type="text/css" href="../../app-assets/css/components.css?time=<?php echo time();?>">
-    <link rel="stylesheet" type="text/css" href="../../app-assets/css/themes/dark-layout.css">
-    <link rel="stylesheet" type="text/css" href="../../app-assets/css/themes/semi-dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/bootstrap.css?time=<?php echo time();?>">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/bootstrap-extended.css?time=<?php echo time();?>">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/colors.css?time=<?php echo time();?>">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/components.css?time=<?php echo time();?>">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/themes/dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/themes/semi-dark-layout.css">
     <!-- END: Theme CSS-->
 
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="../../app-assets/css/core/menu/menu-types/vertical-menu.css">
-    <link rel="stylesheet" type="text/css" href="../../app-assets/css/plugins/forms/validation/form-validation.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/plugins/forms/validation/form-validation.css">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
@@ -77,14 +77,14 @@
             <div class="content-header-left col-12 mb-2 mt-1">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h5 class="content-header-title float-left pr-1 mb-0">Review Submission</h5>
+                        <h5 class="content-header-title float-left pr-1 mb-0">Fill Form</h5>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb p-0 mb-0">
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bx bx-home-alt"></i></a>
                                 </li>
                                 <li class="breadcrumb-item"><a href="{{ route('templates.index') }}">Templates</a>
                                 </li>
-                                <li class="breadcrumb-item active">{{ $thisTemplateSubmission->template_title }}
+                                <li class="breadcrumb-item active">{{ $thistemplate->title }}
                                 </li>
                             </ol>
                         </div>
@@ -100,17 +100,17 @@
                 @endforeach
             @endif
             <section class="input-validation">
-                <form id="frmNewTemplate" class="form-horizontal"  novalidate method="post" action="{{ route('templates.reviewsubmit') }}">
+                <form id="frmNewTemplate" class="form-horizontal"  novalidate method="post" action="{{ route('templates.fillsubmit') }}">
                     @csrf
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">{{ $thisTemplateSubmission->template_title }} - Version {{ $thisTemplateSubmission->template_version }} <small>(Created on  {{ $thisTemplateSubmission->template_created_on }})</small></h4>
-                                    <input type="hidden" id="strTempTitle" name="strTempTitle" value="{{ $thisTemplateSubmission->template_title }}"/>
-                                    <input type="hidden" id="nTemplate" name="nTemplate" value="{{ $thisTemplateSubmission->id }}">
-                                    <input type="hidden" id="nVersion" name="nVersion" value="{{ $thisTemplateSubmission->template_title }}">
-                                    <input type="hidden" id="strWithCheckbox" name="strWithCheckbox" value="{{ $thisTemplateSubmission->with_checkboxes }}">
+                                    <h4 class="card-title">{{ $thistemplate->title }} - Version {{ $thistemplate->version }} <small>(Created on  @if(empty($thistemplate->updated_on)) {{ date("d-m-Y H:i:s", strtotime($thistemplate->created_on)) }} @else {{ date("d-m-Y H:i:s", strtotime($thistemplate->updated_on)) }} @endif)</small></h4>
+                                    <input type="hidden" id="strTempTitle" name="strTempTitle" value="{{ $thistemplate->title }}"/>
+                                    <input type="hidden" id="nTemplate" name="nTemplate" value="{{ $thistemplate->id }}">
+                                    <input type="hidden" id="nVersion" name="nVersion" value="{{ $thistemplate->version }}">
+                                    <input type="hidden" id="strWithCheckbox" name="strWithCheckbox" value="{{ $thistemplate->with_checkboxes }}">
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
@@ -118,15 +118,15 @@
                                             <div class="form col-md-12">
                                                 <div class="row">
                                                     <div class="form-group col-sm">
-                                                        <label>Submissitted on?</label>
+                                                        <label>Date</label>
                                                         <div class="controls">
-                                                            {{ $thisTemplateSubmission->submit_date }}
+                                                            {{ date("d-m-Y") }}
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-sm">
-                                                        <label>Submitted By</label>
+                                                        <label>User</label>
                                                         <div class="controls">
-                                                            {{ $thisTemplateSubmission->name }}
+                                                            {{ Auth::user()->name }}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -134,16 +134,50 @@
                                                     <div class="form-group col-sm">
                                                         <label>Supervisor</label>
                                                         <div class="controls">
-                                                            {{ $thisTemplateSubmission->supname }}
+                                                            <select class="form-control" name="nSupervisor">
+                                                                <option selected=""></option>
+                                                                @foreach($productionEmployees as $thisemployee)
+                                                                    <option value="{{ $thisemployee->id }}" @if($thisemployee->id==$objSubmission->supervisor) selected @endif>{{ $thisemployee->name }}</option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-sm">
                                                         <label>Production Site</label>
                                                         <div class="controls">
-                                                            {{$thisTemplateSubmission->production_site}}
+                                                            <select class="form-control" name="strProductionLocation">
+                                                                <option selected=""></option>
+                                                                @foreach($sitesettings as $thissetting)
+                                                                    @if($thissetting->field=='ProductionSite')
+                                                                        <option value="{{ $thissetting->value }}" @if($objSubmission->production_site==$thissetting->value) selected @endif>{{ $thissetting->value }}</option>
+                                                                    @endif
+                                                                @endforeach
+                                                                @php
+                                                                    /*<option value="Framleiðslueldhús">Framleiðslueldhús</option>
+                                                                    <option value="Reykhús">Reykhús</option>*/
+                                                                @endphp
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Supervisor Comments</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                {{ $objSubmission->supervisor_comment }}
                                             </div>
                                         </div>
                                     </div>
@@ -161,25 +195,7 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                {{ $thisTemplateSubmission->instruction }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Comments</h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                {{ $thisTemplateSubmission->comments }}
+                                                {{ $thistemplate->instruction }}
                                             </div>
                                         </div>
                                     </div>
@@ -198,7 +214,7 @@
                                         <table class="table table-borderless" colspan="12">
                                             <thead>
                                                 <tr>
-                                                    @if($thisTemplateSubmission->with_checkboxes=='yes')
+                                                    @if($thistemplate->with_checkboxes=='yes')
                                                         <th></th>
                                                         <th></th>
                                                         <th><strong>Comment</strong></th>
@@ -214,12 +230,16 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($TemplateFields as $fields)
+                                            @foreach($templatefields as $fields)
+                                                @php
+                                                    $strFieldTitle = $fields->field_title;
+                                                    $thisFieldVals = $arrSubmittedValues["$strFieldTitle"];
+                                                @endphp
                                                 <tr>
-                                                    @if($thisTemplateSubmission->with_checkboxes=='yes')
+                                                    @if($thistemplate->with_checkboxes=='yes')
                                                         <td>
                                                             <label class="custom-control custom-checkbox checkbox-input">
-                                                                <input type="checkbox" name="chk_entry_{{$fields->id}}" class="checkbox-input custom-control-input" value="yes" readonly disabled @if($fields->chk_emp_confirm=='yes') checked @endif>
+                                                                <input type="checkbox" name="chk_entry_{{$fields->id}}" class="checkbox-input custom-control-input" value="yes" @if($thisFieldVals["chk_emp_confirm"]=='yes') checked @endif>
                                                                 <span class="custom-control-label" for="chk_make" style="padding-top: 3px !important;"></span>
                                                             </label>
                                                         </td>
@@ -230,18 +250,18 @@
                                                         </td>
                                                         <td>
                                                             <fieldset class="position-relative">
-                                                                <input type="text" class="form-control" placeholder="Comment" id="comment" name="comment_{{$fields->id}}" value="{{ $fields->emp_comment }}" readonly disabled>
+                                                                <input type="text" class="form-control" placeholder="Comment" id="comment" name="comment_{{$fields->id}}" value="{{$thisFieldVals["emp_comment"]}}">
                                                             </fieldset>
                                                         </td>
                                                         <td>
                                                             <label class="custom-control custom-checkbox checkbox-input">
-                                                                <input type="checkbox" name="chk_verify_{{$fields->id}}" class="checkbox-input custom-control-input" value="yes">
+                                                                <input type="checkbox" name="chk_verify_{{$fields->id}}" class="checkbox-input custom-control-input" value="yes" @if($thisFieldVals["chk_supervisor_confirmed"]=='yes') checked @endif disabled>
                                                                 <span class="custom-control-label" for="chk_make" style="padding-top: 3px !important;"></span>
                                                             </label>
                                                         </td>
                                                         <td>
                                                             <fieldset class="position-relative">
-                                                                <input type="text" class="form-control" placeholder="Supervisor Comment" id="supervisor_comment" name="supervisor_comment_{{$fields->id}}">
+                                                                <input type="text" class="form-control" placeholder="Supervisor Comment" id="supervisor_comment" name="supervisor_comment_{{$fields->id}}" value="{{$thisFieldVals["supervisor_comment"]}}" disabled>
                                                             </fieldset>
                                                         </td>
                                                     @else
@@ -252,23 +272,23 @@
                                                         </td>
                                                         <td>
                                                             <fieldset class="position-relative">
-                                                                <input type="text" class="form-control" placeholder="Value" id="value" name="value_{{$fields->id}}" value="{{ $fields->emp_value }}" readonly disabled>
+                                                                <input type="text" class="form-control" placeholder="Value" id="value" name="value_{{$fields->id}}" value="{{$thisFieldVals['emp_value']}}">
                                                             </fieldset>
                                                         </td>
                                                         <td>
                                                             <fieldset class="position-relative">
-                                                                <input type="text" class="form-control" placeholder="Comment" id="comment" name="comment_{{$fields->id}}" value="{{ $fields->emp_comment }}" readonly disabled>
+                                                                <input type="text" class="form-control" placeholder="Comment" id="comment" name="comment_{{$fields->id}}" value="{{$thisFieldVals["emp_comment"]}}">
                                                             </fieldset>
                                                         </td>
                                                         <td>
                                                             <label class="custom-control custom-checkbox checkbox-input">
-                                                                <input type="checkbox" name="chk_verify_{{$fields->id}}" class="checkbox-input custom-control-input" value="yes">
+                                                                <input type="checkbox" name="chk_verify_{{$fields->id}}" class="checkbox-input custom-control-input" value="yes" @if($thisFieldVals["chk_supervisor_confirmed"]=='yes') checked @endif disabled >
                                                                 <span class="custom-control-label" for="chk_make" style="padding-top: 3px !important;"></span>
                                                             </label>
                                                         </td>
                                                         <td>
                                                             <fieldset class="position-relative">
-                                                                <input type="text" class="form-control" placeholder="Supervisor Comment" id="supervisor_comment" name="supervisor_comment_{{$fields->id}}">
+                                                                <input type="text" class="form-control" placeholder="Supervisor Comment" id="supervisor_comment" name="supervisor_comment_{{$fields->id}}" value="{{$thisFieldVals["supervisor_comment"]}}" disabled>
                                                             </fieldset>
                                                         </td>
                                                     @endif
@@ -291,20 +311,8 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <textarea name="strSupervisorComment" id="strSupervisorComment" class="form-control" placeholder="Comments" rows="4"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            &nbsp;
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-sm">
-                                                <fieldset>
-                                                    <div class="checkbox">
-                                                        <input type="checkbox" class="checkbox-input" id="chReturn" name="chReturn" value="yes">
-                                                        <label for="chReturn">Send back for re-check</label>
-                                                    </div>
-                                                </fieldset>
+                                                <textarea name="strComments" class="form-control" <?php /*data-validation-required-message="Name is requried"*/?> placeholder="Comments" rows="4">{{$objSubmission->comments}}</textarea>
+                                                <input type="hidden" id="nParent" name="nParent" value="{{$objSubmission->id}}">
                                             </div>
                                         </div>
                                     </div>
@@ -336,33 +344,33 @@
 
 
 <!-- BEGIN: Vendor JS-->
-<script src="../../app-assets/vendors/js/vendors.min.js"></script>
-<script src="../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
-<script src="../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
-<script src="../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
+<script src="../../../../app-assets/vendors/js/vendors.min.js"></script>
+<script src="../../../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
+<script src="../../../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
+<script src="../../../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
-<script src="../../app-assets/vendors/js/forms/validation/jqBootstrapValidation.js"></script>
-<script src="../../app-assets/vendors/js/pickers/pickadate/picker.js"></script>
-<script src="../../app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
-<script src="../../app-assets/vendors/js/pickers/pickadate/picker.time.js"></script>
-<script src="../../app-assets/vendors/js/pickers/pickadate/legacy.js"></script>
+<script src="../../../../app-assets/vendors/js/forms/validation/jqBootstrapValidation.js"></script>
+<script src="../../../../app-assets/vendors/js/pickers/pickadate/picker.js"></script>
+<script src="../../../../app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
+<script src="../../../../app-assets/vendors/js/pickers/pickadate/picker.time.js"></script>
+<script src="../../../../app-assets/vendors/js/pickers/pickadate/legacy.js"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
-<script src="../../app-assets/js/scripts/configs/vertical-menu-light.js"></script>
-<script src="../../app-assets/js/core/app-menu.js"></script>
-<script src="../../app-assets/js/core/app.js"></script>
-<script src="../../app-assets/js/scripts/components.js"></script>
-<script src="../../app-assets/js/scripts/footer.js"></script>
-<script src="../../app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
-<script src="../../app-assets/js/scripts/forms/form-repeater.js"></script>
+<script src="../../../../app-assets/js/scripts/configs/vertical-menu-light.js"></script>
+<script src="../../../../app-assets/js/core/app-menu.js"></script>
+<script src="../../../../app-assets/js/core/app.js"></script>
+<script src="../../../../app-assets/js/scripts/components.js"></script>
+<script src="../../../../app-assets/js/scripts/footer.js"></script>
+<script src="../../../../app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
+<script src="../../../../app-assets/js/scripts/forms/form-repeater.js"></script>
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
-<script src="../../app-assets/js/scripts/forms/validation/form-validation.js"></script>
-<?php /*<script src="../../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js?time=<?php echo time();?>"></script>*/?>
+<script src="../../../../app-assets/js/scripts/forms/validation/form-validation.js"></script>
+<?php /*<script src="../../../../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js?time=<?php echo time();?>"></script>*/?>
 <script>
     $(document).ready(function(){
         $('.pickadate-limits').pickadate({

@@ -152,6 +152,8 @@ Route::group(['middleware' => ['auth', 'forcereset']], function() {
     Route::get('templates/review/{id}', ['as'=>'templates.review', 'uses'=>'App\Http\Controllers\TemplatesController@review']);
     Route::post('/templates/fillsubmit', ['as'=>'templates.fillsubmit', 'uses'=>'App\Http\Controllers\TemplatesController@fillsubmit']);
     Route::post('/templates/reviewsubmit', ['as'=>'templates.reviewsubmit', 'uses'=>'App\Http\Controllers\TemplatesController@reviewsubmit']);
+    Route::get('templates/refill/{id}/submission/{nSubID}', ['as'=>'templates.refill', 'uses'=>'App\Http\Controllers\TemplatesController@refill']);
+    Route::post('/templates/refillsubmit', ['as'=>'templates.fillsubmit', 'uses'=>'App\Http\Controllers\TemplatesController@fillsubmit']);
 
     Route::resource('reports', ReportsController::class);
     Route::get('/reports/{id}', [ReportsController::class, 'show']);

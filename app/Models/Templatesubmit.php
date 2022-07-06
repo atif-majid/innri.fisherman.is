@@ -24,6 +24,9 @@ class Templatesubmit extends Model
         'with_checkboxes',
         'instruction',
         'comments',
-        'template_created_on'
+        'template_created_on',
+        'status',
+        'supervisor_comment',
+        'nChild'
     ];
 }

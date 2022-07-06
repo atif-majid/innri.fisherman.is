@@ -41,9 +41,17 @@
                             <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                                 @php
                                     $strDispMsg = "";
+                                    if(count($header_templates)>0)
+                                    {
+                                        $strDispMsg = count($header_templates)." templates";
+                                    }
                                     if(count($header_Improvements)>0)
                                     {
-                                        $strDispMsg = count($header_Improvements)." improvements";
+                                        if($strDispMsg!="")
+                                        {
+                                            $strDispMsg = $strDispMsg.", ";
+                                        }
+                                        $strDispMsg = $strDispMsg.count($header_Improvements)." improvements";
                                     }
                                     if(count($header_Salesopportunities)>0)
                                     {
@@ -51,7 +59,7 @@
                                         {
                                             $strDispMsg = $strDispMsg.", ";
                                         }
-                                        $strDispMsg = $strDispMsg.count($header_Salesopportunities)." improvements";
+                                        $strDispMsg = $strDispMsg.count($header_Salesopportunities)." Sales Opportunities";
                                     }
                                     if(count($header_tasks)>0)
                                     {
@@ -61,6 +69,7 @@
                                         }
                                         $strDispMsg = $strDispMsg.count($header_tasks)." on/off boarding tasks";
                                     }
+
                                 @endphp
                                 <li class="dropdown-menu-header">
                                     <div class="dropdown-header px-1 py-75 d-flex justify-content-between" style="background-color: #525253 !important;"><span class="notification-title">{{$strDispMsg}}</span><!--<span class="text-bold-400 cursor-pointer">Mark all as read</span>--></div>
@@ -68,20 +77,37 @@
                                 <li class="scrollable-container media-list">
                                     @if(count($header_templates)>0)
                                         @foreach($header_templates as $template)
-                                            <a class="d-flex justify-content-between" href="{{ route('templates.review', $template->id) }}">
-                                                <div class="media d-flex align-items-center">
-                                                    <div class="media-left pr-0">
-                                                        <div class="avatar bg-primary bg-lighten-5 mr-1 m-0 p-25"><span class="avatar-content text-primary font-medium-2">TMP</span></div>
+                                            @if($template->status=='returned')
+                                                <a class="d-flex justify-content-between" href="{{ route('templates.refill', [$template->id, $template->template_id]) }}">
+                                                    <div class="media d-flex align-items-center">
+                                                        <div class="media-left pr-0">
+                                                            <div class="avatar bg-primary bg-lighten-5 mr-1 m-0 p-25"><span class="avatar-content text-primary font-medium-2">TMP</span></div>
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <h6 class="media-heading">
+                                                                <span class="text-bold-500">
+                                                                    {{ $template->template_title }} ({{ $template->template_version }})
+                                                                </span>
+                                                            </h6><small class="notification-text">{{date("d-m-Y", strtotime($template->submit_date))}}</small>
+                                                        </div>
                                                     </div>
-                                                    <div class="media-body">
-                                                        <h6 class="media-heading">
-                                                            <span class="text-bold-500">
-                                                                {{ $template->template_title }} ({{ $template->template_version }})
-                                                            </span>
-                                                        </h6><small class="notification-text">{{date("d-m-Y", strtotime($template->submit_date))}}</small>
+                                                </a>
+                                            @else
+                                                <a class="d-flex justify-content-between" href="{{ route('templates.review', $template->id) }}">
+                                                    <div class="media d-flex align-items-center">
+                                                        <div class="media-left pr-0">
+                                                            <div class="avatar bg-primary bg-lighten-5 mr-1 m-0 p-25"><span class="avatar-content text-primary font-medium-2">TMP</span></div>
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <h6 class="media-heading">
+                                                                <span class="text-bold-500">
+                                                                    {{ $template->template_title }} ({{ $template->template_version }})
+                                                                </span>
+                                                            </h6><small class="notification-text">{{date("d-m-Y", strtotime($template->submit_date))}}</small>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </a>
+                                                </a>
+                                            @endif
                                         @endforeach
                                     @endif
                                     @if(count($header_Improvements)>0)

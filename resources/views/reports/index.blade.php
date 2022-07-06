@@ -174,6 +174,11 @@
                                                         <a href="{{ route('reports.show', $template->id) }}" class="invoice-action-view">
                                                             <i class="bx bx-show-alt"></i>
                                                         </a>
+                                                        @if(array_key_exists($template->id, $arrParents))
+                                                            <a href="{{ route('reports.show', $arrParents["$template->id"]) }}" class="invoice-action-view">
+                                                                <i class="bx bx-history"></i>
+                                                            </a>
+                                                        @endif
                                                     </td>
                                                     <td style="padding: 0.5rem">{{ $template->template_title }}</td>
                                                     <td style="padding: 0.5rem">{{ $template->template_version }}</td>

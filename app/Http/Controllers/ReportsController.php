@@ -58,8 +58,20 @@ class ReportsController extends Controller
                 ->leftJoin('employees as m2', 'm2.id', '=', 'template_submit.user_id')
                 ->select(['template_submit.id', 'template_submit.template_title', 'template_submit.template_version', 'template_submit.submit_date',
                     'm1.name as supervisor', 'm2.name as employeename'])
+                ->where('template_submit.nChild', NULL)
                 //->orderBy('submit_date', 'desc')
                 ->get();
+
+            $parentSubmissions = Templatesubmit::whereNotNull('nChild')->get();
+            $arrParents = array();
+            foreach($parentSubmissions as $thisSubmission)
+            {
+                $nParentID = $thisSubmission->id;
+                $nChildID = $thisSubmission->nChild;
+                $arrParents["$nChildID"] = $nParentID;
+            }
+
+
             $arrSupervisors = array();
             $distincSup = Templates::get()->unique('supervisor');
             foreach($distincSup as $sup)
@@ -85,7 +97,7 @@ class ReportsController extends Controller
                 ->get();
 
 
-            return view('reports.index', compact('templatesubmit', 'employees', 'supervisors', 'templates', 'visitors', 'strEmpDesignation', 'allFoodOrders'));
+            return view('reports.index', compact('templatesubmit', 'employees', 'supervisors', 'templates', 'visitors', 'strEmpDesignation', 'allFoodOrders', 'arrParents'));
         }
     }
 
@@ -103,7 +115,7 @@ class ReportsController extends Controller
             ->leftJoin('employees as m1', 'm1.id', '=', 'template_submit.supervisor')
             ->leftJoin('employees as m2', 'm2.id', '=', 'template_submit.user_id')
             ->select(['template_submit.id', 'template_submit.template_title', 'template_submit.template_version', 'template_submit.submit_date',
-                'template_submit.with_checkboxes', 'template_submit.comments', 'template_submit.instruction','m1.name as supervisor', 'm2.name as employeename'])
+                'template_submit.with_checkboxes', 'template_submit.comments', 'template_submit.instruction', 'template_submit.supervisor_comment','m1.name as supervisor', 'm2.name as employeename'])
             ->where('template_submit.id', $nSubmitID)
             ->first();
         //dd(DB::getQueryLog());

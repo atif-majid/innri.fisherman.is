@@ -54,9 +54,20 @@ class AppServiceProvider extends ServiceProvider
                 $Templates = DB::table('template_submit')
                     ->leftJoin('employees', 'user_id', '=', 'employees.id')
                     ->select('template_submit.*','employees.name')
-                    ->where('supervisor', $nCurrUserID)
-                    ->where('reviewed', '=', 'no')
+                    //->where('supervisor', $nCurrUserID)
+                    //->where('reviewed', '=', 'no')
                     ->orderBy('submit_date', 'desc')
+                    ->where(function($query) use($nCurrUserID){
+                        $query->where(function($query) use($nCurrUserID){
+                            $query->where('supervisor', $nCurrUserID)
+                                ->where('reviewed', '=', 'no');
+                        })
+                        ->orwhere(function($query) use($nCurrUserID){
+                            $query->where('user_id', $nCurrUserID)
+                                ->where('template_submit.status', 'returned')
+                                ->where('nChild', NULL);
+                        });
+                    })
                     ->get();
                 $nSumAll = count($tasks) + count($Improvements) + count($Salesopportunities) + count($Templates);
 
