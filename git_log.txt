@@ -1,0 +1,1264 @@
+commit fa3d6078b84451ddd7394d9236ac758b5b36bade
+Author: Atif Majid <atif.majid10@gmail.com>
+Date:   Wed Aug 31 15:20:15 2022 +0500
+
+    Fix report sorting based upon datetime
+
+commit 7c65a3a65c5a4f236a837958b7e4451d7ff6b8b3
+Author: Atif Majid <atif.majid10@gmail.com>
+Date:   Tue Jul 5 14:48:05 2022 +0500
+
+    Create middleware for password reset. Update first time login process to use reset password middleware. Also add force password change after 6 months.
+
+commit 4e145ec7380d4eb43c77c25b471d0c460519b759
+Author: Atif Majid <atif.majid10@gmail.com>
+Date:   Fri Jun 10 12:44:30 2022 +0500
+
+    Update gitignore
+
+commit e5dab6cfdb0187e661503b2d4fe8342593a0bccf
+Author: Atif Majid <atif.majid10@gmail.com>
+Date:   Fri Jun 10 11:07:01 2022 +0500
+
+    Add Production time per employee and number of employees field in create and edit production pages
+
+commit 2e386c0b9273eafd94688e11552d4a4391927429
+Author: Atif Majid <atif.majid10@gmail.com>
+Date:   Wed Jun 1 17:49:24 2022 +0500
+
+    Update gitignore file to exclude editor config files
+
+commit fddde254881a06ad715fccc543a64fd3abe1fcb1
+Author: Atif Majid <atif.majid10@gmail.com>
+Date:   Wed Jun 1 16:23:43 2022 +0500
+
+    Fix the filter clear button
+
+commit efad896a6c33cea4a2042fd84c61c453e3b5759f
+Author: Atif Majid <atif.majid10@gmail.com>
+Date:   Wed Jun 1 16:16:25 2022 +0500
+
+    Add Production Site to Recipes index table, and on create and edit page. Also added in the pdf export
+
+commit b270b878e2b95f19a262ccf0fae5b672ce34d928
+Author: Atif Majid <atif.majid10@gmail.com>
+Date:   Wed Jun 1 15:25:19 2022 +0500
+
+    Add employee list from production department as supervisor while filling the template. Elias is also added as CEO
+
+commit 1a22f8efc5df368bc6c5b9fc3d07be6200299c02
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue May 31 19:38:49 2022 +0500
+
+    Deleted a duplicate file with lowercase name
+
+commit 7a02aa2b96ad631023020ddaa1e074f380601c61
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed May 18 20:22:55 2022 +0500
+
+    Fix a bug that was preventing items deletion in Templates
+
+commit a979ff00d1f7a46df7a809281cf36f267ddfd6ee
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue May 10 13:34:47 2022 +0500
+
+    Display production costs in expansion as well as in PDF
+
+commit ff844d3d58e73cb5b7fdecf931f3168d076862b0
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue May 10 13:30:49 2022 +0500
+
+    Only use productions with quantity greater than 0
+
+commit 8257f3accfeb63c805adb3f046dbf975fe9bae7f
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Apr 8 22:23:35 2022 +0500
+
+    Add Production Time, Predicted costs of goods and actual cost of goods in create and edit page. Displayed these values in show and pdf export
+
+commit 43fbe180531508789ae0f3472764683a472c753f
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Apr 8 22:16:36 2022 +0500
+
+    Add salary cost per hour field in Site settings page
+
+commit 41753bc2a13c912693f148dcd32d80e333d645eb
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Feb 25 16:12:36 2022 +0500
+
+    Remove icons in header
+
+commit b1e3ba39f2ae3cdd4d50930ef5a8c6502a018a38
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Feb 25 16:12:14 2022 +0500
+
+    Complete food order process. From menu creation as chef, order as employee and viewing order as report by chef
+
+commit 101b55bf94d0eb138393bf567eaf7a13187dd7eb
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Feb 16 16:46:47 2022 +0500
+
+    Add food order reports in report section
+
+commit 4331ccf70d04bc4c8e88b243ffce28891ab4c13b
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Feb 11 18:23:14 2022 +0500
+
+    Make the dashboard left menu same as other pages
+
+commit 06e4c075b7629d121c5fd0497bedde726c0aeca6
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Feb 11 15:40:00 2022 +0500
+
+    Complete food order project
+
+commit da9b284082b85e287e82bf32e42db9ec712cd6bd
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Feb 10 22:14:25 2022 +0500
+
+    To avoid error, add default 0 to dropdown
+
+commit 74470a48c8d4964cb57790880ebb5fe0d64e8680
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Feb 10 22:10:08 2022 +0500
+
+    Add active/inactive employee check. If an employee is inactive, he will be brought to login screen
+
+commit c3b94104b76b88eae7217a9c6a1640ce3f5adb7d
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Feb 9 18:59:16 2022 +0500
+
+    Add a function to get employee designation
+
+commit caf34c73811c4af31762fb8d1f469deb577529bb
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Feb 9 18:27:19 2022 +0500
+
+    Update recipient email address for the Todays Production CSV file
+
+commit 85ef09a51a2ba67cd238e63561d8e0c3fed82e3d
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Jan 14 16:42:48 2022 +0500
+
+    Skip the rows that do not have product number as this causes error in bookkeeping software
+
+commit 92af9edf6a86537dbda0a7761837928ca5d6c872
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Jan 13 13:18:44 2022 +0500
+
+    Replace . with , in quantity
+
+commit 1549c9923bc3f2c2d91861e2f906e03a5fcadb92
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Jan 12 22:55:48 2022 +0500
+
+    Add posibility to upload files in Fisherman School. Also adjusted left navigation for Fisherman School and set route
+
+commit 3739519fb39108b18cb1804de2164c41b15d9f7c
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Jan 7 11:23:07 2022 +0500
+
+    Fix an issue in code that was breaking when a post data was an array. Fixed in all of these files
+
+commit 631b0b79a3383d4cebeec53368cd4e8052eaa3d2
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Jan 5 23:07:22 2022 +0500
+
+    Add visitor in Template reports so now, the visitor daa is shown
+
+commit f786b6759dabb95b757e5de4b75ceb24cd7e09ab
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Jan 5 22:00:00 2022 +0500
+
+    Add a separator in post data email
+
+commit 1f6caaef8b367234c0bf7ff152c5bdaf79d0faf8
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Jan 5 21:58:35 2022 +0500
+
+    Restrict visitors page only for within Iceland. Also, store IP of the client while storing visitor's data
+
+commit 5474a564a8a5cec68cdc5e4ce33f9f7c3e569985
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon Jan 3 19:33:40 2022 +0500
+
+    Update csv file as per the format sent by Jon Arnar on 2022-01-03
+
+commit 98f04bdbf5d448f05214ea0db60d69d5d8ce1964
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon Jan 3 18:02:58 2022 +0500
+
+    Add email with request data to debug errors
+
+commit b7fff3461f8f3a95f637424d0348b65bf2d0c501
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon Jan 3 17:34:40 2022 +0500
+
+    Create page to collect visitors data
+
+commit 71ce96d37727e4c228f4672604e881023dfddbea
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Dec 29 12:47:03 2021 +0500
+
+    Remove code related to Instructions, RawMaterials, Packaging and Shipment as these are not being used anymore
+
+commit 85c95cdd2f970cc70d5b038fc2131f3cb498cc5f
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Dec 29 12:46:20 2021 +0500
+
+    Add cronjob to send email with csv file daily at 23:59
+
+commit 7858bbd7b6bdc92b1cac5e6562e84d7c6095459a
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Dec 17 18:06:25 2021 +0500
+
+    Add warehouse field in today's production forms. In show page and in pdf export
+
+commit f773cf6696a93b488a438799710744ebae9d13a0
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Dec 16 19:21:34 2021 +0500
+
+    Add warehouse form fields in Sitesettings. So that the warehouse values can be managed
+
+commit f06ce6ba5295f553e471f709c7f07a3285a09c72
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Dec 16 19:19:45 2021 +0500
+
+    Change default sortint to Lot-Nr descending
+
+commit 6539bc3ac2ac2f8562754d3aaf19d4ce63db5457
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Dec 15 16:53:33 2021 +0500
+
+    Add email in store action so that I get data what is posted to debug the issue
+
+commit b33118502322362cf45a8b46563fe1e1ce990488
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Dec 15 12:12:34 2021 +0500
+
+    Add wagons as a unit for quantity
+
+commit fb6e51322d56fd6462b71ef5fec2761368c608d6
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Nov 25 22:56:09 2021 +0500
+
+    Fix the bug that was not allowing new improvement record to be created in system
+
+commit 462695dfe18b0e75b3b5f271e8cf01af12732235
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Nov 25 16:24:33 2021 +0500
+
+    Add additional option of wagon(s) to the unit dropdown in Today's production (new and edit) pages
+
+commit 4f8396487c97b46d1353cd3bea2301191f27783d
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Nov 23 21:18:08 2021 +0500
+
+    Add numeric validation for cases while creating new raw fish record
+
+commit 32cba210f82128998b069ad5a56317616fc553e3
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Nov 23 21:11:29 2021 +0500
+
+    Update display of data for Productions related to lot number
+
+commit 941a63983cd7f6db5ea5229ad839bbfdb27fbdb2
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Nov 23 21:10:38 2021 +0500
+
+    Add Suppliers, fish types, production sites in raw material table filters, create and edit pages
+
+commit 1aba20efc76ff73aa8a4db6eb118018946d1306a
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Nov 23 21:08:58 2021 +0500
+
+    Add date range filter on raw material page
+
+commit ab7f82cc08e0fefb6781afcaf11dcb79d64a7cd2
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Nov 23 21:07:39 2021 +0500
+
+    Change quantity estimate to quantity scaled
+
+commit 60d6aa99eb9dff412d86711f3a84361e33b7de67
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Nov 23 21:03:47 2021 +0500
+
+    Enable email for errors while creating a new improvement record
+
+commit 69572d1ea7953b13b3711ad8b19ff22366d20566
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Oct 20 14:24:48 2021 +0500
+
+    Change order nr. to disposal on request by FM
+
+commit 2e0fa241b2b3aa02b24e34f0ea6ef4bbaa31b5f7
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Oct 20 14:12:12 2021 +0500
+
+    Fix the bug related to date format with purchase date and due date
+
+commit d8eaf1e58c6c594c6f1138cfd92b8a72b4fe4326
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Oct 12 18:05:43 2021 +0500
+
+    COmmit on 12th Oct
+
+commit 7a2ee8fafa32c5aaaae6ea7c7d6aaf81dfb56831
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Oct 8 16:50:07 2021 +0500
+
+    Fix the issue which was stopping initial employees getting rights
+
+commit 71838549e955946306584ef27bc3b65437db54a7
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Oct 8 16:49:35 2021 +0500
+
+    Remove department rights in left navigation
+
+commit 7f17eb920e1683ae35b65988d999cba6451527a6
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Oct 6 17:48:40 2021 +0500
+
+    Fix the issue of duplicate enteries in Employee rights
+
+commit bb06d9b7a9b2e5f30ed4619b5373bea478da9266
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Oct 6 16:37:05 2021 +0500
+
+    Create/update menu item for raw material in left nav
+
+commit ffc7d1ba10727d4d0483cda3f5b43f566dc760e9
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Oct 6 16:35:32 2021 +0500
+
+    Complete Raw material first page, create models, routes and necessary code
+
+commit ad626bb5393aa3019dc12bd0c282acee81d38802
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Oct 6 16:03:52 2021 +0500
+
+    Fix user rights bug. Assign No access, if user rights is missing. This will avoid system error. Instead, it will show rights error. Also fix a bug in template delete list. The system was sending the top id to delete even if we click on some other.
+
+commit 4b42a1b181d3912ac30ead565dafa173ec74157f
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Oct 6 15:58:40 2021 +0500
+
+    Complete the initial phase of raw material
+
+commit d200252a116fa4411e2487695cf2b5a418faa1be
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Oct 1 09:25:27 2021 +0500
+
+    Create raw material countroller. Also create blank index page and create material form
+
+commit 5ecade1d1b83ebe6b1136eee6629c4cac1ac1421
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Oct 1 09:23:52 2021 +0500
+
+    Add new route for Raw material. Update left navigation for new route.
+
+commit 47dd5f551ec7beea925606e2ad17cfcb003a55c4
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Sep 30 21:42:45 2021 +0500
+
+    Add Fish type form
+
+commit b8add7b8361ccc1fc7718f07df499791da7ff225
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Sep 30 15:46:17 2021 +0500
+
+    Change field format of Fish received from text to date
+
+commit ba3a22c8a8819344ead3abdb0aaeca4ecbe17764
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Sep 23 18:40:23 2021 +0500
+
+    Add supplier list from form settings to Reception Surveilance. Also re-arrange form elements on the raw materiail page
+
+commit 398c64218014d3c884e80033ab5d1f26ec276f2c
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Sep 23 18:39:26 2021 +0500
+
+    Change Raw materials to Raw Materials. And change Certificate and permits to Certificates and Permits
+
+commit b62c1ee2d79e4a2b3f448ec550532213f2a93cc9
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Sep 23 15:32:29 2021 +0500
+
+    Change Reception Surveilance to Raw material and move it under Quality Control in left menu
+
+commit fa45c6eab381c10594f5a311577b24a3c02b25da
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Sep 10 19:18:10 2021 +0500
+
+    Add checkbox for templates with checklist. Also displayed comments and instructions in view section
+
+commit d343020a319dc4fbb981909646a9f6d7eade3848
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Sep 10 19:17:30 2021 +0500
+
+    Change delete process for templates. Instead of deleting it from DB, now it is marked inactive
+
+commit 62d80ddeb1a2bc7a1de7699880f8a847f6da2537
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Sep 10 19:16:49 2021 +0500
+
+    Add catalogue to be downloaded
+
+commit d4624fa9f51333c186ee78a2f4eaab2981811d92
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Sep 9 20:42:01 2021 +0500
+
+    Add option to delete templates for admins
+
+commit 9853eb20a78b52ae7dfef7bd986f2cc3b1fd78ec
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Sep 8 10:01:36 2021 +0500
+
+    Change date format from YYYY-mm-dd to dd-mm-YYYY in all occurance
+
+commit 5badbe249b437a048cd7f13bf28e3f84b9819c49
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon Sep 6 17:18:17 2021 +0500
+
+    Add a report option for templates. Where all submiited templates data can be viewed. Also update the menu and routes
+
+commit 36e8e20d1a8b1926777db9811dc3358f74b43413
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Aug 25 19:20:46 2021 +0500
+
+    Fix a bug that stoped on-change event firing for status change in today's production
+
+commit bc43f93c70ec2474960223c6727ca8112f5421cf
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Aug 20 22:34:27 2021 +0500
+
+    Fix a bug that was not updating repeated items in database
+
+commit 47d929cc4910e78f0f315205594b3bc9ff1b5cca
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Jul 28 22:50:06 2021 +0500
+
+    Remove Instructions, packaging, shipping and raw materials from production (create, edit, pdf, expansion)
+
+commit f842809717c05c0fb3b05ed1e894771790859069
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Jul 21 21:32:29 2021 +0500
+
+    Add user rights when a new user is created
+
+commit 871cf9f62d154136f6c1bde1623da017ac48af0e
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon Jul 19 19:44:42 2021 +0500
+
+    Fix the typo in Certificate and permits
+
+commit bd544b052f0aa7cde074f7ee74457c19d61d36c3
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon Jul 19 14:38:26 2021 +0500
+
+    Add new options for sales opportunity status. Also update the filter based upon status
+
+commit f83e09a5439371390b5e788603cdc271974f42d5
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Sun Jul 18 23:49:39 2021 +0500
+
+    Add a field in sales opportunity for priority. Add option to edit. Enable priority filter on datatable
+
+commit dfd217670d72ac0cff0107a07045db9607d11916
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Sun Jul 18 23:08:54 2021 +0500
+
+    Add Responsible filter and attach it to the specific column in data table for filtering. Also add fields for Priority filter
+
+commit 84db32ecf939309dadbb48e7ec5591cb092d31c1
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Sun Jul 18 21:09:48 2021 +0500
+
+    Remove CRM System link from navigation
+
+commit dbdb2e6183cbfe9627e21cb3184f48e5c930c139
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Sun Jul 18 20:55:08 2021 +0500
+
+    Add new options in instructions and packaging for production records
+
+commit db924976fba27f53790c51b3ea430236d666f1c2
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri May 28 19:52:36 2021 +0500
+
+    Skip new device login email for localhost
+
+commit 44a89664102d8d7b0938da9fd384a4cd4e3e5322
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu May 27 22:56:20 2021 +0500
+
+    Date range filter has today's date by default in start and end date. Also fix the bug in range filter
+
+commit 17ed774a30e94534cf3b8c463b31a4e0cb7af6de
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu May 27 22:54:16 2021 +0500
+
+    Fixed a bug where form throws an error if there is no instruction selected
+
+commit bcb52ac9c580b03bc4ae304691280dd2d90e7ed5
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed May 26 21:05:32 2021 +0500
+
+    Add employee status filter in the employees table
+
+commit 4cad74ba7e121f73190f2080bf9d9abf2060d057
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed May 26 18:56:43 2021 +0500
+
+    Change Framleóandi to Supplier
+
+commit 8776852454a958442e65470c5b6ff3ec33d35cb1
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed May 26 17:39:50 2021 +0500
+
+    Fix a bug that keeps the button disabled if the form is not summitted due to validation errors
+
+commit 527ac444ca7abff1e4374c5713a5e272885bac73
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed May 26 17:38:31 2021 +0500
+
+    Fix access as per user rights for Edit role
+
+commit e36d8fdd018b9be43fe96dae71da1ee0b6051c22
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue May 11 09:12:32 2021 +0500
+
+    Add instructions field in template. Also display when the template was created
+
+commit 87a62cf3f0df0794114d0711ab8c301681bbd3bd
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon May 3 17:55:10 2021 +0500
+
+    Initial phase of template creation and submission
+
+commit cb8a618b59548df097b1bb091653be6edacc417c
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Apr 16 10:49:35 2021 +0500
+
+    Complete the picture zoom feature in improvement view page
+
+commit 702449b7e201678cf3d161b792c9ef7032b0d1f3
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Apr 15 05:14:23 2021 +0500
+
+    Add drag/drop file uploader in edit recipe page. Allow multiple filetypes to be uploaded. And Also allow to delete already uploaded files in recipe edit page
+
+commit 12c313560e56d8042fe60778591f179ae74312d6
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon Apr 12 15:55:33 2021 +0500
+
+    Fix bug in display of edit production page
+
+commit dfa11c04816fa834106231914fbc6eafc43d18e6
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Apr 9 17:55:38 2021 +0500
+
+    Roleback the recipe form. Removed the select 2 field in repeater form
+
+commit 88f95de39836d70a0b145d1f4047751983541094
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Apr 9 17:27:56 2021 +0500
+
+    Add production date and production site in productions. Also status field. Allow user to search based upon date and site. And also mark a production complete from the production list table
+
+commit c7f998bc2826ce22a9cb00c9c93ef07f8da4f83c
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Apr 7 19:51:27 2021 +0500
+
+    Add search field while chosing supplier
+
+commit 2029168034b6f333b0dd164dcf4699a824fb7b9d
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Apr 7 19:50:57 2021 +0500
+
+    Fix edit today's production page. Add type/search in field while choosing recipe in today's production both create and edit page
+
+commit 6db626bfe80683c2532f3e23e2b89a79c651d8d2
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Apr 7 19:02:41 2021 +0500
+
+    Allow different file type upload in improvement create and view page. Also, allow user to delete files in Improvement view page. Displayed the list of non-image type files so that those can be downloaded from view improvement page
+
+commit bbfc70fd50e0b3090b003117c81b5e4114597c76
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Apr 7 19:00:23 2021 +0500
+
+    Update default sorting for Employees table
+
+commit 75507a8a1b0c94dbf653d6d4e3449dc1fc437387
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Mar 31 10:26:10 2021 +0500
+
+    Fix column name spel mistake. Add additional options in Packaging dropdowns. Update index table with instructions and raw materials
+
+commit facfd26837c6b6f4c0de4e266831a052ac324ac9
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Mar 30 23:26:24 2021 +0500
+
+    Fix the changes as requested by Ragnar on 2021-03-30
+
+commit 390fb603b832a3e030868524bcd51f5911386704
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Mar 30 22:37:46 2021 +0500
+
+    Add sorting based upon business potential.
+
+commit d2e86c56be3c5637602231d41ae91a0231274a7a
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Mar 30 22:36:07 2021 +0500
+
+    Fix a bug in recipe edit function. Also remove un-necessary css in pdfstyle for pdf
+
+commit 5fa2d028f1760dca21b36ca10377b79c8da76577
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Mar 30 22:34:53 2021 +0500
+
+    Complete first draft of PDF generation on Today's production
+
+commit 7240c04c94b8e874f99ea819e88665207db56bb0
+Merge: 50532f0 808db2a
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Mar 24 18:55:59 2021 +0500
+
+    Merge branch 'recipe_photo_uploader'
+    Merging the changes related to recipe file drag/drop. As it also include some other changes on the way. Bad git practice, but .."
+
+commit 808db2a10cafdb3da43289ec36b29b9cc63e8098
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Mar 24 18:55:43 2021 +0500
+
+    Fix the recipe pdf print to include total production for this recipr
+
+commit 0f466d60c62c240a50baafa831ababc527ac3d11
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Mar 24 18:54:50 2021 +0500
+
+    Fix the user rights to view calculator. Also add units for all fields similar to other
+
+commit e623a64fc989dcef2d8a5c8e67cc0b813d1b534f
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Mar 24 18:51:53 2021 +0500
+
+    Add business potential field to sales opportunity. Also changd 'Who notified' to customer as requested by Elias on 2021-03-24'
+
+commit 50532f0f5276ecc5c68a42b47df7c760cc092119
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Mar 23 19:47:36 2021 +0500
+
+    Initial draft of Reception Surveillance form
+
+commit be975c065e967a74edbfe9974a7788c3c8902c12
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Mar 23 12:23:08 2021 +0500
+
+    Add drag/drop photo uploader in recipe create page
+
+commit 54b17bf3e9b1a21cda2e22de9beea0b219c219fc
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Mar 19 18:25:00 2021 +0500
+
+    Diplay active tasks, improvements and sales opportunites assigned to current user under bell icon in header. Also adjust the count display on bell icon
+
+commit 6ebf0defbf36c7d99cf03ce45c90a8778d8cef62
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Mar 19 18:23:59 2021 +0500
+
+    Sort Suppliers alphabetically in Recipe create and edit page
+
+commit 1135acadfda828dd90af05e5f607332bc0b1c3b4
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Mar 18 17:18:59 2021 +0500
+
+    Move options to left most colum in table display
+
+commit 022d8c84ed41db5d2c9243ccb2c565be9ba60109
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Mar 18 10:44:39 2021 +0500
+
+    Add recipe calculator in Production creation page. This is now delivered for testing. Any changes will be done in a new git branch
+
+commit 13ebbe793a0963706fbf91fc1a08d2beb0877011
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Mar 16 14:27:26 2021 +0500
+
+    Fix a javascript error on dashboard which was occuring due to removal of some components
+
+commit 4d5de188aacc73ba3cd07b5ac2f3c09e388c446e
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Sun Mar 14 23:48:53 2021 +0500
+
+    Update gitignore to hide some bkp files
+
+commit fa588e4fa112c7c9d122d3d84c51153aafef0eaa
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Sun Mar 14 23:44:41 2021 +0500
+
+    Complete forgot password process from login page
+
+commit 585bf021c0cdcba95ef3e0191a816cf4330e4128
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Mar 12 16:21:38 2021 +0500
+
+    Update default sorting on reipe page. It is now based upon recipe title and if there is a number associated, then sorting is based upon number
+
+commit 792ba2d2d54fab73a0dc2a98923b7cd48c12486b
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Mar 12 12:25:49 2021 +0500
+
+    Update error message related to user rights. Also alow Edit role to delete recipes
+
+commit 13cbc9c0a36030cff545a9a4aa682bf58dd646b5
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Mar 10 18:37:39 2021 +0500
+
+    Fix a bug related to admin rights in sales opportunities. Also, fix a bug in display of recipies with old values (after form submit)
+
+commit 90a08dec8ab7fc85aef5e68ffe0bb7adfadbddc8
+Merge: 1e3b356 51992d5
+Author: Atif Majid <47459173+atif-majid@users.noreply.github.com>
+Date:   Mon Mar 8 22:34:43 2021 +0500
+
+    Merge pull request #1 from atif-majid/security
+    
+    Complete the Security project as requested
+
+commit 51992d56f19c51d8e7aa36a7fd043989d7cac29a
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon Mar 8 22:32:51 2021 +0500
+
+    Add an email for login from new device. Also, forced session close if user closes the browser
+
+commit 1e3b3569812b0e930582528be744b4076c6994be
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon Mar 8 16:22:13 2021 +0500
+
+    Complete user and department rights. And access to different sections based upon employee rights
+
+commit 17918b51709682d146f80f8daa3eaa7913af3b9a
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Mar 4 17:34:57 2021 +0500
+
+    Moved the left menu in leftnav.blad.php file. Updat all files to include leftnav
+
+commit dcb6510257b68f18c0f2d631993f17fc9b2d7610
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Mar 4 12:07:12 2021 +0500
+
+    Fix a bug in dropzone that was processing only 2 files. Now it can process 20. Also, added the improvement creation date on improvement view page
+
+commit 1c9b62ff1b244b4b002d6825358cc1537871ef18
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Mar 4 12:04:56 2021 +0500
+
+    Restrict the edit of improvement to creator only. Other users cannot edit
+
+commit dc2249d60368b2a601f8350609caaab8f1f32a93
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Mar 3 15:48:52 2021 +0500
+
+    Add Brandguide pdf file
+
+commit de41eaf7c566caeaa6708864aed4f7a7f08cf5c3
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Mar 2 16:27:48 2021 +0500
+
+    Fix the responsive issue in view improvement page by changing table to div
+
+commit a3e213fd9d60901adaf576a1e23ae35bdd319610
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon Mar 1 17:46:42 2021 +0500
+
+    Adjust table filters with respect to their specific columns. Also, added a free search field to search all
+
+commit d9c71af189f21e3b30daca2e777fd2886c83acb1
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon Mar 1 17:45:46 2021 +0500
+
+    Fix a bug that hides sales opportunities in dashboard if there is no improvement or task for that user
+
+commit f48a134603a18f17e2979e1e47e88d0840c264cd
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Feb 26 12:54:08 2021 +0500
+
+    Fix a bug that displayed all onboardig tasks on dashboard, without taking count of its status
+
+commit e6460ae4fecc0efee311e1cd6065d817db735959
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Feb 24 17:42:37 2021 +0500
+
+    Add exception handling in store improvements. And a bug report is emailed to developer
+
+commit 288c9b4b37decdeb6245c41f51b699a0482039c3
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Feb 24 17:41:56 2021 +0500
+
+    Create a separate file for header icons so that we change only once. Updated all template files
+
+commit 8cbc24a017e0e471af1fe07a9f04425f3426340b
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Feb 24 17:37:54 2021 +0500
+
+    Add sales opportunities on dashboard. And add option to mark those completed from dashboard
+
+commit 3a39ddba4ca40c3067c30bc7cf48012f52fae84c
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Feb 24 17:32:58 2021 +0500
+
+    Redirect to login page if user clicked a link in email and not logged in to app already
+
+commit cb59b9cecdf739194973f90a3b14906ef6fc663b
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Sat Feb 20 11:36:40 2021 +0500
+
+    Fix edit sales opportunity page
+
+commit e2f60e64c577761e2d26067acae7aa776d6ae480
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Sat Feb 20 11:36:04 2021 +0500
+
+    Add pdf download functionality in recipe. There is a link on recipe index against each recipe. It will download the respective recipe in pdf
+
+commit a3a7908f240a0f478a2fe9cfd952c0ed4df430e9
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Feb 19 18:42:26 2021 +0500
+
+    Update menu for Sales opportunity. Update recipe, add supplier with Ingredients. Update Improvement, fix a bug to mark in progress from view page. Also, removed image resize in image upload on improvement
+
+commit c1dbf2c5f33d05f97679256eba069fbd27d77cef
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Feb 19 17:09:41 2021 +0500
+
+    Complete sales opportunity process. They can add, view Sales opportunity. Also they can add comments as this progress
+
+commit 558435c1409e78d45e10fa9bd0b8fea3530f577e
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Feb 17 09:50:03 2021 +0500
+
+    Fix a bug that prevents intervention to create directory and upload file
+
+commit 9d74933543ce8e741eed036762925ec33d5c7f6a
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Feb 16 16:20:24 2021 +0500
+
+    Add alert message on dashboard while changing task status. Also, update improvement process page and moved photo uploader to a separate section. Also adjust width, height of photo display area
+
+commit 95b29967c1fcf4f8ac78ebf972ccc23c3cb775fa
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Feb 16 16:18:14 2021 +0500
+
+    Resize picture using intervention package in laravel
+
+commit 23a2ded2aa0b3183b6689ad39a9d7f71ea7fe8f3
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon Feb 15 13:39:15 2021 +0500
+
+    Add drozpne file uploaded on improvement create form. Link improvement create and process form to same file upload code in controller. Add route for file upload action
+
+commit e65aedf8331a1a78a60b6da7311a2db05534162a
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Feb 12 10:54:58 2021 +0500
+
+    Implement query exception while creating a new recipe. This send an email to developer (Atif) and display user friendly error to user
+
+commit 5f0d3a2a202e3ae91d6a450dbbdd58cb6209590b
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Feb 12 10:53:52 2021 +0500
+
+    Increase session timeout to 8 hours
+
+commit 14893319f64c9f1524c5e88d0a815f6afc36fec6
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Feb 10 21:32:22 2021 +0500
+
+    Add improvement to homescreen dashboard. Allow user to mark it complete from homescreen. Display improvement added by field on view page. Restore old values on improvement creation page. Validate due date if improvemetn is being assigned to someone.
+
+commit 9ebe7c3dd5250a5ed226abf3df2bcbdda8e4bea9
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon Feb 8 18:25:39 2021 +0500
+
+    Add dropzone picture upload for improvment process page. Allow edit on the comments in Improvement process page. Add filter in Improvement list page for completed and inprocess. Update all controllers to redirect uses to change password if they haven't done already
+
+commit 6a36be9cf3be8b3f6b9f4cf61f9bbaaeba7a401c
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Feb 5 10:47:20 2021 +0500
+
+    Fix a bug in dashboard which was keeping a dropdown disabled until next page load. Add file upload option in improvement process page. Also add an option to edit comment.
+
+commit 8eb1ed7b2acf486c1ae0c7fd3abfec474ea4c3f2
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Feb 3 17:59:48 2021 +0500
+
+    Update gitignore file to ignore Tasks files
+
+commit f670bc0e1445240e0d16893d8e18cc6d26c70d7e
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Feb 3 17:48:12 2021 +0500
+
+    Create onboarding and ofboarding tasks. Assign tasks to employees. Employees can change task status at their dashboard. Also create page for outstanding items which is linked with onboarding and offboardign tasks
+
+commit 52e8f46349f8147b584498a09354657b9c3e2f91
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon Feb 1 10:56:30 2021 +0500
+
+    Add product number, creation date to recipes. Add product number to ingredients. Add photos to recipes. Adjust the view in expanion with this information and photos. Also fix a bug in production delete where first product in table was getting deleted even if we select some other.
+
+commit 60838879620399a54e976ad09ce214dd285fc2b5
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Jan 28 15:54:13 2021 +0500
+
+    Fix a bug in Improvement comment to avoid errors on empty comments
+
+commit 56a46b118b3890727ca2a9cebabccaf7f4198ac7
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Jan 27 16:52:06 2021 +0500
+
+    Add more option in recipe quantity unit. Modify the layout of recipie expansion area
+
+commit ccf2f4a2e9829b1eff0a74cb66ec692133773a1e
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Jan 26 16:33:56 2021 +0500
+
+    Enable edit improvement page. And also fix a bug in improvement creation which missed phone number of the person reporting the problem
+
+commit 2e0e861efd1ed1a134e8d33cc474136d49cc02df
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon Jan 25 14:54:40 2021 +0500
+
+    Update gitignore file to ignore uploads folder
+
+commit eb7b0d652a43273e6861e8c29622e92d1a6a3c02
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon Jan 25 14:52:16 2021 +0500
+
+    Make password change on first login cumpulsory. As the pages have left menu items, so the change was done in all controllers
+
+commit fc68fe8785475c2713edd8a2ea87329c53d712a7
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Sat Jan 23 19:32:45 2021 +0500
+
+    Add delete option in process improement page. Updated the controller to process delete request. Also update usertable in display to remove delete and edit icons to avoid confusion
+
+commit a03bdb9ed6a7a452376c6c7e03a91621c01082a7
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Sat Jan 23 18:58:39 2021 +0500
+
+    Remove different sections in dashboard. Only kept the first fisherman pic
+
+commit ac0608664192189f7ac088b944501f5f5bc63d10
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Jan 21 14:19:20 2021 +0500
+
+    Fix the deactivate employee process. Also deactivated the user related to that employee
+
+commit ed5354b548168dc69f4e39d5f3ee565156ba8195
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Jan 21 14:18:38 2021 +0500
+
+    Fix the menu present of Site Settings module. Link the Site Settings module with Improvemetn creation process to use the pre-configured values. Fix minor bugs in improvement creation form
+
+commit 0c3e974c063a4744e4dd2911b8e83ec55d92c89d
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Jan 21 14:15:52 2021 +0500
+
+    Fix repeater form issue in Site Settings module
+
+commit 7ff74cf74e38cd802d6a4b6859b91fd2dc9d679c
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Jan 21 14:15:01 2021 +0500
+
+    Change login process. If an employee is deactivated, he/she cannot login
+
+commit 736ab6047676fd1c05ff3ca60006fd4a63e2121d
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Jan 21 14:13:36 2021 +0500
+
+    Develop the module where some options in improvement section can be managed. Like Notification Type, Production Location, Selling lOcation and supplier
+
+commit 5aa84ec12280371982940b72df619d3a79add166
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Jan 20 08:48:34 2021 +0500
+
+    Fix bugs while creating new improvement record
+
+commit ede5bebee879113ad14320b73e6c5664896cd098
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Jan 20 08:46:48 2021 +0500
+
+    Disable employee delete option to avaoid any accidential deletion
+
+commit b3af568898b83da35420cd4898aa33e51f99dc1d
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Sat Jan 16 00:18:43 2021 +0500
+
+    Fix the issue of refreshing the page after uploading employee photo
+
+commit ab918ef5f167a4ac1c2768449ec526f760376b3a
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Sat Jan 16 00:17:52 2021 +0500
+
+    Fix some minor bugs
+
+commit fea023dd0a53527b371bce5f0c299deba7bfc035
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Jan 15 19:49:31 2021 +0500
+
+    Fix email receiver
+
+commit 5ddf7f7c58dae2aee79a0c545be606e9b67794ee
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Jan 15 18:58:33 2021 +0500
+
+    Update process improvement page to display pictures, form for comment and assign to someone else, and list of comments display. Also set the route to post the comment and forward the support ticke to someone else.
+
+commit f12d94bb6a80784717fcd5f73f3c181b3b83a3ec
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Jan 15 18:51:53 2021 +0500
+
+    Chane “Unit” dropdown under “Production data” to: “Kg” og “Pieces”
+
+commit 3eb08d1f1ad26bb08289dc7009ac391dc302ada5
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Jan 15 10:39:05 2021 +0500
+
+    Add Production site in display filter. Add option to upload photos alongwith the improvement details
+
+commit 2d8bed362bce02a3176de253286fbfb682becfef
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Jan 14 15:24:29 2021 +0500
+
+    Removed field validation for testing time
+
+commit 7ea3caacbd3af13c59dd20e01e5c21ea712bd5b2
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Jan 14 08:34:53 2021 +0500
+
+    Remove a line which was reading an object not present now.
+
+commit 6740265df63925d2b8be028d215e5ef24d78547d
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Jan 14 08:33:01 2021 +0500
+
+    Add route for improvement process record.
+
+commit 7f6e6903f8fbac002573958fc5cff2f481273f26
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Jan 14 08:31:32 2021 +0500
+
+    Add a method to fix the bug where datepicker was not working for repeater table fields
+
+commit e2a4fd518a28105c51b64431138bebfda8485685
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Jan 14 08:29:51 2021 +0500
+
+    Add function to get employee id of current user. As employee table is different than the authentication table
+
+commit 7eb531c17b325292ba70b6bf400145423aa112f5
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Jan 14 08:28:55 2021 +0500
+
+    Complete production record creation process. And display it in expansion. Also create email for new improvement record. Added the action to display the improvement record for further processing
+
+commit ff608bc531b331d2c1a430044a7d6e83bca738f6
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Jan 12 22:52:37 2021 +0500
+
+    Again update gitignore to ignore some additional files
+
+commit d87c4e61ec47f468fcdca15435f883c020245913
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Jan 12 22:50:31 2021 +0500
+
+    Updated gitignore
+
+commit 957cb69da6e6048d23531f08ede1f4028ee907ef
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Jan 12 22:45:52 2021 +0500
+
+    Upload files for top header avatar adjustment
+
+commit e1a906e1626735ffdf87cd937974ea6c08d27f1f
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Jan 12 22:43:53 2021 +0500
+
+    Update Improvement add process to disable field validation, just for testing duration
+
+commit b8ae8bb1cc60bf6f18005b9523c789bb4968f0c5
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Jan 12 22:43:06 2021 +0500
+
+    Adjust collumn numbers for employee datatable to adjust sortable. Also modified for drop file upload in employee datatable.
+
+commit 45d6054151b00a885516d73e972f3de13278780b
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Jan 12 22:41:33 2021 +0500
+
+    Update user model to link logged in user with employee table
+
+commit de25d3ae9833a011861503a259691bab65c5a382
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Jan 12 22:40:45 2021 +0500
+
+    Update employee model to handle file name for picture
+
+commit eaf43422cc033ea7b279d753f6cf44d80ba911d8
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Jan 12 22:39:39 2021 +0500
+
+    Updated gitignore list
+
+commit 9ade14f3db2f4c0b2457e5dd10c11a5216c99e02
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Jan 12 22:39:11 2021 +0500
+
+    Complete picture upload process in Employees Directory. Displayed picture in extension. And in top right avatar on employee table, employee create and edit record
+
+commit 14c4f4ecd713a0af9b99593c9cf88e94f0084817
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Sun Jan 10 09:27:52 2021 +0500
+
+    Activate improvement creation form and fix the datatable display and filter
+
+commit 33c3e17fe632665536874c4d17f377583e22e0c3
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Fri Jan 8 16:35:59 2021 +0500
+
+    Add Improvements in navigation. Create improvement listing page, add new improvement page. Also create filter on improvement datatable
+
+commit 0d1dbb3677e321290bdd030d077c5db04f0bde3d
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon Jan 4 20:50:37 2021 +0500
+
+    Add View option in Recipies. As Recipie data is longer, it is being loaded via ajax
+
+commit e53eb48e061f9cb33b42e60b44539ad2caa45303
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon Jan 4 20:49:53 2021 +0500
+
+    Remove the extra space between view and edit icons
+
+commit 7188a27c296eec04edafe720818711f5e01e6967
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon Jan 4 18:59:43 2021 +0500
+
+    Add border around production details
+
+commit 2bcdd040483f6f4cdf5e558c8e671cf67cc43620
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon Jan 4 18:38:49 2021 +0500
+
+    Add redirect to login page if session timedout.
+
+commit 68316a8de0d07732a8631fb47834c7eb436acf9d
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Sun Jan 3 23:21:27 2021 +0500
+
+    Add search filter and expand content in User list page
+
+commit b1df9fe9402907820a2e7c6b100b00b580b199f2
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Dec 31 23:13:08 2020 +0500
+
+    Updated search filter in production list to clear other search fields. Also added view detail option for a production record
+
+commit 37a46edaa75666bbbdeebc782347044ab91ecbfb
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Thu Dec 31 23:11:40 2020 +0500
+
+    Added filter option in recipe list page. Also updated unit list in recipe add, edit process. Also updated recipe edit process and allowed user to delete one or more ingredients and steps
+
+commit da93ea60674a0aa2e4cc324aff2035fc363c4256
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Dec 30 15:59:33 2020 +0500
+
+    Fixed changed in login page and dashboard
+
+commit 80906fa21c581df27f75b9b1e6f7fa2454010b89
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Dec 30 12:07:29 2020 +0500
+
+    Changed the login page with Fisherman background and customized the form
+
+commit 87b3c59d64d963ffa9cc45b788959b348838319a
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Dec 30 00:25:42 2020 +0500
+
+    Applied css changes for button color, icon color, and background
+
+commit ab62d0b110a146b6aef5bb2bdbd0b12db558d1a7
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Dec 29 22:33:51 2020 +0500
+
+    Fixed spelling from Empoloyee to Employee in menu
+
+commit 591a3151cba171f3b74e7fee19dc8882b1e059ca
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Dec 29 22:29:25 2020 +0500
+
+    Completed edit recipe page. Added option of grams in ingredients units for both add and edit pages
+
+commit f8e45f15ef68df3790470bd95d5034652e8bc4bc
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Dec 29 19:28:23 2020 +0500
+
+    Enabled sorting and pagination on recipe list
+
+commit d91812907da2f0dad3d425d27e093791560da1a5
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Dec 29 19:27:40 2020 +0500
+
+    Enable sorting, pagination on production list
+
+commit 487b61d79aa28858ba3f1ae5f698a3fea450defa
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Dec 29 19:26:52 2020 +0500
+
+    Fixed filter, sorting and pagination on employees directory
+
+commit b2121a883d8d98dc7cc07e20fe47223d23f0b799
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Tue Dec 29 17:50:07 2020 +0500
+
+    Fixed missing of old values in case there is validation error on form
+
+commit c69a7ba63c20712162bdf539b813e80b925f6c6c
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon Dec 28 23:15:31 2020 +0500
+
+    Added production date field, and unit for production total field
+
+commit 3f492d18402b56caea34b06a3c7d504033a346ff
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon Dec 28 23:14:36 2020 +0500
+
+    Removed cooking time and preparation time fields. Adjusted field distances in repeater form
+
+commit f8f246e73faa57cf8d4b30d3c386adda1da013fb
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Mon Dec 28 19:34:05 2020 +0500
+
+    Completed process to add new recipe
+
+commit 74c18d057de581814d9da9a0af527858b0646684
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Sun Dec 27 23:27:42 2020 +0500
+
+    Completed form for adding new recipe. Now staring in db, edit and link with production is left
+
+commit 5b5daf72f03f8d5512f17ccb4b96d13ae619c1da
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Sun Dec 27 19:19:54 2020 +0500
+
+    Starting work on recipes
+
+commit 455de6497e5daf4ee80a1f9fbdeb663ac9e3f22f
+Author: atif-majid <atif.majid10@gmail.com>
+Date:   Wed Dec 23 12:54:26 2020 +0500
+
+    Initial commit after employee directory, and today's production page. Now working on change password
