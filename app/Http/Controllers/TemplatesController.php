@@ -34,8 +34,8 @@ class TemplatesController extends Controller
             $strAcionName = substr($strFullRoute, strpos($strFullRoute, "@")+1);
             $arrAllowedPages = array(
                 "View"=>array('index', "fill", "fillsubmit"),
-                "Edit"=>array("index", "fill", "fillsubmit", 'review', 'reviewsubmit'),
-                "Admin"=>array("index", "create", "store", "review", "reviewsubmit", "fill", "fillsubmit", "show", "edit", "destroy"),
+                "Edit"=>array("index", "fill", "fillsubmit", 'review', 'reviewsubmit', 'refill'),
+                "Admin"=>array("index", "create", "store", "review", "reviewsubmit", "fill", "fillsubmit", "show", "edit", "destroy", 'refill'),
                 "No Access"=>array("none")
             );
 
