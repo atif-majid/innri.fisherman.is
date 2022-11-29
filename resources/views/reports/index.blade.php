@@ -183,7 +183,7 @@
                                                     <td style="padding: 0.5rem">{{ $template->template_title }}</td>
                                                     <td style="padding: 0.5rem">{{ $template->template_version }}</td>
                                                     <td style="padding: 0.5rem">{{ $template->employeename }}</td>
-                                                    <td style="padding: 0.5rem">
+                                                    <td style="padding: 0.5rem" data-sort="{{strtotime($template->submit_date)}}">
                                                         {{ date("d-m-Y H:i:s", strtotime($template->submit_date)) }}
                                                     </td>
                                                     <td style="padding: 0.5rem">{{ $template->supervisor }}</td>
@@ -213,7 +213,7 @@
                                                     <td style="padding: 0.5rem">Visitors</td>
                                                     <td style="padding: 0.5rem">&nbsp;</td>
                                                     <td style="padding: 0.5rem">{{ $visitor->fullname }}</td>
-                                                    <td style="padding: 0.5rem">
+                                                    <td style="padding: 0.5rem" data-sort="{{strtotime($visitor->visit_date_time)}}">
                                                         {{ date("d-m-Y H:i:s", strtotime($visitor->visit_date_time)) }}
                                                     </td>
                                                     <td style="padding: 0.5rem">&nbsp;</td>
@@ -243,7 +243,7 @@
                                                     <td style="padding: 0.5rem">Food Orders</td>
                                                     <td style="padding: 0.5rem">&nbsp;</td>
                                                     <td style="padding: 0.5rem">{{ $foodorder->name }}</td>
-                                                    <td style="padding: 0.5rem">
+                                                    <td style="padding: 0.5rem" data-sort="{{strtotime($foodorder->date)}}">
                                                         {{date("d-m-Y H:i:s", strtotime($foodorder->date))}}
                                                     </td>
                                                     <td style="padding: 0.5rem">&nbsp;</td>
@@ -367,6 +367,11 @@
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
+<?php
+/*<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+<script src="//cdn.datatables.net/plug-ins/1.12.1/sorting/datetime-moment.js"></script>*/
+?>
+
 <script src="app-assets/js/scripts/pages/page-templatesubmitted.js?time=<?php echo time();?>"></script>
 <script src="app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js?time=<?php echo time();?>"></script>
 
