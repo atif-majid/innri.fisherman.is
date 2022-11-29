@@ -80,7 +80,7 @@ class User extends Authenticatable
     {
         $strEmail = $this->email;
         $objCurrentEmployee = Employees::where('email',$strEmail)->first();
-        $nThisEmpDesignation = "Chef";
+        $nThisEmpDesignation = "CEO";
         if($objCurrentEmployee)
         {
             $nThisEmpDesignation = $objCurrentEmployee->designation;
